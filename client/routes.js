@@ -2,9 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Homepage, Recipe, RecipeForm} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Homepage,
+  Recipe,
+  RecipeForm
+} from './components'
 import {me} from './store'
-
 
 class Routes extends Component {
   componentDidMount() {
@@ -23,17 +29,17 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* only available after logging in */}
+            <Route path="/recipes" component={Recipe} />
+            <Route path="/recipeform" component={RecipeForm} />
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-        <Route path="/recipes" component={Recipe} />
-        <Route path="/recipeform" component={RecipeForm} />  
+
         <Route component={Login} />
       </Switch>
     )
   }
 }
-
 
 const mapState = state => {
   return {
@@ -49,9 +55,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
 
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,

@@ -15,23 +15,19 @@ export const setRecipeThunk = (url, userId) => {
         url: url,
         userId: userId
       })
-      console.log("res.data", res.data)
-      history.push('/recipeform')
       dispatch(setSingleRecipe(res.data))
+      history.push('/recipeform')
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-const initialState = {
-  
-}
- 
+const initialState = {}
 
 function singleRecipeReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_SINGLE_RECIPE: 
+    case SET_SINGLE_RECIPE:
       return action.recipe
     default:
       return state

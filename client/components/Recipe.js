@@ -1,10 +1,9 @@
-import React from 'react' 
+import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeThunk} from '../store/singleRecipe'
 import history from '../history'
 
 export const Recipe = props => {
-  
   const {getSingleRecipe} = props
   let userId = 0
 
@@ -12,11 +11,11 @@ export const Recipe = props => {
     event.preventDefault()
     const url = document.getElementById('url-input').value
     getSingleRecipe(url, userId)
-    document.getElementById('url-input').value = ' '  
+    document.getElementById('url-input').value = ' '
     history.push('/recipeform')
-    console.log("history", history)
+    console.log('history', history)
   }
-
+  console.log('Here')
   return (
     <>
       <div className="title">Fetch Recipe here</div>
