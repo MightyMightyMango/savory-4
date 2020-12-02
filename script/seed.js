@@ -64,7 +64,7 @@ async function seed() {
   ])
 
   console.log(`seeded ${recipes.length} recipes`)
-  console.log(`seeded successfully`)
+  console.log(`all seeded successfully`)
 }
 
 async function runSeed() {
