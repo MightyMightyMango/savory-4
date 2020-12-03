@@ -9,7 +9,8 @@ import {
   Homepage,
   Recipe,
   RecipeForm,
-  AllRecipes
+  AllRecipes,
+  SingleRecipe
 } from './components'
 import {me} from './store'
 
@@ -30,10 +31,15 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* only available after logging in */}
-            <Route path="/recipes" component={Recipe} />
+            <Route exact path="/recipes" component={Recipe} />
             <Route path="/recipeform" component={RecipeForm} />
             <Route path="/myrecipes" component={AllRecipes} />
             <Route path="/home" component={UserHome} />
+
+            <Route
+              path="/recipes/:recipeId"
+              render={routeProps => <SingleRecipe {...routeProps} />}
+            />
           </Switch>
         )}
 

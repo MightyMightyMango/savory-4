@@ -10,11 +10,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <Link to="/">
       <Logo src="/images/savory-logo.png" />
     </Link>
-    <Link to="/home">Home</Link>
     <div>
       {isLoggedIn ? (
         <div>
           {/* available after you log in */}
+          <Link to="/home">Home</Link>
+          <span> | </span>
           <Link to="/myrecipes">My Recipes</Link>
           <span> | </span>
           <Link to="/recipes">Fetch Recipe</Link>
@@ -26,6 +27,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* available before you log in */}
+          <Link to="/home">Home</Link>
+          <span> | </span>
           <Link to="/login">Login</Link>
           <span> | </span>
           <Link to="/signup">Sign Up</Link>

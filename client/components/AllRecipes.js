@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import setUserAllRecipes from '../store/recipes'
-import Link from 'react-router-dom'
+import setAllRecipesThunk from '../store/recipes'
+import {NavLink} from 'react-router-dom'
 
 export const AllRecipes = props => {
+  // const {state, setState} = useState(props)
   // useEffect(() => {
-  //   getUserAllRecipes(props.user.id)
+  //   props.getAllRecipes(props.user.id)
   // })
 
   console.log('props ', props)
@@ -24,7 +25,9 @@ export const AllRecipes = props => {
               <Image src={recipe.imageUrl} />
               <Subtitle>{recipe.name}</Subtitle>
               <Subtitle>Source: {recipe.publisher}</Subtitle>
-              <button type="submit">View Recipe</button>
+              <NavLink to={`/recipes/${recipe.id}`}>
+                <button type="submit">View Recipe</button>
+              </NavLink>
             </Recipe>
           ))}
         </RecipesContainer>
@@ -39,14 +42,14 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getUserAllRecipes: userId => {
-    dispatch(setUserAllRecipes(userId))
-  }
+  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   text-align: center;
   width: 100%;
   height: 87vh;
@@ -61,6 +64,7 @@ const RecipesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-self: center;
   width: 70%;
   padding-top: 20px;
 `
@@ -76,6 +80,7 @@ const Recipe = styled.div`
 
 const Subtitle = styled.div`
   font-size: 1em;
+  padding-bottom: 5px;
 `
 
 const Image = styled.img`
