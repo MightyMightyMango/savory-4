@@ -1,19 +1,65 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import setAllRecipesThunk from '../store/recipes'
+import {setAllRecipesThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 
 export const AllRecipes = props => {
   // const {state, setState} = useState(props)
-  // useEffect(() => {
-  //   props.getAllRecipes(props.user.id)
-  // })
+
+  const {recipes, getAllRecipes} = props
 
   console.log('props ', props)
-  console.log('props.user.recipes ', props.user.recipes)
+  console.log('recipes ', recipes)
 
-  const {recipes} = props.user
+  // const [initialRecipeState, setRecipe] = useState('')
+
+  // console.log('1. initialRecipeState ', initialRecipeState)
+
+  useEffect(() => {
+    getAllRecipes(props.user.id)
+
+    console.log('In useEffect props ', props)
+    // console.log('2. initialRecipeState ', initialRecipeState)
+  }, [])
+
+  // console.log('props.user.recipes ', props.user.recipes)
+
+  // const recipes = props
+
+  // console.log('In AllRecipes recipes ', props.recipes)
+
+  // if (recipes.length > 0) {
+  //   return (
+  //     <>
+  //       <Container>
+  //         <Title>My Recipes</Title>
+  //         <RecipesContainer>
+  //           {recipes.map(recipe => (
+  //             <Recipe key={recipe.id}>
+  //               <Image src={recipe.imageUrl} />
+  //               <Subtitle>{recipe.name}</Subtitle>
+  //               <Subtitle>Source: {recipe.publisher}</Subtitle>
+  //               <NavLink to={`/recipes/${recipe.id}`}>
+  //                 <button type="submit">View Recipe</button>
+  //               </NavLink>
+  //             </Recipe>
+  //           ))}
+  //         </RecipesContainer>
+  //       </Container>
+  //     </>
+  //   )
+
+  // } else {
+  //   return (
+  //     <>
+  //       <Container>
+  //         <Title>Rendering</Title>
+  //       </Container>
+  //     </>
+  //   )
+
+  // }
 
   return (
     <>
@@ -38,7 +84,7 @@ export const AllRecipes = props => {
 
 const mapState = state => ({
   user: state.user,
-  recipes: state.recipes
+  recipes: state.recipes.allRecipes
 })
 
 const mapDispatch = dispatch => ({
