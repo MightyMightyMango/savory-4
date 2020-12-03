@@ -48,7 +48,7 @@ router.get('/me', async (req, res) => {
       where: {id: req.user.id},
       include: Recipe
     })
-    console.log('req.user ', userwithRecipes)
+    // console.log('req.user ', userwithRecipes)
     res.json(userwithRecipes)
   } catch (error) {
     next(error)
