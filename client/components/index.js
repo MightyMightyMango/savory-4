@@ -4,8 +4,11 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
+export {default as Footer} from './Footer'
 export {default as UserHome} from './user-home'
 export {default as Homepage} from './Homepage'
 export {default as Recipe} from './Recipe'
 export {default as RecipeForm} from './RecipeForm'
+export {default as AllRecipes} from './AllRecipes'
+export {default as SingleRecipe} from './SingleRecipe'
 export {Login, Signup} from './auth-form'

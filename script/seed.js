@@ -8,15 +8,23 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'lea@lea.com', password: '123'}),
-    User.create({email: 'ellen@ellen.com', password: '123'})
-  ])
+  const users = [
+    {
+      email: 'lea@lea.com',
+      password: '123'
+    },
+    {
+      email: 'ellen@ellen.com',
+      password: '123'
+    }
+  ]
+
+  const [lea, ellen] = await User.bulkCreate(users)
 
   console.log(`seeded ${users.length} users`)
 
-  const recipes = await Promise.all([
-    Recipe.create({
+  const recipes = [
+    {
       name: 'Cranberry Sauce with Orange and Cinnamon',
       publisher: 'Bon Appetit',
       url:
@@ -38,8 +46,8 @@ async function seed() {
         'Cook, stirring often and reducing heat as needed to avoid scorching, until cranberries burst, juices are syrupy, and pan is visible when a wooden spoon is dragged across the bottom, 12–15 minutes. Let cool.',
         'Do Ahead: Sauce can be made 1 week ahead. Cover and chill.'
       ]
-    }),
-    Recipe.create({
+    },
+    {
       name: "BA's Best Pesto",
       publisher: 'Bon Appetit',
       url: 'https://www.bonappetit.com/recipe/best-pesto',
@@ -60,8 +68,13 @@ async function seed() {
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ]
-    })
-  ])
+    }
+  ]
+
+  const [cranberry, lemon] = await Recipe.bulkCreate(recipes)
+
+  await cranberry.setUser(lea)
+  await lemon.setUser(lea)
 
   console.log(`seeded ${recipes.length} recipes`)
   console.log(`all seeded successfully`)

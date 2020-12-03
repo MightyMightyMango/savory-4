@@ -6,12 +6,18 @@ import {logout} from '../store'
 import styled from 'styled-components'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
- <NavbarContainer>
-    <Link to="/home">Home</Link>
-      <div>
-        {isLoggedIn ? (
+  <NavbarContainer>
+    <Link to="/">
+      <Logo src="/images/savory-logo.png" />
+    </Link>
+    <div>
+      {isLoggedIn ? (
         <div>
           {/* available after you log in */}
+          <Link to="/home">Home</Link>
+          <span> | </span>
+          <Link to="/myrecipes">My Recipes</Link>
+          <span> | </span>
           <Link to="/recipes">Fetch Recipe</Link>
           <span> | </span>
           <a href="#" onClick={handleClick}>
@@ -21,11 +27,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* available before you log in */}
+          <Link to="/home">Home</Link>
+          <span> | </span>
           <Link to="/login">Login</Link>
           <span> | </span>
           <Link to="/signup">Sign Up</Link>
         </div>
-      )} 
+      )}
     </div>
   </NavbarContainer>
 )
@@ -59,12 +67,13 @@ Navbar.propTypes = {
 
 const NavbarContainer = styled.div`
   color: black;
-  width: 100%;
+  width: 96%;
   border-bottom: 1px solid white;
   display: flex;
   justify-content: space-between;
-  height: 30px;
   align-items: center;
+  padding-right: 2%;
+  padding-left: 2%;
 
   a {
     text-decoration: none;
@@ -76,4 +85,8 @@ const NavbarContainer = styled.div`
     color: grey;
     cursor: grab;
   }
+`
+const Logo = styled.img`
+  width: 150px;
+  margin: 0.25em;
 `
