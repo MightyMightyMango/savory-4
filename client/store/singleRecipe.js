@@ -8,18 +8,39 @@ export const setSingleRecipe = recipe => ({
   recipe: recipe
 })
 
-export const setRecipeThunk = (url, userId) => {
-  return async dispatch => {
-    try {
-      const res = await axios.post('/api/scrape/', {
-        url: url,
-        userId: userId
-      })
-      dispatch(setSingleRecipe(res.data))
-      history.push('/recipeform')
-    } catch (error) {
-      console.error(error)
-    }
+// export const setRecipeThunk = (url, userId) => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await axios.post('/api/scrape/', {
+//         url: url,
+//         userId: userId,
+//       })
+//       dispatch(setSingleRecipe(res.data))
+//       // history.push('/recipeform')
+//       console.log(res.data)
+//       let JsonData = JSON.stringify(res.data)
+//       console.log(typeof JsonData)
+//       localStorage.setItem(`recipeDraft`, JsonData)
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
+// }
+
+export const setRecipeThunk = async (url, userId) => {
+  try {
+    console.log('url in thunk', url)
+    const res = await axios.post('/api/scrape/', {
+      url: url,
+      userId: userId
+    })
+    console.log('res.data in new thunk', res.data)
+    let jsonData = JSON.stringify(res.data)
+    console.log('json data in new thunk', jsonData)
+    console.log('typeof JsonData', typeof jsonData)
+    localStorage.setItem(`recipeDraft`, jsonData)
+  } catch (error) {
+    console.error(error)
   }
 }
 

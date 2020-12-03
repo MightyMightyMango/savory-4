@@ -2,7 +2,7 @@
 const request = require('request')
 const cheerio = require('cheerio')
 
-let data = []
+let data = {}
 
 //Scraper for Bon Appetit && SimplyRecipes
 const scraper1 = (url, publisher, userId) => {
@@ -44,10 +44,10 @@ const scraper1 = (url, publisher, userId) => {
       }
     }
     //post recipe entry
-    data.pop()
-    data.push(recipeEntry)
+    data = recipeEntry
+    console.log('recipeEntry in scrape func', recipeEntry)
   })
-  return data[0]
+  return data
 }
 
 //AllRecipes Scraper

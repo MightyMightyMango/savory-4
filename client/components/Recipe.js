@@ -14,9 +14,7 @@ export const Recipe = props => {
     getSingleRecipe(url, userId)
     document.getElementById('url-input').value = ' '
     history.push('/recipeform')
-    console.log('history', history)
   }
-  console.log('Here')
   return (
     <>
       <Container>
@@ -38,7 +36,7 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   getSingleRecipe: (url, userId) => {
-    dispatch(setRecipeThunk(url, userId))
+    setRecipeThunk(url, userId)
   }
 })
 
