@@ -22,7 +22,7 @@ const Recipe = db.define('recipe', {
     allowNull: false,
     defaultValue: ''
   },
-  thumbnailUrl: {
+  imageUrl: {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: '/images/default-recipe.png'

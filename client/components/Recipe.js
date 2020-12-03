@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeThunk} from '../store/singleRecipe'
 import history from '../history'
+import styled from 'styled-components'
 
 export const Recipe = props => {
   const {getSingleRecipe} = props
@@ -18,13 +19,15 @@ export const Recipe = props => {
   console.log('Here')
   return (
     <>
-      <div className="title">Fetch Recipe here</div>
-      <form>
-        <input type="text" id="url-input" />
+      <Container>
+        <Title>Enter Recipe Url:</Title>
+        <Form>
+          <input type="text" id="url-input" />
+        </Form>
         <button type="submit" onClick={() => submitUrl(event)}>
           Get Recipe
         </button>
-      </form>
+      </Container>
     </>
   )
 }
@@ -40,3 +43,23 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(Recipe)
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+  width: 100%;
+  height: 87vh;
+`
+
+const Title = styled.div`
+  margin: 20px;
+  text-align: center;
+  font-size: 1.5em;
+`
+const Form = styled.form`
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+`

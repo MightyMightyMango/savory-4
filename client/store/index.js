@@ -4,12 +4,13 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import singleRecipeReducer from './singleRecipe'
+import recipesReducer from './recipes'
 
 const reducer = combineReducers({
   recipe: singleRecipeReducer,
+  recipes: recipesReducer,
   user: user
 })
-
 
 // const reducer = combineReducers({user})
 const middleware = composeWithDevTools(

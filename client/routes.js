@@ -8,7 +8,8 @@ import {
   UserHome,
   Homepage,
   Recipe,
-  RecipeForm
+  RecipeForm,
+  AllRecipes
 } from './components'
 import {me} from './store'
 
@@ -31,6 +32,7 @@ class Routes extends Component {
             {/* only available after logging in */}
             <Route path="/recipes" component={Recipe} />
             <Route path="/recipeform" component={RecipeForm} />
+            <Route path="/myrecipes" component={AllRecipes} />
             <Route path="/home" component={UserHome} />
           </Switch>
         )}

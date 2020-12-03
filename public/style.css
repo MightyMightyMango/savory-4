@@ -1,5 +1,10 @@
+* {
+  /* background-color: DarkSeaGreen; */
+}
+
 body {
   font-family: sans-serif;
+  height: 100vh;
 }
 
 a {
@@ -18,4 +23,8 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+button {
+  margin-top: 10px;
 }
