@@ -34,11 +34,8 @@ export const setRecipeThunk = async (url, userId) => {
       url: url,
       userId: userId
     })
-    console.log('res.data in new thunk', res.data)
     let jsonData = JSON.stringify(res.data)
-    console.log('json data in new thunk', jsonData)
-    console.log('typeof JsonData', typeof jsonData)
-    localStorage.setItem(`recipeDraft`, jsonData)
+    await localStorage.setItem(`recipeDraft`, jsonData)
   } catch (error) {
     console.error(error)
   }

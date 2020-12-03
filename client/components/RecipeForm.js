@@ -24,12 +24,14 @@ class RecipeForm extends React.Component {
   }
 
   componentDidMount() {
+    console.log('INSIDE CDM')
     // let modifiedData = dummyData
     // modifiedData.ingredients = dummyData.ingredients.join('\n')
     // modifiedData.instructions = dummyData.instructions.join('\n')
     // this.setState(dummyData)
-    let recipeData = JSON.parse(localStorage.getItem('recipeDraft'))
-    this.setState(recipeData)
+    // let recipeData = JSON.parse(localStorage.getItem('recipeDraft'))
+    this.setState(JSON.parse(localStorage.getItem('recipeDraft')))
+    console.log(this.state)
   }
 
   handleChange(evt) {
@@ -45,11 +47,12 @@ class RecipeForm extends React.Component {
     // let formattedInstructions = this.state.instructions.split('\n')
     // dataToSend.ingredients = formattedIngredients
     // dataToSend.instructions = formattedInstructions
-    history.push('/recipeform')
+    // history.push('/recipeform')
   }
 
   render() {
-    let recipe = this.state.recipe || {}
+    let recipe = this.state || {}
+    console.log(this.state)
     return (
       <div>
         <h4>
