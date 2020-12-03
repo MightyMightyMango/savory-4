@@ -18,13 +18,16 @@ export const AllRecipes = props => {
     <>
       <Container>
         <Title>My Recipes</Title>
-        {recipes.map(recipe => (
-          <div key={recipe.id}>
-            <Image src={recipe.imageUrl} />
-            <Subtitle>{recipe.name}</Subtitle>
-            <button type="submit">View Recipe</button>
-          </div>
-        ))}
+        <RecipesContainer>
+          {recipes.map(recipe => (
+            <Recipe key={recipe.id}>
+              <Image src={recipe.imageUrl} />
+              <Subtitle>{recipe.name}</Subtitle>
+              <Subtitle>Source: {recipe.publisher}</Subtitle>
+              <button type="submit">View Recipe</button>
+            </Recipe>
+          ))}
+        </RecipesContainer>
       </Container>
     </>
   )
@@ -44,18 +47,31 @@ const mapDispatch = dispatch => ({
 export default connect(mapState, mapDispatch)(AllRecipes)
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-contents: center;
-  align-items: center;
+  text-align: center;
   width: 100%;
   height: 87vh;
 `
-
 const Title = styled.div`
   margin: 20px;
   text-align: center;
   font-size: 1.5em;
+`
+
+const RecipesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 70%;
+  padding-top: 20px;
+`
+
+const Recipe = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-contents: flex-start;
+  padding: 30px;
+  width: calc(33.333333% - 30px);
 `
 
 const Subtitle = styled.div`
@@ -63,5 +79,9 @@ const Subtitle = styled.div`
 `
 
 const Image = styled.img`
-  width: 25%;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  overflow: hidden;
+  padding-bottom: 20px;
 `
