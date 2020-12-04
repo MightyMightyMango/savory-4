@@ -51,7 +51,8 @@ async function seed() {
         'Place orange in a large saucepan and pour in cold water to come 1 up sides of pan. Bring to a boil, then remove immediately from heat and drain orange in a mesh sieve or colander. Rinse under cold water; return to saucepan. Add cranberries, sugar, butter, cinnamon, allspice, and salt and bring to a boil, stirring to dissolve sugar.',
         'Cook, stirring often and reducing heat as needed to avoid scorching, until cranberries burst, juices are syrupy, and pan is visible when a wooden spoon is dragged across the bottom, 12–15 minutes. Let cool.',
         'Do Ahead: Sauce can be made 1 week ahead. Cover and chill.'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: 'Gluten-Free Carrot Cake',
@@ -93,7 +94,8 @@ async function seed() {
         '⅓ cup Greek yogurt',
         '1 tsp. vanilla extract',
         'Pinch of kosher salt'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: 'Grilled Crispy-Skinned Salmon with Whole Lemon-Sesame Sauce',
@@ -119,7 +121,8 @@ async function seed() {
         'Cut ends off lemon and discard. Place lemon upright and slice off outer lobes in 4 sections, leaving a square-shaped core and seeds behind. Finely chop lobes (flesh, pith, and all) and transfer to a small bowl (you should have about ⅓ cup). Squeeze out juice from core over bowl. Add shallot, sesame seeds, honey, sesame oil, and remaining ⅓ cup olive oil; season with salt and lots of pepper. Toss to combine.',
         'Clean and oil grate, then immediately place salmon on grill skin side down. Cover grill and cook, skin side down the entire time, until skin is lightly charred and fish is opaque, 6–8 minutes. Transfer salmon to a plate and let cool slightly.',
         'Divide salmon among plates. Top with basil. Spoon lemon-sesame sauce over.'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: "BA's Best Pesto",
@@ -143,7 +146,8 @@ async function seed() {
         'Cooks’ Note: If you want to use this with pasta, cook 12 oz. dried pasta (we prefer long pasta for pesto) in a large pot of boiling salted water, stirring occasionally, until al dente. Drain, reserving ½ cup pasta cooking liquid.',
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: 'Lemon Pound Cake',
@@ -175,7 +179,8 @@ async function seed() {
         'Place 1½ cups powdered sugar in another medium bowl. Slowly whisk in about half of lemon juice until smooth, then add sliced lemon zest; set glaze aside.',
         "Let cake cool about 10 minutes. (Yeah, it really does need to cool a bit, so set a timer if you're impatient.) Poke 10-15 holes evenly throughout cake with a cake tester or toothpick. Pour the remaining lemon juice—the stuff that didn't end up going into the glaze—over the top of the cake. Let cool completely. (Seriously!)",
         'Run a butter knife around edges of pan to loosen. Using parchment overhang, lift cake onto a wire rack; remove parchment.”,”Now, pour the lemon zest glaze over cake, letting it fall down the sides. Let icing set for at least 10 minutes before slicing. Serve on its own, or with a spoonful of Greek yogurt, a dollop of whipped cream, or a scoop of ice cream on top. (You deserve it!)'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: "BA's Best Pesto",
@@ -197,7 +202,8 @@ async function seed() {
         'Cooks’ Note: If you want to use this with pasta, cook 12 oz. dried pasta (we prefer long pasta for pesto) in a large pot of boiling salted water, stirring occasionally, until al dente. Drain, reserving ½ cup pasta cooking liquid.',
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: 'Chicken Paprikash with Buttered Egg Noodles',
@@ -262,7 +268,8 @@ async function seed() {
         'Cooks’ Note: If you want to use this with pasta, cook 12 oz. dried pasta (we prefer long pasta for pesto) in a large pot of boiling salted water, stirring occasionally, until al dente. Drain, reserving ½ cup pasta cooking liquid.',
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
-      ]
+      ],
+      isDraft: false
     },
     {
       name: 'Classic Focaccia Bread',
@@ -290,7 +297,8 @@ async function seed() {
         "Let sheet pan sit in a warm spot until dough is puffed and bubbly and nearly doubled in height, 45–65 minutes (if you're using a standard half sheet pan, it will have risen to the very top of the sides). Meanwhile, place a rack in center of oven; preheat to 450°.",
         'Remove plastic and drizzle dough generously with more oil. Oil hands again and press fingertips firmly into dough, pushing down all the way to bottom of pan to dimple all over. Sprinkle generously with sea salt.',
         'Bake focaccia until surface is deep golden brown all over, 25–35 minutes. Let cool in pan 10 minutes. Slide a thin metal spatula underneath focaccia to loosen from sheet pan (it may stick in a couple of places, so use some elbow grease to get underneath) and transfer to a wire rack. Let cool completely before cutting as desired.'
-      ]
+      ],
+      isDraft: false
     }
   ]
 
