@@ -64,3 +64,22 @@ router.get('/user/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+// Get recipe draft
+// GET /api/recipes/draft/:userId
+router.get('/draft/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    const recipe = await Recipe.findAll({
+      where: {
+        userId: userId,
+        isDraft: true
+      },
+      order: [['updatedAt', 'DESC']]
+    })
+    let draft = recipe[0]
+    res.json(draft)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
 
 const defaultState = {
   url: '',
@@ -24,14 +25,30 @@ class RecipeForm extends React.Component {
   }
 
   componentDidMount() {
-    console.log('INSIDE CDM')
     // let modifiedData = dummyData
     // modifiedData.ingredients = dummyData.ingredients.join('\n')
     // modifiedData.instructions = dummyData.instructions.join('\n')
     // this.setState(dummyData)
     // let recipeData = JSON.parse(localStorage.getItem('recipeDraft'))
-    this.setState(JSON.parse(localStorage.getItem('recipeDraft')))
-    console.log(this.state)
+    // this.setState(JSON.parse(localStorage.getItem('recipeDraft')))
+    // console.log(this.state)
+    console.log(this.props)
+    this.setState({recipe: this.props.recipe})
+    this.setState({
+      url: this.props.recipe.url,
+      name: this.props.recipe.name,
+      alt_headline: this.props.recipe.alt_headline,
+      imageUrl: this.props.recipe.thumbnail_url,
+      publisher: this.props.recipe.publisher_name,
+      ingredients: this.props.recipe.ingredients,
+      instructions: this.props.recipe.instructions,
+      yield: this.props.recipe.yield,
+      prepTime: this.props.recipe.prepTime,
+      categories: this.props.recipe.categories,
+      userId: this.props.user.id,
+      isDraft: true
+    })
+    console.log('this.state in CDM', this.state)
   }
 
   handleChange(evt) {
@@ -51,8 +68,10 @@ class RecipeForm extends React.Component {
   }
 
   render() {
-    let recipe = this.state || {}
-    console.log(this.state)
+    console.log('this.state in recipeform render', this.state)
+    console.log('this.props in recipeform render', this.props)
+    let recipe = this.state
+
     return (
       <div>
         <h4>
@@ -67,7 +86,7 @@ class RecipeForm extends React.Component {
           <input
             type="text"
             name="name"
-            value={this.state.name}
+            value={this.props.name}
             onChange={this.handleChange}
           />
 
@@ -150,7 +169,20 @@ class RecipeForm extends React.Component {
 }
 
 const mapState = state => ({
-  recipe: state.recipe
+  recipe: state.recipe,
+  user: state.user
 })
 
-export default connect(mapState, null)(RecipeForm)
+const mapDispatch = dispatch => ({
+  getRecipeDraft: (url, userId) => {
+    dispatch(setRecipeDraft(url, userId))
+  },
+  submitRecipe: recipe => {
+    dispatch(submitRecipe(recipe))
+  },
+  getUserDraft: userId => {
+    dispatch(getUserDraft(userId))
+  }
+})
+
+export default connect(mapState, mapDispatch)(RecipeForm)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from '../history'
+// import history from '../history'
 
 const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
 
@@ -8,36 +8,43 @@ export const setSingleRecipe = recipe => ({
   recipe: recipe
 })
 
-// export const setRecipeThunk = (url, userId) => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await axios.post('/api/scrape/', {
-//         url: url,
-//         userId: userId,
-//       })
-//       dispatch(setSingleRecipe(res.data))
-//       // history.push('/recipeform')
-//       console.log(res.data)
-//       let JsonData = JSON.stringify(res.data)
-//       console.log(typeof JsonData)
-//       localStorage.setItem(`recipeDraft`, JsonData)
-//     } catch (error) {
-//       console.error(error)
-//     }
-//   }
-// }
+export const setRecipeDraft = (url, userId) => {
+  return async dispatch => {
+    try {
+      // console.log('userid in route', userId)
+      const res = await axios.post('/api/scrape/', {
+        url: url,
+        userId: userId
+      })
+      dispatch(setSingleRecipe(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
-export const setRecipeThunk = async (url, userId) => {
-  try {
-    console.log('url in thunk', url)
-    const res = await axios.post('/api/scrape/', {
-      url: url,
-      userId: userId
-    })
-    let jsonData = JSON.stringify(res.data)
-    await localStorage.setItem(`recipeDraft`, jsonData)
-  } catch (error) {
-    console.error(error)
+export const getUserDraft = userId => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`/api/recipes/draft/${userId}`)
+      // console.log('res.data in draft thunk', res.data)
+      dispatch(setSingleRecipe(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const submitRecipe = recipe => {
+  return async dispatch => {
+    try {
+      let recipeId = recipe.id
+      const res = await axios.put(`/api/recipes/${recipeId}`, recipe)
+      // console.log(res.data)
+      dispatch(setSingleRecipe(res.data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 

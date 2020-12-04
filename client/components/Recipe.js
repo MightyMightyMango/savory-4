@@ -1,42 +1,54 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setRecipeThunk} from '../store/singleRecipe'
+import {setRecipeDraft} from '../store/singleRecipe'
 import history from '../history'
 import styled from 'styled-components'
+import {render} from 'enzyme'
+import RecipeForm from './RecipeForm'
 
-export const Recipe = props => {
-  const {getSingleRecipe} = props
-  let userId = 0
+export class Recipe extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isSubmitted: false
+    }
+  }
 
-  const submitUrl = event => {
+  async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    getSingleRecipe(url, userId)
-    document.getElementById('url-input').value = ' '
-    history.push('/recipeform')
+    await this.props.getSingleRecipe(url, this.props.user.id)
+    // document.getElementById('url-input').value = ' '
+    this.setState({...this.state, isSubmitted: true})
   }
-  return (
-    <>
-      <Container>
-        <Title>Enter Recipe Url:</Title>
-        <Form>
-          <input type="text" id="url-input" />
-        </Form>
-        <button type="submit" onClick={() => submitUrl(event)}>
-          Get Recipe
-        </button>
-      </Container>
-    </>
-  )
+
+  render() {
+    console.log('this.props in Recipe.js', this.props.recipe)
+    return (
+      <>
+        <Container>
+          <Title>Enter Recipe Url:</Title>
+          <Form>
+            <input type="text" id="url-input" />
+          </Form>
+          <button type="submit" onClick={() => this.submitUrl(event)}>
+            Get Recipe
+          </button>
+          {this.state.isSubmitted && <RecipeForm recipe={this.props.recipe} />}
+        </Container>
+      </>
+    )
+  }
 }
 
 const mapState = state => ({
-  recipe: state.recipe
+  recipe: state.recipe,
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
   getSingleRecipe: (url, userId) => {
-    setRecipeThunk(url, userId)
+    dispatch(setRecipeDraft(url, userId))
   }
 })
 
