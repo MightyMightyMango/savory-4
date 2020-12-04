@@ -35,6 +35,7 @@ const scraper1 = async (url, publisher, userId) => {
       categories: [],
       userId: userId || 0
     }
+    console.log(recipeEntry)
     return recipeEntry
   } catch (error) {
     console.error(error)
