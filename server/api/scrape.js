@@ -1,14 +1,27 @@
 const router = require('express').Router()
 module.exports = router
 const {processUrl} = require('../scrape')
+const Recipe = require('../db/models/recipe')
 
-router.post('*', async (req, res) => {
+router.post('/', async (req, res, next) => {
   try {
-    let url = req.body.url
-    let id = 3 // change to req.body.userId after testing is done
-    let data = await processUrl(url, id)
-    res.send(data)
+    const url = req.body.url
+    const userId = req.body.userId
+    let data = await processUrl(url, userId)
+    const newRecipe = await Recipe.create(data)
+    res.status(200).send(newRecipe)
   } catch (error) {
-    console.error(error)
+    next(error)
   }
 })
+
+// router.post('*', async (req, res) => {
+//   try {
+//     let url = req.body.url
+//     let id = 3 // change to req.body.userId after testing is done
+//     let data = await processUrl(url, id)
+//     res.send(data)
+//   } catch (error) {
+//     console.error(error)
+//   }
+// })

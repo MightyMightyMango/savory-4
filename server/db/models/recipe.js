@@ -38,19 +38,19 @@ const Recipe = db.define('recipe', {
     defaultValue: []
   },
   cookTime: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 0
+    defaultValue: ''
   },
   prepTime: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 0
+    defaultValue: ''
   },
   yield: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 0
+    defaultValue: ''
   },
   isDraft: {
     type: Sequelize.BOOLEAN,
