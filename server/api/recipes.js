@@ -16,12 +16,20 @@ router.get('/', async (req, res, next) => {
 router.get('/:recipeId', async (req, res, next) => {
   try {
     const recipeId = req.params.recipeId
-    const recipes = await Recipe.findAll({
-      where: {
-        id: recipeId
-      }
-    })
-    res.json(recipes)
+    const recipe = await Recipe.findByPk(recipeId)
+    res.json(recipe)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Edit a single recipe
+router.put('/:recipeId', async (req, res, next) => {
+  try {
+    const recipeId = req.params.recipeId
+    const recipe = await Recipe.findByPk(recipeId)
+    const newRecipe = await recipe.update(req.body)
+    res.status(200).send(newRecipe)
   } catch (err) {
     next(err)
   }
