@@ -52,6 +52,11 @@ const Recipe = db.define('recipe', {
     allowNull: false,
     defaultValue: 0
   },
+  isDraft: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
+  },
   categories: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false,
