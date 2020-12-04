@@ -1,5 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import history from '../history'
+
+import {passRecipe, passRecipeThunk} from '../store/singleRecipe'
 
 const defaultState = {
   url: '',
@@ -18,23 +21,34 @@ const defaultState = {
 class RecipeForm extends React.Component {
   constructor(props) {
     super(props)
-    this.handleChange = this.handleChange.bind(this)
+    this.state = JSON.parse(localStorage.getItem('recipeDraft'))
+    // this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.state = {}
   }
+
+  // componentWillMount() {
+  //   const recipe = JSON.parse(localStorage.getItem('recipeDraft'))
+  //   console.log('recipe ', recipe)
+  // }
 
   componentDidMount() {
     console.log('INSIDE CDM')
-    // let modifiedData = dummyData
-    // modifiedData.ingredients = dummyData.ingredients.join('\n')
-    // modifiedData.instructions = dummyData.instructions.join('\n')
-    // this.setState(dummyData)
-    // let recipeData = JSON.parse(localStorage.getItem('recipeDraft'))
-    this.setState(JSON.parse(localStorage.getItem('recipeDraft')))
-    console.log(this.state)
+    console.log('CDM initial state = ', this.state)
+
+    const recipe = JSON.parse(localStorage.getItem('recipeDraft'))
+
+    console.log('recipe2 ', recipe)
+    // passRecipe(recipe)
+    this.setState(recipe)
+    console.log('CDM state is now = ', this.state)
+
+    history.push('/recipeform')
   }
 
+  componentDidUpdate() {}
+
   handleChange(evt) {
+    console.log('evt.target.value ', evt.target.value)
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -43,11 +57,7 @@ class RecipeForm extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     let dataToSend = this.state
-    // let formattedIngredients = this.state.ingredients.split('\n')
-    // let formattedInstructions = this.state.instructions.split('\n')
-    // dataToSend.ingredients = formattedIngredients
-    // dataToSend.instructions = formattedInstructions
-    // history.push('/recipeform')
+    // this.setState(JSON.parse(localStorage.getItem('recipeDraft')))
   }
 
   render() {
@@ -153,4 +163,8 @@ const mapState = state => ({
   recipe: state.recipe
 })
 
-export default connect(mapState, null)(RecipeForm)
+const mapDispatch = dispatch => ({
+  // passRecipe: (recipe) => dispatch(passRecipeThunk(recipe))
+})
+
+export default connect(mapState, mapDispatch)(RecipeForm)

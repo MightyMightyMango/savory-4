@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setRecipeThunk} from '../store/singleRecipe'
+import {setRecipeThunk, passRecipe} from '../store/singleRecipe'
 import history from '../history'
 import styled from 'styled-components'
 
@@ -12,6 +12,11 @@ export const Recipe = props => {
     event.preventDefault()
     const url = document.getElementById('url-input').value
     getSingleRecipe(url, userId)
+    console.log('Recipe Component: props ', props)
+    const res = JSON.parse(localStorage.getItem(`recipeDraft`))
+    console.log('Recipe Component res = ', res)
+    passRecipe(res)
+    console.log('Recipe Component: props again', props)
     document.getElementById('url-input').value = ' '
     history.push('/recipeform')
   }
@@ -37,6 +42,9 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getSingleRecipe: (url, userId) => {
     setRecipeThunk(url, userId)
+  },
+  passRecipe: recipe => {
+    passRecipe(recipe)
   }
 })
 

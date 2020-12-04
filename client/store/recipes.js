@@ -30,6 +30,7 @@ export const setSingleRecipeThunk = recipeId => {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/recipes/${recipeId}`)
+      console.log('In Thunk: res.data = ', res.data)
       dispatch(setSingleRecipe(res.data))
     } catch (error) {
       console.error(error)
