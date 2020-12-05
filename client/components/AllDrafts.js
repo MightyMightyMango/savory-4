@@ -7,75 +7,34 @@ import {NavLink} from 'react-router-dom'
 export const AllDrafts = props => {
   // const {state, setState} = useState(props)
 
-  const {recipes, getAllRecipes} = props
+  const {recipes, getDrafts} = props
 
   console.log('props ', props)
   console.log('recipes ', recipes)
 
-  // const [initialRecipeState, setRecipe] = useState('')
-
-  // console.log('1. initialRecipeState ', initialRecipeState)
-
   useEffect(() => {
-    getAllRecipes(props.user.id)
+    getDrafts(props.user.id)
 
     console.log('In useEffect props ', props)
-    // console.log('2. initialRecipeState ', initialRecipeState)
   }, [])
-
-  // console.log('props.user.recipes ', props.user.recipes)
-
-  // const recipes = props
-
-  // console.log('In AllRecipes recipes ', props.recipes)
-
-  // if (recipes.length > 0) {
-  //   return (
-  //     <>
-  //       <Container>
-  //         <Title>My Recipes</Title>
-  //         <RecipesContainer>
-  //           {recipes.map(recipe => (
-  //             <Recipe key={recipe.id}>
-  //               <Image src={recipe.imageUrl} />
-  //               <Subtitle>{recipe.name}</Subtitle>
-  //               <Subtitle>Source: {recipe.publisher}</Subtitle>
-  //               <NavLink to={`/recipes/${recipe.id}`}>
-  //                 <button type="submit">View Recipe</button>
-  //               </NavLink>
-  //             </Recipe>
-  //           ))}
-  //         </RecipesContainer>
-  //       </Container>
-  //     </>
-  //   )
-
-  // } else {
-  //   return (
-  //     <>
-  //       <Container>
-  //         <Title>Rendering</Title>
-  //       </Container>
-  //     </>
-  //   )
-
-  // }
 
   return (
     <>
       <Container>
         <Title>My Recipe Drafts</Title>
         <RecipesContainer>
-          {recipes.map(recipe => (
-            <Recipe key={recipe.id}>
-              <Image src={recipe.imageUrl} />
-              <Subtitle>{recipe.name}</Subtitle>
-              <Subtitle>Source: {recipe.publisher}</Subtitle>
-              <NavLink to={`/recipes/${recipe.id}`}>
-                <button type="submit">View Recipe</button>
-              </NavLink>
-            </Recipe>
-          ))}
+          {recipes
+            ? recipes.map(recipe => (
+                <Recipe key={recipe.id}>
+                  <Image src={recipe.imageUrl} />
+                  <Subtitle>{recipe.name}</Subtitle>
+                  <Subtitle>Source: {recipe.publisher}</Subtitle>
+                  <NavLink to={`/recipes/${recipe.id}`}>
+                    <button type="submit">View Recipe</button>
+                  </NavLink>
+                </Recipe>
+              ))
+            : ''}
         </RecipesContainer>
       </Container>
     </>
@@ -84,11 +43,11 @@ export const AllDrafts = props => {
 
 const mapState = state => ({
   user: state.user,
-  recipes: state.recipes.allRecipes
+  recipes: state.recipes.allDrafts
 })
 
 const mapDispatch = dispatch => ({
-  getAllRecipes: userId => dispatch(setAllDraftsThunk(userId))
+  getDrafts: userId => dispatch(setAllDraftsThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(AllDrafts)

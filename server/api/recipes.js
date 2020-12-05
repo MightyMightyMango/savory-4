@@ -44,8 +44,8 @@ router.delete('/:recipeId', async (req, res, next) => {
     const id = req.params.recipeId
     await Recipe.destroy({where: {id}})
     res.sendStatus(204)
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
   }
 })
 
@@ -60,6 +60,21 @@ router.get('/user/:userId', async (req, res, next) => {
       }
     })
     res.json(recipes)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/drafts/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    const drafts = await Recipe.findAll({
+      where: {
+        userId: userId,
+        isDraft: true
+      }
+    })
+    res.json(drafts)
   } catch (err) {
     next(err)
   }

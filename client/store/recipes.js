@@ -3,9 +3,15 @@ import axios from 'axios'
 
 const SET_ALL_RECIPES = 'SET_ALL_RECIPES'
 const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
+const SET_ALL_DRAFTS = 'SET_ALL_DRAFTS'
 
 export const setAllRecipes = recipes => ({
   type: SET_ALL_RECIPES,
+  recipes
+})
+
+export const setAllDrafts = recipes => ({
+  type: SET_ALL_DRAFTS,
   recipes
 })
 
@@ -37,6 +43,17 @@ export const setSingleRecipeThunk = recipeId => {
   }
 }
 
+export const setAllDraftsThunk = userId => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`/api/recipes/drafts/${userId}`)
+      dispatch(setAllDrafts(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 const initialState = {
   allRecipes: [],
   singleRecipe: {}
@@ -50,6 +67,8 @@ function recipesReducer(state = initialState, action) {
       return {...state, allRecipes: action.recipes}
     case SET_SINGLE_RECIPE:
       return {...state, singleRecipe: action.recipe}
+    case SET_ALL_DRAFTS:
+      return {...state, allDrafts: action.recipes}
     default:
       return state
   }
