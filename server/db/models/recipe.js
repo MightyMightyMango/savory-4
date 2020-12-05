@@ -57,8 +57,8 @@ const Recipe = db.define('recipe', {
     allowNull: false,
     defaultValue: true
   },
-  categories: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+  categoryIds: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
     allowNull: false,
     defaultValue: []
   }
