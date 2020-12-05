@@ -1,20 +1,70 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import {setAllRecipesThunk} from '../store/recipes'
+import {setAllDraftsThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 
-export const AllRecipes = props => {
+export const AllDrafts = props => {
+  // const {state, setState} = useState(props)
+
   const {recipes, getAllRecipes} = props
+
+  console.log('props ', props)
+  console.log('recipes ', recipes)
+
+  // const [initialRecipeState, setRecipe] = useState('')
+
+  // console.log('1. initialRecipeState ', initialRecipeState)
 
   useEffect(() => {
     getAllRecipes(props.user.id)
+
+    console.log('In useEffect props ', props)
+    // console.log('2. initialRecipeState ', initialRecipeState)
   }, [])
+
+  // console.log('props.user.recipes ', props.user.recipes)
+
+  // const recipes = props
+
+  // console.log('In AllRecipes recipes ', props.recipes)
+
+  // if (recipes.length > 0) {
+  //   return (
+  //     <>
+  //       <Container>
+  //         <Title>My Recipes</Title>
+  //         <RecipesContainer>
+  //           {recipes.map(recipe => (
+  //             <Recipe key={recipe.id}>
+  //               <Image src={recipe.imageUrl} />
+  //               <Subtitle>{recipe.name}</Subtitle>
+  //               <Subtitle>Source: {recipe.publisher}</Subtitle>
+  //               <NavLink to={`/recipes/${recipe.id}`}>
+  //                 <button type="submit">View Recipe</button>
+  //               </NavLink>
+  //             </Recipe>
+  //           ))}
+  //         </RecipesContainer>
+  //       </Container>
+  //     </>
+  //   )
+
+  // } else {
+  //   return (
+  //     <>
+  //       <Container>
+  //         <Title>Rendering</Title>
+  //       </Container>
+  //     </>
+  //   )
+
+  // }
 
   return (
     <>
       <Container>
-        <Title>My Recipes</Title>
+        <Title>My Recipe Drafts</Title>
         <RecipesContainer>
           {recipes.map(recipe => (
             <Recipe key={recipe.id}>
@@ -38,10 +88,10 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId))
+  getAllRecipes: userId => dispatch(setAllDraftsThunk(userId))
 })
 
-export default connect(mapState, mapDispatch)(AllRecipes)
+export default connect(mapState, mapDispatch)(AllDrafts)
 
 const Container = styled.div`
   display: flex;

@@ -18,7 +18,6 @@ export const setAllRecipesThunk = userId => {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/recipes/user/${userId}`)
-      console.log('In All Recipes Thunk = ', res.data)
       dispatch(setAllRecipes(res.data))
     } catch (error) {
       console.error(error)
@@ -30,6 +29,7 @@ export const setSingleRecipeThunk = recipeId => {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/recipes/${recipeId}`)
+      console.log('In Single Recipes Thunk = ', res.data)
       dispatch(setSingleRecipe(res.data))
     } catch (error) {
       console.error(error)
@@ -49,7 +49,7 @@ function recipesReducer(state = initialState, action) {
     case SET_ALL_RECIPES:
       return {...state, allRecipes: action.recipes}
     case SET_SINGLE_RECIPE:
-      return {...state, singleRecipe: action.recipes}
+      return {...state, singleRecipe: action.recipe}
     default:
       return state
   }
