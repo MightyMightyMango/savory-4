@@ -9,7 +9,7 @@ export const AllRecipes = props => {
 
   useEffect(() => {
     getAllRecipes(props.user.id)
-  }, [])
+  })
 
   return (
     <>

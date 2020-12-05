@@ -1,19 +1,39 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import {setSingleRecipeThunk} from '../store/recipes'
+import history from '../history'
+import {
+  setSingleRecipeThunk,
+  deleteRecipeThunk,
+  deleteDraftThunk
+} from '../store/recipes'
 
 export const SingleRecipe = props => {
-  const {recipe, getRecipe} = props
+  const {recipe, getRecipe, deleteDraft, deleteRecipe} = props
+  const recipeId = props.match.params.recipeId
 
   useEffect(() => {
-    getRecipe(props.match.params.recipeId)
+    getRecipe(recipeId)
   }, [])
+
+  const handleDeleteDraft = event => {
+    event.preventDefault()
+    deleteDraft(recipeId)
+    history.push('/drafts')
+  }
+
+  const handleDeleteRecipe = event => {
+    event.preventDefault()
+    deleteRecipe(recipeId)
+    history.push('/myrecipes')
+  }
 
   return (
     <>
       <Container>
         <Title>{recipe.name}</Title>
+        {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''}
+        <Subtitle />
         <RecipeContainer>
           <Image src={recipe.imageUrl} />
           <Details>
@@ -55,17 +75,30 @@ export const SingleRecipe = props => {
             )}
           </Instructions>
         </RecipeContainer>
+        {recipe.isDraft ? (
+          <button type="submit" onClick={() => handleDeleteDraft(event)}>
+            Delete Draft
+          </button>
+        ) : (
+          <button type="submit" onClick={() => handleDeleteRecipe(event)}>
+            Delete Recipe
+          </button>
+        )}
       </Container>
     </>
   )
 }
 
 const mapState = state => ({
-  recipe: state.recipes.singleRecipe
+  recipe: state.recipes.singleRecipe,
+  recipes: state.recipes.allRecipes,
+  drafts: state.recipes.allDrafts
 })
 
 const mapDispatch = dispatch => ({
-  getRecipe: recipeId => dispatch(setSingleRecipeThunk(recipeId))
+  getRecipe: recipeId => dispatch(setSingleRecipeThunk(recipeId)),
+  deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
+  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId))
 })
 
 export default connect(mapState, mapDispatch)(SingleRecipe)

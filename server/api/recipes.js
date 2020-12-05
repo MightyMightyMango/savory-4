@@ -38,7 +38,8 @@ router.put('/:recipeId', async (req, res, next) => {
   }
 })
 
-// Delete a single recipe
+// Delete a single recipe. Also use this route for deleting drafts.
+// DELETE /api/recipes/:recipeId
 router.delete('/:recipeId', async (req, res, next) => {
   try {
     const id = req.params.recipeId
@@ -65,6 +66,8 @@ router.get('/user/:userId', async (req, res, next) => {
   }
 })
 
+// Get all drafts for one user
+// GET /api/recipes/drafts/:userId
 router.get('/drafts/:userId', async (req, res, next) => {
   try {
     const userId = req.params.userId

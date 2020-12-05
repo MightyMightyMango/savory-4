@@ -4,6 +4,8 @@ import axios from 'axios'
 const SET_ALL_RECIPES = 'SET_ALL_RECIPES'
 const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
 const SET_ALL_DRAFTS = 'SET_ALL_DRAFTS'
+const DELETE_RECIPE = 'DELETE_RECIPE'
+const DELETE_DRAFT = 'DELETE_DRAFT'
 
 export const setAllRecipes = recipes => ({
   type: SET_ALL_RECIPES,
@@ -20,6 +22,17 @@ export const setSingleRecipe = recipe => ({
   recipe
 })
 
+export const deleteRecipe = recipeId => ({
+  type: DELETE_RECIPE,
+  recipeId
+})
+
+export const deleteDraft = recipeId => ({
+  type: DELETE_DRAFT,
+  recipeId
+})
+
+// ALL RECIPES
 export const setAllRecipesThunk = userId => {
   return async dispatch => {
     try {
@@ -31,6 +44,7 @@ export const setAllRecipesThunk = userId => {
   }
 }
 
+// SINGLE RECIPE
 export const setSingleRecipeThunk = recipeId => {
   return async dispatch => {
     try {
@@ -43,6 +57,7 @@ export const setSingleRecipeThunk = recipeId => {
   }
 }
 
+// ALL DRAFTS
 export const setAllDraftsThunk = userId => {
   return async dispatch => {
     try {
@@ -54,9 +69,34 @@ export const setAllDraftsThunk = userId => {
   }
 }
 
+// DELETE RECIPE
+export const deleteRecipeThunk = recipeId => {
+  return async dispatch => {
+    try {
+      dispatch(deleteRecipe(recipeId))
+      await axios.delete(`/api/recipes/${recipeId}`)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+// DELETE DRAFT
+export const deleteDraftThunk = recipeId => {
+  return async dispatch => {
+    try {
+      dispatch(deleteDraft(recipeId))
+      await axios.delete(`/api/recipes/${recipeId}`)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 const initialState = {
   allRecipes: [],
-  singleRecipe: {}
+  singleRecipe: {},
+  allDrafts: []
 }
 
 // const initialState = []
@@ -69,6 +109,19 @@ function recipesReducer(state = initialState, action) {
       return {...state, singleRecipe: action.recipe}
     case SET_ALL_DRAFTS:
       return {...state, allDrafts: action.recipes}
+    case DELETE_RECIPE: {
+      const recipes = state.allRecipes.filter(
+        recipe => recipe.id !== action.recipeId
+      )
+      return {...state, allRecipes: recipes}
+    }
+    case DELETE_DRAFT: {
+      const drafts = state.allDrafts.filter(
+        draft => draft.id !== action.recipeId
+      )
+      return {...state, allDrafts: drafts}
+    }
+
     default:
       return state
   }
