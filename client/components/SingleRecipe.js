@@ -14,7 +14,7 @@ export const SingleRecipe = props => {
 
   useEffect(() => {
     getRecipe(recipeId)
-  }, [])
+  })
 
   const handleDeleteDraft = event => {
     event.preventDefault()
@@ -76,11 +76,25 @@ export const SingleRecipe = props => {
           </Instructions>
         </RecipeContainer>
         {recipe.isDraft ? (
-          <button type="submit" onClick={() => handleDeleteDraft(event)}>
+          <button
+            type="submit"
+            onClick={() => {
+              if (window.confirm('Are you sure you wish to delete this draft?'))
+                handleDeleteDraft(event)
+            }}
+          >
             Delete Draft
           </button>
         ) : (
-          <button type="submit" onClick={() => handleDeleteRecipe(event)}>
+          <button
+            type="submit"
+            onClick={() => {
+              if (
+                window.confirm('Are you sure you wish to delete this recipe?')
+              )
+                handleDeleteRecipe(event)
+            }}
+          >
             Delete Recipe
           </button>
         )}
@@ -91,8 +105,7 @@ export const SingleRecipe = props => {
 
 const mapState = state => ({
   recipe: state.recipes.singleRecipe,
-  recipes: state.recipes.allRecipes,
-  drafts: state.recipes.allDrafts
+  recipes: state.recipes.allRecipes
 })
 
 const mapDispatch = dispatch => ({

@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import {setAllDraftsThunk} from '../store/recipes'
+import {setAllDraftsThunk, deleteDraftThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 
 export const AllDrafts = props => {
   // const {state, setState} = useState(props)
 
-  const {recipes, getDrafts} = props
+  const {recipes, getDrafts, deleteDraft} = props
 
   console.log('props ', props)
   console.log('recipes ', recipes)
@@ -17,6 +17,12 @@ export const AllDrafts = props => {
 
     console.log('In useEffect props ', props)
   })
+
+  const handleDeleteDraft = (event, recipeId) => {
+    event.preventDefault()
+    deleteDraft(recipeId)
+    history.push('/drafts')
+  }
 
   return (
     <>
@@ -32,6 +38,19 @@ export const AllDrafts = props => {
                   <NavLink to={`/recipes/${recipe.id}`}>
                     <button type="submit">View Recipe</button>
                   </NavLink>
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Are you sure you wish to delete this draft?'
+                        )
+                      )
+                        handleDeleteDraft(event, recipe.id)
+                    }}
+                  >
+                    Delete Draft
+                  </button>
                 </Recipe>
               ))
             : ''}
@@ -47,7 +66,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getDrafts: userId => dispatch(setAllDraftsThunk(userId))
+  getDrafts: userId => dispatch(setAllDraftsThunk(userId)),
+  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId))
 })
 
 export default connect(mapState, mapDispatch)(AllDrafts)

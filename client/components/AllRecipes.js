@@ -1,15 +1,21 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import {setAllRecipesThunk} from '../store/recipes'
+import {setAllRecipesThunk, deleteRecipeThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 
 export const AllRecipes = props => {
-  const {recipes, getAllRecipes} = props
+  const {recipes, getAllRecipes, deleteRecipe} = props
 
   useEffect(() => {
     getAllRecipes(props.user.id)
-  })
+  }, [])
+
+  const handleDeleteRecipe = (event, recipeId) => {
+    event.preventDefault()
+    console.log('event ', event)
+    deleteRecipe(recipeId)
+  }
 
   return (
     <>
@@ -24,6 +30,35 @@ export const AllRecipes = props => {
               <NavLink to={`/recipes/${recipe.id}`}>
                 <button type="submit">View Recipe</button>
               </NavLink>
+              {recipe.isDraft ? (
+                <button
+                  type="submit"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Are you sure you wish to delete this draft?'
+                      )
+                    )
+                      handleDeleteRecipe(event, recipe.id)
+                  }}
+                >
+                  Delete Draft
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Are you sure you wish to delete this recipe?'
+                      )
+                    )
+                      handleDeleteRecipe(event, recipe.id)
+                  }}
+                >
+                  Delete Recipe
+                </button>
+              )}
             </Recipe>
           ))}
         </RecipesContainer>
@@ -38,7 +73,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId))
+  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
+  deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId))
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)
