@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Recipe} = require('../db/models')
+const {Recipe, Category, RecipeCategory} = require('../db/models')
 module.exports = router
 
 // Get all recipes in database
@@ -78,6 +78,27 @@ router.get('/drafts/:userId', async (req, res, next) => {
       }
     })
     res.json(drafts)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Get all recipes for one category
+// GET /api/recipes/categories/:categoryId
+router.get('/categories/:categoryId', async (req, res, next) => {
+  try {
+    const categoryId = req.params.categoryId
+    console.log('categoryId', categoryId)
+    console.log('typeof categoryId', typeof categoryId)
+    const recipesInCategory = await Category.findAll({
+      where: {
+        id: categoryId
+      },
+      include: {
+        model: Recipe
+      }
+    })
+    res.json(recipesInCategory)
   } catch (err) {
     next(err)
   }

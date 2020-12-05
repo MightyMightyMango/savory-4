@@ -337,8 +337,6 @@ async function seed() {
   ] = createdRecipes
 
   // SET ASSOCIATIONS FOR RECIPES WITH USERS
-  // await cranberry.setUser(lea, { category: 'thanksgiving'})
-  // await cranberry.setUser(lea, { category: 'thanksgiving'})
   await cranberry.setUser(lea)
   await carrot.setUser(lea)
   await salmon.setUser(lea)
@@ -351,7 +349,7 @@ async function seed() {
 
   console.log(`seeded ${recipes.length} recipes`)
 
-  // RECIPECATEGORY
+  // CREATE RECIPECATEGORY
   const flattenRecipeCategories = recipesToFlatten => {
     const recipeCategoriesArray = []
 
