@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Recipe, Category, RecipeCategory} = require('../server/db/models')
+const {
+  User,
+  Recipe,
+  Category,
+  RecipeCategory,
+  UserCategory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -371,6 +377,28 @@ async function seed() {
   const recipeCategories = flattenRecipeCategories(createdRecipes)
   await RecipeCategory.bulkCreate(recipeCategories)
   console.log('Seeded recipe_categories')
+
+  // CREATE USERS
+  const userCategories = [
+    {
+      userId: 1,
+      categoryId: 1
+    },
+    {
+      userId: 1,
+      categoryId: 2
+    },
+    {
+      userId: 1,
+      categoryId: 3
+    },
+    {
+      userId: 1,
+      categoryId: 4
+    }
+  ]
+
+  await UserCategory.bulkCreate(userCategories)
 
   console.log(`all seeded successfully`)
 }
