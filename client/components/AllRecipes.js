@@ -12,7 +12,7 @@ import {NavLink} from 'react-router-dom'
 
 export const AllRecipes = props => {
   // categories contains all the categories
-  // to filter by category, pass the userId into getRecipesInCategory
+  // to filter by category, pass the userId and categoryId into getRecipesInCategory
   const {
     user,
     recipes,
@@ -94,7 +94,8 @@ const mapDispatch = dispatch => ({
   getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
-  getRecipesInCategory: userId => dispatch(getRecipesInCategoryThunk(userId))
+  getRecipesInCategory: (userId, categoryId) =>
+    dispatch(getRecipesInCategoryThunk(userId, categoryId))
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)
