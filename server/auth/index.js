@@ -51,7 +51,7 @@ router.get('/me', async (req, res) => {
     // console.log('req.user ', userwithRecipes)
     res.json(userwithRecipes)
   } catch (error) {
-    next(error)
+    console.error(error)
   }
 })
 

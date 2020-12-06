@@ -16,7 +16,7 @@ export const AllDrafts = props => {
     getDrafts(props.user.id)
 
     console.log('In useEffect props ', props)
-  })
+  }, [])
 
   const handleDeleteDraft = (event, recipeId) => {
     event.preventDefault()
