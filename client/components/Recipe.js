@@ -36,17 +36,13 @@ export class Recipe extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     let dataToSend = this.state
-    console.log(dataToSend)
     delete dataToSend.isSubmitted
-    console.log(dataToSend)
-    let formattedIngredients = this.state.ingredients.split('\n')
-    let formattedInstructions = this.state.instructions.split('\n')
-    dataToSend.ingredients = formattedIngredients
-    dataToSend.instructions = formattedInstructions
+    dataToSend.ingredients = this.state.ingredients.split('\n')
+    dataToSend.instructions = this.state.instructions.split('\n')
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
-    this.setState({})
+    // history.push(`/recipes/${dataToSend.id}`)
   }
 
   async submitUrl(event) {
