@@ -42,17 +42,8 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', async (req, res) => {
-  try {
-    const userwithRecipes = await User.findOne({
-      where: {id: req.user.id},
-      include: Recipe
-    })
-    // console.log('req.user ', userwithRecipes)
-    res.json(userwithRecipes)
-  } catch (error) {
-    console.error(error)
-  }
+router.get('/me', (req, res) => {
+  res.json(req.user)
 })
 
 router.use('/google', require('./google'))

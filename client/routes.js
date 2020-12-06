@@ -11,7 +11,8 @@ import {
   RecipeForm,
   AllRecipes,
   SingleRecipe,
-  AllDrafts
+  AllDrafts,
+  LoginSignup
 } from './components'
 import {me} from './store'
 
@@ -27,8 +28,8 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Homepage} />
         {/* available to all users */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={LoginSignup} />
+        <Route path="/signup" component={LoginSignup} />
         {isLoggedIn && (
           <Switch>
             {/* only available after logging in */}

@@ -14,13 +14,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* available after you log in */}
-          <Link to="/home">Home</Link>
-          <span> | </span>
           <Link to="/myrecipes">My Recipes</Link>
           <span> | </span>
           <Link to="/drafts">My Drafts</Link>
           <span> | </span>
-          <Link to="/recipes">Fetch Recipe</Link>
+          <Link to="/recipes">Save New Recipe</Link>
+          <span> | </span>
+          <Link to="/home">My Account</Link>
           <span> | </span>
           <a href="#" onClick={handleClick}>
             Logout
