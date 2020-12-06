@@ -1,65 +1,21 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import {setAllRecipesThunk} from '../store/recipes'
+import {setAllRecipesThunk, deleteRecipeThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 
 export const AllRecipes = props => {
-  // const {state, setState} = useState(props)
-
-  const {recipes, getAllRecipes} = props
-
-  console.log('props ', props)
-  console.log('recipes ', recipes)
-
-  // const [initialRecipeState, setRecipe] = useState('')
-
-  // console.log('1. initialRecipeState ', initialRecipeState)
+  const {recipes, getAllRecipes, deleteRecipe} = props
 
   useEffect(() => {
     getAllRecipes(props.user.id)
-
-    console.log('In useEffect props ', props)
-    // console.log('2. initialRecipeState ', initialRecipeState)
   }, [])
 
-  // console.log('props.user.recipes ', props.user.recipes)
-
-  // const recipes = props
-
-  // console.log('In AllRecipes recipes ', props.recipes)
-
-  // if (recipes.length > 0) {
-  //   return (
-  //     <>
-  //       <Container>
-  //         <Title>My Recipes</Title>
-  //         <RecipesContainer>
-  //           {recipes.map(recipe => (
-  //             <Recipe key={recipe.id}>
-  //               <Image src={recipe.imageUrl} />
-  //               <Subtitle>{recipe.name}</Subtitle>
-  //               <Subtitle>Source: {recipe.publisher}</Subtitle>
-  //               <NavLink to={`/recipes/${recipe.id}`}>
-  //                 <button type="submit">View Recipe</button>
-  //               </NavLink>
-  //             </Recipe>
-  //           ))}
-  //         </RecipesContainer>
-  //       </Container>
-  //     </>
-  //   )
-
-  // } else {
-  //   return (
-  //     <>
-  //       <Container>
-  //         <Title>Rendering</Title>
-  //       </Container>
-  //     </>
-  //   )
-
-  // }
+  const handleDeleteRecipe = (event, recipeId) => {
+    event.preventDefault()
+    console.log('event ', event)
+    deleteRecipe(recipeId)
+  }
 
   return (
     <>
@@ -74,6 +30,35 @@ export const AllRecipes = props => {
               <NavLink to={`/recipes/${recipe.id}`}>
                 <button type="submit">View Recipe</button>
               </NavLink>
+              {recipe.isDraft ? (
+                <button
+                  type="submit"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Are you sure you wish to delete this draft?'
+                      )
+                    )
+                      handleDeleteRecipe(event, recipe.id)
+                  }}
+                >
+                  Delete Draft
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Are you sure you wish to delete this recipe?'
+                      )
+                    )
+                      handleDeleteRecipe(event, recipe.id)
+                  }}
+                >
+                  Delete Recipe
+                </button>
+              )}
             </Recipe>
           ))}
         </RecipesContainer>
@@ -88,7 +73,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId))
+  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
+  deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId))
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)
