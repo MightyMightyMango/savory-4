@@ -25,30 +25,22 @@ class RecipeForm extends React.Component {
   }
 
   componentDidMount() {
-    // let modifiedData = dummyData
-    // modifiedData.ingredients = dummyData.ingredients.join('\n')
-    // modifiedData.instructions = dummyData.instructions.join('\n')
-    // this.setState(dummyData)
-    // let recipeData = JSON.parse(localStorage.getItem('recipeDraft'))
-    // this.setState(JSON.parse(localStorage.getItem('recipeDraft')))
-    // console.log(this.state)
-    console.log(this.props)
-    this.setState({recipe: this.props.recipe})
+    let modifiedIngredients = this.props.recipe.ingredients.join('\n')
+    let modifiedInstructions = this.props.recipe.instructions.join('\n')
     this.setState({
       url: this.props.recipe.url,
       name: this.props.recipe.name,
-      alt_headline: this.props.recipe.alt_headline,
-      imageUrl: this.props.recipe.thumbnail_url,
-      publisher: this.props.recipe.publisher_name,
-      ingredients: this.props.recipe.ingredients,
-      instructions: this.props.recipe.instructions,
+      description: this.props.recipe.description,
+      imageUrl: this.props.recipe.imageUrl,
+      publisher: this.props.recipe.publisher,
+      ingredients: modifiedIngredients,
+      instructions: modifiedInstructions,
       yield: this.props.recipe.yield,
       prepTime: this.props.recipe.prepTime,
       categories: this.props.recipe.categories,
-      userId: this.props.user.id,
-      isDraft: true
+      userId: this.props.userId,
+      isDraft: this.props.isDraft
     })
-    console.log('this.state in CDM', this.state)
   }
 
   handleChange(evt) {
@@ -59,26 +51,26 @@ class RecipeForm extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    console.log('click')
     let dataToSend = this.state
-    // let formattedIngredients = this.state.ingredients.split('\n')
-    // let formattedInstructions = this.state.instructions.split('\n')
-    // dataToSend.ingredients = formattedIngredients
-    // dataToSend.instructions = formattedInstructions
-    // history.push('/recipeform')
+    let formattedIngredients = this.state.ingredients.split('\n')
+    let formattedInstructions = this.state.instructions.split('\n')
+    dataToSend.ingredients = formattedIngredients
+    dataToSend.instructions = formattedInstructions
+    dataToSend.isDraft = false
+    console.log('DATA SENT TO DB', dataToSend)
+    this.props.submitRecipe(dataToSend)
   }
 
   render() {
-    console.log('this.state in recipeform render', this.state)
-    console.log('this.props in recipeform render', this.props)
     let recipe = this.state
-
     return (
       <div>
         <h4>
           Edit recipe details for <em>{recipe.name}</em> below, then click
           CONFIRM when you're ready to save!
         </h4>
-        <img width="250px" src={recipe.thumbnail_url} />
+        <img width="250px" src={recipe.imageUrl} />
         <h6>Recipe Collected From: {recipe.url} </h6>
         <form onSubmit={this.handleSubmit}>
           <button type="submit">Confirm Changes</button>
@@ -86,7 +78,7 @@ class RecipeForm extends React.Component {
           <input
             type="text"
             name="name"
-            value={this.props.name}
+            value={this.state.name}
             onChange={this.handleChange}
           />
 

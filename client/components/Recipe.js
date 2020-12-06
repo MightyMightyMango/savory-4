@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setRecipeDraft} from '../store/singleRecipe'
+import {setRecipeDraft, submitRecipe} from '../store/singleRecipe'
 import history from '../history'
 import styled from 'styled-components'
 import {render} from 'enzyme'
@@ -23,7 +23,8 @@ export class Recipe extends React.Component {
   }
 
   render() {
-    console.log('this.props in Recipe.js', this.props.recipe)
+    // console.log('this.props.recipe in Recipe.js', this.props.recipe)
+    console.log('this.state.isSubmitted in Recipe.js', this.state.isSubmitted)
     return (
       <>
         <Container>
@@ -34,7 +35,13 @@ export class Recipe extends React.Component {
           <button type="submit" onClick={() => this.submitUrl(event)}>
             Get Recipe
           </button>
-          {this.state.isSubmitted && <RecipeForm recipe={this.props.recipe} />}
+          {this.state.isSubmitted &&
+            this.props.recipe.id && (
+              <RecipeForm
+                recipe={this.props.recipe}
+                submitRecipe={this.props.submitRecipe}
+              />
+            )}
         </Container>
       </>
     )
@@ -49,6 +56,9 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getSingleRecipe: (url, userId) => {
     dispatch(setRecipeDraft(url, userId))
+  },
+  submitRecipe: recipe => {
+    dispatch(submitRecipe(recipe))
   }
 })
 
