@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Recipe} = require('../db/models')
+const {Recipe, Category, RecipeCategory, User} = require('../db/models')
 module.exports = router
 
 // Get all recipes in database
@@ -38,14 +38,15 @@ router.put('/:recipeId', async (req, res, next) => {
   }
 })
 
-// Delete a single recipe
+// Delete a single recipe. Also use this route for deleting drafts.
+// DELETE /api/recipes/:recipeId
 router.delete('/:recipeId', async (req, res, next) => {
   try {
     const id = req.params.recipeId
     await Recipe.destroy({where: {id}})
     res.sendStatus(204)
-  } catch (error) {
-    next(error)
+  } catch (err) {
+    next(err)
   }
 })
 
@@ -60,6 +61,65 @@ router.get('/user/:userId', async (req, res, next) => {
       }
     })
     res.json(recipes)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Get all drafts for one user
+// GET /api/recipes/drafts/:userId
+router.get('/drafts/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    const drafts = await Recipe.findAll({
+      where: {
+        userId: userId,
+        isDraft: true
+      }
+    })
+    res.json(drafts)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Get all recipes for one category
+// GET /api/recipes/categories/:categoryId
+router.get('/categories/:categoryId', async (req, res, next) => {
+  try {
+    const categoryId = req.params.categoryId
+    console.log('categoryId', categoryId)
+    console.log('typeof categoryId', typeof categoryId)
+    const recipesInCategory = await Category.findAll({
+      where: {
+        id: categoryId
+      },
+      include: {
+        model: Recipe
+      }
+    })
+    res.json(recipesInCategory)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Get all recipes for one category
+// GET /api/recipes/categories/:userId
+router.get('/categories/user/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    console.log('categoryId', userId)
+    console.log('typeof categoryId', typeof userId)
+    const recipesInCategory = await User.findOne({
+      where: {
+        id: userId
+      },
+      include: {
+        model: Category
+      }
+    })
+    res.json(recipesInCategory)
   } catch (err) {
     next(err)
   }

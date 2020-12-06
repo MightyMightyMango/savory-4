@@ -1,13 +1,19 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
-const {Recipe} = require('../server/db/models')
+const {
+  User,
+  Recipe,
+  Category,
+  RecipeCategory,
+  UserCategory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  // CREATE USERS
   const users = [
     {
       email: 'lea@lea.com',
@@ -29,6 +35,19 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
 
+  // CREATE CATEGORIES
+  const categories = [
+    {category: 'dessert'},
+    {category: 'dinner'},
+    {category: 'western'},
+    {category: 'thanksgiving'}
+  ]
+
+  const [dessert, dinner, western, thanksgiving] = await Category.bulkCreate(
+    categories
+  )
+
+  // CREATE RECIPES
   const recipes = [
     {
       name: 'Cranberry Sauce with Orange and Cinnamon',
@@ -52,7 +71,8 @@ async function seed() {
         'Cook, stirring often and reducing heat as needed to avoid scorching, until cranberries burst, juices are syrupy, and pan is visible when a wooden spoon is dragged across the bottom, 12–15 minutes. Let cool.',
         'Do Ahead: Sauce can be made 1 week ahead. Cover and chill.'
       ],
-      isDraft: false
+      isDraft: false,
+      categoryIds: [thanksgiving.id]
     },
     {
       name: 'Gluten-Free Carrot Cake',
@@ -95,7 +115,7 @@ async function seed() {
         '1 tsp. vanilla extract',
         'Pinch of kosher salt'
       ],
-      isDraft: false
+      categoryIds: [western.id, dessert.id]
     },
     {
       name: 'Grilled Crispy-Skinned Salmon with Whole Lemon-Sesame Sauce',
@@ -122,7 +142,7 @@ async function seed() {
         'Clean and oil grate, then immediately place salmon on grill skin side down. Cover grill and cook, skin side down the entire time, until skin is lightly charred and fish is opaque, 6–8 minutes. Transfer salmon to a plate and let cool slightly.',
         'Divide salmon among plates. Top with basil. Spoon lemon-sesame sauce over.'
       ],
-      isDraft: false
+      categoryIds: [dinner.id]
     },
     {
       name: "BA's Best Pesto",
@@ -147,7 +167,8 @@ async function seed() {
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
-      isDraft: false
+      isDraft: false,
+      categoryIds: []
     },
     {
       name: 'Lemon Pound Cake',
@@ -180,7 +201,8 @@ async function seed() {
         "Let cake cool about 10 minutes. (Yeah, it really does need to cool a bit, so set a timer if you're impatient.) Poke 10-15 holes evenly throughout cake with a cake tester or toothpick. Pour the remaining lemon juice—the stuff that didn't end up going into the glaze—over the top of the cake. Let cool completely. (Seriously!)",
         'Run a butter knife around edges of pan to loosen. Using parchment overhang, lift cake onto a wire rack; remove parchment.”,”Now, pour the lemon zest glaze over cake, letting it fall down the sides. Let icing set for at least 10 minutes before slicing. Serve on its own, or with a spoonful of Greek yogurt, a dollop of whipped cream, or a scoop of ice cream on top. (You deserve it!)'
       ],
-      isDraft: false
+      isDraft: false,
+      categoryIds: []
     },
     {
       name: "BA's Best Pesto",
@@ -203,7 +225,8 @@ async function seed() {
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
-      isDraft: false
+      isDraft: false,
+      categoryIds: []
     },
     {
       name: 'Chicken Paprikash with Buttered Egg Noodles',
@@ -239,7 +262,8 @@ async function seed() {
         'Finely chop ½ cup parsley and add half to noodles; toss to coat.',
         "Carefully remove skillet from oven (handle will be hot!). Using tongs, transfer chicken skin side up to a clean plate. Taste sauce and season with more salt and pepper, if needed. Spoon about ¼ cup sauce into a small bowl and stir in sour cream until smooth (this slowly brings up the temperature of the sour cream so it doesn't split when it hits the hot skillet). Pour back into skillet and stir to combine.",
         'Arrange chicken thighs and juices back in skillet and top with remaining chopped parsley. Serve over noodles.'
-      ]
+      ],
+      categoryIds: []
     },
     {
       name: 'Ramen Noodles with Miso Pesto',
@@ -269,7 +293,8 @@ async function seed() {
         'Place pesto and 2 Tbsp. unsalted butter, cut into pieces, in a large bowl. Add pasta and ¼ cup pasta cooking liquid. Using tongs, toss vigorously, adding more pasta cooking liquid if needed, until pasta is glossy and well coated with sauce. Season with salt.',
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
-      isDraft: false
+      isDraft: false,
+      categoryIds: [dinner.id]
     },
     {
       name: 'Classic Focaccia Bread',
@@ -298,9 +323,12 @@ async function seed() {
         'Remove plastic and drizzle dough generously with more oil. Oil hands again and press fingertips firmly into dough, pushing down all the way to bottom of pan to dimple all over. Sprinkle generously with sea salt.',
         'Bake focaccia until surface is deep golden brown all over, 25–35 minutes. Let cool in pan 10 minutes. Slide a thin metal spatula underneath focaccia to loosen from sheet pan (it may stick in a couple of places, so use some elbow grease to get underneath) and transfer to a wire rack. Let cool completely before cutting as desired.'
       ],
-      isDraft: false
+      isDraft: false,
+      categoryIds: []
     }
   ]
+
+  const createdRecipes = await Recipe.bulkCreate(recipes)
 
   const [
     cranberry,
@@ -312,8 +340,9 @@ async function seed() {
     chicken,
     ramen,
     bread
-  ] = await Recipe.bulkCreate(recipes)
+  ] = createdRecipes
 
+  // SET ASSOCIATIONS FOR RECIPES WITH USERS
   await cranberry.setUser(lea)
   await carrot.setUser(lea)
   await salmon.setUser(lea)
@@ -325,6 +354,52 @@ async function seed() {
   await bread.setUser(lea)
 
   console.log(`seeded ${recipes.length} recipes`)
+
+  // CREATE RECIPECATEGORY
+  const flattenRecipeCategories = recipesToFlatten => {
+    const recipeCategoriesArray = []
+
+    return recipesToFlatten.reduce(
+      (accumulator, currentRecipe, indexOfRecipe) => {
+        const recipeValues = currentRecipe.dataValues
+        const currentRecipeCategories = recipeValues.categoryIds.map(
+          categoryId => {
+            return {categoryId, recipeId: indexOfRecipe + 1}
+          }
+        )
+
+        return accumulator.concat(currentRecipeCategories)
+      },
+      recipeCategoriesArray
+    )
+  }
+
+  const recipeCategories = flattenRecipeCategories(createdRecipes)
+  await RecipeCategory.bulkCreate(recipeCategories)
+  console.log('Seeded recipe_categories')
+
+  // CREATE USERS
+  const userCategories = [
+    {
+      userId: 1,
+      categoryId: 1
+    },
+    {
+      userId: 1,
+      categoryId: 2
+    },
+    {
+      userId: 1,
+      categoryId: 3
+    },
+    {
+      userId: 1,
+      categoryId: 4
+    }
+  ]
+
+  await UserCategory.bulkCreate(userCategories)
+
   console.log(`all seeded successfully`)
 }
 

@@ -10,7 +10,8 @@ import {
   Recipe,
   RecipeForm,
   AllRecipes,
-  SingleRecipe
+  SingleRecipe,
+  AllDrafts
 } from './components'
 import {me} from './store'
 
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path="/recipeform" component={RecipeForm} />
             <Route path="/myrecipes" component={AllRecipes} />
             <Route path="/home" component={UserHome} />
+            <Route path="/drafts" component={AllDrafts} />
 
             <Route
               path="/recipes/:recipeId"
