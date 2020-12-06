@@ -107,8 +107,6 @@ router.get('/drafts/:userId', async (req, res, next) => {
 router.get('/categories/:categoryId', async (req, res, next) => {
   try {
     const categoryId = req.params.categoryId
-    console.log('categoryId', categoryId)
-    console.log('typeof categoryId', typeof categoryId)
     const recipesInCategory = await Category.findAll({
       where: {
         id: categoryId
