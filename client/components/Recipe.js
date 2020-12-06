@@ -17,10 +17,16 @@ export class Recipe extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps)
     if (nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
-      newState.ingredients = nextProps.recipe.ingredients.join('\n')
-      newState.instructions = nextProps.recipe.instructions.join('\n')
+      newState.ingredients = Array.isArray(newState.ingredients)
+        ? nextProps.recipe.ingredients.join('\n')
+        : nextProps.recipe.ingredients
+      newState.instructions = Array.isArray(newState.instructions)
+        ? nextProps.recipe.instructions.join('\n')
+        : nextProps.recipe.instructions
+      // newState.instructions = nextProps.recipe.instructions.join('\n')
       return newState
     } else {
       return null
@@ -40,6 +46,7 @@ export class Recipe extends React.Component {
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
+    this.setState({})
     // history.push(`/recipes/${dataToSend.id}`)
   }
 
