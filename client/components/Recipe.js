@@ -17,7 +17,6 @@ export class Recipe extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps)
     if (nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
       newState.ingredients = nextProps.recipe.ingredients.join('\n')
@@ -30,7 +29,6 @@ export class Recipe extends React.Component {
 
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
-    console.log(this.state)
   }
 
   handleSubmit(evt) {
@@ -54,7 +52,6 @@ export class Recipe extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <>
         <Container>
