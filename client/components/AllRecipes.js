@@ -1,14 +1,31 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-import {setAllRecipesThunk, deleteRecipeThunk} from '../store/recipes'
+import {
+  setAllRecipesThunk,
+  deleteRecipeThunk,
+  getUserCategoriesThunk,
+  getRecipesInCategoryThunk,
+  getRecipesInCategory
+} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 
 export const AllRecipes = props => {
-  const {recipes, getAllRecipes, deleteRecipe} = props
+  // categories contains all the categories
+  // to filter by category, pass the userId into getRecipesInCategory
+  const {
+    user,
+    recipes,
+    categories,
+    getAllRecipes,
+    deleteRecipe,
+    getCategories,
+    getRecipesInCategory
+  } = props
 
   useEffect(() => {
     getAllRecipes(props.user.id)
+    getCategories(props.user.id)
   }, [])
 
   const handleDeleteRecipe = (event, recipeId) => {
@@ -69,12 +86,15 @@ export const AllRecipes = props => {
 
 const mapState = state => ({
   user: state.user,
-  recipes: state.recipes.allRecipes
+  recipes: state.recipes.allRecipes,
+  categories: state.recipes.categories
 })
 
 const mapDispatch = dispatch => ({
   getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
-  deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId))
+  deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
+  getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
+  getRecipesInCategory: userId => dispatch(getRecipesInCategoryThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)

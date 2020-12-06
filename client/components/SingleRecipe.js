@@ -14,7 +14,7 @@ export const SingleRecipe = props => {
 
   useEffect(() => {
     getRecipe(recipeId)
-  })
+  }, [])
 
   const handleDeleteDraft = event => {
     event.preventDefault()

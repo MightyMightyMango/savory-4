@@ -66,7 +66,6 @@ router.get('/user/:userId', async (req, res, next) => {
   }
 })
 
-
 // Get recipe draft
 // GET /api/recipes/draft/:userId
 router.get('/draft/:userId', async (req, res, next) => {
@@ -81,6 +80,10 @@ router.get('/draft/:userId', async (req, res, next) => {
     })
     let draft = recipe[0]
     res.json(draft)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // Get all drafts for one user
 // GET /api/recipes/drafts/:userId
@@ -104,8 +107,6 @@ router.get('/drafts/:userId', async (req, res, next) => {
 router.get('/categories/:categoryId', async (req, res, next) => {
   try {
     const categoryId = req.params.categoryId
-    console.log('categoryId', categoryId)
-    console.log('typeof categoryId', typeof categoryId)
     const recipesInCategory = await Category.findAll({
       where: {
         id: categoryId
