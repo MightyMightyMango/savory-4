@@ -72,7 +72,7 @@ export class SingleRecipe extends React.Component {
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
     this.setState({})
-    // history.push(`/recipes/${dataToSend.id}`)
+    history.push(`/recipes/${dataToSend.id}`)
   }
 
   render() {

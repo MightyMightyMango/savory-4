@@ -18,7 +18,6 @@ export class Recipe extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps)
     if (nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
@@ -48,7 +47,7 @@ export class Recipe extends React.Component {
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
     this.setState({})
-    // history.push(`/recipes/${dataToSend.id}`)
+    history.push(`/recipes/${dataToSend.id}`)
   }
 
   async submitUrl(event) {
