@@ -1,5 +1,12 @@
 const router = require('express').Router()
-const {Recipe, Category, RecipeCategory, User} = require('../db/models')
+const {
+  Recipe,
+  Category,
+  RecipeCategory,
+  User,
+  UserCategory
+} = require('../db/models')
+const {useStore} = require('react-redux')
 module.exports = router
 
 // Get all recipes in database
@@ -120,6 +127,28 @@ router.get('/categories/:categoryId', async (req, res, next) => {
     res.json(recipesInCategory)
   } catch (err) {
     next(err)
+  }
+})
+
+//HOW do we create a category with a userId? for user categories?
+//Post to categories, put request for the user?
+// PUT   /api/recipes/categories/:userId
+router.put('/categories/user/:userId', async (req, res, next) => {
+  try {
+    const category = req.body.category
+    const userId = req.params.userId
+    const newCategory = await Category.findOrCreate({
+      where: {
+        category: category
+      }
+    })
+    await UserCategory.create({
+      userId: userId,
+      categoryId: newCategory[0].id
+    })
+    res.status(200).send(newCategory[0])
+  } catch (error) {
+    next(error)
   }
 })
 

@@ -52,6 +52,9 @@ export class Recipe extends React.Component {
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
+
+   
+
     window.alert('Recipe Saved!')
     history.push(`/recipes/${dataToSend.id}`)
   }
