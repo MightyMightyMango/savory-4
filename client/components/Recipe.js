@@ -47,7 +47,7 @@ export class Recipe extends React.Component {
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
     this.setState({})
-    // history.push(`/recipes/${dataToSend.id}`)
+    history.push(`/recipes/${dataToSend.id}`)
   }
 
   async submitUrl(event) {
