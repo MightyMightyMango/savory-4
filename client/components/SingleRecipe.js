@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import history from '../history'
+import {submitRecipe} from '../store/singleRecipe'
 import {
   setSingleRecipeThunk,
   deleteRecipeThunk,
@@ -12,16 +13,33 @@ import RecipeForm from './RecipeForm'
 export class SingleRecipe extends React.Component {
   constructor(props) {
     super(props)
-    // this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.state = {
       canEdit: false
     }
   }
 
   componentDidMount() {
+    console.log(this.props.recipe)
     const recipeId = this.props.match.params.recipeId
     this.props.getRecipe(recipeId)
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.recipe.id !== prevState.id) {
+      let newState = nextProps.recipe
+      newState.ingredients = Array.isArray(newState.ingredients)
+        ? nextProps.recipe.ingredients.join('\n')
+        : nextProps.recipe.ingredients
+      newState.instructions = Array.isArray(newState.instructions)
+        ? nextProps.recipe.instructions.join('\n')
+        : nextProps.recipe.instructions
+      // newState.instructions = nextProps.recipe.instructions.join('\n')
+      return newState
+    } else {
+      return null
+    }
   }
 
   handleDeleteDraft = event => {
@@ -36,83 +54,121 @@ export class SingleRecipe extends React.Component {
     history.push('/myrecipes')
   }
 
-  render() {
-    let recipe = this.props.recipe || {}
-    return (
-      <>
-        <Container>
-          <Title>{recipe.name}</Title>
-          {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''}
-          <Subtitle />
-          <RecipeContainer>
-            <Image src={recipe.imageUrl} />
-            <Details>
-              <div>{recipe.description}</div>
-              <div>Source: {recipe.publisher}</div>
-              <div>Link: {recipe.url}</div>
-              <div>Prep Time: {recipe.prepTime}</div>
-              <div>Cook Time: {recipe.cookTime}</div>
-              <div>Yield: {recipe.yield}</div>
-              <div>Categories: {recipe.categories}</div>
-            </Details>
+  renderForm = event => {
+    event.preventDefault()
+    this.setState({canEdit: true})
+  }
 
-            <Ingredients>
-              <Subtitle>Ingredients</Subtitle>
-              {recipe.ingredients ? (
-                <ul>
-                  {recipe.ingredients.map(ingredient => (
-                    <ListItem key={recipe.ingredients.indexOf(ingredient)}>
-                      {ingredient}
-                    </ListItem>
-                  ))}
-                </ul>
-              ) : (
-                ''
-              )}
-            </Ingredients>
-            <Instructions>
-              <Subtitle>Instructions</Subtitle>
-              {recipe.instructions ? (
-                <ul>
-                  {recipe.instructions.map(instruction => (
-                    <ListItem key={recipe.instructions.indexOf(instruction)}>
-                      Step 1: {instruction}
-                    </ListItem>
-                  ))}
-                </ul>
-              ) : (
-                ''
-              )}
-            </Instructions>
-          </RecipeContainer>
-          {recipe.isDraft ? (
-            <button
-              type="submit"
-              onClick={() => {
-                if (
-                  window.confirm('Are you sure you wish to delete this draft?')
-                )
-                  this.handleDeleteDraft(event)
-              }}
-            >
-              Delete Draft
-            </button>
-          ) : (
-            <button
-              type="submit"
-              onClick={() => {
-                if (
-                  window.confirm('Are you sure you wish to delete this recipe?')
-                )
-                  this.handleDeleteRecipe(event)
-              }}
-            >
-              Delete Recipe
-            </button>
-          )}
-        </Container>
-      </>
-    )
+  handleChange(evt) {
+    this.setState({[evt.target.name]: evt.target.value})
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault()
+    let dataToSend = this.state
+    delete dataToSend.canEdit
+    dataToSend.ingredients = this.state.ingredients.split('\n')
+    dataToSend.instructions = this.state.instructions.split('\n')
+    dataToSend.isDraft = false
+    console.log('DATA SENT TO DB', dataToSend)
+    this.props.submitRecipe(dataToSend)
+    this.setState({})
+    // history.push(`/recipes/${dataToSend.id}`)
+  }
+
+  render() {
+    console.log(this.props.recipe)
+    let recipe = this.props.recipe || {}
+    if (!this.state.canEdit) {
+      return (
+        <>
+          <Container>
+            <button onClick={() => this.renderForm(event)}>Edit</button>
+            <Title>{recipe.name}</Title>
+            {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''}
+            <Subtitle />
+            <RecipeContainer>
+              <Image src={recipe.imageUrl} />
+              <Details>
+                <div>{recipe.description}</div>
+                <div>Source: {recipe.publisher}</div>
+                <div>Link: {recipe.url}</div>
+                <div>Prep Time: {recipe.prepTime}</div>
+                <div>Cook Time: {recipe.cookTime}</div>
+                <div>Yield: {recipe.yield}</div>
+                <div>Categories: {recipe.categories}</div>
+              </Details>
+
+              <Ingredients>
+                <Subtitle>Ingredients</Subtitle>
+                {Array.isArray(recipe.ingredients) ? (
+                  <ul>
+                    {recipe.ingredients.map(ingredient => (
+                      <ListItem key={recipe.ingredients.indexOf(ingredient)}>
+                        {ingredient}
+                      </ListItem>
+                    ))}
+                  </ul>
+                ) : (
+                  ''
+                )}
+              </Ingredients>
+              <Instructions>
+                <Subtitle>Instructions</Subtitle>
+                {Array.isArray(recipe.instructions) ? (
+                  <ul>
+                    {recipe.instructions.map(instruction => (
+                      <ListItem key={recipe.instructions.indexOf(instruction)}>
+                        Step 1: {instruction}
+                      </ListItem>
+                    ))}
+                  </ul>
+                ) : (
+                  ''
+                )}
+              </Instructions>
+            </RecipeContainer>
+            {recipe.isDraft ? (
+              <button
+                type="submit"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you wish to delete this draft?'
+                    )
+                  )
+                    this.handleDeleteDraft(event)
+                }}
+              >
+                Delete Draft
+              </button>
+            ) : (
+              <button
+                type="submit"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you wish to delete this recipe?'
+                    )
+                  )
+                    this.handleDeleteRecipe(event)
+                }}
+              >
+                Delete Recipe
+              </button>
+            )}
+          </Container>
+        </>
+      )
+    } else {
+      return (
+        <RecipeForm
+          recipe={this.state}
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+        />
+      )
+    }
   }
 }
 
@@ -124,7 +180,10 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getRecipe: recipeId => dispatch(setSingleRecipeThunk(recipeId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
-  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId))
+  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId)),
+  submitRecipe: recipe => {
+    dispatch(submitRecipe(recipe))
+  }
 })
 
 export default connect(mapState, mapDispatch)(SingleRecipe)
