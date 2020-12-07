@@ -2,68 +2,52 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
 
-// const defaultState = {
-//   url: '',
-//   name: 'string',
-//   alt_headline: '',
-//   thumbnail_url: '',
-//   publisher_name: '',
-//   ingredients: [],
-//   instructions: [],
-//   yield: '',
-//   prepTime: '',
-//   categories: [],
-//   userId: ''
-// }
-
 const RecipeForm = props => {
-  let recipe = props.recipeDraft
-  console.log(recipe)
   return (
     <div>
       <h4>
-        Recipe Saved! You can view it in your drafts or press confirm below to
-        save it to permanent recipes. Make edits if u want ;)
+        Recipe Saved! You can view it in your drafts or make edits below and
+        press 'confirm' when you're done.
         {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
       </h4>
-      <img width="250px" src={recipe.imageUrl} />
-      <h6>Recipe Collected From: {recipe.url} </h6>
+      <img width="250px" src={props.recipe.imageUrl} />
+      <h6>Recipe Collected From: {props.recipe.url} </h6>
       <form onSubmit={props.handleSubmit}>
         <button type="submit">Confirm Changes</button>
         <label>Recipe Name:</label>
         <input
           type="text"
           name="name"
-          value={recipe.name}
+          value={props.recipe.name}
           onChange={props.handleChange}
         />
 
         <label>Published By:</label>
         <input
           type="text"
-          name="publisher_name"
-          value={recipe.publisher_name}
+          name="publisher"
+          value={props.recipe.publisher}
           onChange={props.handleChange}
         />
         <label>Source URL:</label>
         <input
           type="text"
           name="url"
-          value={recipe.url}
+          value={props.recipe.url}
           onChange={props.handleChange}
         />
         <label>Image URL:</label>
         <input
           type="text"
-          name="thumbnail_url"
-          value={recipe.thumbnail_url}
+          name="imageUrl"
+          value={props.recipe.imageUrl}
           onChange={props.handleChange}
         />
         <label>Description:</label>
         <textarea
           type="text"
-          name="alt_headline"
-          value={recipe.alt_headline}
+          name="description"
+          value={props.recipe.description}
           onChange={props.handleChange}
         />
 
@@ -71,7 +55,7 @@ const RecipeForm = props => {
         <input
           type="text"
           name="prepTime"
-          value={recipe.prepTime}
+          value={props.recipe.prepTime}
           onChange={props.handleChange}
         />
 
@@ -79,7 +63,7 @@ const RecipeForm = props => {
         <input
           type="text"
           name="cookTime"
-          value={recipe.cookTime}
+          value={props.recipe.cookTime}
           onChange={props.handleChange}
         />
 
@@ -87,7 +71,7 @@ const RecipeForm = props => {
         <input
           type="text"
           name="yield"
-          value={recipe.yield}
+          value={props.recipe.yield}
           onChange={props.handleChange}
         />
 
@@ -97,7 +81,7 @@ const RecipeForm = props => {
           rows="20"
           type="textarea"
           name="ingredients"
-          value={recipe.ingredients}
+          value={props.recipe.ingredients}
           onChange={props.handleChange}
         />
 
@@ -107,7 +91,7 @@ const RecipeForm = props => {
           rows="20"
           type="textarea"
           name="instructions"
-          value={recipe.instructions}
+          value={props.recipe.instructions}
           onChange={props.handleChange}
         />
       </form>

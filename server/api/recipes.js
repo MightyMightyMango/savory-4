@@ -31,7 +31,9 @@ router.put('/:recipeId', async (req, res, next) => {
   try {
     const recipeId = req.params.recipeId
     const recipe = await Recipe.findByPk(recipeId)
+    console.log('OLD recipe', recipe)
     const newRecipe = await recipe.update(req.body)
+    console.log('newRecipe', newRecipe)
     res.status(200).send(newRecipe)
   } catch (err) {
     next(err)

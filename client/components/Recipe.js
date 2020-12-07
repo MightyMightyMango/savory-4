@@ -17,48 +17,37 @@ export class Recipe extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.recipe.userId !== prevState.userId) {
-      let modifiedIngredients = nextProps.recipe.ingredients.join('\n')
-      let modifiedInstructions = nextProps.recipe.instructions.join('\n')
-      return {
-        recipe: {
-          url: nextProps.recipe.url,
-          name: nextProps.recipe.name,
-          description: nextProps.recipe.description,
-          imageUrl: nextProps.recipe.imageUrl,
-          publisher: nextProps.recipe.publisher,
-          ingredients: modifiedIngredients,
-          instructions: modifiedInstructions,
-          yield: nextProps.recipe.yield,
-          prepTime: nextProps.recipe.prepTime,
-          categories: nextProps.recipe.categories,
-          userId: nextProps.recipe.userId,
-          isDraft: nextProps.recipe.isDraft
-        }
-      }
+    console.log(nextProps)
+    if (nextProps.recipe.id !== prevState.id) {
+      let newState = nextProps.recipe
+      newState.ingredients = Array.isArray(newState.ingredients)
+        ? nextProps.recipe.ingredients.join('\n')
+        : nextProps.recipe.ingredients
+      newState.instructions = Array.isArray(newState.instructions)
+        ? nextProps.recipe.instructions.join('\n')
+        : nextProps.recipe.instructions
+      // newState.instructions = nextProps.recipe.instructions.join('\n')
+      return newState
     } else {
       return null
     }
   }
 
   handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value
-    })
+    this.setState({[evt.target.name]: evt.target.value})
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
-    console.log('click')
     let dataToSend = this.state
-    let formattedIngredients = this.state.recipe.ingredients.split('\n')
-    let formattedInstructions = this.state.recipe.instructions.split('\n')
-    dataToSend.ingredients = formattedIngredients
-    dataToSend.instructions = formattedInstructions
+    delete dataToSend.isSubmitted
+    dataToSend.ingredients = this.state.ingredients.split('\n')
+    dataToSend.instructions = this.state.instructions.split('\n')
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
     this.setState({})
+    // history.push(`/recipes/${dataToSend.id}`)
   }
 
   async submitUrl(event) {
@@ -70,9 +59,6 @@ export class Recipe extends React.Component {
   }
 
   render() {
-    console.log(this.state)
-    // console.log('this.props.recipe in Recipe.js', this.props.recipe)
-    console.log('this.state.isSubmitted in Recipe.js', this.state.isSubmitted)
     return (
       <>
         <Container>
@@ -87,14 +73,13 @@ export class Recipe extends React.Component {
               </button>
             </div>
           )}
-          {this.state.isSubmitted &&
-            this.state.recipe && (
-              <RecipeForm
-                recipeDraft={this.state.recipe}
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-              />
-            )}
+          {this.state.isSubmitted && (
+            <RecipeForm
+              recipe={this.state}
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+            />
+          )}
         </Container>
       </>
     )
