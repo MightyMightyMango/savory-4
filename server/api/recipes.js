@@ -123,13 +123,11 @@ router.get('/categories/:categoryId', async (req, res, next) => {
   }
 })
 
-// Get all recipes for one category
-// GET /api/recipes/categories/:userId
-router.get('/categories/user/:userId', async (req, res, next) => {
+// Get all categories for one user
+// GET /api/recipes/categories/user/:userId
+router.get('/categories/user/:userId/', async (req, res, next) => {
   try {
     const userId = req.params.userId
-    console.log('categoryId', userId)
-    console.log('typeof categoryId', typeof userId)
     const recipesInCategory = await User.findOne({
       where: {
         id: userId
