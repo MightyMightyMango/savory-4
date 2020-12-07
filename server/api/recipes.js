@@ -141,3 +141,29 @@ router.get('/categories/user/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+// Get all recipes for one user
+// GET /api/recipes/categories/user/:userId
+router.get(
+  '/categories/user/:userId/category/:categoryId',
+  async (req, res, next) => {
+    try {
+      const userId = req.params.userId
+      const categoryId = req.params.categoryId
+      const recipesInCategory = await Category.findOne({
+        where: {
+          id: categoryId
+        },
+        include: {
+          model: Recipe,
+          where: {
+            userId: userId
+          }
+        }
+      })
+      res.json(recipesInCategory)
+    } catch (err) {
+      next(err)
+    }
+  }
+)
