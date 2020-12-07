@@ -11,6 +11,7 @@ export class Recipe extends React.Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.submitUrl = this.submitUrl.bind(this)
     this.state = {
       isSubmitted: false
     }
