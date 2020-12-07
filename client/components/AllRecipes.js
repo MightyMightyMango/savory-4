@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import {
@@ -8,10 +8,14 @@ import {
   getRecipesInCategoryThunk
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
+import EditCategories from './EditCategories'
 
 export const AllRecipes = props => {
   // categories contains all the categories
   // to filter by category, pass the userId and categoryId into getRecipesInCategory
+  const [showForm, toggleShowForm] = useState(false)
+  const [newCategory, setNewCategory] = useState('')
+
   const {
     user,
     recipes,
@@ -19,17 +23,13 @@ export const AllRecipes = props => {
     getAllRecipes,
     deleteRecipe,
     getCategories,
-    getRecipesInCategory,
-    recipesByCat
+    getRecipesInCategory
   } = props
 
   useEffect(() => {
     getAllRecipes(props.user.id)
     getCategories(props.user.id)
-    // getRecipesInCategory(props.user.id, 2)
   }, [])
-
-  //map categories
 
   const handleDeleteRecipe = (event, recipeId) => {
     event.preventDefault()
@@ -37,22 +37,37 @@ export const AllRecipes = props => {
     deleteRecipe(recipeId)
   }
 
-  let fetchedRecipes = recipes
-
   const getRecipesFromCategory = event => {
     event.preventDefault()
     console.log('recipes by Category')
     getRecipesInCategory(props.user.id, event.target.value)
-    //  categories.map(category => {
-    //    <Subtitle></Subtitle>
-    //  })
   }
 
-  //  async function getRecipesFromCategory(category) {
-  //     console.log("recipes by Category", recipesByCat.recipes)
-  //     await getRecipesInCategory(props.user.id, 2)
-  //     return <div>{category}</div>
-  //   }
+  const handleChange = event => {
+    setNewCategory(event.target.value)
+    console.log('newCategory', newCategory)
+  }
+
+  const handleSubmit = event => {
+    //use newCategory variable to post onto Categories Table
+    //call a submitCategory function connected to thunk that updates categories
+  }
+
+  const displayForm = () => {
+    toggleShowForm(!showForm)
+  }
+
+  const Form = () => {
+    if (showForm) {
+      return (
+        <EditCategories
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          newCategory={newCategory}
+        />
+      )
+    }
+  }
 
   return (
     <>
@@ -121,6 +136,10 @@ export const AllRecipes = props => {
         ) : (
           <div />
         )}
+        <button type="submit" onClick={() => displayForm(event)}>
+          Add or Edit Recipe Books
+        </button>
+        {Form()}
       </Container>
     </>
   )
