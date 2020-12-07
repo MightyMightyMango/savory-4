@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import history from '../history'
 
 const SET_ALL_RECIPES = 'SET_ALL_RECIPES'
 const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
@@ -61,7 +60,6 @@ export const setSingleRecipeThunk = recipeId => {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/recipes/${recipeId}`)
-      console.log('In Single Recipes Thunk = ', res.data)
       dispatch(setSingleRecipe(res.data))
     } catch (error) {
       console.error(error)
@@ -110,7 +108,6 @@ export const getUserCategoriesThunk = userId => {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/recipes/categories/user/${userId}`)
-      console.log('In Thunk: res.data ', res.data)
       dispatch(getUserCategories(res.data.categories))
     } catch (error) {
       console.error(error)
@@ -125,7 +122,7 @@ export const getRecipesInCategoryThunk = (userId, categoryId) => {
       const res = await axios.get(
         `/api/recipes/categories/user/${userId}/category/${categoryId}`
       )
-      dispatch(getRecipesInCategory(res.data))
+      dispatch(getRecipesInCategory(res.data.recipes))
     } catch (error) {
       console.error(error)
     }
@@ -138,8 +135,6 @@ const initialState = {
   allDrafts: [],
   categories: []
 }
-
-// const initialState = []
 
 function recipesReducer(state = initialState, action) {
   switch (action.type) {

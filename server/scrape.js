@@ -20,13 +20,14 @@ const scraper1 = async (url, publisher, userId) => {
         return item.text.replace(/(\r\n|\n|\r)/gm, '')
       })
     }
-    let thumbnail_url = parsed.thumbnailUrl ? parsed.thumbnailUrl : parsed.image
+    let imageUrl = parsed.thumbnailUrl ? parsed.thumbnailUrl : parsed.image
+    imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
     recipeEntry = {
       url: url,
       name: parsed.name || '',
-      alt_headline: parsed.description || '',
-      thumbnail_url: thumbnail_url || '',
-      publisher_name: publisher,
+      description: parsed.description || '',
+      imageUrl: imageUrl || '',
+      publisher: publisher,
       ingredients: parsed.recipeIngredient || [],
       instructions: instructions || [],
       yield: parsed.recipeYield || '',
@@ -54,13 +55,14 @@ const scraper2 = async (url, publisher, userId) => {
     let instructions = mainInfo.recipeInstructions.map(item => {
       return item.text
     })
-    let thumbnail_url = mainInfo.image ? mainInfo.image.url : ''
+    let imageUrl = mainInfo.image ? mainInfo.image.url : ''
+    imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
     recipeEntry = {
       url: url,
       name: mainInfo.name || '',
-      alt_headline: mainInfo.description || '',
-      thumbnail_url: thumbnail_url || '',
-      publisher_name: publisher || '',
+      description: mainInfo.description || '',
+      imageUrl: imageUrl || '',
+      publisher: publisher || '',
       ingredients: mainInfo.recipeIngredient || [],
       instructions: instructions || [],
       yield: mainInfo.recipeYield || '',
@@ -106,6 +108,6 @@ const genericScrape = url => {
 
 // To test the scraper, call the processUrl function on a URL string
 // scraper1('https://www.food.com/recipe/gingerbread-gingerbread-cake-48219')
-//processUrl("https://www.bonappetit.com/recipe/seedy-sweet-potato-oatmeal");
+processUrl('https://www.bonappetit.com/recipe/kale-and-brussels-sprout-salad')
 
 module.exports = {scraper1, processUrl}
