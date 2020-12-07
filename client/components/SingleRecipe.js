@@ -21,7 +21,6 @@ export class SingleRecipe extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.recipe)
     const recipeId = this.props.match.params.recipeId
     this.props.getRecipe(recipeId)
   }
@@ -77,7 +76,6 @@ export class SingleRecipe extends React.Component {
   }
 
   render() {
-    console.log(this.props.recipe)
     let recipe = this.props.recipe || {}
     if (!this.state.canEdit) {
       return (

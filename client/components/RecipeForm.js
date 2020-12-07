@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
 
 const RecipeForm = props => {
-  console.log('props in recipe form', props)
   return (
     <div>
       <h4>
