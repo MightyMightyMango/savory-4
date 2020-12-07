@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeDraft, submitRecipe} from '../store/singleRecipe'
+import {deleteDraftThunk} from '../store/recipes'
 import history from '../history'
 import styled from 'styled-components'
 import {render} from 'enzyme'
@@ -11,13 +12,13 @@ export class Recipe extends React.Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.submitUrl = this.submitUrl.bind(this)
     this.state = {
       isSubmitted: false
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps)
     if (nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
@@ -26,7 +27,6 @@ export class Recipe extends React.Component {
       newState.instructions = Array.isArray(newState.instructions)
         ? nextProps.recipe.instructions.join('\n')
         : nextProps.recipe.instructions
-      // newState.instructions = nextProps.recipe.instructions.join('\n')
       return newState
     } else {
       return null
@@ -41,13 +41,26 @@ export class Recipe extends React.Component {
     evt.preventDefault()
     let dataToSend = this.state
     delete dataToSend.isSubmitted
-    dataToSend.ingredients = this.state.ingredients.split('\n')
-    dataToSend.instructions = this.state.instructions.split('\n')
+    dataToSend.ingredients =
+      typeof dataToSend.ingredients === 'string'
+        ? dataToSend.ingredients.split('\n')
+        : dataToSend.ingredients
+    dataToSend.instructions =
+      typeof dataToSend.instructions === 'string'
+        ? dataToSend.instructions.split('\n')
+        : dataToSend.instructions
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
-    this.setState({})
-    // history.push(`/recipes/${dataToSend.id}`)
+    window.alert('Recipe Saved!')
+    history.push(`/recipes/${dataToSend.id}`)
+  }
+
+  handleDeleteDraft = event => {
+    event.preventDefault()
+    this.props.deleteDraft(this.state.id)
+    this.setState({isSubmitted: false})
+    // console.log(this.state)
   }
 
   async submitUrl(event) {
@@ -74,6 +87,22 @@ export class Recipe extends React.Component {
             </div>
           )}
           {this.state.isSubmitted && (
+            <button
+              type="submit"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    'Are you sure you want to abandon your draft? It will not be saved.'
+                  )
+                ) {
+                  this.handleDeleteDraft(event)
+                }
+              }}
+            >
+              Abandon Draft
+            </button>
+          )}
+          {this.state.isSubmitted && (
             <RecipeForm
               recipe={this.state}
               handleSubmit={this.handleSubmit}
@@ -97,7 +126,8 @@ const mapDispatch = dispatch => ({
   },
   submitRecipe: recipe => {
     dispatch(submitRecipe(recipe))
-  }
+  },
+  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId))
 })
 
 export default connect(mapState, mapDispatch)(Recipe)

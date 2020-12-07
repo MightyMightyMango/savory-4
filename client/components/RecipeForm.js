@@ -75,7 +75,10 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Ingredients:</label>
+        <label>
+          Ingredients (Please list one ingredient per line, with no additional
+          spacing)
+        </label>
         <textarea
           cols="60"
           rows="20"
@@ -85,7 +88,10 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Instructions</label>
+        <label>
+          Instructions (Please list one instruction per line, with no additional
+          spacing)
+        </label>
         <textarea
           cols="60"
           rows="20"
