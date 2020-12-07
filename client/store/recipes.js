@@ -118,12 +118,14 @@ export const getUserCategoriesThunk = userId => {
   }
 }
 
-// RECIPES IN CATEGORIES
-export const getRecipesInCategoryThunk = categoryId => {
+// RECIPES IN ONE CATEGORIES FOR ONE USER
+export const getRecipesInCategoryThunk = (userId, categoryId) => {
   return async dispatch => {
     try {
-      const res = await axios.get(`/api/recipes/categories/${categoryId}`)
-      dispatch(getRecipesInCategory(res.data))
+      const res = await axios.get(
+        `/api/recipes/categories/user/${userId}/category/${categoryId}`
+      )
+      dispatch(getRecipesInCategory(res.data.recipes))
     } catch (error) {
       console.error(error)
     }
@@ -135,6 +137,7 @@ const initialState = {
   singleRecipe: {},
   allDrafts: [],
   categories: []
+  // recipesByCategory: []
 }
 
 // const initialState = []
