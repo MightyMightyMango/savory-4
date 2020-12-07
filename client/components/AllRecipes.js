@@ -37,6 +37,11 @@ export const AllRecipes = props => {
     deleteRecipe(recipeId)
   }
 
+
+
+  let fetchedRecipes = recipes || []
+
+
   const getRecipesFromCategory = event => {
     event.preventDefault()
     console.log('recipes by Category')
