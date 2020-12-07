@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
@@ -34,7 +35,6 @@ export class SingleRecipe extends React.Component {
       newState.instructions = Array.isArray(newState.instructions)
         ? nextProps.recipe.instructions.join('\n')
         : nextProps.recipe.instructions
-      // newState.instructions = nextProps.recipe.instructions.join('\n')
       return newState
     } else {
       return null
@@ -66,17 +66,33 @@ export class SingleRecipe extends React.Component {
     evt.preventDefault()
     let dataToSend = this.state
     delete dataToSend.canEdit
-    dataToSend.ingredients = this.state.ingredients.split('\n')
-    dataToSend.instructions = this.state.instructions.split('\n')
+    dataToSend.ingredients =
+      typeof dataToSend.ingredients === 'string'
+        ? dataToSend.ingredients.split('\n')
+        : dataToSend.ingredients
+    dataToSend.instructions =
+      typeof dataToSend.instructions === 'string'
+        ? dataToSend.instructions.split('\n')
+        : dataToSend.instructions
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
-    this.setState({})
-    history.push(`/recipes/${dataToSend.id}`)
+    this.setState({canEdit: false})
+    this.props.getRecipe(dataToSend.id)
   }
 
   render() {
     let recipe = this.props.recipe || {}
+    let displayIngredients =
+      typeof recipe.ingredients === 'string'
+        ? recipe.ingredients.split('\n')
+        : recipe.ingredients
+    let displayInstructions =
+      typeof recipe.instructions === 'string'
+        ? recipe.instructions.split('\n')
+        : recipe.instructions
+    displayInstructions = displayInstructions || []
+    displayIngredients = displayIngredients || []
     if (!this.state.canEdit) {
       return (
         <>
@@ -99,31 +115,23 @@ export class SingleRecipe extends React.Component {
 
               <Ingredients>
                 <Subtitle>Ingredients</Subtitle>
-                {Array.isArray(recipe.ingredients) ? (
-                  <ul>
-                    {recipe.ingredients.map(ingredient => (
-                      <ListItem key={recipe.ingredients.indexOf(ingredient)}>
-                        {ingredient}
-                      </ListItem>
-                    ))}
-                  </ul>
-                ) : (
-                  ''
-                )}
+                <ul>
+                  {displayIngredients.map(ingredient => (
+                    <ListItem key={recipe.ingredients.indexOf(ingredient)}>
+                      {ingredient}
+                    </ListItem>
+                  ))}
+                </ul>
               </Ingredients>
               <Instructions>
                 <Subtitle>Instructions</Subtitle>
-                {Array.isArray(recipe.instructions) ? (
-                  <ul>
-                    {recipe.instructions.map(instruction => (
-                      <ListItem key={recipe.instructions.indexOf(instruction)}>
-                        Step 1: {instruction}
-                      </ListItem>
-                    ))}
-                  </ul>
-                ) : (
-                  ''
-                )}
+                <ul>
+                  {displayInstructions.map(instruction => (
+                    <ListItem key={recipe.instructions.indexOf(instruction)}>
+                      {instruction}
+                    </ListItem>
+                  ))}
+                </ul>
               </Instructions>
             </RecipeContainer>
             {recipe.isDraft ? (

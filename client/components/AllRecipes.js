@@ -37,7 +37,7 @@ export const AllRecipes = props => {
     deleteRecipe(recipeId)
   }
 
-  let fetchedRecipes = recipes
+  let fetchedRecipes = recipes || []
 
   const getRecipesFromCategory = event => {
     event.preventDefault()

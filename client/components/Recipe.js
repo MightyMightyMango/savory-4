@@ -26,7 +26,6 @@ export class Recipe extends React.Component {
       newState.instructions = Array.isArray(newState.instructions)
         ? nextProps.recipe.instructions.join('\n')
         : nextProps.recipe.instructions
-      // newState.instructions = nextProps.recipe.instructions.join('\n')
       return newState
     } else {
       return null
@@ -41,8 +40,14 @@ export class Recipe extends React.Component {
     evt.preventDefault()
     let dataToSend = this.state
     delete dataToSend.isSubmitted
-    dataToSend.ingredients = this.state.ingredients.split('\n')
-    dataToSend.instructions = this.state.instructions.split('\n')
+    dataToSend.ingredients =
+      typeof dataToSend.ingredients === 'string'
+        ? dataToSend.ingredients.split('\n')
+        : dataToSend.ingredients
+    dataToSend.instructions =
+      typeof dataToSend.instructions === 'string'
+        ? dataToSend.instructions.split('\n')
+        : dataToSend.instructions
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
