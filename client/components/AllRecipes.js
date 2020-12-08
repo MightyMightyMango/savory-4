@@ -5,7 +5,8 @@ import {
   setAllRecipesThunk,
   deleteRecipeThunk,
   getUserCategoriesThunk,
-  getRecipesInCategoryThunk
+  getRecipesInCategoryThunk,
+  submitCategory
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 import EditCategories from './EditCategories'
@@ -23,7 +24,8 @@ export const AllRecipes = props => {
     getAllRecipes,
     deleteRecipe,
     getCategories,
-    getRecipesInCategory
+    getRecipesInCategory,
+    submitCategory
   } = props
 
   useEffect(() => {
@@ -51,8 +53,9 @@ export const AllRecipes = props => {
   }
 
   const handleSubmit = event => {
-    //use newCategory variable to post onto Categories Table
-    //call a submitCategory function connected to thunk that updates categories
+    event.preventDefault()
+    console.log('props.user.id, category', props.user.id, newCategory)
+    submitCategory(props.user.id, newCategory)
   }
 
   const displayForm = () => {
@@ -122,28 +125,27 @@ export const AllRecipes = props => {
             <div />
           )}
         </RecipesContainer>
-        <CategoriesContainer>
-          <Title>Categories</Title>
-          {Array.isArray(categories) ? (
-            categories.map(category => (
-              <>
-                <button
-                  type="submit"
-                  value={category.id}
-                  onClick={() => getRecipesFromCategory(event)}
-                >
-                  {category.category}
-                </button>
-              </>
-            ))
-          ) : (
-            <div />
-          )}
-          <button type="submit" onClick={() => displayForm(event)}>
-            Add or Edit Recipe Books
-          </button>
-          {Form()}
-        </CategoriesContainer>
+
+        <Title>Categories</Title>
+        {Array.isArray(categories) ? (
+          categories.map(category => (
+            <>
+              <button
+                type="submit"
+                value={category.id}
+                onClick={() => getRecipesFromCategory(event)}
+              >
+                {category.category}
+              </button>
+            </>
+          ))
+        ) : (
+          <div />
+        )}
+        <button type="submit" onClick={() => displayForm(event)}>
+          Add or Edit Recipe Books
+        </button>
+        {Form()}
       </Container>
     </>
   )
@@ -161,7 +163,10 @@ const mapDispatch = dispatch => ({
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
   getRecipesInCategory: (userId, categoryId) =>
-    dispatch(getRecipesInCategoryThunk(userId, categoryId))
+    dispatch(getRecipesInCategoryThunk(userId, categoryId)),
+  submitCategory: (userId, category) => {
+    dispatch(submitCategory(userId, category))
+  }
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)
