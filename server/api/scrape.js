@@ -1,6 +1,6 @@
 const router = require('express').Router()
 module.exports = router
-const {processUrl} = require('../scrape')
+const {processUrl} = require('../scrape/main')
 const Recipe = require('../db/models/recipe')
 
 // POST   /api/scrape
