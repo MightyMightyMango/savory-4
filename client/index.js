@@ -5,14 +5,19 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
-
-// establishes socket connection
 import './socket'
+
+import {ThemeProvider} from 'styled-components'
+import GlobalStyle from './theme/GlobalStyle'
+import Theme from './theme/theme'
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <App />
+      <ThemeProvider theme={Theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
     </Router>
   </Provider>,
   document.getElementById('app')
