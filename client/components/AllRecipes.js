@@ -37,10 +37,7 @@ export const AllRecipes = props => {
     deleteRecipe(recipeId)
   }
 
-
-
   let fetchedRecipes = recipes || []
-
 
   const getRecipesFromCategory = event => {
     event.preventDefault()
@@ -178,6 +175,7 @@ const Title = styled.div`
   margin: 20px;
   text-align: center;
   font-size: 1.5em;
+  color: ${props => props.theme.colors.sage};
 `
 
 const RecipesContainer = styled.div`

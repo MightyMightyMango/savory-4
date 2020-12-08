@@ -316,7 +316,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n  color: ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -363,7 +363,7 @@ var AllRecipes = function AllRecipes(props) {
       showForm = _useState2[0],
       toggleShowForm = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
       newCategory = _useState4[0],
       setNewCategory = _useState4[1];
@@ -386,6 +386,8 @@ var AllRecipes = function AllRecipes(props) {
     deleteRecipe(recipeId);
   };
 
+  var fetchedRecipes = recipes || [];
+
   var getRecipesFromCategory = function getRecipesFromCategory(event) {
     event.preventDefault();
     console.log('recipes by Category');
@@ -394,7 +396,7 @@ var AllRecipes = function AllRecipes(props) {
 
   var handleChange = function handleChange(event) {
     setNewCategory(event.target.value);
-    console.log("newCategory", newCategory);
+    console.log('newCategory', newCategory);
   };
 
   var handleSubmit = function handleSubmit(event) {//use newCategory variable to post onto Categories Table
@@ -479,7 +481,9 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapDispatch)(AllRecipes));
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject2());
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject2(), function (props) {
+  return props.theme.colors.sage;
+});
 var RecipesContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
 var Recipe = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4());
 var Subtitle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject5());
@@ -689,11 +693,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleRecipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleRecipe */ "./client/store/singleRecipe.js");
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../history */ "./client/history.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var enzyme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! enzyme */ "./node_modules/enzyme/build/index.js");
-/* harmony import */ var enzyme__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(enzyme__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _RecipeForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RecipeForm */ "./client/components/RecipeForm.js");
+/* harmony import */ var _store_recipes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/recipes */ "./client/store/recipes.js");
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../history */ "./client/history.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var enzyme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! enzyme */ "./node_modules/enzyme/build/index.js");
+/* harmony import */ var enzyme__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(enzyme__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _RecipeForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RecipeForm */ "./client/components/RecipeForm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _templateObject3() {
@@ -707,7 +712,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n  color: ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -732,8 +737,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -754,6 +757,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -772,8 +778,21 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Recipe);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteDraft", function (event) {
+      event.preventDefault();
+
+      _this.props.deleteDraft(_this.state.id);
+
+      _this.setState({
+        isSubmitted: false
+      }); // console.log(this.state)
+
+    });
+
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.submitUrl = _this.submitUrl.bind(_assertThisInitialized(_this));
     _this.state = {
       isSubmitted: false
     };
@@ -791,13 +810,13 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
       evt.preventDefault();
       var dataToSend = this.state;
       delete dataToSend.isSubmitted;
-      dataToSend.ingredients = this.state.ingredients.split('\n');
-      dataToSend.instructions = this.state.instructions.split('\n');
+      dataToSend.ingredients = typeof dataToSend.ingredients === 'string' ? dataToSend.ingredients.split('\n') : dataToSend.ingredients;
+      dataToSend.instructions = typeof dataToSend.instructions === 'string' ? dataToSend.instructions.split('\n') : dataToSend.instructions;
       dataToSend.isDraft = false;
       console.log('DATA SENT TO DB', dataToSend);
       this.props.submitRecipe(dataToSend);
-      this.setState({});
-      _history__WEBPACK_IMPORTED_MODULE_3__["default"].push("/recipes/".concat(dataToSend.id));
+      window.alert('Recipe Saved!');
+      _history__WEBPACK_IMPORTED_MODULE_4__["default"].push("/recipes/".concat(dataToSend.id));
     }
   }, {
     key: "submitUrl",
@@ -846,7 +865,14 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _this2.submitUrl(event);
         }
-      }, "Get Recipe")), this.state.isSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecipeForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, "Get Recipe")), this.state.isSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        onClick: function onClick() {
+          if (window.confirm('Are you sure you want to abandon your draft? It will not be saved.')) {
+            _this2.handleDeleteDraft(event);
+          }
+        }
+      }, "Abandon Draft"), this.state.isSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecipeForm__WEBPACK_IMPORTED_MODULE_7__["default"], {
         recipe: this.state,
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
@@ -855,13 +881,10 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
   }], [{
     key: "getDerivedStateFromProps",
     value: function getDerivedStateFromProps(nextProps, prevState) {
-      console.log(nextProps);
-
       if (nextProps.recipe.id !== prevState.id) {
         var newState = nextProps.recipe;
         newState.ingredients = Array.isArray(newState.ingredients) ? nextProps.recipe.ingredients.join('\n') : nextProps.recipe.ingredients;
-        newState.instructions = Array.isArray(newState.instructions) ? nextProps.recipe.instructions.join('\n') : nextProps.recipe.instructions; // newState.instructions = nextProps.recipe.instructions.join('\n')
-
+        newState.instructions = Array.isArray(newState.instructions) ? nextProps.recipe.instructions.join('\n') : nextProps.recipe.instructions;
         return newState;
       } else {
         return null;
@@ -886,14 +909,19 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     submitRecipe: function submitRecipe(recipe) {
       dispatch(Object(_store_singleRecipe__WEBPACK_IMPORTED_MODULE_2__["submitRecipe"])(recipe));
+    },
+    deleteDraft: function deleteDraft(recipeId) {
+      return dispatch(Object(_store_recipes__WEBPACK_IMPORTED_MODULE_3__["deleteDraftThunk"])(recipeId));
     }
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapState, mapDispatch)(Recipe));
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject());
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject2());
-var Form = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].form(_templateObject3());
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject());
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject2(), function (props) {
+  return props.theme.colors.sage;
+});
+var Form = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].form(_templateObject3());
 
 /***/ }),
 
@@ -962,14 +990,14 @@ var RecipeForm = function RecipeForm(props) {
     name: "yield",
     value: props.recipe["yield"],
     onChange: props.handleChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Ingredients:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Ingredients (Please list one ingredient per line, with no additional spacing)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     cols: "60",
     rows: "20",
     type: "textarea",
     name: "ingredients",
     value: props.recipe.ingredients,
     onChange: props.handleChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Instructions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Instructions (Please list one instruction per line, with no additional spacing)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     cols: "60",
     rows: "20",
     type: "textarea",
@@ -1117,6 +1145,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+/* eslint-disable complexity */
 
 
 
@@ -1185,12 +1214,15 @@ var SingleRecipe = /*#__PURE__*/function (_React$Component) {
       evt.preventDefault();
       var dataToSend = this.state;
       delete dataToSend.canEdit;
-      dataToSend.ingredients = this.state.ingredients.split('\n');
-      dataToSend.instructions = this.state.instructions.split('\n');
+      dataToSend.ingredients = typeof dataToSend.ingredients === 'string' ? dataToSend.ingredients.split('\n') : dataToSend.ingredients;
+      dataToSend.instructions = typeof dataToSend.instructions === 'string' ? dataToSend.instructions.split('\n') : dataToSend.instructions;
       dataToSend.isDraft = false;
       console.log('DATA SENT TO DB', dataToSend);
       this.props.submitRecipe(dataToSend);
-      this.setState({}); // history.push(`/recipes/${dataToSend.id}`)
+      this.setState({
+        canEdit: false
+      });
+      this.props.getRecipe(dataToSend.id);
     }
   }, {
     key: "render",
@@ -1198,6 +1230,10 @@ var SingleRecipe = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var recipe = this.props.recipe || {};
+      var displayIngredients = typeof recipe.ingredients === 'string' ? recipe.ingredients.split('\n') : recipe.ingredients;
+      var displayInstructions = typeof recipe.instructions === 'string' ? recipe.instructions.split('\n') : recipe.instructions;
+      displayInstructions = displayInstructions || [];
+      displayIngredients = displayIngredients || [];
 
       if (!this.state.canEdit) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1206,15 +1242,15 @@ var SingleRecipe = /*#__PURE__*/function (_React$Component) {
           }
         }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, recipe.name), recipe.isDraft ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Draft") : '', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RecipeContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
           src: recipe.imageUrl
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Details, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, recipe.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Source: ", recipe.publisher), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Link: ", recipe.url), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Prep Time: ", recipe.prepTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Cook Time: ", recipe.cookTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Yield: ", recipe["yield"]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Categories: ", recipe.categories)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Ingredients, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Ingredients"), Array.isArray(recipe.ingredients) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, recipe.ingredients.map(function (ingredient) {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Details, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, recipe.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Source: ", recipe.publisher), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Link: ", recipe.url), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Prep Time: ", recipe.prepTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Cook Time: ", recipe.cookTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Yield: ", recipe["yield"]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Categories: ", recipe.categories)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Ingredients, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Ingredients"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, displayIngredients.map(function (ingredient) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ListItem, {
             key: recipe.ingredients.indexOf(ingredient)
           }, ingredient);
-        })) : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Instructions, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Instructions"), Array.isArray(recipe.instructions) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, recipe.instructions.map(function (instruction) {
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Instructions, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Instructions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, displayInstructions.map(function (instruction) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ListItem, {
             key: recipe.instructions.indexOf(instruction)
-          }, "Step 1: ", instruction);
-        })) : '')), recipe.isDraft ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          }, instruction);
+        })))), recipe.isDraft ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "submit",
           onClick: function onClick() {
             if (window.confirm('Are you sure you wish to delete this draft?')) _this2.handleDeleteDraft(event);
@@ -1239,8 +1275,7 @@ var SingleRecipe = /*#__PURE__*/function (_React$Component) {
       if (nextProps.recipe.id !== prevState.id) {
         var newState = nextProps.recipe;
         newState.ingredients = Array.isArray(newState.ingredients) ? nextProps.recipe.ingredients.join('\n') : nextProps.recipe.ingredients;
-        newState.instructions = Array.isArray(newState.instructions) ? nextProps.recipe.instructions.join('\n') : nextProps.recipe.instructions; // newState.instructions = nextProps.recipe.instructions.join('\n')
-
+        newState.instructions = Array.isArray(newState.instructions) ? nextProps.recipe.instructions.join('\n') : nextProps.recipe.instructions;
         return newState;
       } else {
         return null;
@@ -1645,20 +1680,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app */ "./client/app.js");
 /* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./socket */ "./client/socket.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _theme_GlobalStyle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./theme/GlobalStyle */ "./client/theme/GlobalStyle.js");
+/* harmony import */ var _theme_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme/theme */ "./client/theme/theme.js");
 
 
 
 
 
 
- // establishes socket connection
+
+
+
 
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
   store: _store__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
   history: _history__WEBPACK_IMPORTED_MODULE_4__["default"]
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app__WEBPACK_IMPORTED_MODULE_6__["default"], null))), document.getElementById('app'));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_8__["ThemeProvider"], {
+  theme: _theme_theme__WEBPACK_IMPORTED_MODULE_10__["default"]
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_theme_GlobalStyle__WEBPACK_IMPORTED_MODULE_9__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app__WEBPACK_IMPORTED_MODULE_6__["default"], null)))), document.getElementById('app'));
 
 /***/ }),
 
@@ -2614,6 +2656,86 @@ var logout = function logout() {
       return state;
   }
 });
+
+/***/ }),
+
+/***/ "./client/theme/GlobalStyle.js":
+/*!*************************************!*\
+  !*** ./client/theme/GlobalStyle.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n\nhtml {\n    height: 100%\n\n}\n\n* {\n    padding: 0;\n    margin: 0\n}\n\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["createGlobalStyle"])(_templateObject()); //can also keep any styled components here that are the same globally,
+
+/* harmony default export */ __webpack_exports__["default"] = (GlobalStyle);
+
+/***/ }),
+
+/***/ "./client/theme/theme.js":
+/*!*******************************!*\
+  !*** ./client/theme/theme.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var Theme = {
+  colors: {
+    sage: '#99c49f',
+    grey: '#8c8c8c',
+    navy: '#000a54'
+  },
+  breakpoints: {
+    mobile: '679px',
+    tablet: '1000px'
+  },
+  shadowed: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    padding: '0 30px'
+  },
+  fonts: {}
+}; //look into materialUI?
+// const theme2 = createMuiTheme({
+//     palette: {
+//       primary: {
+//         main: purple[500],
+//       },
+//       secondary: {
+//         main: green[500],
+//       },
+//     },
+//   });
+//in components, can use theme toggle as such:
+// const Toggle = ({ theme, toggleTheme }) => {
+//   const isLight = theme === 'light';
+//   return (
+//     <button onClick={toggleTheme} >
+//       <SunIcon />
+//       <MoonIcon />
+//     </button>
+//   );
+// };
+
+/* harmony default export */ __webpack_exports__["default"] = (Theme);
 
 /***/ }),
 

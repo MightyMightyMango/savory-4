@@ -53,8 +53,6 @@ export class Recipe extends React.Component {
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
 
-   
-
     window.alert('Recipe Saved!')
     history.push(`/recipes/${dataToSend.id}`)
   }
@@ -148,6 +146,7 @@ const Title = styled.div`
   margin: 20px;
   text-align: center;
   font-size: 1.5em;
+  color: ${props => props.theme.colors.sage};
 `
 const Form = styled.form`
   display: flex;
