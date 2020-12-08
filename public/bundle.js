@@ -316,7 +316,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n  color: ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n  color: ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -712,7 +712,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n  color: ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n  color: ", ";\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -2682,7 +2682,7 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["createGlobalStyle"])(_templateObject()); //can also keep any styled components here that are the same globally, 
+var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["createGlobalStyle"])(_templateObject()); //can also keep any styled components here that are the same globally,
 
 /* harmony default export */ __webpack_exports__["default"] = (GlobalStyle);
 
@@ -2707,8 +2707,14 @@ var Theme = {
     mobile: '679px',
     tablet: '1000px'
   },
+  shadowed: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    padding: '0 30px'
+  },
   fonts: {}
-}; // const theme2 = createMuiTheme({
+}; //look into materialUI?
+// const theme2 = createMuiTheme({
 //     palette: {
 //       primary: {
 //         main: purple[500],
@@ -2718,7 +2724,16 @@ var Theme = {
 //       },
 //     },
 //   });
-//can make multlipe themes, can invert theme
+//in components, can use theme toggle as such:
+// const Toggle = ({ theme, toggleTheme }) => {
+//   const isLight = theme === 'light';
+//   return (
+//     <button onClick={toggleTheme} >
+//       <SunIcon />
+//       <MoonIcon />
+//     </button>
+//   );
+// };
 
 /* harmony default export */ __webpack_exports__["default"] = (Theme);
 
