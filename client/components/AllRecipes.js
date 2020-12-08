@@ -189,6 +189,15 @@ const RecipesContainer = styled.div`
   padding-top: 20px;
 `
 
+const CategoriesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  position: fixed;
+  left: 20px;
+  top: 20%;
+`
+
 const Recipe = styled.div`
   display: flex;
   flex-direction: column;

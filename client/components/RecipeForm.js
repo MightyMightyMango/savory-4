@@ -14,7 +14,7 @@ const RecipeForm = props => {
       <h6>Recipe Collected From: {props.recipe.url} </h6>
       <form onSubmit={props.handleSubmit}>
         <button type="submit">Confirm Changes</button>
-        <label>Recipe Name:</label>
+        <label>RECIPE NAME:</label>
         <input
           type="text"
           name="name"
@@ -22,28 +22,28 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Published By:</label>
+        <label>PUBLISHED BY:</label>
         <input
           type="text"
           name="publisher"
           value={props.recipe.publisher}
           onChange={props.handleChange}
         />
-        <label>Source URL:</label>
+        <label>SOURCE URL:</label>
         <input
           type="text"
           name="url"
           value={props.recipe.url}
           onChange={props.handleChange}
         />
-        <label>Image URL:</label>
+        <label>IMAGE URL:</label>
         <input
           type="text"
           name="imageUrl"
           value={props.recipe.imageUrl}
           onChange={props.handleChange}
         />
-        <label>Description:</label>
+        <label>DESCRIPTION:</label>
         <textarea
           type="text"
           name="description"
@@ -51,7 +51,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Prep Time:</label>
+        <label>PREP TIME:</label>
         <input
           type="text"
           name="prepTime"
@@ -59,7 +59,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Cook Time:</label>
+        <label>COOK TIME:</label>
         <input
           type="text"
           name="cookTime"
@@ -67,7 +67,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Yield:</label>
+        <label>YIELD:</label>
         <input
           type="text"
           name="yield"
@@ -75,10 +75,10 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>
-          Ingredients (Please list one ingredient per line, with no additional
-          spacing)
-        </label>
+        <label>INGREDIENTS</label>
+        <div className="recipe-form-span">
+          (Please list one ingredient per line, with no additional spacing)
+        </div>
         <textarea
           cols="60"
           rows="20"
@@ -88,10 +88,10 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>
-          Instructions (Please list one instruction per line, with no additional
-          spacing)
-        </label>
+        <label>INSTRUCTIONS</label>
+        <div className="recipe-form-span">
+          (Please list one instruction per line, with no additional spacing)
+        </div>
         <textarea
           cols="60"
           rows="20"

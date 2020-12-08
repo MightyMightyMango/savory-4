@@ -10,6 +10,7 @@ Color Name: DarkSeaGreen. Hex: #8FBC8B. RGB: rgb(143, 188, 139)
 /* FONTS:
 Body: font-family: 'Noto Sans', sans-serif;
 Heading: font-family: 'Oswald', sans-serif;
+Subheading: font-family: 'Raleway', sans-serif;
 My Books: font-family: 'Homemade Apple', cursive;
 Form?: font-family: 'Courier Prime', monospace;
 Form?:font-family: 'Cutive Mono', monospace;
@@ -24,6 +25,7 @@ body {
   font-family: 'Dosis', sans-serif;
   height: 100vh;
   font-size: 1.25em;
+  scrollbar-width: thin;
 }
 
 a {
@@ -49,4 +51,84 @@ form div {
 
 button {
   margin-top: 10px;
+}
+
+label {
+  font-size: 1.25em;
+  padding-top: 10px;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.0625em;
+}
+
+.recipe-form-span {
+  padding-bottom: 15px;
+}
+
+input[type='text'] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 3px solid #000000;
+  background-color: #ffffff;
+  font-size: 1em;
+  font-family: 'Courier Prime', monospace;
+  outline: none;
+}
+
+input[type='password'] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 3px solid black;
+  background-color: #fffff;
+  outline: none;
+}
+
+textarea {
+  padding: 12px 20px;
+  margin: 8px 0;
+  min-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 3px solid #000000;
+  background-color: #ffffff;
+  font-size: 1em;
+  font-family: 'Courier Prime', monospace;
+  outline: none;
+}
+
+textarea::-webkit-scrollbar {
+  width: 12px;
+  background-color: gainsboro;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #8fbc8b;
+}
+
+button {
+  background-color: #8fbc8b;
+  color: #ffffff;
+  border-radius: 2px;
+  padding: 10px 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  transition-duration: 0.4s;
+  height: 50px;
+  font-size: 0.75em;
+  font-family: 'Rubik', sans-serif;
+}
+
+button:hover {
+  background-color: #a0b39e;
+}
+
+button a {
+  color: #ffffff;
 }
