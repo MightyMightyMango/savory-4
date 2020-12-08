@@ -122,26 +122,28 @@ export const AllRecipes = props => {
             <div />
           )}
         </RecipesContainer>
-        <Title>Categories</Title>
-        {Array.isArray(categories) ? (
-          categories.map(category => (
-            <>
-              <button
-                type="submit"
-                value={category.id}
-                onClick={() => getRecipesFromCategory(event)}
-              >
-                {category.category}
-              </button>
-            </>
-          ))
-        ) : (
-          <div />
-        )}
-        <button type="submit" onClick={() => displayForm(event)}>
-          Add or Edit Recipe Books
-        </button>
-        {Form()}
+        <CategoriesContainer>
+          <Title>Categories</Title>
+          {Array.isArray(categories) ? (
+            categories.map(category => (
+              <>
+                <button
+                  type="submit"
+                  value={category.id}
+                  onClick={() => getRecipesFromCategory(event)}
+                >
+                  {category.category}
+                </button>
+              </>
+            ))
+          ) : (
+            <div />
+          )}
+          <button type="submit" onClick={() => displayForm(event)}>
+            Add or Edit Recipe Books
+          </button>
+          {Form()}
+        </CategoriesContainer>
       </Container>
     </>
   )
@@ -193,7 +195,7 @@ const Recipe = styled.div`
   flex-wrap: wrap;
   justify-contents: flex-start;
   padding: 30px;
-  width: calc(33.333333% - 30px);
+  width: calc(30% - 30px);
 `
 
 const Subtitle = styled.div`

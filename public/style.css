@@ -1,10 +1,29 @@
+/* COLORS:
+Color Name: Gold. Hex: #FFD700. RGB: rgb(255, 215, 0)
+Color Name: Silver. Hex: #C0C0C0. RGB: rgb(192, 192, 192)
+Color Name: Gainsboro. Hex: #DCDCDC RGB: rgb(220, 220, 220)
+Color Name: MidnightBlue. Hex: #191970. RGB: rgb(25, 25, 112)
+Color Name: SteelBlue. Hex: #4682B4. RGB: rgb(70, 130, 180)
+Color Name: DarkSeaGreen. Hex: #8FBC8B. RGB: rgb(143, 188, 139)
+*/
+
+/* FONTS:
+Body: font-family: 'Noto Sans', sans-serif;
+Heading: font-family: 'Oswald', sans-serif;
+My Books: font-family: 'Homemade Apple', cursive;
+Form?: font-family: 'Courier Prime', monospace;
+Form?:font-family: 'Cutive Mono', monospace;
+
+
+*/
 * {
   /* background-color: DarkSeaGreen; */
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Dosis', sans-serif;
   height: 100vh;
+  font-size: 1.25em;
 }
 
 a {
@@ -15,9 +34,12 @@ label {
   display: block;
 }
 
+nav {
+  background-color: DarkSeaGreen;
+}
+
 nav a {
   display: inline-block;
-  margin: 1em;
 }
 
 form div {
