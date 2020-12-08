@@ -106,8 +106,39 @@ const genericScrape = url => {
   })
 }
 
+const anonScrape = async (url, publisher, userId) => {
+  try {
+    let title, author, ingredients, description, instructions
+    const html = await axios.get(url)
+    const $ = cheerio.load(html.data)
+    let info = $('script[type="application/ld+json"]').html()
+
+    if (info === null) {
+      title = $('meta[property="og:title"]').attr('content')
+      author = $('meta[itemprop="author"]').attr('content')
+      ingredients = $('.ingredients').text()
+      description = $('meta[property="og:description"]').attr('content')
+      instructions = $('div[itemprop="recipeInstructions"]').text()
+      console.log(title, author, ingredients, description, instructions)
+    } else {
+      scraper1(url, 'Fake Pubilsher', 7)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 // To test the scraper, call the processUrl function on a URL string
 // scraper1('https://www.food.com/recipe/gingerbread-gingerbread-cake-48219')
-processUrl('https://www.bonappetit.com/recipe/kale-and-brussels-sprout-salad')
-
+//processUrl('https://www.bonappetit.com/recipe/kale-and-brussels-sprout-salad')
+anonScrape(
+  'https://www.epicurious.com/recipes/food/views/smoked-salmon-7-layer-dip'
+)
+console.log('NEW RECIPE')
+//anonScrape('https://www.franksredhot.com/en-us/recipes/franks-redhot-buffalo-chicken-dip')
+//anonScrape('https://www.bonappetit.com/recipe/hallacas')
+anonScrape('https://www.tasteofhome.com/recipes/buffalo-chicken-dip/')
+anonScrape(
+  'https://www.the-girl-who-ate-everything.com/football-kickoff-buffalo-chicken-dip/'
+)
 module.exports = {scraper1, processUrl}
