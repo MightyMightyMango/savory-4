@@ -1,0 +1,30 @@
+.spin {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  0% {
+    transform: rotate(1440deg);
+  }
+}
+
+h1 {
+  padding: 10px;
+}
+
+#first {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+
+#second {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
