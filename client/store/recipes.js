@@ -8,6 +8,7 @@ const DELETE_DRAFT = 'DELETE_DRAFT'
 const GET_USER_CATEGORIES = 'GET_USER_CATEGORIES'
 const GET_RECIPES_IN_CATEGORY = 'GET_RECIPES_IN_CATEGORY'
 const SET_CATEGORY = 'SET_CATEGORY'
+const EDIT_CATEGORY = 'EDIT_CATEGORY'
 
 export const setAllRecipes = recipes => ({
   type: SET_ALL_RECIPES,
@@ -46,6 +47,11 @@ export const getRecipesInCategory = recipes => ({
 
 export const setCategory = category => ({
   type: SET_CATEGORY,
+  category
+})
+
+export const editCategory = category => ({
+  type: EDIT_CATEGORY,
   category
 })
 
@@ -134,7 +140,7 @@ export const getRecipesInCategoryThunk = (userId, categoryId) => {
     }
   }
 }
-
+//add recipe
 export const submitCategory = (userId, category) => {
   console.log('in thunk', userId, category)
   return async dispatch => {
@@ -144,6 +150,22 @@ export const submitCategory = (userId, category) => {
       })
       console.log('res.data', res.data)
       dispatch(setCategory(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+//edit categories
+export const editCategoryThunk = (categoryId, category) => {
+  console.log('in thunk', categoryId, category)
+  return async dispatch => {
+    try {
+      const res = await axios.put(`/api/recipes/categories/${categoryId}`, {
+        category: category
+      })
+      console.log('res.data', res.data)
+      dispatch(editCategory(res.data))
     } catch (error) {
       console.error(error)
     }
@@ -184,6 +206,13 @@ function recipesReducer(state = initialState, action) {
     case SET_CATEGORY:
       const newCategories = state.categories.push(action.category)
       return {...state, categories: newCategories}
+    case EDIT_CATEGORY:
+      const updatedCategories = state.categories.map(category => {
+        if (category.id === action.id) {
+          category = action.category
+        }
+      })
+      return {...state, categories: updatedCategories}
     default:
       return state
   }
