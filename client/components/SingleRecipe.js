@@ -168,11 +168,17 @@ export class SingleRecipe extends React.Component {
       )
     } else {
       return (
-        <RecipeForm
-          recipe={this.state}
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-        />
+        <div>
+          <button
+            type="submit"
+            onClick={() => {
+              this.handleSubmit(event)
+            }}
+          >
+            Confirm Changes
+          </button>
+          <RecipeForm recipe={this.state} handleChange={this.handleChange} />
+        </div>
       )
     }
   }
