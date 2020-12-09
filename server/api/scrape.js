@@ -1,12 +1,13 @@
 const router = require('express').Router()
 module.exports = router
-const {processUrl} = require('../scrape')
+const {processUrl} = require('../scrape/main')
 const Recipe = require('../db/models/recipe')
 
 // POST   /api/scrape
 router.post('/', async (req, res, next) => {
   try {
     const url = req.body.url
+    console.log(url)
     const userId = req.body.userId
     let data = await processUrl(url, userId)
     const newRecipe = await Recipe.create(data)

@@ -20,9 +20,10 @@ const RecipeForm = props => {
         {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
       </h4>
 
-      <form onSubmit={props.handleSubmit}>
-        <Button primary>Confirm Changes</Button>
-        <label>RECIPE NAME:</label>
+      <img width="250px" src={props.recipe.imageUrl} />
+      <h6>Recipe Collected From: {props.recipe.url} </h6>
+      <form>
+        <label>Recipe Name:</label>
         <input
           type="text"
           name="name"
