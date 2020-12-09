@@ -12,8 +12,7 @@ const RecipeForm = props => {
       </h4>
       <img width="250px" src={props.recipe.imageUrl} />
       <h6>Recipe Collected From: {props.recipe.url} </h6>
-      <form onSubmit={props.handleSubmit}>
-        <button type="submit">Confirm Changes</button>
+      <form>
         <label>Recipe Name:</label>
         <input
           type="text"

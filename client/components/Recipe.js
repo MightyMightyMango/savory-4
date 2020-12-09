@@ -88,20 +88,30 @@ export class Recipe extends React.Component {
             </div>
           )}
           {this.state.isSubmitted && (
-            <button
-              type="submit"
-              onClick={() => {
-                if (
-                  window.confirm(
-                    'Are you sure you want to abandon your draft? It will not be saved.'
-                  )
-                ) {
-                  this.handleDeleteDraft(event)
-                }
-              }}
-            >
-              Abandon Draft
-            </button>
+            <div>
+              <button
+                type="submit"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you want to abandon your draft? It will not be saved.'
+                    )
+                  ) {
+                    this.handleDeleteDraft(event)
+                  }
+                }}
+              >
+                Abandon Draft
+              </button>
+              <button
+                type="submit"
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </button>
+            </div>
           )}
           {this.state.isSubmitted && (
             <RecipeForm
