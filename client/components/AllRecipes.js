@@ -19,12 +19,13 @@ export const AllRecipes = props => {
   const {
     user,
     recipes,
-    categories,
     getAllRecipes,
     deleteRecipe,
     getCategories,
     getRecipesInCategory
   } = props
+
+  const categories = props.categories || []
 
   useEffect(() => {
     getAllRecipes(props.user.id)
@@ -80,7 +81,7 @@ export const AllRecipes = props => {
         <RecipesContainer>
           {Array.isArray(recipes) ? (
             recipes.map(recipe => (
-              <Recipe key={recipe.id}>
+              <Recipe key={'r' + recipe.id}>
                 <Image src={recipe.imageUrl} />
                 <Subtitle>{recipe.name}</Subtitle>
                 <Subtitle>Source: {recipe.publisher}</Subtitle>
@@ -124,25 +125,16 @@ export const AllRecipes = props => {
         </RecipesContainer>
         <CategoriesContainer>
           <Title>Categories</Title>
-          {Array.isArray(categories) ? (
-            categories.map(category => (
-              <>
-                <button
-                  type="submit"
-                  value={category.id}
-                  onClick={() => getRecipesFromCategory(event)}
-                >
-                  {category.category}
-                </button>
-              </>
-            ))
-          ) : (
-            <div />
-          )}
-          <button type="submit" onClick={() => displayForm(event)}>
-            Add or Edit Recipe Books
-          </button>
-          {Form()}
+          {categories.map(category => (
+            <button
+              type="submit"
+              value={category.id}
+              key={category.id}
+              onClick={() => getRecipesFromCategory(event)}
+            >
+              {category.category}
+            </button>
+          ))}
         </CategoriesContainer>
       </Container>
     </>
