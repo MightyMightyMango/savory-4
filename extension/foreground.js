@@ -26,3 +26,7 @@ second.addEventListener('click', () => {
   chrome.runtime.sendMessage({message: 'CHECK THE STORAGE'})
   console.log('I SENT THE MESSAGE')
 })
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(request.message)
+})
