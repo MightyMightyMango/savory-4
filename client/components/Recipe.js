@@ -61,7 +61,7 @@ export class Recipe extends React.Component {
     event.preventDefault()
     this.props.deleteDraft(this.state.id)
     this.setState({isSubmitted: false})
-    // console.log(this.state)
+    console.log(this.state)
   }
 
   async submitUrl(event) {
