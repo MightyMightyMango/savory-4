@@ -127,11 +127,15 @@ export class SingleRecipe extends React.Component {
               <Instructions>
                 <Subtitle>Instructions</Subtitle>
                 <ul>
-                  {displayInstructions.map(instruction => (
-                    <ListItem key={recipe.instructions.indexOf(instruction)}>
-                      {instruction}
-                    </ListItem>
-                  ))}
+                  {displayInstructions.map(function(instruction) {
+                    return (
+                      <ListItem
+                        key={'i' + recipe.instructions.indexOf(instruction)}
+                      >
+                        {instruction}
+                      </ListItem>
+                    )
+                  })}
                 </ul>
               </Instructions>
             </RecipeContainer>
