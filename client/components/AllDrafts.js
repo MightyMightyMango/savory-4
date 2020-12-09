@@ -100,7 +100,7 @@ const Recipe = styled.div`
   flex-wrap: wrap;
   justify-contents: flex-start;
   padding: 30px;
-  width: calc(33.333333% - 30px);
+  width: calc(30% - 30px);
 `
 
 const Subtitle = styled.div`

@@ -3,20 +3,25 @@ import styled from 'styled-components'
 
 const Footer = () => {
   return (
-    <div>
-      <Container>
-        <List>
-          <ListItem>© 2020 Mighty Mangos</ListItem>
-        </List>
-      </Container>
-    </div>
+    <FooterWrapper>
+      <List>
+        <ListItem>© 2020 Team Savory</ListItem>
+      </List>
+    </FooterWrapper>
   )
 }
 
 export default Footer
 
-const Container = styled.footer`
+const FooterWrapper = styled.footer`
   padding: 10px;
+  height: 50px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position:fixed;
+  bottom: 0px;
 `
 
 const ListItem = styled.li`

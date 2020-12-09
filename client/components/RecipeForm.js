@@ -1,15 +1,25 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
+import styled from 'styled-components'
+import Button from '../theme/Button'
 
 const RecipeForm = props => {
   return (
-    <div>
+    <Container>
       <h4>
-        Recipe Saved! You can view it in your drafts or make edits below and
-        press 'confirm' when you're done.
+        <Heading>
+          <img width="250px" src={props.recipe.imageUrl} />
+          <span>
+            Recipe Saved! You can view it in your drafts or make edits below and
+            press 'confirm' when you're done.
+          </span>
+          <p>Recipe Collected From: {props.recipe.url}</p>
+        </Heading>
+
         {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
       </h4>
+
       <img width="250px" src={props.recipe.imageUrl} />
       <h6>Recipe Collected From: {props.recipe.url} </h6>
       <form>
@@ -21,28 +31,28 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Published By:</label>
+        <label>PUBLISHED BY:</label>
         <input
           type="text"
           name="publisher"
           value={props.recipe.publisher}
           onChange={props.handleChange}
         />
-        <label>Source URL:</label>
+        <label>SOURCE URL:</label>
         <input
           type="text"
           name="url"
           value={props.recipe.url}
           onChange={props.handleChange}
         />
-        <label>Image URL:</label>
+        <label>IMAGE URL:</label>
         <input
           type="text"
           name="imageUrl"
           value={props.recipe.imageUrl}
           onChange={props.handleChange}
         />
-        <label>Description:</label>
+        <label>DESCRIPTION:</label>
         <textarea
           type="text"
           name="description"
@@ -50,7 +60,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Prep Time:</label>
+        <label>PREP TIME:</label>
         <input
           type="text"
           name="prepTime"
@@ -58,7 +68,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Cook Time:</label>
+        <label>COOK TIME:</label>
         <input
           type="text"
           name="cookTime"
@@ -66,7 +76,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>Yield:</label>
+        <label>YIELD:</label>
         <input
           type="text"
           name="yield"
@@ -74,10 +84,10 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>
-          Ingredients (Please list one ingredient per line, with no additional
-          spacing)
-        </label>
+        <label>INGREDIENTS</label>
+        <div className="recipe-form-span">
+          (Please list one ingredient per line, with no additional spacing)
+        </div>
         <textarea
           cols="60"
           rows="20"
@@ -87,10 +97,10 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
 
-        <label>
-          Instructions (Please list one instruction per line, with no additional
-          spacing)
-        </label>
+        <label>INSTRUCTIONS</label>
+        <div className="recipe-form-span">
+          (Please list one instruction per line, with no additional spacing)
+        </div>
         <textarea
           cols="60"
           rows="20"
@@ -100,8 +110,22 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
       </form>
-    </div>
+      <Button primary>Confirm Changes</Button>
+    </Container>
   )
 }
 
 export default RecipeForm
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  flex-wrap: wrap;
+`
+
+const Heading = styled.div`
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+`

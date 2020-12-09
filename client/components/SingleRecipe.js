@@ -98,6 +98,7 @@ export class SingleRecipe extends React.Component {
         <>
           <Container>
             <button onClick={() => this.renderForm(event)}>Edit</button>
+            <Image2 src={recipe.imageUrl} />
             <Title>{recipe.name}</Title>
             {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''}
             <Subtitle />
@@ -217,6 +218,13 @@ const Title = styled.div`
 const Image = styled.img`
   width: 30%;
   height: 300px;
+  object-fit: cover;
+  overflow: hidden;
+  padding-bottom: 20px;
+`
+const Image2 = styled.img`
+  width: 100%;
+  height: 150px;
   object-fit: cover;
   overflow: hidden;
   padding-bottom: 20px;
