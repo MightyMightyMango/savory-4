@@ -5,6 +5,7 @@ const {timescrape} = require('../scrape/timescrape')
 
 //Scrape function for websites with script tag metadata in object format
 const scraper1 = async (url, publisher, userId) => {
+  console.log(url.length)
   let recipeEntry
   try {
     const html = await axios.get(url)
@@ -37,7 +38,7 @@ const scraper1 = async (url, publisher, userId) => {
       categories: [],
       userId: userId || 0
     }
-    console.log(recipeEntry.prepTime.slice(2))
+    console.log(recipeEntry)
     return recipeEntry
   } catch (error) {
     console.error(error)

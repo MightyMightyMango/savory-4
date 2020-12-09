@@ -4,6 +4,9 @@ const timescrape = time => {
     return ''
   }
   let totalTime = time.slice(2).toString()
+  if (totalTime.indexOf('D') !== -1) {
+    return totalTime
+  }
   let min = totalTime.slice(3, 5)
   let hour = totalTime.slice(0, 2)
   let splitMin = min.split('')

@@ -7,6 +7,7 @@ const Recipe = require('../db/models/recipe')
 router.post('/', async (req, res, next) => {
   try {
     const url = req.body.url
+    console.log(url)
     const userId = req.body.userId
     let data = await processUrl(url, userId)
     const newRecipe = await Recipe.create(data)

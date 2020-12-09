@@ -13,7 +13,7 @@ const Recipe = db.define('recipe', {
     defaultValue: ''
   },
   url: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     defaultValue: ''
   },
@@ -23,7 +23,7 @@ const Recipe = db.define('recipe', {
     defaultValue: ''
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     defaultValue: '/images/default-recipe.png'
   },
