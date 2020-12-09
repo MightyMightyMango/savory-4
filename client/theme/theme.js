@@ -1,6 +1,7 @@
 const Theme = {
   colors: {
-    sage: '#99c49f',
+    // sage: '#99c49f',
+    sage: '#8FBC8B',
     grey: '#8c8c8c',
     navy: '#000a54'
   },

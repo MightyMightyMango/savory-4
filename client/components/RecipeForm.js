@@ -1,19 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
+import styled from 'styled-components'
+import Button from '../theme/Button'
 
 const RecipeForm = props => {
   return (
-    <div>
+    <Container>
       <h4>
-        Recipe Saved! You can view it in your drafts or make edits below and
-        press 'confirm' when you're done.
+        <Heading>
+          <img width="250px" src={props.recipe.imageUrl} />
+          <span>
+            Recipe Saved! You can view it in your drafts or make edits below and
+            press 'confirm' when you're done.
+          </span>
+          <p>Recipe Collected From: {props.recipe.url}</p>
+        </Heading>
+
         {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
       </h4>
-      <img width="250px" src={props.recipe.imageUrl} />
-      <h6>Recipe Collected From: {props.recipe.url} </h6>
+
       <form onSubmit={props.handleSubmit}>
-        <button type="submit">Confirm Changes</button>
+        <Button primary>Confirm Changes</Button>
         <label>RECIPE NAME:</label>
         <input
           type="text"
@@ -101,8 +109,22 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
       </form>
-    </div>
+      <Button primary>Confirm Changes</Button>
+    </Container>
   )
 }
 
 export default RecipeForm
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  flex-wrap: wrap;
+`
+
+const Heading = styled.div`
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+`

@@ -185,7 +185,7 @@ const RecipesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-self: center;
-  width: 70%;
+  width: 100%;
   padding-top: 20px;
 `
 
@@ -203,8 +203,7 @@ const Recipe = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-contents: flex-start;
-  padding: 30px;
-  width: calc(30% - 30px);
+  width: 33.33333%;
 `
 
 const Subtitle = styled.div`

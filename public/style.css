@@ -14,43 +14,39 @@ Subheading: font-family: 'Raleway', sans-serif;
 My Books: font-family: 'Homemade Apple', cursive;
 Form?: font-family: 'Courier Prime', monospace;
 Form?:font-family: 'Cutive Mono', monospace;
-
+font-family: 'Poppins', sans-serif;
 
 */
-* {
-  /* background-color: DarkSeaGreen; */
-}
+/* * {
+  background-color: DarkSeaGreen;
+} */
 
-body {
-  font-family: 'Dosis', sans-serif;
+/* body {
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
   font-size: 1.25em;
   scrollbar-width: thin;
-}
+} */
 
-a {
+/* a {
   text-decoration: none;
 }
 
 label {
   display: block;
-}
+} */
 
-nav {
+/* nav {
   background-color: DarkSeaGreen;
 }
 
 nav a {
   display: inline-block;
-}
+} */
 
 form div {
-  margin: 1em;
+  /* margin: 1em; */
   display: inline-block;
-}
-
-button {
-  margin-top: 10px;
 }
 
 label {
@@ -61,7 +57,10 @@ label {
 }
 
 .recipe-form-span {
-  padding-bottom: 15px;
+  padding-top: 2px;
+  padding-bottom: 10px;
+  font-size: 0.75em;
+  letter-spacing: 0.02em;
 }
 
 input[type='text'] {
@@ -83,8 +82,12 @@ input[type='password'] {
   box-sizing: border-box;
   border: none;
   border-bottom: 3px solid black;
-  background-color: #fffff;
+  background-color: #ffffff;
   outline: none;
+}
+
+input:focus {
+  background-color: rgb(244, 245, 244);
 }
 
 textarea {
@@ -100,35 +103,28 @@ textarea {
   outline: none;
 }
 
+textarea:focus {
+  background-color: rgb(244, 245, 244);
+}
+
 textarea::-webkit-scrollbar {
   width: 12px;
   background-color: gainsboro;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  height: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #8fbc8b;
 }
 
-button {
-  background-color: #8fbc8b;
-  color: #ffffff;
-  border-radius: 2px;
-  padding: 10px 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: none;
-  transition-duration: 0.4s;
-  height: 50px;
-  font-size: 0.75em;
-  font-family: 'Rubik', sans-serif;
-}
-
-button:hover {
-  background-color: #a0b39e;
-}
-
-button a {
-  color: #ffffff;
+.food-item {
+  width: 100%;
+  height: 225px;
+  object-fit: cover;
+  overflow: hidden;
+  padding: none;
+  position: relative;
+  top: 0px;
+  opacity: 0.8;
 }

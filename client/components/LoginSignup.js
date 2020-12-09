@@ -1,19 +1,21 @@
 import React from 'react'
 import {Login, Signup} from './index'
+import Container from '../theme/Container'
+import HalfPageDiv from '../theme/HalfPageDiv'
 
 const LoginSignup = props => {
   return (
-    <div className="content-wrapper">
-      <div className="border-box">
+    <Container>
+      <HalfPageDiv>
         Already have an account? Log-in:
         <Login />
-      </div>
+      </HalfPageDiv>
 
-      <div className="border-box">
+      <HalfPageDiv>
         New to Savory? Sign up for an account:
         <Signup />
-      </div>
-    </div>
+      </HalfPageDiv>
+    </Container>
   )
 }
 

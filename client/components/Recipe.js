@@ -77,7 +77,7 @@ export class Recipe extends React.Component {
       <>
         <Container>
           {!this.state.isSubmitted && (
-            <div>
+            <RecipeScrape>
               <Title>Enter Recipe Url:</Title>
               <Form>
                 <input type="text" id="url-input" />
@@ -85,7 +85,7 @@ export class Recipe extends React.Component {
               <button type="submit" onClick={() => this.submitUrl(event)}>
                 Get Recipe
               </button>
-            </div>
+            </RecipeScrape>
           )}
           {this.state.isSubmitted && (
             <button
@@ -142,6 +142,10 @@ const Container = styled.div`
   height: 87vh;
 `
 
+const RecipeScrape = styled.div`
+  width: 70%;
+`
+
 const Title = styled.div`
   margin: 20px;
   text-align: center;
@@ -152,4 +156,10 @@ const Form = styled.form`
   display: flex;
   justify-contents: center;
   align-items: center;
+  width: 100%;
+`
+
+const ScrapeButton = styled.button`
+  padding: 10px;
+  align-self: center;
 `
