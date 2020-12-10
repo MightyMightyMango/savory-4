@@ -81,24 +81,25 @@ export const AllRecipes = props => {
         {/* <Title>My Recipe Books</Title> */}
         {/* {getRecipesFromCategory} */}
         <Title>My Recipes</Title>
-        <div>
+        <CategoriesContainer>
           <h2>Categories</h2>
-          {Array.isArray(categories) ? (
-            categories.map(category => (
-              <>
-                <button
-                  type="submit"
-                  value={category.id}
-                  onClick={() => getRecipesFromCategory(event)}
-                >
-                  {category.category}
-                </button>
-              </>
-            ))
-          ) : (
-            <div>No Categories</div>
-          )}
-        </div>
+          <Categories>
+            {Array.isArray(categories) ? (
+              categories.map(category => (
+                <>
+                  <Button
+                    value={category.id}
+                    onClick={() => getRecipesFromCategory(event)}
+                  >
+                    {category.category}
+                  </Button>
+                </>
+              ))
+            ) : (
+              <div>No Categories</div>
+            )}
+          </Categories>
+        </CategoriesContainer>
         <RecipesContainer>
           {Array.isArray(recipes) ? (
             recipes.map(recipe => (
@@ -213,9 +214,10 @@ const RecipesContainer = styled.div`
 
 const CategoriesContainer = styled.div`
   display: flex;
+  width: 80%;
   flex-wrap: wrap;
-  width: 200px;
-  position: fixed;
+  flex-direction: column;
+  align-items: center;
   left: 20px;
   top: 20%;
 `
@@ -239,4 +241,11 @@ const Image = styled.img`
   object-fit: cover;
   overflow: hidden;
   padding-bottom: 20px;
+`
+
+const Categories = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `

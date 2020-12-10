@@ -43,7 +43,7 @@ const AuthForm = props => {
             </h3>
           ) : (
             <h3>
-              Already registered? <Link to="/signup">Sign in.</Link>
+              Already registered? <Link to="/login">Sign in.</Link>
             </h3>
           )}
           {error && error.response && <div> {error.response.data} </div>}
