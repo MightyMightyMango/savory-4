@@ -1,7 +1,8 @@
 /* eslint-disable complexity */
 const cheerio = require('cheerio')
 const axios = require('axios')
-const {timescrape} = require('../scrape/timescrape')
+const {timescrape2} = require('./timescrape2')
+
 //Scrape function for websites with script tag metadata in array of objects format
 const scraper2 = async (url, publisher, userId) => {
   let recipeEntry
@@ -16,6 +17,8 @@ const scraper2 = async (url, publisher, userId) => {
     })
     let imageUrl = mainInfo.image ? mainInfo.image.url : ''
     imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
+    let prepTime = timescrape2(mainInfo.prepTime) || ''
+    let cookTime = timescrape2(mainInfo.cookTime) || ''
     recipeEntry = {
       url: url,
       name: mainInfo.name || '',
@@ -25,8 +28,8 @@ const scraper2 = async (url, publisher, userId) => {
       ingredients: mainInfo.recipeIngredient || [],
       instructions: instructions || [],
       yield: mainInfo.recipeYield || '',
-      prepTime: mainInfo.prepTime || '',
-      cookTime: mainInfo.cookTime || '',
+      prepTime: prepTime || '',
+      cookTime: cookTime || '',
       categories: [],
       userId: userId || 0
     }

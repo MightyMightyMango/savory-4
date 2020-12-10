@@ -7,14 +7,12 @@ const {scraper2} = require('../scrape/scraper2')
 const processUrl = async (url, userId) => {
   console.log(url)
   console.log(url.includes('bonappetit.com'))
-  if (url.includes('bonappetit.com')) {
+  if (url.includes('bonappetit.com/recipe')) {
     return scraper1(url, 'Bon Appetit', userId)
-  } else if (url.includes('cooking.nytimes')) {
+  } else if (url.includes('cooking.nytimes/recipes')) {
     return scraper1(url, 'New York Times Cooking', userId)
-  } else if (url.includes('simplyrecipes.com')) {
+  } else if (url.includes('simplyrecipes.com/recipes')) {
     return scraper1(url, 'SimplyRecipes', userId)
-  } else if (url.includes('food.com')) {
-    return scraper1(url, 'Food.com', userId)
   } else if (url.includes('allrecipes.com')) {
     return scraper2(url, 'AllRecipes', userId)
   } else if (url.includes('eatingwell.com')) {
