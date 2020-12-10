@@ -6,6 +6,8 @@ import history from '../history'
 import styled from 'styled-components'
 import {render} from 'enzyme'
 import RecipeForm from './RecipeForm'
+import Button from '../theme/Button'
+// import Container from '../theme/Container'
 
 export class Recipe extends React.Component {
   constructor(props) {
@@ -82,14 +84,19 @@ export class Recipe extends React.Component {
               <Form>
                 <input type="text" id="url-input" />
               </Form>
-              <button type="submit" onClick={() => this.submitUrl(event)}>
+              <Button
+                primary
+                type="submit"
+                onClick={() => this.submitUrl(event)}
+              >
                 Get Recipe
-              </button>
+              </Button>
             </RecipeScrape>
           )}
           {this.state.isSubmitted && (
-            <div>
-              <button
+            <Actions>
+              <Button
+                primary
                 type="submit"
                 onClick={() => {
                   if (
@@ -102,16 +109,17 @@ export class Recipe extends React.Component {
                 }}
               >
                 Abandon Draft
-              </button>
-              <button
+              </Button>
+              <Button
+                primary
                 type="submit"
                 onClick={() => {
                   this.handleSubmit(event)
                 }}
               >
                 Confirm Changes
-              </button>
-            </div>
+              </Button>
+            </Actions>
           )}
           {this.state.isSubmitted && (
             <RecipeForm
@@ -149,18 +157,26 @@ const Container = styled.div`
   justify-contents: center;
   align-items: center;
   width: 100%;
-  height: 87vh;
+  padding-top: 50px;
+  height: 100vh;
 `
 
 const RecipeScrape = styled.div`
   width: 70%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
 `
 
 const Title = styled.div`
   margin: 20px;
   text-align: center;
   font-size: 1.5em;
-  color: ${props => props.theme.colors.sage};
+  font-family: 'Merriweather', sans serif;
 `
 const Form = styled.form`
   display: flex;
@@ -169,7 +185,8 @@ const Form = styled.form`
   width: 100%;
 `
 
-const ScrapeButton = styled.button`
-  padding: 10px;
-  align-self: center;
+const Actions = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
 `

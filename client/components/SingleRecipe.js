@@ -10,6 +10,7 @@ import {
   deleteDraftThunk
 } from '../store/recipes'
 import RecipeForm from './RecipeForm'
+import Button from '../theme/Button'
 
 export class SingleRecipe extends React.Component {
   constructor(props) {
@@ -97,35 +98,96 @@ export class SingleRecipe extends React.Component {
       return (
         <>
           <Container>
-            <button onClick={() => this.renderForm(event)}>Edit</button>
-            <Image2 src={recipe.imageUrl} />
-            <Title>{recipe.name}</Title>
-            {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''}
-            <Subtitle />
-            <RecipeContainer>
-              <Image src={recipe.imageUrl} />
-              <Details>
-                <div>{recipe.description}</div>
-                <div>Source: {recipe.publisher}</div>
-                <div>Link: {recipe.url}</div>
-                <div>Prep Time: {recipe.prepTime}</div>
-                <div>Cook Time: {recipe.cookTime}</div>
-                <div>Yield: {recipe.yield}</div>
-                <div>Categories: {recipe.categories}</div>
-              </Details>
+            {/* HEADER */}
+            <SingleRecipeHeader>
+              <HeaderImage src={recipe.imageUrl} />
+              <Title>{recipe.name}</Title>
+            </SingleRecipeHeader>
+            {/* {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''} */}
 
+            <RecipeContainer>
+              <Description>{recipe.description}</Description>
+              <Image src={recipe.imageUrl} />
+
+              <DetailsContainer>
+                {/* BUTTONS */}
+                <ActionButtons>
+                  <Button primary onClick={() => this.renderForm(event)}>
+                    Edit
+                  </Button>
+                  <Button primary>
+                    <a href="#">Edit Categories</a>
+                  </Button>
+                  <Button primary>
+                    <a href={recipe.url}>View Original</a>
+                  </Button>
+                  {recipe.isDraft ? (
+                    <Button
+                      primary
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            'Are you sure you wish to delete this draft?'
+                          )
+                        )
+                          this.handleDeleteDraft(event)
+                      }}
+                    >
+                      Delete Draft
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            'Are you sure you wish to delete this recipe?'
+                          )
+                        )
+                          this.handleDeleteRecipe(event)
+                      }}
+                    >
+                      Delete Recipe
+                    </Button>
+                  )}
+                </ActionButtons>
+                {/* DETAILS */}
+                <ul>
+                  <li>
+                    <b>Source:</b> {recipe.publisher}
+                  </li>
+                  <li>
+                    <b>Prep Time:</b> {recipe.prepTime}
+                  </li>
+                  <li>
+                    <b>Cook Time:</b> {recipe.cookTime}
+                  </li>
+                  <li>
+                    <b>Yield:</b> {recipe.yield}
+                  </li>
+                  <li>
+                    <b>Prep Time:</b> {recipe.prepTime}
+                  </li>
+                  <li>
+                    <b>Categories:</b> {recipe.prepTime}
+                  </li>
+                </ul>
+              </DetailsContainer>
+
+              {/* INGREDIENTS */}
               <Ingredients>
-                <Subtitle>Ingredients</Subtitle>
+                <b>Ingredients</b>
                 <ul>
                   {displayIngredients.map(ingredient => (
-                    <ListItem key={recipe.ingredients.indexOf(ingredient)}>
+                    <li key={recipe.ingredients.indexOf(ingredient)}>
                       {ingredient}
-                    </ListItem>
+                    </li>
                   ))}
                 </ul>
               </Ingredients>
+
+              {/* INSTRUCTIONS */}
               <Instructions>
-                <Subtitle>Instructions</Subtitle>
+                <b>Instructions</b>
                 <ul>
                   {displayInstructions.map(function(instruction) {
                     return (
@@ -139,35 +201,6 @@ export class SingleRecipe extends React.Component {
                 </ul>
               </Instructions>
             </RecipeContainer>
-            {recipe.isDraft ? (
-              <button
-                type="submit"
-                onClick={() => {
-                  if (
-                    window.confirm(
-                      'Are you sure you wish to delete this draft?'
-                    )
-                  )
-                    this.handleDeleteDraft(event)
-                }}
-              >
-                Delete Draft
-              </button>
-            ) : (
-              <button
-                type="submit"
-                onClick={() => {
-                  if (
-                    window.confirm(
-                      'Are you sure you wish to delete this recipe?'
-                    )
-                  )
-                    this.handleDeleteRecipe(event)
-                }}
-              >
-                Delete Recipe
-              </button>
-            )}
           </Container>
         </>
       )
@@ -208,51 +241,86 @@ export default connect(mapState, mapDispatch)(SingleRecipe)
 const Container = styled.div`
   display: flex;
   text-align: center;
-  flex-direction: column;
+  // flex-direction: column;
+  justify-content: center;
   width: 100%;
   flex-wrap: wrap;
 `
-const Title = styled.div`
-  margin: 20px;
-  text-align: center;
-  font-size: 1.5em;
-  width: 100%;
+
+const SingleRecipeHeader = styled.div`
+  display: flex;
+  background-color: black;
+  height: 200px;
+  border-bottom: none;
+  flex-direction: column;
 `
 
-const Image = styled.img`
-  width: 30%;
-  height: 300px;
-  object-fit: cover;
-  overflow: hidden;
-  padding-bottom: 20px;
+const Title = styled.h1`
+  // height: 200px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  background: transparent;
+  font-size: 3em;
+  color: white;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  z-index: 2;
 `
-const Image2 = styled.img`
-  width: 100%;
-  height: 150px;
+
+const HeaderImage = styled.img`
+  width: 100vw;
   object-fit: cover;
   overflow: hidden;
+  border: none;
+  opacity: 0.4;
+`
+
+const Description = styled.div`
   padding-bottom: 20px;
+  width: 80%;
+  justify-content: space-evenly;
+`
+const Image = styled.img`
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
+  overflow: hidden;
+  position: relative;
+  top: 0px;
+  left: 0px;
+`
+
+const ActionButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 `
 
 const RecipeContainer = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
+  text-align: left;
   justify-content: center;
   align-self: center;
-  width: 70%;
+  width: 80%;
   padding-top: 20px;
 `
 
-const Details = styled.div`
+const DetailsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  width: 50%;
+  width: 68%;
   padding-left: 20px;
 `
 
-const Subtitle = styled.div`
-  font-size: 1em;
+const Subtitle = styled.b`
+  font-size: 1.25em;
   padding-bottom: 5px;
+  font-style: 'Oswald', sans serif;
 `
 
 const ListItem = styled.li`
@@ -260,11 +328,17 @@ const ListItem = styled.li`
 `
 
 const Ingredients = styled.div`
-  width: calc(30%-20px);
-  padding: 20px;
+  width: 450px;
+  padding-top: 20px;
+  padding-right: 20px;
 `
 
 const Instructions = styled.div`
-  width: calc(70%-20px);
-  padding: 20px;
+  width: calc(100% - 450px);
+  padding-top: 20px;
+  padding-left: 20px;
+`
+
+const Details = styled.ul`
+  list-style-type: none;
 `

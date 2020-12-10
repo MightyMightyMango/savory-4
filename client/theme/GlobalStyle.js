@@ -21,6 +21,16 @@ html, body {
   box-sizing: border-box;
 }
 
+h1 {
+  padding-bottom: 20px;
+  font-family: 'Oswald', sans serif;
+}
+
+h2, h3, h4, h5, h6 {
+  padding-bottom: 20px;
+  font-weight: 700;
+}
+
 a {
   text-decoration: none;
   transition-duration: 0.4s;
@@ -28,6 +38,38 @@ a {
 
 label {
   display: block;
+}
+
+b {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  border:none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  text-align: left;
 }
 
 `

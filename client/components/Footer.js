@@ -13,15 +13,15 @@ const Footer = () => {
 
 export default Footer
 
-const FooterWrapper = styled.footer`
+const FooterWrapper = styled.div`
   padding: 10px;
   height: 50px;
   background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // position:fixed;
-  bottom: 0px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 `
 
 const ListItem = styled.li`

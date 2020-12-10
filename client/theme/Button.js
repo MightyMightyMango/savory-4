@@ -15,7 +15,9 @@ const StyledButton = styled.button`
   height: 50px;
   font-size: 1.25em;
   font-family: 'Raleway', sans-serif;
+  font-weight: 500;
   letter-spacing: 0.0625em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);
 
   :hover {
     background-color: ${props => (props.primary ? '#a0b39e' : '#DCDCDC')};
@@ -26,9 +28,14 @@ const StyledButton = styled.button`
   }
 `
 
-const Button = ({primary, children}) => {
+const Button = ({primary, children, onClick, otherProps}) => {
   return (
-    <StyledButton primary={primary} type="submit">
+    <StyledButton
+      primary={primary}
+      type="submit"
+      onClick={onClick}
+      {...otherProps}
+    >
       {children}
     </StyledButton>
   )

@@ -2,8 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import LoginFieldDiv from '../theme/LoginFormContainer'
+// import LoginFieldDiv from '../theme/LoginFormContainer'
 import Button from '../theme/Button'
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
+
+// import Container from '../theme/Container'
 
 /**
  * COMPONENT
@@ -12,31 +16,40 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <LoginFieldDiv>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" required />
-        </LoginFieldDiv>
-        <LoginFieldDiv>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" required />
-        </LoginFieldDiv>
-        <LoginFieldDiv>
-          <Button type="submit" primary>
-            {displayName}
-          </Button>
-        </LoginFieldDiv>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <Button type="submit" primary>
-        <a href="/auth/google">{displayName} with Google</a>
-      </Button>
-    </div>
+    <Container primary>
+      <LoginSignupWrapper>
+        <form onSubmit={handleSubmit} name={name}>
+          <LoginFieldDiv>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="text" required />
+          </LoginFieldDiv>
+          <LoginFieldDiv>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <Password name="password" type="password" required />
+          </LoginFieldDiv>
+          <ButtonDiv>
+            <Button primary>{displayName}</Button>
+            <Button type="submit" primary>
+              <a href="/auth/google">{displayName} with Google</a>
+            </Button>
+          </ButtonDiv>
+          {displayName === 'Login' ? (
+            <h3>
+              Not registered? <Link to="/signup">Create an account.</Link>
+            </h3>
+          ) : (
+            <h3>
+              Already registered? <Link to="/login">Sign in.</Link>
+            </h3>
+          )}
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+      </LoginSignupWrapper>
+    </Container>
   )
 }
 
@@ -87,3 +100,54 @@ AuthForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: ${props => (props.primary ? 'column' : 'row')};
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding-top: 180px;
+  padding-bottom: 50px;
+  background-color: darkseagreen;
+`
+
+const LoginSignupWrapper = styled.div`
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  background-color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);
+
+  a {
+    color: darkseagreen;
+  }
+`
+
+const Password = styled.input`
+  width: 100%;
+`
+
+const LoginFieldDiv = styled.div`
+  width: 100%;
+`
+const ButtonDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+
+  a {
+    color: white;
+  }
+`

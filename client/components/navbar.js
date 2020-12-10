@@ -40,7 +40,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <ul>
             {/* <li><Link to="/home">HOME</Link></li> */}
             <li>
-              <Link to="/loginsignup">LOGIN / SIGN-UP</Link>
+              <Link to="/login">LOGIN</Link>
+            </li>
+            <li>
+              <Link to="/signup">SIGN-UP</Link>
             </li>
             {/* <li><Link to="/signup">SIGN-UP</Link></li> */}
           </ul>

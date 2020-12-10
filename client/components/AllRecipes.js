@@ -8,7 +8,8 @@ import {
   getRecipesInCategoryThunk
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
-import EditCategories from './EditCategories'
+// import EditCategories from './EditCategories'
+import Button from '../theme/Button'
 
 export const AllRecipes = props => {
   // categories contains all the categories
@@ -63,7 +64,7 @@ export const AllRecipes = props => {
   const Form = () => {
     if (showForm) {
       return (
-        <EditCategories
+        <div
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           newCategory={newCategory}
@@ -72,23 +73,45 @@ export const AllRecipes = props => {
     }
   }
 
+  console.log('categories ', categories)
+  console.log('props ', props)
+
   return (
     <>
       <Container>
         {/* <Title>My Recipe Books</Title> */}
         {/* {getRecipesFromCategory} */}
         <Title>My Recipes</Title>
+        <CategoriesContainer>
+          <h2>Categories</h2>
+          <Categories>
+            {Array.isArray(categories) ? (
+              categories.map(category => (
+                <>
+                  <Button
+                    value={category.id}
+                    onClick={() => getRecipesFromCategory(event)}
+                  >
+                    {category.category}
+                  </Button>
+                </>
+              ))
+            ) : (
+              <div>No Categories</div>
+            )}
+          </Categories>
+        </CategoriesContainer>
         <RecipesContainer>
           {Array.isArray(recipes) ? (
             recipes.map(recipe => (
               <Recipe key={'r' + recipe.id}>
                 <Image src={recipe.imageUrl} />
-                <Subtitle>{recipe.name}</Subtitle>
-                <Subtitle>Source: {recipe.publisher}</Subtitle>
+                <Title>{recipe.name}</Title>
+                {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
                 <NavLink to={`/recipes/${recipe.id}`}>
-                  <button type="submit">View Recipe</button>
+                  <Button primary>View Recipe</Button>
                 </NavLink>
-                {recipe.isDraft ? (
+                {/* {recipe.isDraft ? (
                   <button
                     type="submit"
                     onClick={() => {
@@ -116,26 +139,35 @@ export const AllRecipes = props => {
                   >
                     Delete Recipe
                   </button>
-                )}
+                )} */}
               </Recipe>
             ))
           ) : (
             <div />
           )}
         </RecipesContainer>
-        <CategoriesContainer>
+        {/* <CategoriesContainer>
           <Title>Categories</Title>
-          {categories.map(category => (
-            <button
-              type="submit"
-              value={category.id}
-              key={category.id}
-              onClick={() => getRecipesFromCategory(event)}
-            >
-              {category.category}
-            </button>
-          ))}
-        </CategoriesContainer>
+          {Array.isArray(categories) ? (
+            categories.map(category => (
+              <>
+                <button
+                  type="submit"
+                  value={category.id}
+                  onClick={() => getRecipesFromCategory(event)}
+                >
+                  {category.category}
+                </button>
+              </>
+            ))
+          ) : (
+            <div />
+          )}
+          <button type="submit" onClick={() => displayForm(event)}>
+            Add or Edit Recipe Books
+          </button>
+          {Form()}
+        </CategoriesContainer> */}
       </Container>
     </>
   )
@@ -163,13 +195,13 @@ const Container = styled.div`
   flex-direction: column;
   text-align: center;
   width: 100%;
-  height: 87vh;
+  height: 100vh;
 `
-const Title = styled.div`
-  margin: 20px;
-  text-align: center;
-  font-size: 1.5em;
-  color: ${props => props.theme.colors.sage};
+const Title = styled.h1`
+  // margin: 20px;
+  // text-align: center;
+  // font-size: 1.5em;
+  font-family: 'Merriweather', serif;
 `
 
 const RecipesContainer = styled.div`
@@ -183,9 +215,10 @@ const RecipesContainer = styled.div`
 
 const CategoriesContainer = styled.div`
   display: flex;
+  width: 80%;
   flex-wrap: wrap;
-  width: 200px;
-  position: fixed;
+  flex-direction: column;
+  align-items: center;
   left: 20px;
   top: 20%;
 `
@@ -209,4 +242,11 @@ const Image = styled.img`
   object-fit: cover;
   overflow: hidden;
   padding-bottom: 20px;
+`
+
+const Categories = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `

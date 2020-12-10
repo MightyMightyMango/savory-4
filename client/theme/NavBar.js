@@ -53,7 +53,7 @@ const Navbar = styled.div`
     width: 180px;
     height: 80px;
     margin: 0.25em;
-    z-index: 7;
+    z-index: 8;
   }
 
   .logo:hover {
@@ -64,7 +64,7 @@ const Navbar = styled.div`
     height: 80px;
     margin: 0.25em;
     transition-duration: 0.4s;
-    z-index: 7;
+    z-index: 8;
   }
 `
 
