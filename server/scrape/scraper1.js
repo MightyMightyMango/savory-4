@@ -22,8 +22,8 @@ const scraper1 = async (url, publisher, userId) => {
     }
     let imageUrl = parsed.thumbnailUrl ? parsed.thumbnailUrl : parsed.image
     imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
-    let prepTime = timescrape1(parsed.prepTime) || ''
-    let cookTime = timescrape1(parsed.cookTime) || ''
+    let prepTime = parsed.prepTime ? timescrape1(parsed.prepTime) : ''
+    let cookTime = parsed.cookTime ? timescrape1(parsed.cookTime) : ''
     recipeEntry = {
       url: url,
       name: parsed.name || '',
@@ -38,7 +38,6 @@ const scraper1 = async (url, publisher, userId) => {
       categories: [],
       userId: userId || 0
     }
-    console.log(recipeEntry)
     return recipeEntry
   } catch (error) {
     console.error(error)

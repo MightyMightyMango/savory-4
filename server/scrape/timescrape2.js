@@ -8,8 +8,7 @@ const timescrape2 = time => {
     return ''
   }
   time = time.toString()
-  console.log('totalTime', typeof time)
-  console.log(time.indexOf('P') !== -1)
+
   let totalTime =
     time.indexOf('P') !== -1
       ? time.slice(4).toString()
