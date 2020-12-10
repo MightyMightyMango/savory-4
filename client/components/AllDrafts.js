@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {connect} from 'react-redux'
 import {setAllDraftsThunk, deleteDraftThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
+import Button from '../theme/Button'
 
 export const AllDrafts = props => {
   // const {state, setState} = useState(props)
@@ -33,12 +34,12 @@ export const AllDrafts = props => {
             ? recipes.map(recipe => (
                 <Recipe key={recipe.id}>
                   <Image src={recipe.imageUrl} />
-                  <Subtitle>{recipe.name}</Subtitle>
-                  <Subtitle>Source: {recipe.publisher}</Subtitle>
+                  <Title>{recipe.name}</Title>
+                  {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
                   <NavLink to={`/recipes/${recipe.id}`}>
-                    <button type="submit">View Recipe</button>
+                    <Button primary>View Recipe</Button>
                   </NavLink>
-                  <button
+                  {/* <button
                     type="submit"
                     onClick={() => {
                       if (
@@ -50,7 +51,7 @@ export const AllDrafts = props => {
                     }}
                   >
                     Delete Draft
-                  </button>
+                  </button> */}
                 </Recipe>
               ))
             : ''}
@@ -77,12 +78,13 @@ const Container = styled.div`
   flex-direction: column;
   text-align: center;
   width: 100%;
-  height: 87vh;
+  height: 100vh;
 `
-const Title = styled.div`
-  margin: 20px;
-  text-align: center;
-  font-size: 1.5em;
+const Title = styled.h1`
+  // margin: 20px;
+  // text-align: center;
+  // font-size: 1.5em;
+  font-family: 'Merriweather', serif;
 `
 
 const RecipesContainer = styled.div`
@@ -90,7 +92,7 @@ const RecipesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-self: center;
-  width: 70%;
+  width: 100%;
   padding-top: 20px;
 `
 
@@ -99,8 +101,7 @@ const Recipe = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-contents: flex-start;
-  padding: 30px;
-  width: calc(30% - 30px);
+  width: 33.33333%;
 `
 
 const Subtitle = styled.div`

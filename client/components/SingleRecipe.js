@@ -167,6 +167,9 @@ export class SingleRecipe extends React.Component {
                   <li>
                     <b>Prep Time:</b> {recipe.prepTime}
                   </li>
+                  <li>
+                    <b>Categories:</b> {recipe.prepTime}
+                  </li>
                 </ul>
               </DetailsContainer>
 
@@ -272,6 +275,8 @@ const HeaderImage = styled.img`
 
 const Description = styled.div`
   padding-bottom: 20px;
+  width: 80%;
+  justify-content: space-evenly;
 `
 const Image = styled.img`
   width: 450px;
@@ -320,12 +325,14 @@ const ListItem = styled.li`
 
 const Ingredients = styled.div`
   width: 450px;
-  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
 `
 
 const Instructions = styled.div`
   width: calc(100% - 450px);
-  padding-right: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
 `
 
 const Details = styled.ul`

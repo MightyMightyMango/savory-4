@@ -107,7 +107,9 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
       </form>
-      <Button primary>Confirm Changes</Button>
+      <Button primary onClick={props.handleSubmit}>
+        Confirm Changes
+      </Button>
     </Container>
   )
 }
