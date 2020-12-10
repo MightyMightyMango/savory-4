@@ -30,6 +30,23 @@ label {
   display: block;
 }
 
+b {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  border:none;
+}
+
 `
 
 //can also keep any styled components here that are the same globally,

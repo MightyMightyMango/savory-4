@@ -26,9 +26,14 @@ const StyledButton = styled.button`
   }
 `
 
-const Button = ({primary, children}) => {
+const Button = ({primary, children, onClick, otherProps}) => {
   return (
-    <StyledButton primary={primary} type="submit">
+    <StyledButton
+      primary={primary}
+      type="submit"
+      onClick={onClick}
+      {...otherProps}
+    >
       {children}
     </StyledButton>
   )

@@ -154,6 +154,10 @@ const Container = styled.div`
 
 const RecipeScrape = styled.div`
   width: 70%;
+  align-self: center;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
 `
 
 const Title = styled.div`

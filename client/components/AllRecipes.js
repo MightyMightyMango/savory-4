@@ -82,7 +82,7 @@ export const AllRecipes = props => {
             recipes.map(recipe => (
               <Recipe key={recipe.id}>
                 <Image src={recipe.imageUrl} />
-                <Subtitle>{recipe.name}</Subtitle>
+                <Title>{recipe.name}</Title>
                 <Subtitle>Source: {recipe.publisher}</Subtitle>
                 <NavLink to={`/recipes/${recipe.id}`}>
                   <button type="submit">View Recipe</button>
