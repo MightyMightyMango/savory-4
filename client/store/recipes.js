@@ -128,6 +128,7 @@ export const getUserCategoriesThunk = userId => {
 
 // RECIPES IN ONE CATEGORIES FOR ONE USER
 export const getRecipesInCategoryThunk = (userId, categoryId) => {
+  console.log('in thunk')
   return async dispatch => {
     try {
       const res = await axios.get(

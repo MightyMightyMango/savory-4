@@ -5,11 +5,14 @@ import {
   setAllRecipesThunk,
   deleteRecipeThunk,
   getUserCategoriesThunk,
-  getRecipesInCategoryThunk
+  getRecipesInCategoryThunk,
+  submitCategory
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 // import EditCategories from './EditCategories'
 import Button from '../theme/Button'
+import {StyledButton} from '../theme/Button.js'
+import Link from 'react-router-dom'
 
 export const AllRecipes = props => {
   // categories contains all the categories
@@ -39,43 +42,16 @@ export const AllRecipes = props => {
     deleteRecipe(recipeId)
   }
 
-  let fetchedRecipes = recipes || []
-
   const getRecipesFromCategory = event => {
     event.preventDefault()
     console.log('recipes by Category')
-    getRecipesInCategory(props.user.id, event.target.value)
+    console.log('event.targ.value', event.target.value)
+    getRecipesInCategory(user.id, event.target.value)
   }
 
-  const handleChange = event => {
-    setNewCategory(event.target.value)
-    console.log('newCategory', newCategory)
-  }
-
-  const handleSubmit = event => {
-    //use newCategory variable to post onto Categories Table
-    //call a submitCategory function connected to thunk that updates categories
-  }
-
-  const displayForm = () => {
-    toggleShowForm(!showForm)
-  }
-
-  const Form = () => {
-    if (showForm) {
-      return (
-        <div
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          newCategory={newCategory}
-        />
-      )
-    }
-  }
-
-  console.log('categories ', categories)
-  console.log('props ', props)
-
+  // const getAllRecipesFunc = event => {
+  //   getAllRecipes(props.user.id)
+  // }
   return (
     <>
       <Container>
@@ -87,18 +63,22 @@ export const AllRecipes = props => {
           <Categories>
             {Array.isArray(categories) ? (
               categories.map(category => (
-                <>
-                  <Button
-                    value={category.id}
-                    onClick={() => getRecipesFromCategory(event)}
-                  >
-                    {category.category}
-                  </Button>
-                </>
+                <StyledButton
+                  key={'c' + category.id}
+                  type="submit"
+                  value={category.id}
+                  onClick={() => getRecipesFromCategory(event)}
+                >
+                  {category.category}
+                </StyledButton>
               ))
             ) : (
               <div>No Categories</div>
             )}
+
+            <StyledButton onClick={() => getAllRecipes(props.user.id)}>
+              ALL
+            </StyledButton>
           </Categories>
         </CategoriesContainer>
         <RecipesContainer>
@@ -185,7 +165,9 @@ const mapDispatch = dispatch => ({
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
   getRecipesInCategory: (userId, categoryId) =>
-    dispatch(getRecipesInCategoryThunk(userId, categoryId))
+    dispatch(getRecipesInCategoryThunk(userId, categoryId)),
+  submitCategory: (userId, category) =>
+    dispatch(submitCategory(userId, category))
 })
 
 export default connect(mapState, mapDispatch)(AllRecipes)
@@ -202,6 +184,7 @@ const Title = styled.h1`
   // text-align: center;
   // font-size: 1.5em;
   font-family: 'Merriweather', serif;
+  margin-top: 30px;
 `
 
 const RecipesContainer = styled.div`
@@ -215,12 +198,10 @@ const RecipesContainer = styled.div`
 
 const CategoriesContainer = styled.div`
   display: flex;
-  width: 80%;
-  flex-wrap: wrap;
+  width: 100%;
   flex-direction: column;
   align-items: center;
-  left: 20px;
-  top: 20%;
+  padding: 30px;
 `
 
 const Recipe = styled.div`
@@ -249,4 +230,6 @@ const Categories = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 50px;
+  flex-wrap: wrap;
 `

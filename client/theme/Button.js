@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   margin-top: 10px;
   background-color: ${props => (props.primary ? '#8fbc8b' : '#C0C0C0')};
   color: #ffffff;
@@ -18,6 +18,7 @@ const StyledButton = styled.button`
   font-weight: 500;
   letter-spacing: 0.0625em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);
+  max-width: 300px;
 
   :hover {
     background-color: ${props => (props.primary ? '#a0b39e' : '#DCDCDC')};
