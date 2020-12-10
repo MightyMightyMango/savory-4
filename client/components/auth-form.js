@@ -5,7 +5,9 @@ import {auth} from '../store'
 // import LoginFieldDiv from '../theme/LoginFormContainer'
 import Button from '../theme/Button'
 import styled from 'styled-components'
-import Container from '../theme/Container'
+import {Link} from 'react-router-dom'
+
+// import Container from '../theme/Container'
 
 /**
  * COMPONENT
@@ -35,6 +37,15 @@ const AuthForm = props => {
               <a href="/auth/google">{displayName} with Google</a>
             </Button>
           </ButtonDiv>
+          {displayName === 'Login' ? (
+            <h3>
+              Not registered? <Link to="/signup">Create an account.</Link>
+            </h3>
+          ) : (
+            <h3>
+              Already registered? <Link to="/signup">Sign in.</Link>
+            </h3>
+          )}
           {error && error.response && <div> {error.response.data} </div>}
         </form>
       </LoginSignupWrapper>
@@ -90,6 +101,19 @@ AuthForm.propTypes = {
   error: PropTypes.object
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: ${props => (props.primary ? 'column' : 'row')};
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding-top: 180px;
+  padding-bottom: 50px;
+  background-color: darkseagreen;
+`
+
 const LoginSignupWrapper = styled.div`
   width: 600px;
   display: flex;
@@ -97,6 +121,15 @@ const LoginSignupWrapper = styled.div`
   justify-content: center;
   align-items: center;
   align-self: center;
+  background-color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);
+
+  a {
+    color: darkseagreen;
+  }
 `
 
 const Password = styled.input`
@@ -110,4 +143,11 @@ const ButtonDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+
+  a {
+    color: white;
+  }
 `
