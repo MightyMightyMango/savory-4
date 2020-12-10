@@ -13,7 +13,8 @@ import {
   SingleRecipe,
   AllDrafts,
   LoginSignup,
-  MyBooks
+  MyBooks,
+  Footer
 } from './components'
 import {me} from './store'
 
