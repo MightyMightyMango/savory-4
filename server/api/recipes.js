@@ -196,3 +196,39 @@ router.get(
     }
   }
 )
+
+// Get all categories for one user
+// GET /api/recipes/categories/user/:userId
+router.get('/categories/user/:userId/', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    const recipesInCategory = await User.findOne({
+      where: {
+        id: userId
+      },
+      include: {
+        model: Category
+      }
+    })
+    res.json(recipesInCategory)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// UPDATE CATEGORY NAME
+router.put('/categories/:categoryId', async (req, res, next) => {
+  try {
+    const categoryId = req.params.categoryId
+    const foundCategory = await Category.findOne({
+      where: {
+        id: categoryId
+      }
+    })
+    let updatedCategory = await foundCategory.update(req.body)
+
+    res.json(updatedCategory)
+  } catch (error) {
+    next(error)
+  }
+})

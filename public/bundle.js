@@ -382,11 +382,11 @@ var AllRecipes = function AllRecipes(props) {
 
   var user = props.user,
       recipes = props.recipes,
-      categories = props.categories,
       getAllRecipes = props.getAllRecipes,
       deleteRecipe = props.deleteRecipe,
       getCategories = props.getCategories,
       getRecipesInCategory = props.getRecipesInCategory;
+  var categories = props.categories || [];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     getAllRecipes(props.user.id);
     getCategories(props.user.id);
@@ -431,7 +431,7 @@ var AllRecipes = function AllRecipes(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "My Recipes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RecipesContainer, null, Array.isArray(recipes) ? recipes.map(function (recipe) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Recipe, {
-      key: recipe.id
+      key: 'r' + recipe.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
       src: recipe.imageUrl
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, recipe.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Source: ", recipe.publisher), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
@@ -449,20 +449,16 @@ var AllRecipes = function AllRecipes(props) {
         if (window.confirm('Are you sure you wish to delete this recipe?')) handleDeleteRecipe(event, recipe.id);
       }
     }, "Delete Recipe"));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategoriesContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Categories"), Array.isArray(categories) ? categories.map(function (category) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategoriesContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Categories"), categories.map(function (category) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       type: "submit",
       value: category.id,
+      key: category.id,
       onClick: function onClick() {
         return getRecipesFromCategory(event);
       }
-    }, category.category));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "submit",
-    onClick: function onClick() {
-      return displayForm(event);
-    }
-  }, "Add or Edit Recipe Books"), Form())));
+    }, category.category);
+  }))));
 };
 
 var mapState = function mapState(state) {
@@ -709,6 +705,188 @@ var LoginSignup = function LoginSignup(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (LoginSignup);
+
+/***/ }),
+
+/***/ "./client/components/MyBooks.js":
+/*!**************************************!*\
+  !*** ./client/components/MyBooks.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_recipes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/recipes */ "./client/store/recipes.js");
+/* harmony import */ var _theme_HalfPageDiv__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../theme/HalfPageDiv */ "./client/theme/HalfPageDiv.js");
+/* harmony import */ var _theme_Container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../theme/Container */ "./client/theme/Container.js");
+/* harmony import */ var _EditCategories__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EditCategories */ "./client/components/EditCategories.js");
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n  font-size: 1em;\n  padding: 5px;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  justify-content: center;\n  text-align: center;\n  width: 100%;\n  padding-top: 20px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    justify-content: center;\n    text-align: center;\n\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    padding: 100px;\n    .li {\n        display: block\n    }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var MyBooks = function MyBooks(props) {
+  var categories = props.categories,
+      getCategories = props.getCategories,
+      getAllRecipes = props.getAllRecipes,
+      submitCat = props.submitCat,
+      user = props.user,
+      recipes = props.recipes;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      newCategory = _useState2[0],
+      setNewCategory = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      recipesToBeAdded = _useState4[0],
+      setRecipesToBeAdded = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    getCategories(user.id);
+    getAllRecipes(user.id);
+  }, []);
+
+  var handleChange = function handleChange(event) {
+    setNewCategory(event.target.value);
+  };
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    console.log(newCategory);
+    submitCat(user.id, newCategory, recipesToBeAdded);
+  };
+
+  var handleAddChange = function handleAddChange(event) {
+    console.log(event.target.name, event.target.value);
+    setRecipesToBeAdded.apply(void 0, _toConsumableArray(state).concat([_defineProperty({}, event.target.name, event.target.value)]));
+    console.log(recipesToBeAdded);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RecipesContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "My Books"), categories.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategoryItem, null, item.category);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ColContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Box, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Add Recipe"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditCategories__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    handleChange: handleChange,
+    handleSubmit: handleSubmit,
+    newCategory: newCategory
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: props.handleAddSubmit
+  }, recipes.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "li"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      name: item.name,
+      value: "checked",
+      onChange: handleAddChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: item.name
+    }, item.name));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit"
+  }, "Add Recipes to your book")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Box, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Edit Recipes"))));
+};
+
+var mapState = function mapState(state) {
+  return {
+    user: state.user,
+    categories: state.recipes.categories,
+    recipes: state.recipes.allRecipes
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    getAllRecipes: function getAllRecipes(userId) {
+      return dispatch(Object(_store_recipes__WEBPACK_IMPORTED_MODULE_3__["setAllRecipesThunk"])(userId));
+    },
+    getCategories: function getCategories(userId) {
+      return dispatch(Object(_store_recipes__WEBPACK_IMPORTED_MODULE_3__["getUserCategoriesThunk"])(userId));
+    },
+    submitCat: function submitCat(userId, category) {
+      dispatch(Object(_store_recipes__WEBPACK_IMPORTED_MODULE_3__["submitCategory"])(userId, category));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapDispatch)(MyBooks));
+var Box = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
+var ColContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject2());
+var RecipesContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
+var CategoryItem = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4());
 
 /***/ }),
 
@@ -1351,7 +1529,7 @@ var SingleRecipe = /*#__PURE__*/function (_React$Component) {
           }, ingredient);
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Instructions, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Instructions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, displayInstructions.map(function (instruction) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ListItem, {
-            key: recipe.instructions.indexOf(instruction)
+            key: 'i' + recipe.instructions.indexOf(instruction)
           }, instruction);
         })))), recipe.isDraft ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "submit",
@@ -1546,7 +1724,7 @@ AuthForm.propTypes = {
 /*!************************************!*\
   !*** ./client/components/index.js ***!
   \************************************/
-/*! exports provided: Navbar, Footer, UserHome, Homepage, Recipe, RecipeForm, AllRecipes, SingleRecipe, AllDrafts, LoginSignup, Login, Signup */
+/*! exports provided: Navbar, Footer, UserHome, Homepage, Recipe, RecipeForm, AllRecipes, SingleRecipe, AllDrafts, LoginSignup, MyBooks, Login, Signup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1581,16 +1759,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LoginSignup__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./LoginSignup */ "./client/components/LoginSignup.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LoginSignup", function() { return _LoginSignup__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _auth_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_10__["Login"]; });
+/* harmony import */ var _MyBooks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./MyBooks */ "./client/components/MyBooks.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MyBooks", function() { return _MyBooks__WEBPACK_IMPORTED_MODULE_10__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_10__["Signup"]; });
+/* harmony import */ var _auth_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_11__["Login"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_11__["Signup"]; });
 
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
+
 
 
 
@@ -1882,6 +2064,9 @@ var Routes = /*#__PURE__*/function (_Component) {
         path: "/drafts",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["AllDrafts"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/books",
+        component: _components__WEBPACK_IMPORTED_MODULE_4__["MyBooks"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/recipes/:recipeId",
         render: function render(routeProps) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_4__["SingleRecipe"], routeProps);
@@ -1987,7 +2172,7 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!*********************************!*\
   !*** ./client/store/recipes.js ***!
   \*********************************/
-/*! exports provided: setAllRecipes, setAllDrafts, setSingleRecipe, deleteRecipe, deleteDraft, getUserCategories, getRecipesInCategory, setAllRecipesThunk, setSingleRecipeThunk, setAllDraftsThunk, deleteRecipeThunk, deleteDraftThunk, getUserCategoriesThunk, getRecipesInCategoryThunk, default */
+/*! exports provided: setAllRecipes, setAllDrafts, setSingleRecipe, deleteRecipe, deleteDraft, getUserCategories, getRecipesInCategory, setCategory, editCategory, setAllRecipesThunk, setSingleRecipeThunk, setAllDraftsThunk, deleteRecipeThunk, deleteDraftThunk, getUserCategoriesThunk, getRecipesInCategoryThunk, submitCategory, editCategoryThunk, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1999,6 +2184,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteDraft", function() { return deleteDraft; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserCategories", function() { return getUserCategories; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRecipesInCategory", function() { return getRecipesInCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCategory", function() { return setCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editCategory", function() { return editCategory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAllRecipesThunk", function() { return setAllRecipesThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSingleRecipeThunk", function() { return setSingleRecipeThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAllDraftsThunk", function() { return setAllDraftsThunk; });
@@ -2006,6 +2193,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteDraftThunk", function() { return deleteDraftThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserCategoriesThunk", function() { return getUserCategoriesThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRecipesInCategoryThunk", function() { return getRecipesInCategoryThunk; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitCategory", function() { return submitCategory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editCategoryThunk", function() { return editCategoryThunk; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2026,6 +2215,8 @@ var DELETE_RECIPE = 'DELETE_RECIPE';
 var DELETE_DRAFT = 'DELETE_DRAFT';
 var GET_USER_CATEGORIES = 'GET_USER_CATEGORIES';
 var GET_RECIPES_IN_CATEGORY = 'GET_RECIPES_IN_CATEGORY';
+var SET_CATEGORY = 'SET_CATEGORY';
+var EDIT_CATEGORY = 'EDIT_CATEGORY';
 var setAllRecipes = function setAllRecipes(recipes) {
   return {
     type: SET_ALL_RECIPES,
@@ -2066,6 +2257,18 @@ var getRecipesInCategory = function getRecipesInCategory(recipes) {
   return {
     type: GET_RECIPES_IN_CATEGORY,
     recipes: recipes
+  };
+};
+var setCategory = function setCategory(category) {
+  return {
+    type: SET_CATEGORY,
+    category: category
+  };
+};
+var editCategory = function editCategory(category) {
+  return {
+    type: EDIT_CATEGORY,
+    category: category
   };
 }; // ALL RECIPES
 
@@ -2323,6 +2526,87 @@ var getRecipesInCategoryThunk = function getRecipesInCategoryThunk(userId, categ
     };
   }();
 };
+var submitCategory = function submitCategory(userId, category) {
+  console.log('in thunk', userId, category);
+  return /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(dispatch) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              _context8.prev = 0;
+              _context8.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/recipes/categories/user/".concat(userId), {
+                category: category
+              });
+
+            case 3:
+              res = _context8.sent;
+              console.log('res.data', res.data);
+              dispatch(setCategory(res.data));
+              _context8.next = 11;
+              break;
+
+            case 8:
+              _context8.prev = 8;
+              _context8.t0 = _context8["catch"](0);
+              console.error(_context8.t0);
+
+            case 11:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8, null, [[0, 8]]);
+    }));
+
+    return function (_x8) {
+      return _ref8.apply(this, arguments);
+    };
+  }();
+}; //edit categories
+
+var editCategoryThunk = function editCategoryThunk(categoryId, category) {
+  console.log('in thunk', categoryId, category);
+  return /*#__PURE__*/function () {
+    var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(dispatch) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              _context9.prev = 0;
+              _context9.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/recipes/categories/".concat(categoryId), {
+                category: category
+              });
+
+            case 3:
+              res = _context9.sent;
+              console.log('res.data', res.data);
+              dispatch(editCategory(res.data));
+              _context9.next = 11;
+              break;
+
+            case 8:
+              _context9.prev = 8;
+              _context9.t0 = _context9["catch"](0);
+              console.error(_context9.t0);
+
+            case 11:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9, null, [[0, 8]]);
+    }));
+
+    return function (_x9) {
+      return _ref9.apply(this, arguments);
+    };
+  }();
+};
 var initialState = {
   allRecipes: [],
   singleRecipe: {},
@@ -2378,6 +2662,22 @@ function recipesReducer() {
     case GET_RECIPES_IN_CATEGORY:
       return _objectSpread(_objectSpread({}, state), {}, {
         allRecipes: action.recipes
+      });
+
+    case SET_CATEGORY:
+      var newCategories = state.categories.push(action.category);
+      return _objectSpread(_objectSpread({}, state), {}, {
+        categories: newCategories
+      });
+
+    case EDIT_CATEGORY:
+      var updatedCategories = state.categories.map(function (category) {
+        if (category.id === action.id) {
+          category = action.category;
+        }
+      });
+      return _objectSpread(_objectSpread({}, state), {}, {
+        categories: updatedCategories
       });
 
     default:
@@ -12622,10 +12922,10 @@ exports.isHtml = function(str) {
 /*!*******************************************!*\
   !*** ./node_modules/cheerio/package.json ***!
   \*******************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, dependencies, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"cheerio@1.0.0-rc.3\",\"/Users/ellengranoff/Repos/senior-phase/capstone/savory-4\"]],\"_from\":\"cheerio@1.0.0-rc.3\",\"_id\":\"cheerio@1.0.0-rc.3\",\"_inBundle\":false,\"_integrity\":\"sha512-0td5ijfUPuubwLUu0OBoe98gZj8C/AA+RW3v67GPlGOrvxWjZmBXiBCRU+I8VEiNyJzjth40POfHiz2RB3gImA==\",\"_location\":\"/cheerio\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"cheerio@1.0.0-rc.3\",\"name\":\"cheerio\",\"escapedName\":\"cheerio\",\"rawSpec\":\"1.0.0-rc.3\",\"saveSpec\":null,\"fetchSpec\":\"1.0.0-rc.3\"},\"_requiredBy\":[\"/\",\"/enzyme\"],\"_resolved\":\"https://registry.npmjs.org/cheerio/-/cheerio-1.0.0-rc.3.tgz\",\"_spec\":\"1.0.0-rc.3\",\"_where\":\"/Users/ellengranoff/Repos/senior-phase/capstone/savory-4\",\"author\":{\"name\":\"Matt Mueller\",\"email\":\"mattmuelle@gmail.com\",\"url\":\"mat.io\"},\"bugs\":{\"url\":\"https://github.com/cheeriojs/cheerio/issues\"},\"dependencies\":{\"css-select\":\"~1.2.0\",\"dom-serializer\":\"~0.1.1\",\"entities\":\"~1.1.1\",\"htmlparser2\":\"^3.9.1\",\"lodash\":\"^4.15.0\",\"parse5\":\"^3.0.1\"},\"description\":\"Tiny, fast, and elegant implementation of core jQuery designed specifically for the server\",\"devDependencies\":{\"benchmark\":\"^2.1.0\",\"coveralls\":\"^2.11.9\",\"expect.js\":\"~0.3.1\",\"istanbul\":\"^0.4.3\",\"jquery\":\"^3.0.0\",\"jsdom\":\"^9.2.1\",\"jshint\":\"^2.9.2\",\"mocha\":\"^3.1.2\",\"xyz\":\"~1.1.0\"},\"engines\":{\"node\":\">= 0.6\"},\"files\":[\"index.js\",\"lib\"],\"homepage\":\"https://github.com/cheeriojs/cheerio#readme\",\"keywords\":[\"htmlparser\",\"jquery\",\"selector\",\"scraper\",\"parser\",\"html\"],\"license\":\"MIT\",\"main\":\"./index.js\",\"name\":\"cheerio\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/cheeriojs/cheerio.git\"},\"scripts\":{\"test\":\"make test\"},\"version\":\"1.0.0-rc.3\"}");
+module.exports = JSON.parse("{\"_from\":\"cheerio@^1.0.0-rc.3\",\"_id\":\"cheerio@1.0.0-rc.3\",\"_inBundle\":false,\"_integrity\":\"sha512-0td5ijfUPuubwLUu0OBoe98gZj8C/AA+RW3v67GPlGOrvxWjZmBXiBCRU+I8VEiNyJzjth40POfHiz2RB3gImA==\",\"_location\":\"/cheerio\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"cheerio@^1.0.0-rc.3\",\"name\":\"cheerio\",\"escapedName\":\"cheerio\",\"rawSpec\":\"^1.0.0-rc.3\",\"saveSpec\":null,\"fetchSpec\":\"^1.0.0-rc.3\"},\"_requiredBy\":[\"/\",\"/enzyme\"],\"_resolved\":\"https://registry.npmjs.org/cheerio/-/cheerio-1.0.0-rc.3.tgz\",\"_shasum\":\"094636d425b2e9c0f4eb91a46c05630c9a1a8bf6\",\"_spec\":\"cheerio@^1.0.0-rc.3\",\"_where\":\"/Users/leaoverend/GraceHopper/savory-4\",\"author\":{\"name\":\"Matt Mueller\",\"email\":\"mattmuelle@gmail.com\",\"url\":\"mat.io\"},\"bugs\":{\"url\":\"https://github.com/cheeriojs/cheerio/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"css-select\":\"~1.2.0\",\"dom-serializer\":\"~0.1.1\",\"entities\":\"~1.1.1\",\"htmlparser2\":\"^3.9.1\",\"lodash\":\"^4.15.0\",\"parse5\":\"^3.0.1\"},\"deprecated\":false,\"description\":\"Tiny, fast, and elegant implementation of core jQuery designed specifically for the server\",\"devDependencies\":{\"benchmark\":\"^2.1.0\",\"coveralls\":\"^2.11.9\",\"expect.js\":\"~0.3.1\",\"istanbul\":\"^0.4.3\",\"jquery\":\"^3.0.0\",\"jsdom\":\"^9.2.1\",\"jshint\":\"^2.9.2\",\"mocha\":\"^3.1.2\",\"xyz\":\"~1.1.0\"},\"engines\":{\"node\":\">= 0.6\"},\"files\":[\"index.js\",\"lib\"],\"homepage\":\"https://github.com/cheeriojs/cheerio#readme\",\"keywords\":[\"htmlparser\",\"jquery\",\"selector\",\"scraper\",\"parser\",\"html\"],\"license\":\"MIT\",\"main\":\"./index.js\",\"name\":\"cheerio\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/cheeriojs/cheerio.git\"},\"scripts\":{\"test\":\"make test\"},\"version\":\"1.0.0-rc.3\"}");
 
 /***/ }),
 
