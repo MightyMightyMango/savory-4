@@ -20,12 +20,13 @@ export const AllRecipes = props => {
   const {
     user,
     recipes,
-    categories,
     getAllRecipes,
     deleteRecipe,
     getCategories,
     getRecipesInCategory
   } = props
+
+  const categories = props.categories || []
 
   useEffect(() => {
     getAllRecipes(props.user.id)
@@ -103,7 +104,7 @@ export const AllRecipes = props => {
         <RecipesContainer>
           {Array.isArray(recipes) ? (
             recipes.map(recipe => (
-              <Recipe key={recipe.id}>
+              <Recipe key={'r' + recipe.id}>
                 <Image src={recipe.imageUrl} />
                 <Title>{recipe.name}</Title>
                 {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
