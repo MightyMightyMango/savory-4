@@ -9,6 +9,9 @@ import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
 // import Container from '../theme/Container'
 
+import Loader from './Loader'
+import FadeIn from 'react-fade-in'
+
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
 export class Recipe extends React.Component {
@@ -19,7 +22,8 @@ export class Recipe extends React.Component {
     this.submitUrl = this.submitUrl.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.state = {
-      isSubmitted: false
+      isSubmitted: false,
+      loading: true
     }
   }
 
@@ -73,8 +77,9 @@ export class Recipe extends React.Component {
     event.preventDefault()
     const url = document.getElementById('url-input').value
     await this.props.getSingleRecipe(url, this.props.user.id)
-    // document.getElementById('url-input').value = ' '
-    this.setState({isSubmitted: true})
+    // document.getElementById('url-input').value = '
+    // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
+    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
   }
 
   async handleKeyPress(event) {
@@ -113,46 +118,46 @@ export class Recipe extends React.Component {
           )}
           {this.state.isSubmitted && (
             <Actions>
-              <Button
-                primary
-                type="submit"
-                onClick={() => {
-                  if (
-                    window.confirm(
-                      'Are you sure you want to abandon your draft? It will not be saved.'
-                    )
-                  ) {
-                    this.handleDeleteDraft(event)
-                  }
-                }}
-              >
-                Abandon Draft
-              </Button>
-              <Button
-                primary
-                type="submit"
-                onClick={() => {
-                  this.handleSubmit(event)
-                }}
-              >
-                Confirm Changes
-              </Button>
+              <FadeIn>
+                <Button
+                  primary
+                  type="submit"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        'Are you sure you want to abandon your draft? It will not be saved.'
+                      )
+                    ) {
+                      this.handleDeleteDraft(event)
+                    }
+                  }}
+                >
+                  Abandon Draft
+                </Button>
+                <Button
+                  primary
+                  type="submit"
+                  onClick={() => {
+                    this.handleSubmit(event)
+                  }}
+                >
+                  Confirm Changes
+                </Button>
+              </FadeIn>
             </Actions>
           )}
-          {this.state.isSubmitted && (
-            <CSSTransition
-              in={this.state.isSubmitted}
-              key="125"
-              timeout={50000}
-              classNames="recipeform"
-            >
-              <RecipeForm
-                recipe={this.state}
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-              />
-            </CSSTransition>
-          )}
+          {this.state.isSubmitted &&
+            (this.state.loading ? (
+              <Loader />
+            ) : (
+              <FadeIn>
+                <RecipeForm
+                  recipe={this.state}
+                  handleSubmit={this.handleSubmit}
+                  handleChange={this.handleChange}
+                />
+              </FadeIn>
+            ))}
         </Container>
       </>
     )

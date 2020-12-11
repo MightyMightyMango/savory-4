@@ -24,6 +24,10 @@ export const StyledButton = styled.button`
     background-color: ${props => (props.primary ? '#a0b39e' : '#DCDCDC')};
   }
 
+  :focus {
+    outline: 2px solid gray;
+  }
+
   a {
     color: #ffffff;
   }

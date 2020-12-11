@@ -10,6 +10,8 @@ import HalfPageDiv from '../theme/HalfPageDiv'
 import Container from '../theme/Container'
 import EditCategories from './EditCategories'
 
+import FadeIn from 'react-fade-in'
+
 const MyBooks = props => {
   const {
     categories,
@@ -45,39 +47,41 @@ const MyBooks = props => {
 
   return (
     <>
-      <RecipesContainer>
-        <h1>My Books</h1>
-        {categories.map(item => <CategoryItem>{item.category}</CategoryItem>)}
-      </RecipesContainer>
-      <ColContainer>
-        <Box>
-          <>
-            <h1>Add Recipe</h1>
-            <EditCategories
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              newCategory={newCategory}
-            />
-            <form onSubmit={props.handleAddSubmit}>
-              {recipes.map(item => (
-                <div className="li">
-                  <input
-                    type="checkbox"
-                    name={item.name}
-                    value="checked"
-                    onChange={handleAddChange}
-                  />
-                  <label htmlFor={item.name}>{item.name}</label>
-                </div>
-              ))}
-              <button type="submit">Add Recipes to your book</button>
-            </form>
-          </>
-        </Box>
-        <Box>
-          <h1>Edit Recipes</h1>
-        </Box>
-      </ColContainer>
+      <FadeIn>
+        <RecipesContainer>
+          <h1>My Books</h1>
+          {categories.map(item => <CategoryItem>{item.category}</CategoryItem>)}
+        </RecipesContainer>
+        <ColContainer>
+          <Box>
+            <>
+              <h1>Add Recipe</h1>
+              <EditCategories
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                newCategory={newCategory}
+              />
+              <form onSubmit={props.handleAddSubmit}>
+                {recipes.map(item => (
+                  <div className="li">
+                    <input
+                      type="checkbox"
+                      name={item.name}
+                      value="checked"
+                      onChange={handleAddChange}
+                    />
+                    <label htmlFor={item.name}>{item.name}</label>
+                  </div>
+                ))}
+                <button type="submit">Add Recipes to your book</button>
+              </form>
+            </>
+          </Box>
+          <Box>
+            <h1>Edit Recipes</h1>
+          </Box>
+        </ColContainer>
+      </FadeIn>
     </>
   )
 }

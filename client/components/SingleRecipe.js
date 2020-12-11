@@ -12,6 +12,8 @@ import {
 import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
 
+import FadeIn from 'react-fade-in'
+
 export class SingleRecipe extends React.Component {
   constructor(props) {
     super(props)
@@ -98,134 +100,140 @@ export class SingleRecipe extends React.Component {
       return (
         <>
           <Container>
-            {/* HEADER */}
-            <SingleRecipeHeader>
-              <HeaderImage src={recipe.imageUrl} />
-              <Title>{recipe.name}</Title>
-            </SingleRecipeHeader>
-            {/* {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''} */}
+            <FadeIn>
+              {/* HEADER */}
+              <SingleRecipeHeader>
+                <HeaderImage src={recipe.imageUrl} />
+                <Title>{recipe.name}</Title>
+              </SingleRecipeHeader>
+              {/* {recipe.isDraft ? <Subtitle>Draft</Subtitle> : ''} */}
 
-            <RecipeContainer>
-              <Description>{recipe.description}</Description>
-              <Image src={recipe.imageUrl} />
+              <RecipeContainer>
+                <Description>{recipe.description}</Description>
+                <Image src={recipe.imageUrl} />
 
-              <DetailsContainer>
-                {/* BUTTONS */}
-                <ActionButtons>
-                  <Button primary onClick={() => this.renderForm(event)}>
-                    Edit
-                  </Button>
-                  <Button primary>
-                    <a href="/books">Edit Categories</a>
-                  </Button>
-                  <Button primary>
-                    <a href={recipe.url} target="_blank">
-                      View Recipe Source
-                    </a>
-                  </Button>
-                  <Button primary>
-                    <a
-                      href={`mailto:?subject=${recipe.name}&body=${recipe.url}`}
-                      title="Share by Email"
-                    >
-                      Share by Email
-                    </a>
-                  </Button>
-                  {recipe.isDraft ? (
-                    <Button
-                      primary
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            'Are you sure you wish to delete this draft?'
-                          )
-                        )
-                          this.handleDeleteDraft(event)
-                      }}
-                    >
-                      Delete Draft
+                <DetailsContainer>
+                  {/* BUTTONS */}
+                  <ActionButtons>
+                    <Button primary onClick={() => this.renderForm(event)}>
+                      Edit
                     </Button>
-                  ) : (
-                    <Button
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            'Are you sure you wish to delete this recipe?'
-                          )
-                        )
-                          this.handleDeleteRecipe(event)
-                      }}
-                    >
-                      Delete Recipe
+                    <Button primary>
+                      <a href="/books">Edit Categories</a>
                     </Button>
-                  )}
-                </ActionButtons>
-                {/* DETAILS */}
-                <ul>
-                  <li>
-                    <b>Source:</b> {recipe.publisher}
-                  </li>
-                  <li>
-                    <b>Prep Time:</b> {recipe.prepTime}
-                  </li>
-                  <li>
-                    <b>Cook Time:</b> {recipe.cookTime}
-                  </li>
-                  <li>
-                    <b>Yield:</b> {recipe.yield}
-                  </li>
-                  <li>
-                    <b>Prep Time:</b> {recipe.prepTime}
-                  </li>
-                  <li>
-                    <b>Categories:</b> {recipe.prepTime}
-                  </li>
-                </ul>
-              </DetailsContainer>
-
-              {/* INGREDIENTS */}
-              <Ingredients>
-                <b>Ingredients</b>
-                <ul>
-                  {displayIngredients.map(ingredient => (
-                    <li key={recipe.ingredients.indexOf(ingredient)}>
-                      {ingredient}
-                    </li>
-                  ))}
-                </ul>
-              </Ingredients>
-
-              {/* INSTRUCTIONS */}
-              <Instructions>
-                <b>Instructions</b>
-                <ul>
-                  {displayInstructions.map(function(instruction) {
-                    return (
-                      <ListItem
-                        key={'i' + recipe.instructions.indexOf(instruction)}
+                    <Button primary>
+                      <a href={recipe.url} target="_blank">
+                        View Recipe Source
+                      </a>
+                    </Button>
+                    <Button primary>
+                      <a
+                        href={`mailto:?subject=${recipe.name}&body=${
+                          recipe.url
+                        }`}
+                        title="Share by Email"
                       >
-                        {instruction}
-                      </ListItem>
-                    )
-                  })}
-                </ul>
-              </Instructions>
-            </RecipeContainer>
+                        Share by Email
+                      </a>
+                    </Button>
+                    {recipe.isDraft ? (
+                      <Button
+                        primary
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              'Are you sure you wish to delete this draft?'
+                            )
+                          )
+                            this.handleDeleteDraft(event)
+                        }}
+                      >
+                        Delete Draft
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              'Are you sure you wish to delete this recipe?'
+                            )
+                          )
+                            this.handleDeleteRecipe(event)
+                        }}
+                      >
+                        Delete Recipe
+                      </Button>
+                    )}
+                  </ActionButtons>
+                  {/* DETAILS */}
+                  <ul>
+                    <li>
+                      <b>Source:</b> {recipe.publisher}
+                    </li>
+                    <li>
+                      <b>Prep Time:</b> {recipe.prepTime}
+                    </li>
+                    <li>
+                      <b>Cook Time:</b> {recipe.cookTime}
+                    </li>
+                    <li>
+                      <b>Yield:</b> {recipe.yield}
+                    </li>
+                    <li>
+                      <b>Prep Time:</b> {recipe.prepTime}
+                    </li>
+                    <li>
+                      <b>Categories:</b> {recipe.prepTime}
+                    </li>
+                  </ul>
+                </DetailsContainer>
+
+                {/* INGREDIENTS */}
+                <Ingredients>
+                  <b>Ingredients</b>
+                  <ul>
+                    {displayIngredients.map(ingredient => (
+                      <li key={recipe.ingredients.indexOf(ingredient)}>
+                        {ingredient}
+                      </li>
+                    ))}
+                  </ul>
+                </Ingredients>
+
+                {/* INSTRUCTIONS */}
+                <Instructions>
+                  <b>Instructions</b>
+                  <ul>
+                    {displayInstructions.map(function(instruction) {
+                      return (
+                        <ListItem
+                          key={'i' + recipe.instructions.indexOf(instruction)}
+                        >
+                          {instruction}
+                        </ListItem>
+                      )
+                    })}
+                  </ul>
+                </Instructions>
+              </RecipeContainer>
+            </FadeIn>
           </Container>
         </>
       )
     } else {
       return (
         <div>
-          <Button
-            primary
-            onClick={() => {
-              this.handleSubmit(event)
-            }}
-          >
-            Confirm Changes
-          </Button>
-          <RecipeForm recipe={this.state} handleChange={this.handleChange} />
+          <FadeIn>
+            <Button
+              primary
+              onClick={() => {
+                this.handleSubmit(event)
+              }}
+            >
+              Confirm Changes
+            </Button>
+            <RecipeForm recipe={this.state} handleChange={this.handleChange} />
+          </FadeIn>
         </div>
       )
     }

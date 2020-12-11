@@ -5,6 +5,8 @@ import Container from '../theme/Container'
 import styled from 'styled-components'
 import Button from '../theme/Button'
 
+import FadeIn from 'react-fade-in'
+
 /**
  * COMPONENT
  */
@@ -13,64 +15,66 @@ export const UserHome = props => {
 
   return (
     <Container primary>
-      <UserAccount>
-        <div>
-          {firstName ? (
-            <Welcome>Welcome, {email}</Welcome>
-          ) : (
-            <Welcome>Welcome!</Welcome>
-          )}
-        </div>
-        <Row>
-          <Column>
-            <h2>ACCOUNT INFO:</h2>
-          </Column>
-        </Row>
-        <Row>
-          <Column className="col-left">
-            <h3>First Name:</h3>
-          </Column>
-          <Column>
-            <h3>{firstName}</h3>
-          </Column>
-          <Column>
-            <Button primary>Edit</Button>
-          </Column>
-        </Row>
-        <Row>
-          <Column className="col-left">
-            <h3>Last Name:</h3>
-          </Column>
-          <Column>
-            <h3>{lastName}</h3>
-          </Column>
-          <Column>
-            <Button primary>Edit</Button>
-          </Column>
-        </Row>
-        <Row>
-          <Column className="col-left">
-            <h3>Email:</h3>
-          </Column>
-          <Column>
-            <h3>{email}</h3>
-          </Column>
-          <Column>
-            <Button primary>Edit</Button>
-          </Column>
-        </Row>
-        <Row>
-          <Column className="col-left">
-            <h3>Password:</h3>
-          </Column>
-          <Column>
-            <h3>(hidden)</h3>
-          </Column>
-          <Column>
-            <Button primary>Edit</Button>
-          </Column>
-        </Row>
-      </UserAccount>
+      <FadeIn>
+        <UserAccount>
+          <div>
+            {firstName ? (
+              <Welcome>Welcome, {email}</Welcome>
+            ) : (
+              <Welcome>Welcome!</Welcome>
+            )}
+          </div>
+          <Row>
+            <Column>
+              <h2>ACCOUNT INFO:</h2>
+            </Column>
+          </Row>
+          <Row>
+            <Column className="col-left">
+              <h3>First Name:</h3>
+            </Column>
+            <Column>
+              <h3>{firstName}</h3>
+            </Column>
+            <Column>
+              <Button primary>Edit</Button>
+            </Column>
+          </Row>
+          <Row>
+            <Column className="col-left">
+              <h3>Last Name:</h3>
+            </Column>
+            <Column>
+              <h3>{lastName}</h3>
+            </Column>
+            <Column>
+              <Button primary>Edit</Button>
+            </Column>
+          </Row>
+          <Row>
+            <Column className="col-left">
+              <h3>Email:</h3>
+            </Column>
+            <Column>
+              <h3>{email}</h3>
+            </Column>
+            <Column>
+              <Button primary>Edit</Button>
+            </Column>
+          </Row>
+          <Row>
+            <Column className="col-left">
+              <h3>Password:</h3>
+            </Column>
+            <Column>
+              <h3>(hidden)</h3>
+            </Column>
+            <Column>
+              <Button primary>Edit</Button>
+            </Column>
+          </Row>
+        </UserAccount>
+      </FadeIn>
     </Container>
   )
 }
