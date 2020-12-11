@@ -130,13 +130,16 @@ router.get('/categories/:categoryId', async (req, res, next) => {
   }
 })
 
-//HOW do we create a category with a userId? for user categories?
-//Post to categories, put request for the user?
 // PUT   /api/recipes/categories/:userId
 router.put('/categories/user/:userId', async (req, res, next) => {
   try {
     const category = req.body.category
     const userId = req.params.userId
+    const data = req.body.recipes
+
+    //const categoryId = req.body.categoryId
+    const recipeId = req.body.recipeId
+    console.log('Data in route', data)
     const newCategory = await Category.findOrCreate({
       where: {
         category: category
@@ -146,6 +149,24 @@ router.put('/categories/user/:userId', async (req, res, next) => {
       userId: userId,
       categoryId: newCategory[0].id
     })
+
+    //NEED TO FIGURE THIS OUT
+    // await data.forEach(item=> {
+    //  RecipeCategory.create({
+    //     recipeId: item,
+    //     categoryId: newCategory[0].id
+    // });
+    // })
+    for (const [key, value] of Object.entries(data)) {
+      if (value === true) {
+        console.log('key', key)
+        await RecipeCategory.create({
+          recipeId: key,
+          categoryId: newCategory[0].id
+        })
+      }
+    }
+
     res.status(200).send(newCategory[0])
   } catch (error) {
     next(error)
@@ -171,7 +192,6 @@ router.get('/categories/user/:userId/', async (req, res, next) => {
   }
 })
 
-// Get all recipes for one user
 // GET /api/recipes/categories/user/:userId
 router.get(
   '/categories/user/:userId/category/:categoryId',

@@ -141,12 +141,13 @@ export const getRecipesInCategoryThunk = (userId, categoryId) => {
   }
 }
 
-export const submitCategory = (userId, category) => {
-  console.log('in thunk', userId, category)
+export const submitCategory = (userId, category, data) => {
+  console.log('in thunk', userId, category, data)
   return async dispatch => {
     try {
       const res = await axios.put(`/api/recipes/categories/user/${userId}`, {
-        category: category
+        category: category,
+        recipes: data
       })
       console.log('res.data', res.data)
       dispatch(setCategory(res.data))
