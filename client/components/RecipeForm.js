@@ -12,13 +12,6 @@ const RecipeForm = props => {
       <FadeIn>
         <Heading>
           <img width="250px" src={props.recipe.imageUrl} />
-          <Text>
-            <p>
-              Recipe Saved! You can view it in your drafts or make edits below
-              and press 'confirm' when you're done.
-            </p>
-            <p>Recipe Collected From: {props.recipe.url}</p>
-          </Text>
         </Heading>
       </FadeIn>
       {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}

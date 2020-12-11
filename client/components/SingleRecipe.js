@@ -232,6 +232,7 @@ export class SingleRecipe extends React.Component {
             >
               Confirm Changes
             </Button>
+            <p>Make your changes below and when you're done click confirm!</p>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
           </FadeIn>
         </div>
