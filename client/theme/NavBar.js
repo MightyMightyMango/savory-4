@@ -40,7 +40,6 @@ const Navbar = styled.div`
   }
 
   ul {
-    width: 1000px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

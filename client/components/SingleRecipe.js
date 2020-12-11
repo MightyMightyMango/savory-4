@@ -99,8 +99,8 @@ export class SingleRecipe extends React.Component {
     if (!this.state.canEdit) {
       return (
         <>
-          <Container>
-            <FadeIn>
+          <FadeIn>
+            <Container>
               {/* HEADER */}
               <SingleRecipeHeader>
                 <HeaderImage src={recipe.imageUrl} />
@@ -216,8 +216,8 @@ export class SingleRecipe extends React.Component {
                   </ul>
                 </Instructions>
               </RecipeContainer>
-            </FadeIn>
-          </Container>
+            </Container>
+          </FadeIn>
         </>
       )
     } else {
@@ -232,6 +232,7 @@ export class SingleRecipe extends React.Component {
             >
               Confirm Changes
             </Button>
+            <p>Make your changes below and when you're done click confirm!</p>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
           </FadeIn>
         </div>

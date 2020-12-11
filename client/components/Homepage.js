@@ -9,36 +9,11 @@ const Homepage = () => {
   return (
     <>
       <FadeIn>
-        <Circle>
+        <Container primary>
           <Title>Welcome to</Title>
           <Logo src="images/savory-logo.png" />
           <Title>Log-in to save recipes!</Title>
-        </Circle>
-        <HomePageBG>
-          <img
-            className="food-item"
-            src="images/food/crispy-fried-green-beans-BA.jpg"
-          />
-          <img
-            className="food-item"
-            src="images/food/raspberry-ricotta-cake-BA.jpg"
-          />
-
-          <img
-            className="food-item"
-            src="images/food/Healthyish-Sweet-Potato-Tart-Horizontal-BA.jpg"
-          />
-          <img className="food-item" src="images/food/Picadillo-BA.jpg" />
-          <img
-            className="food-item"
-            src="images/food/1119-Perfect-Turkey-BA.jpg"
-          />
-
-          <img
-            className="food-item"
-            src="images/food/smashed-new-potatoes-BA.jpg"
-          />
-        </HomePageBG>
+        </Container>
       </FadeIn>
     </>
   )

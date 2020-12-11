@@ -12,7 +12,7 @@ import Button from '../theme/Button'
 import Loader from './Loader'
 import FadeIn from 'react-fade-in'
 
-import {CSSTransition, TransitionGroup} from 'react-transition-group'
+// import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
 export class Recipe extends React.Component {
   constructor(props) {
@@ -79,8 +79,8 @@ export class Recipe extends React.Component {
     await this.props.getSingleRecipe(url, this.props.user.id)
     // document.getElementById('url-input').value = '
     // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
-    this.setState({isSubmitted: true, loading: false})
-    // setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    this.setState({isSubmitted: true, loading: true})
+    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
   }
 
   async handleKeyPress(event) {
@@ -119,8 +119,8 @@ export class Recipe extends React.Component {
               </RecipeScrape>
             )}
             {this.state.isSubmitted && (
-              <Actions>
-                <FadeIn>
+              <FadeIn>
+                <Actions>
                   <Button
                     primary
                     type="submit"
@@ -145,14 +145,18 @@ export class Recipe extends React.Component {
                   >
                     Confirm Changes
                   </Button>
-                </FadeIn>
-              </Actions>
+                </Actions>
+              </FadeIn>
             )}
             {this.state.isSubmitted &&
               (this.state.loading ? (
                 <Loader />
               ) : (
                 <FadeIn>
+                  <p>
+                    Recipe Saved! You can view it in your drafts or make edits
+                    below and press 'confirm' when you're done.
+                  </p>
                   <RecipeForm
                     recipe={this.state}
                     handleSubmit={this.handleSubmit}
@@ -219,7 +223,7 @@ const Form = styled.form`
 `
 
 const Actions = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `
