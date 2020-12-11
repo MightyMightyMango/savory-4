@@ -116,10 +116,20 @@ export class SingleRecipe extends React.Component {
                     Edit
                   </Button>
                   <Button primary>
-                    <a href="#">Edit Categories</a>
+                    <a href="/books">Edit Categories</a>
                   </Button>
                   <Button primary>
-                    <a href={recipe.url}>View Original</a>
+                    <a href={recipe.url} target="_blank">
+                      View Recipe Source
+                    </a>
+                  </Button>
+                  <Button primary>
+                    <a
+                      href={`mailto:?subject=${recipe.name}&body=${recipe.url}`}
+                      title="Share by Email"
+                    >
+                      Share by Email
+                    </a>
                   </Button>
                   {recipe.isDraft ? (
                     <Button
@@ -207,14 +217,14 @@ export class SingleRecipe extends React.Component {
     } else {
       return (
         <div>
-          <button
-            type="submit"
+          <Button
+            primary
             onClick={() => {
               this.handleSubmit(event)
             }}
           >
             Confirm Changes
-          </button>
+          </Button>
           <RecipeForm recipe={this.state} handleChange={this.handleChange} />
         </div>
       )

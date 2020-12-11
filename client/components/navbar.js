@@ -16,6 +16,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* available after you log in */}
           <ul>
             <li>
+              <Link to="/books">MY BOOKS</Link>
+            </li>
+            <li>
               <Link to="/myrecipes">MY RECIPES</Link>
             </li>
             <li>

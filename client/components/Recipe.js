@@ -9,12 +9,15 @@ import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
 // import Container from '../theme/Container'
 
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
+
 export class Recipe extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.submitUrl = this.submitUrl.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
     this.state = {
       isSubmitted: false
     }
@@ -74,6 +77,21 @@ export class Recipe extends React.Component {
     this.setState({isSubmitted: true})
   }
 
+  async handleKeyPress(event) {
+    event.preventDefault()
+    console.log('key pressed, charCode', event.charCode)
+    console.log('key pressed, keyCode', event.keyCode)
+    console.log('key pressed, keyCode', event.key)
+    console.log('event ', event)
+    console.log('event.value ', event.value)
+    if (event.keyCode == 13 || event.key == 'Enter') {
+      const url = document.getElementById('url-input').value
+      await this.props.getSingleRecipe(url, this.props.user.id)
+      // document.getElementById('url-input').value = ' '
+      this.setState({isSubmitted: true})
+    }
+  }
+
   render() {
     return (
       <>
@@ -81,7 +99,7 @@ export class Recipe extends React.Component {
           {!this.state.isSubmitted && (
             <RecipeScrape>
               <Title>Enter Recipe Url:</Title>
-              <Form>
+              <Form onSubmit={() => this.submitUrl(event)}>
                 <input type="text" id="url-input" />
               </Form>
               <Button
@@ -122,11 +140,18 @@ export class Recipe extends React.Component {
             </Actions>
           )}
           {this.state.isSubmitted && (
-            <RecipeForm
-              recipe={this.state}
-              handleSubmit={this.handleSubmit}
-              handleChange={this.handleChange}
-            />
+            <CSSTransition
+              in={this.state.isSubmitted}
+              key="125"
+              timeout={50000}
+              classNames="recipeform"
+            >
+              <RecipeForm
+                recipe={this.state}
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+              />
+            </CSSTransition>
           )}
         </Container>
       </>
