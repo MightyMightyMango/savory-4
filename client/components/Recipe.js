@@ -23,7 +23,7 @@ export class Recipe extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.state = {
       isSubmitted: false,
-      loading: true
+      loading: false
     }
   }
 
@@ -79,7 +79,8 @@ export class Recipe extends React.Component {
     await this.props.getSingleRecipe(url, this.props.user.id)
     // document.getElementById('url-input').value = '
     // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
-    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    this.setState({isSubmitted: true, loading: false})
+    // setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
   }
 
   async handleKeyPress(event) {
@@ -100,65 +101,67 @@ export class Recipe extends React.Component {
   render() {
     return (
       <>
-        <Container>
-          {!this.state.isSubmitted && (
-            <RecipeScrape>
-              <Title>Enter Recipe Url:</Title>
-              <Form onSubmit={() => this.submitUrl(event)}>
-                <input type="text" id="url-input" />
-              </Form>
-              <Button
-                primary
-                type="submit"
-                onClick={() => this.submitUrl(event)}
-              >
-                Get Recipe
-              </Button>
-            </RecipeScrape>
-          )}
-          {this.state.isSubmitted && (
-            <Actions>
-              <FadeIn>
+        <FadeIn>
+          <Container>
+            {!this.state.isSubmitted && (
+              <RecipeScrape>
+                <Title>Enter Recipe Url:</Title>
+                <Form onSubmit={() => this.submitUrl(event)}>
+                  <input type="text" id="url-input" />
+                </Form>
                 <Button
                   primary
                   type="submit"
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        'Are you sure you want to abandon your draft? It will not be saved.'
-                      )
-                    ) {
-                      this.handleDeleteDraft(event)
-                    }
-                  }}
+                  onClick={() => this.submitUrl(event)}
                 >
-                  Abandon Draft
+                  Get Recipe
                 </Button>
-                <Button
-                  primary
-                  type="submit"
-                  onClick={() => {
-                    this.handleSubmit(event)
-                  }}
-                >
-                  Confirm Changes
-                </Button>
-              </FadeIn>
-            </Actions>
-          )}
-          {this.state.isSubmitted &&
-            (this.state.loading ? (
-              <Loader />
-            ) : (
-              <FadeIn>
-                <RecipeForm
-                  recipe={this.state}
-                  handleSubmit={this.handleSubmit}
-                  handleChange={this.handleChange}
-                />
-              </FadeIn>
-            ))}
-        </Container>
+              </RecipeScrape>
+            )}
+            {this.state.isSubmitted && (
+              <Actions>
+                <FadeIn>
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Are you sure you want to abandon your draft? It will not be saved.'
+                        )
+                      ) {
+                        this.handleDeleteDraft(event)
+                      }
+                    }}
+                  >
+                    Abandon Draft
+                  </Button>
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={() => {
+                      this.handleSubmit(event)
+                    }}
+                  >
+                    Confirm Changes
+                  </Button>
+                </FadeIn>
+              </Actions>
+            )}
+            {this.state.isSubmitted &&
+              (this.state.loading ? (
+                <Loader />
+              ) : (
+                <FadeIn>
+                  <RecipeForm
+                    recipe={this.state}
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                  />
+                </FadeIn>
+              ))}
+          </Container>
+        </FadeIn>
       </>
     )
   }

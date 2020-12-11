@@ -29,7 +29,12 @@ const Navbar = styled.div`
     color: gainsboro;
   }
 
-  a:focus {
+  // a:focus {
+  //   text-decoration: underline;
+  //   text-underline-position: under;
+  // }
+
+  .focused {
     text-decoration: underline;
     text-underline-position: under;
   }

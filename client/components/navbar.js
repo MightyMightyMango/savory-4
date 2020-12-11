@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import Navigation from '../theme/NavBar'
 
@@ -16,19 +16,30 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* available after you log in */}
           <ul>
             <li>
-              <Link to="/books">MY BOOKS</Link>
+              <NavLink to="/books" activeClassName="focused">
+                MY BOOKS
+              </NavLink>
             </li>
             <li>
-              <Link to="/myrecipes">MY RECIPES</Link>
+              <NavLink to="/myrecipes" activeClassName="focused">
+                MY RECIPES
+              </NavLink>
             </li>
             <li>
-              <Link to="/drafts">MY DRAFTS</Link>
+              <NavLink to="/drafts" activeClassName="focused">
+                MY DRAFTS
+              </NavLink>
             </li>
             <li>
-              <Link to="/recipes">SAVE NEW RECIPES</Link>
+              <NavLink to="/recipes" activeClassName="focused" as="/savenew">
+                SAVE NEW RECIPES
+              </NavLink>
+              {/* <a href="/recipes">SAVE NEW RECIPES</a> */}
             </li>
             <li>
-              <Link to="/home">ACCOUNT</Link>
+              <NavLink to="/home" activeClassName="focused">
+                ACCOUNT
+              </NavLink>
             </li>
             <li>
               <a href="#" onClick={handleClick}>
@@ -43,10 +54,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <ul>
             {/* <li><Link to="/home">HOME</Link></li> */}
             <li>
-              <Link to="/login">LOGIN</Link>
+              <NavLink to="/login" activeClassName="focused">
+                LOGIN
+              </NavLink>
             </li>
             <li>
-              <Link to="/signup">SIGN-UP</Link>
+              <NavLink to="/signup" activeClassName="focused">
+                SIGN-UP
+              </NavLink>
             </li>
             {/* <li><Link to="/signup">SIGN-UP</Link></li> */}
           </ul>
