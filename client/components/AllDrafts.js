@@ -5,6 +5,8 @@ import {setAllDraftsThunk, deleteDraftThunk} from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 import Button from '../theme/Button'
 
+import FadeIn from 'react-fade-in'
+
 export const AllDrafts = props => {
   // const {state, setState} = useState(props)
 
@@ -28,18 +30,19 @@ export const AllDrafts = props => {
   return (
     <>
       <Container>
-        <Title>My Recipe Drafts</Title>
-        <RecipesContainer>
-          {recipes
-            ? recipes.map(recipe => (
-                <Recipe key={recipe.id}>
-                  <Image src={recipe.imageUrl} />
-                  <Title>{recipe.name}</Title>
-                  {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
-                  <NavLink to={`/recipes/${recipe.id}`}>
-                    <Button primary>View Recipe</Button>
-                  </NavLink>
-                  {/* <button
+        <FadeIn>
+          <Title>My Recipe Drafts</Title>
+          <RecipesContainer>
+            {recipes
+              ? recipes.map(recipe => (
+                  <Recipe key={recipe.id}>
+                    <Image src={recipe.imageUrl} />
+                    <Title>{recipe.name}</Title>
+                    {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
+                    <NavLink to={`/recipes/${recipe.id}`}>
+                      <Button primary>View Recipe</Button>
+                    </NavLink>
+                    {/* <button
                     type="submit"
                     onClick={() => {
                       if (
@@ -52,10 +55,11 @@ export const AllDrafts = props => {
                   >
                     Delete Draft
                   </button> */}
-                </Recipe>
-              ))
-            : ''}
-        </RecipesContainer>
+                  </Recipe>
+                ))
+              : ''}
+          </RecipesContainer>
+        </FadeIn>
       </Container>
     </>
   )

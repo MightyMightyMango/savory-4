@@ -14,6 +14,8 @@ import Button from '../theme/Button'
 import {StyledButton} from '../theme/Button.js'
 import Link from 'react-router-dom'
 
+import FadeIn from 'react-fade-in'
+
 export const AllRecipes = props => {
   // categories contains all the categories
   // to filter by category, pass the userId and categoryId into getRecipesInCategory
@@ -55,43 +57,44 @@ export const AllRecipes = props => {
   return (
     <>
       <Container>
-        {/* <Title>My Recipe Books</Title> */}
-        {/* {getRecipesFromCategory} */}
-        <Title>My Recipes</Title>
-        <CategoriesContainer>
-          <h2>Categories</h2>
-          <Categories>
-            {Array.isArray(categories) ? (
-              categories.map(category => (
-                <StyledButton
-                  key={'c' + category.id}
-                  type="submit"
-                  value={category.id}
-                  onClick={() => getRecipesFromCategory(event)}
-                >
-                  {category.category}
-                </StyledButton>
-              ))
-            ) : (
-              <div>No Categories</div>
-            )}
+        <FadeIn>
+          {/* <Title>My Recipe Books</Title> */}
+          {/* {getRecipesFromCategory} */}
+          <Title>My Recipes</Title>
+          <CategoriesContainer>
+            <h2>Categories</h2>
+            <Categories>
+              {Array.isArray(categories) ? (
+                categories.map(category => (
+                  <StyledButton
+                    key={'c' + category.id}
+                    type="submit"
+                    value={category.id}
+                    onClick={() => getRecipesFromCategory(event)}
+                  >
+                    {category.category}
+                  </StyledButton>
+                ))
+              ) : (
+                <div>No Categories</div>
+              )}
 
-            <StyledButton onClick={() => getAllRecipes(props.user.id)}>
-              ALL
-            </StyledButton>
-          </Categories>
-        </CategoriesContainer>
-        <RecipesContainer>
-          {Array.isArray(recipes) ? (
-            recipes.map(recipe => (
-              <Recipe key={'r' + recipe.id}>
-                <Image src={recipe.imageUrl} />
-                <Title>{recipe.name}</Title>
-                {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
-                <NavLink to={`/recipes/${recipe.id}`}>
-                  <Button primary>View Recipe</Button>
-                </NavLink>
-                {/* {recipe.isDraft ? (
+              <StyledButton onClick={() => getAllRecipes(props.user.id)}>
+                ALL
+              </StyledButton>
+            </Categories>
+          </CategoriesContainer>
+          <RecipesContainer>
+            {Array.isArray(recipes) ? (
+              recipes.map(recipe => (
+                <Recipe key={'r' + recipe.id}>
+                  <Image src={recipe.imageUrl} />
+                  <Title>{recipe.name}</Title>
+                  {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
+                  <NavLink to={`/recipes/${recipe.id}`}>
+                    <Button primary>View Recipe</Button>
+                  </NavLink>
+                  {/* {recipe.isDraft ? (
                   <button
                     type="submit"
                     onClick={() => {
@@ -120,13 +123,13 @@ export const AllRecipes = props => {
                     Delete Recipe
                   </button>
                 )} */}
-              </Recipe>
-            ))
-          ) : (
-            <div />
-          )}
-        </RecipesContainer>
-        {/* <CategoriesContainer>
+                </Recipe>
+              ))
+            ) : (
+              <div />
+            )}
+          </RecipesContainer>
+          {/* <CategoriesContainer>
           <Title>Categories</Title>
           {Array.isArray(categories) ? (
             categories.map(category => (
@@ -148,6 +151,7 @@ export const AllRecipes = props => {
           </button>
           {Form()}
         </CategoriesContainer> */}
+        </FadeIn>
       </Container>
     </>
   )

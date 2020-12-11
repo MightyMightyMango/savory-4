@@ -3,39 +3,43 @@ import styled from 'styled-components'
 import Container from '../theme/Container'
 import HomePageBG from '../theme/HomePageBG'
 
+import FadeIn from 'react-fade-in'
+
 const Homepage = () => {
   return (
     <>
-      <Circle>
-        <Title>Welcome to</Title>
-        <Logo src="images/savory-logo.png" />
-        <Title>Log-in to save recipes!</Title>
-      </Circle>
-      <HomePageBG>
-        <img
-          className="food-item"
-          src="images/food/crispy-fried-green-beans-BA.jpg"
-        />
-        <img
-          className="food-item"
-          src="images/food/raspberry-ricotta-cake-BA.jpg"
-        />
+      <FadeIn>
+        <Circle>
+          <Title>Welcome to</Title>
+          <Logo src="images/savory-logo.png" />
+          <Title>Log-in to save recipes!</Title>
+        </Circle>
+        <HomePageBG>
+          <img
+            className="food-item"
+            src="images/food/crispy-fried-green-beans-BA.jpg"
+          />
+          <img
+            className="food-item"
+            src="images/food/raspberry-ricotta-cake-BA.jpg"
+          />
 
-        <img
-          className="food-item"
-          src="images/food/Healthyish-Sweet-Potato-Tart-Horizontal-BA.jpg"
-        />
-        <img className="food-item" src="images/food/Picadillo-BA.jpg" />
-        <img
-          className="food-item"
-          src="images/food/1119-Perfect-Turkey-BA.jpg"
-        />
+          <img
+            className="food-item"
+            src="images/food/Healthyish-Sweet-Potato-Tart-Horizontal-BA.jpg"
+          />
+          <img className="food-item" src="images/food/Picadillo-BA.jpg" />
+          <img
+            className="food-item"
+            src="images/food/1119-Perfect-Turkey-BA.jpg"
+          />
 
-        <img
-          className="food-item"
-          src="images/food/smashed-new-potatoes-BA.jpg"
-        />
-      </HomePageBG>
+          <img
+            className="food-item"
+            src="images/food/smashed-new-potatoes-BA.jpg"
+          />
+        </HomePageBG>
+      </FadeIn>
     </>
   )
 }
