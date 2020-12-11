@@ -76,11 +76,13 @@ export class Recipe extends React.Component {
   async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    await this.props.getSingleRecipe(url, this.props.user.id)
-    // document.getElementById('url-input').value = '
-    // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
-    this.setState({isSubmitted: true, loading: true})
-    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    if (url.length !== 0) {
+      await this.props.getSingleRecipe(url, this.props.user.id)
+      // document.getElementById('url-input').value = '
+      // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
+      this.setState({isSubmitted: true, loading: true})
+      setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    }
   }
 
   async handleKeyPress(event) {
@@ -107,7 +109,7 @@ export class Recipe extends React.Component {
               <RecipeScrape>
                 <Title>Enter Recipe Url:</Title>
                 <Form onSubmit={() => this.submitUrl(event)}>
-                  <input type="text" id="url-input" />
+                  <input type="text" id="url-input" required />
                 </Form>
                 <Button
                   primary
