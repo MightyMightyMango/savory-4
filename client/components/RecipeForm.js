@@ -4,23 +4,27 @@ import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
 import styled from 'styled-components'
 import Button from '../theme/Button'
 
+import FadeIn from 'react-fade-in'
+
 const RecipeForm = props => {
   return (
     <Container>
       <h4>
         <Heading>
-          <img width="250px" src={props.recipe.imageUrl} />
-          <span>
-            Recipe Saved! You can view it in your drafts or make edits below and
-            press 'confirm' when you're done.
-          </span>
-          <p>Recipe Collected From: {props.recipe.url}</p>
+          <FadeIn>
+            <img width="250px" src={props.recipe.imageUrl} />
+            <span>
+              Recipe Saved! You can view it in your drafts or make edits below
+              and press 'confirm' when you're done.
+            </span>
+            <p>Recipe Collected From: {props.recipe.url}</p>
+          </FadeIn>
         </Heading>
 
         {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
       </h4>
       <form>
-        <label>Recipe Name:</label>
+        <label>RECIPE NAME:</label>
         <input
           type="text"
           name="name"

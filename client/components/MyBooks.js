@@ -11,6 +11,8 @@ import HalfPageDiv from '../theme/HalfPageDiv'
 import Container from '../theme/Container'
 import StyledButton from '../theme/Button'
 
+import FadeIn from 'react-fade-in'
+
 const MyBooks = props => {
   const {
     categories,
@@ -49,6 +51,7 @@ const MyBooks = props => {
   console.log(recipesToBeAdded)
   return (
     <>
+    <FadeIn>
       <RecipesContainer>
         <h1>My Books</h1>
         {categories.map(item => <CategoryItem>{item.category}</CategoryItem>)}
@@ -66,11 +69,8 @@ const MyBooks = props => {
             />
           </>
         </Box>
-        <Box>
-          <h1>Edit Recipes</h1>
-        </Box>
       </ColContainer>
-      <button onClick={() => handleSubmit(event)}>Edit Recipes</button>
+    </FadeIn>
     </>
   )
 }

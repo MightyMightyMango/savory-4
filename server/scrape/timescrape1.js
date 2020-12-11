@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-const timescrape = time => {
+const timescrape1 = time => {
   if (!time) {
     return ''
   }
@@ -38,4 +38,4 @@ const timescrape = time => {
   } else return `${hour} hours, ${min} minutes`
 }
 
-module.exports = {timescrape}
+module.exports = {timescrape1}

@@ -7,6 +7,8 @@ import Button from '../theme/Button'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
+import FadeIn from 'react-fade-in'
+
 // import Container from '../theme/Container'
 
 /**
@@ -17,38 +19,40 @@ const AuthForm = props => {
 
   return (
     <Container primary>
-      <LoginSignupWrapper>
-        <form onSubmit={handleSubmit} name={name}>
-          <LoginFieldDiv>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="text" required />
-          </LoginFieldDiv>
-          <LoginFieldDiv>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <Password name="password" type="password" required />
-          </LoginFieldDiv>
-          <ButtonDiv>
-            <Button primary>{displayName}</Button>
-            <Button type="submit" primary>
-              <a href="/auth/google">{displayName} with Google</a>
-            </Button>
-          </ButtonDiv>
-          {displayName === 'Login' ? (
-            <h3>
-              Not registered? <Link to="/signup">Create an account.</Link>
-            </h3>
-          ) : (
-            <h3>
-              Already registered? <Link to="/login">Sign in.</Link>
-            </h3>
-          )}
-          {error && error.response && <div> {error.response.data} </div>}
-        </form>
-      </LoginSignupWrapper>
+      <FadeIn>
+        <LoginSignupWrapper>
+          <form onSubmit={handleSubmit} name={name}>
+            <LoginFieldDiv>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" required />
+            </LoginFieldDiv>
+            <LoginFieldDiv>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <Password name="password" type="password" required />
+            </LoginFieldDiv>
+            <ButtonDiv>
+              <Button primary>{displayName}</Button>
+              <Button type="submit" primary>
+                <a href="/auth/google">{displayName} with Google</a>
+              </Button>
+            </ButtonDiv>
+            {displayName === 'Login' ? (
+              <h3>
+                Not registered? <Link to="/signup">Create an account.</Link>
+              </h3>
+            ) : (
+              <h3>
+                Already registered? <Link to="/login">Sign in.</Link>
+              </h3>
+            )}
+            {error && error.response && <div> {error.response.data} </div>}
+          </form>
+        </LoginSignupWrapper>
+      </FadeIn>
     </Container>
   )
 }

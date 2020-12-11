@@ -10,6 +10,7 @@ const Navbar = styled.div`
   width: 100%;
   height: 125px;
   display: flex;
+  font-size: 0.85em;
   justify-content: space-between;
   align-items: center;
   padding-left: 100px;
@@ -28,7 +29,12 @@ const Navbar = styled.div`
     color: gainsboro;
   }
 
-  a:focus {
+  // a:focus {
+  //   text-decoration: underline;
+  //   text-underline-position: under;
+  // }
+
+  .focused {
     text-decoration: underline;
     text-underline-position: under;
   }
@@ -42,7 +48,7 @@ const Navbar = styled.div`
 
   li {
     list-style-type: none;
-    padding-left: 60px;
+    padding-left: 50px;
   }
 
   .logo {
