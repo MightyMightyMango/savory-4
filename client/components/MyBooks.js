@@ -6,9 +6,10 @@ import {
   submitCategory,
   setAllRecipesThunk
 } from '../store/recipes'
+import EditCategories from './EditCategories'
 import HalfPageDiv from '../theme/HalfPageDiv'
 import Container from '../theme/Container'
-import EditCategories from './EditCategories'
+import StyledButton from '../theme/Button'
 
 import FadeIn from 'react-fade-in'
 
@@ -22,7 +23,7 @@ const MyBooks = props => {
     recipes
   } = props
   const [newCategory, setNewCategory] = useState('')
-  const [recipesToBeAdded, setRecipesToBeAdded] = useState({})
+  const [recipesToBeAdded, setRecipesToBeAdded] = useState([])
 
   useEffect(() => {
     getCategories(user.id)
@@ -34,54 +35,42 @@ const MyBooks = props => {
   }
 
   const handleSubmit = event => {
-    event.preventDefault()
-    console.log(newCategory)
+    console.log(recipesToBeAdded)
+
     submitCat(user.id, newCategory, recipesToBeAdded)
   }
 
-  const handleAddChange = event => {
-    console.log(event.target.name, event.target.value)
-    setRecipesToBeAdded(...state, {[event.target.name]: event.target.value})
-    console.log(recipesToBeAdded)
+  const onChange = event => {
+    setRecipesToBeAdded({
+      ...recipesToBeAdded,
+      [event.target.id]: event.target.checked
+    })
+    console.log(event.target.name, event.target.checked, event.target.id)
   }
 
+  console.log(recipesToBeAdded)
   return (
     <>
-      <FadeIn>
-        <RecipesContainer>
-          <h1>My Books</h1>
-          {categories.map(item => <CategoryItem>{item.category}</CategoryItem>)}
-        </RecipesContainer>
-        <ColContainer>
-          <Box>
-            <>
-              <h1>Add Recipe</h1>
-              <EditCategories
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                newCategory={newCategory}
-              />
-              <form onSubmit={props.handleAddSubmit}>
-                {recipes.map(item => (
-                  <div className="li">
-                    <input
-                      type="checkbox"
-                      name={item.name}
-                      value="checked"
-                      onChange={handleAddChange}
-                    />
-                    <label htmlFor={item.name}>{item.name}</label>
-                  </div>
-                ))}
-                <button type="submit">Add Recipes to your book</button>
-              </form>
-            </>
-          </Box>
-          <Box>
-            <h1>Edit Recipes</h1>
-          </Box>
-        </ColContainer>
-      </FadeIn>
+    <FadeIn>
+      <RecipesContainer>
+        <h1>My Books</h1>
+        {categories.map(item => <CategoryItem>{item.category}</CategoryItem>)}
+      </RecipesContainer>
+      <ColContainer>
+        <Box>
+          <>
+            <h1>Add Recipe Book</h1>
+            <EditCategories
+              handleChange={handleChange}
+              onChange={onChange}
+              handleSubmit={handleSubmit}
+              newCategory={newCategory}
+              recipes={recipes}
+            />
+          </>
+        </Box>
+      </ColContainer>
+    </FadeIn>
     </>
   )
 }
@@ -95,8 +84,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
-  submitCat: (userId, category) => {
-    dispatch(submitCategory(userId, category))
+  submitCat: (userId, category, data) => {
+    dispatch(submitCategory(userId, category, data))
   }
 })
 export default connect(mapState, mapDispatch)(MyBooks)
