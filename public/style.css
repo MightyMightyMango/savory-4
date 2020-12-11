@@ -44,6 +44,21 @@ nav a {
   display: inline-block;
 } */
 
+.recipeform-enter {
+  opacity: 0;
+}
+.recipeform-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.recipeform-exit {
+  opacity: 1;
+}
+.recipeform-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
 form div {
   /* margin: 1em; */
   display: inline-block;

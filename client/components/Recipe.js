@@ -119,8 +119,8 @@ export class Recipe extends React.Component {
               </RecipeScrape>
             )}
             {this.state.isSubmitted && (
-              <Actions>
-                <FadeIn>
+              <FadeIn>
+                <Actions>
                   <Button
                     primary
                     type="submit"
@@ -145,8 +145,8 @@ export class Recipe extends React.Component {
                   >
                     Confirm Changes
                   </Button>
-                </FadeIn>
-              </Actions>
+                </Actions>
+              </FadeIn>
             )}
             {this.state.isSubmitted &&
               (this.state.loading ? (
@@ -219,7 +219,7 @@ const Form = styled.form`
 `
 
 const Actions = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `

@@ -9,20 +9,19 @@ import FadeIn from 'react-fade-in'
 const RecipeForm = props => {
   return (
     <Container>
-      <h4>
+      <FadeIn>
         <Heading>
-          <FadeIn>
-            <img width="250px" src={props.recipe.imageUrl} />
-            <span>
+          <img width="250px" src={props.recipe.imageUrl} />
+          <Text>
+            <p>
               Recipe Saved! You can view it in your drafts or make edits below
               and press 'confirm' when you're done.
-            </span>
+            </p>
             <p>Recipe Collected From: {props.recipe.url}</p>
-          </FadeIn>
+          </Text>
         </Heading>
-
-        {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
-      </h4>
+      </FadeIn>
+      {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
       <form>
         <label>RECIPE NAME:</label>
         <input
@@ -123,12 +122,17 @@ export default RecipeForm
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   flex-wrap: wrap;
 `
 
 const Heading = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   width: 100%;
+`
+
+const Text = styled.div`
+  width: calc(50%-350px)
+  padding-left: 20px;
 `
