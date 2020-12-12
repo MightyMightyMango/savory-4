@@ -5,7 +5,6 @@ const {scraper1} = require('../scrape/scraper1')
 const {scraper2} = require('../scrape/scraper2')
 
 const processUrl = async (url, userId) => {
-  console.log(url.includes('bonappetit.com'))
   if (url.includes('bonappetit.com/recipe')) {
     return scraper1(url, 'Bon Appetit', userId)
   } else if (url.includes('cooking.nytimes.com/recipes')) {
@@ -19,7 +18,7 @@ const processUrl = async (url, userId) => {
   } else if (url.includes('eatingwell.com/recipe')) {
     return scraper2(url, 'Eating Well', userId)
   } else {
-    return 'Recipe collection from this website is not supported! Please enter it using the form below.'
+    return 'error'
   }
 }
 

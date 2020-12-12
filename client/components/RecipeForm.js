@@ -31,13 +31,13 @@ const RecipeForm = props => {
           value={props.recipe.publisher}
           onChange={props.handleChange}
         />
-        <label>SOURCE URL:</label>
+        {/* <label>SOURCE URL:</label>
         <input
           type="text"
           name="url"
           value={props.recipe.url}
           onChange={props.handleChange}
-        />
+        /> */}
         <label>IMAGE URL:</label>
         <input
           type="text"

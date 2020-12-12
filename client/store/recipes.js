@@ -20,10 +20,9 @@ export const setAllDrafts = recipes => ({
   recipes
 })
 
-export const setSingleRecipe = recipe => ({
-  type: SET_SINGLE_RECIPE,
-  recipe
-})
+export const setSingleRecipe = recipe => {
+  return {type: SET_SINGLE_RECIPE, recipe}
+}
 
 export const deleteRecipe = recipeId => ({
   type: DELETE_RECIPE,
@@ -72,6 +71,17 @@ export const setSingleRecipeThunk = recipeId => {
     try {
       const res = await axios.get(`/api/recipes/${recipeId}`)
       dispatch(setSingleRecipe(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+//RESET RECIPE STATE
+export const resetRecipeState = () => {
+  return dispatch => {
+    try {
+      dispatch(setSingleRecipe({}))
     } catch (error) {
       console.error(error)
     }
