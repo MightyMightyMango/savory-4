@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setRecipeDraft, submitRecipe} from '../store/singleRecipe'
-import {deleteDraftThunk} from '../store/recipes'
+import {deleteDraftThunk, resetRecipeState} from '../store/recipes'
 import history from '../history'
 import styled from 'styled-components'
 import {render} from 'enzyme'
@@ -14,6 +14,24 @@ import FadeIn from 'react-fade-in'
 
 // import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
+const defaultState = {
+  url: '',
+  name: '',
+  description: '',
+  imageUrl: '',
+  publisher: '',
+  ingredients: [],
+  instructions: [],
+  yield: '',
+  prepTime: '',
+  cookTime: '',
+  categories: {},
+  userId: '',
+  isDraft: '',
+  isSubmitted: false,
+  loading: false
+}
+
 export class Recipe extends React.Component {
   constructor(props) {
     super(props)
@@ -21,10 +39,7 @@ export class Recipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.submitUrl = this.submitUrl.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
-    this.state = {
-      isSubmitted: false,
-      loading: false
-    }
+    this.state = defaultState
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -50,6 +65,7 @@ export class Recipe extends React.Component {
     evt.preventDefault()
     let dataToSend = this.state
     delete dataToSend.isSubmitted
+    delete dataToSend.loading
     dataToSend.ingredients =
       typeof dataToSend.ingredients === 'string'
         ? dataToSend.ingredients.split('\n')
@@ -61,35 +77,34 @@ export class Recipe extends React.Component {
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
-
     window.alert('Recipe Saved!')
+    this.props.resetRecipeState()
     history.push(`/recipes/${dataToSend.id}`)
+  }
+
+  async componentWillUnmount() {
+    await this.props.resetRecipeState()
   }
 
   handleDeleteDraft = event => {
     event.preventDefault()
     this.props.deleteDraft(this.state.id)
-    this.setState({isSubmitted: false})
-    console.log(this.state)
+    this.props.resetRecipeState()
+    this.setState(defaultState)
   }
 
   async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    await this.props.getSingleRecipe(url, this.props.user.id)
-    // document.getElementById('url-input').value = '
-    // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
-    this.setState({isSubmitted: true, loading: true})
-    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    if (url.length !== 0) {
+      await this.props.getSingleRecipe(url, this.props.user.id)
+      this.setState({isSubmitted: true, loading: true})
+      setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    }
   }
 
   async handleKeyPress(event) {
     event.preventDefault()
-    console.log('key pressed, charCode', event.charCode)
-    console.log('key pressed, keyCode', event.keyCode)
-    console.log('key pressed, keyCode', event.key)
-    console.log('event ', event)
-    console.log('event.value ', event.value)
     if (event.keyCode == 13 || event.key == 'Enter') {
       const url = document.getElementById('url-input').value
       await this.props.getSingleRecipe(url, this.props.user.id)
@@ -99,6 +114,8 @@ export class Recipe extends React.Component {
   }
 
   render() {
+    console.log('this.props in render', this.props)
+    console.log('this.state in render', this.state)
     return (
       <>
         <FadeIn>
@@ -107,7 +124,7 @@ export class Recipe extends React.Component {
               <RecipeScrape>
                 <Title>Enter Recipe Url:</Title>
                 <Form onSubmit={() => this.submitUrl(event)}>
-                  <input type="text" id="url-input" />
+                  <input type="text" id="url-input" required />
                 </Form>
                 <Button
                   primary
@@ -183,7 +200,8 @@ const mapDispatch = dispatch => ({
   submitRecipe: recipe => {
     dispatch(submitRecipe(recipe))
   },
-  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId))
+  deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId)),
+  resetRecipeState: () => dispatch(resetRecipeState())
 })
 
 export default connect(mapState, mapDispatch)(Recipe)

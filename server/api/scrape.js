@@ -10,8 +10,10 @@ router.post('/', async (req, res, next) => {
     console.log(url)
     const userId = req.body.userId
     let data = await processUrl(url, userId)
-    const newRecipe = await Recipe.create(data)
-    res.status(200).send(newRecipe)
+    if (data !== 'error' && data.url !== '' && data.name !== '') {
+      const newRecipe = await Recipe.create(data)
+      res.status(200).send(newRecipe)
+    }
   } catch (error) {
     next(error)
   }

@@ -15,7 +15,9 @@ const Recipe = db.define('recipe', {
   url: {
     type: Sequelize.TEXT,
     allowNull: false,
-    defaultValue: ''
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
