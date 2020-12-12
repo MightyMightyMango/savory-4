@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {User, Recipe, Suggestion} = require('../db/models')
 module.exports = router
 
+// GET /api/users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -14,16 +15,11 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// POST /api/users/suggestions
 router.post('/suggestions', async (req, res, next) => {
   try {
     const suggestion = req.body
-    const created = await Suggestion.create({
-      name: suggestion.name,
-      url: suggestion.url,
-      recipeUrl: suggestion.recipeUrl
-    })
-    console.log('suggestion post res ', res)
-    console.log('suggestion post res.data ', res)
+    const created = await Suggestion.create(suggestion)
     res.json(created)
   } catch (error) {
     console.error(error)
@@ -31,13 +27,13 @@ router.post('/suggestions', async (req, res, next) => {
   }
 })
 
+// written for the future, admins can pull all the suggestions for their ccount
+// GET // /api/users/suggestions
 router.get('/suggestions', async (req, res, next) => {
   try {
     // const suggestion = req.body
-    const res = await Suggestion.findAll()
-    console.log('suggestion post res ', res)
-    console.log('suggestion post res.data ', res)
-    res.status(200).send(res)
+    const suggestions = await Suggestion.findAll()
+    res.json(suggestions)
   } catch (error) {
     console.error(error)
     //next (error)

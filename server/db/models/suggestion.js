@@ -20,10 +20,7 @@ const Suggestion = db.define('suggestion', {
   recipeUrl: {
     type: Sequelize.TEXT,
     allowNull: false,
-    defaultValue: '',
-    validate: {
-      isUrl: true
-    }
+    defaultValue: ''
   }
 })
 
