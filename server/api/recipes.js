@@ -14,17 +14,23 @@ module.exports = router
 // Verifies that the request is coming from an admin
 // GET /api/recipes
 router.get('/', async (req, res, next) => {
-  if (req.user === undefined) {
-    res.sendStatus(404)
-  }
-  const returned = await isAdmin(req.user.dataValues.id)
+  // if (req.user === undefined) {
+  //   res.sendStatus(404)
+  // }
+  // const returned = await isAdmin(req.user.dataValues.id)
+  // try {
+  //   if (returned) {
+  //     const recipes = await Recipe.findAll()
+  //     res.json(recipes)
+  //   } else {
+  //     res.sendStatus(404)
+  //   }
+  // } catch (err) {
+  //   next(err)
+  // }
   try {
-    if (returned) {
-      const recipes = await Recipe.findAll()
-      res.json(recipes)
-    } else {
-      res.sendStatus(404)
-    }
+    const recipes = await Recipe.findAll()
+    res.json(recipes)
   } catch (err) {
     next(err)
   }
@@ -34,18 +40,26 @@ router.get('/', async (req, res, next) => {
 // Verifies that the request is coming from the user or that the user is an admin
 // GET /api/recipes/:recipeId
 router.get('/:recipeId', async (req, res, next) => {
-  if (req.user === undefined) {
-    res.sendStatus(404)
-  }
-  const returned = await isAdmin(req.user.dataValues.id)
+  // if (req.user === undefined) {
+  //   res.sendStatus(404)
+  // }
+  // const returned = await isAdmin(req.user.dataValues.id)
+  // try {
+  //   const recipeId = req.params.recipeId
+  //   const recipe = await Recipe.findByPk(recipeId)
+  //   if (returned || req.user.dataValues.id === recipe.userId) {
+  //     res.json(recipe)
+  //   } else {
+  //     res.sendStatus(404)
+  //   }
+  // } catch (err) {
+  //   next(err)
+  // }
+
   try {
     const recipeId = req.params.recipeId
     const recipe = await Recipe.findByPk(recipeId)
-    if (returned || req.user.dataValues.id === recipe.userId) {
-      res.json(recipe)
-    } else {
-      res.sendStatus(404)
-    }
+    res.json(recipe)
   } catch (err) {
     next(err)
   }
@@ -82,25 +96,36 @@ router.delete('/:recipeId', async (req, res, next) => {
 // Get all recipes for one user
 // GET /api/recipes/user/:userId
 router.get('/user/:userId', async (req, res, next) => {
-  if (req.user === undefined) {
-    res.sendStatus(404)
-  }
+  // if (req.user === undefined) {
+  //   res.sendStatus(404)
+  // }
 
-  const returned = await isAdmin(req.user.dataValues.id)
+  // const returned = await isAdmin(req.user.dataValues.id)
+
+  // try {
+  //   if (returned || req.user.dataValues.id === req.params.userId) {
+  //     const recipes = await Recipe.findAll({
+  //       where: {
+  //         userId: req.params.userId
+  //       }
+  //     })
+  //     res.json(recipes)
+  //   } else {
+  //     res.sendStatus(404)
+  //   }
+  // } catch (err) {
+  //   next(err)
+  // }
 
   try {
-    if (returned || req.user.dataValues.id === req.params.userId) {
-      const recipes = await Recipe.findAll({
-        where: {
-          userId: req.params.userId
-        }
-      })
-      res.json(recipes)
-    } else {
-      res.sendStatus(404)
-    }
-  } catch (err) {
-    next(err)
+    const recipes = await Recipe.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+    res.json(recipes)
+  } catch (error) {
+    res.sendStatus(404)
   }
 })
 
