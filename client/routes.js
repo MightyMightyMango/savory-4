@@ -14,7 +14,8 @@ import {
   AllDrafts,
   LoginSignup,
   MyBooks,
-  Footer
+  Footer,
+  NotFound
 } from './components'
 import {me} from './store'
 
@@ -49,8 +50,8 @@ class Routes extends Component {
             />
           </Switch>
         )}
-
-        <Route component={Login} />
+        {/* DEFAULT COMPONENT FOR UNKNOWN PATHS */}
+        <Route component={NotFound} />
       </Switch>
     )
   }

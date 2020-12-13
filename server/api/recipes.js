@@ -6,33 +6,53 @@ const {
   User,
   UserCategory
 } = require('../db/models')
-const {useStore} = require('react-redux')
+const isAdmin = require('../auth/helper')
+
 module.exports = router
 
 // Get all recipes in database
+// Verifies that the request is coming from an admin
 // GET /api/recipes
 router.get('/', async (req, res, next) => {
+  if (req.user === undefined) {
+    res.sendStatus(404)
+  }
+  const returned = await isAdmin(req.user.dataValues.id)
   try {
-    const recipes = await Recipe.findAll()
-    res.json(recipes)
+    if (returned) {
+      const recipes = await Recipe.findAll()
+      res.json(recipes)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (err) {
     next(err)
   }
 })
 
 // Get single recipe
+// Verifies that the request is coming from the user or that the user is an admin
 // GET /api/recipes/:recipeId
 router.get('/:recipeId', async (req, res, next) => {
+  if (req.user === undefined) {
+    res.sendStatus(404)
+  }
+  const returned = await isAdmin(req.user.dataValues.id)
   try {
     const recipeId = req.params.recipeId
     const recipe = await Recipe.findByPk(recipeId)
-    res.json(recipe)
+    if (returned || req.user.dataValues.id === recipe.userId) {
+      res.json(recipe)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (err) {
     next(err)
   }
 })
 
 // Edit a single recipe
+
 // PUT /api/recipes/:recipeId
 router.put('/:recipeId', async (req, res, next) => {
   try {
@@ -62,14 +82,23 @@ router.delete('/:recipeId', async (req, res, next) => {
 // Get all recipes for one user
 // GET /api/recipes/user/:userId
 router.get('/user/:userId', async (req, res, next) => {
+  if (req.user === undefined) {
+    res.sendStatus(404)
+  }
+
+  const returned = await isAdmin(req.user.dataValues.id)
+
   try {
-    const userId = req.params.userId
-    const recipes = await Recipe.findAll({
-      where: {
-        userId: userId
-      }
-    })
-    res.json(recipes)
+    if (returned || req.user.dataValues.id === req.params.userId) {
+      const recipes = await Recipe.findAll({
+        where: {
+          userId: req.params.userId
+        }
+      })
+      res.json(recipes)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (err) {
     next(err)
   }

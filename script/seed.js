@@ -33,6 +33,10 @@ async function seed() {
       email: 'admin@savory-app.com',
       password: '123',
       isAdmin: true
+    },
+    {
+      email: 'beta@savory-app.com',
+      password: 'imafish'
     }
   ]
 

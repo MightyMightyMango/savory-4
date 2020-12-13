@@ -12,7 +12,7 @@ export const SuggestionBox = props => {
   const handleSubmitSuggestion = event => {
     event.preventDefault()
     console.log('props ', props)
-    setShowConfirmation(true)
+    // setShowConfirmation(true)
     const siteName = document.getElementById('suggestion-name').value
     const siteUrl = document.getElementById('suggestion-url').value
     const recipeUrl = document.getElementById('suggestion-url-recipe').value
@@ -34,24 +34,25 @@ export const SuggestionBox = props => {
       {showForm && (
         <>
           <h2>Tell us which site you would like us to support!</h2>
-          {/* <form onSubmit={() => handleSubmitSuggestion(event)}> */}
-          <form>
+          <form onSubmit={() => handleSubmitSuggestion(event)}>
+            {/* <form> */}
             <label>Name:</label>
             <input type="text" id="suggestion-name" required />
             <label>Url:</label>
             <input type="text" id="suggestion-url" required />
             <label>Any specific recipe in mind? Enter its url: </label>
             <input type="text" id="suggestion-url-recipe" />
-            <Button primary onClick={() => setShowConfirmation(true)}>
-              Submit
-            </Button>
+            {/* <Button primary onClick={() => setShowConfirmation(true)}>Submit</Button> */}
+            <Button primary>Submit</Button>
           </form>
         </>
       )}
-      <CSSTransition
+      {/* <CSSTransition
+        key="suggest"
         in={showConfirmation}
         timeout={300}
         classNames="showconfirmation"
+        transitionName="showconfirmation"
         unmountOnExit
         onEnter={() => setShowForm(false)}
         onExited={() => setShowForm(true)}
@@ -62,13 +63,17 @@ export const SuggestionBox = props => {
             Back to Account
           </Button>
         </>
-      </CSSTransition>
+      </CSSTransition> */}
     </>
   )
 }
+
+const mapState = state => ({
+  userId: state.user.id
+})
 
 const mapDispatch = dispatch => ({
   submitSuggestion: suggestion => dispatch(submitSuggestionThunk(suggestion))
 })
 
-export default connect(null, mapDispatch)(SuggestionBox)
+export default connect(mapState, mapDispatch)(SuggestionBox)
