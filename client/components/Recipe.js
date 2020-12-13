@@ -42,6 +42,7 @@ export class Recipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.submitUrl = this.submitUrl.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.validateInput = this.validateInput.bind(this)
     this.state = defaultState
   }
 
@@ -99,13 +100,38 @@ export class Recipe extends React.Component {
     this.setState(defaultState)
   }
 
+  validateInput = url => {
+    if (url.length !== 0) {
+      if (url.includes('bonappetit.com/recipe')) {
+        return true
+      } else if (url.includes('cooking.nytimes.com/recipes')) {
+        return true
+      } else if (url.includes('simplyrecipes.com/recipes')) {
+        return true
+      } else if (url.includes('allrecipes.com/recipe')) {
+        return true
+      } else if (url.includes('foodnetwork.com/recipes')) {
+        return true
+      } else if (url.includes('eatingwell.com/recipe')) {
+        return true
+      } else {
+        return false
+      }
+    }
+    return false
+  }
+
   async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    if (url.length !== 0) {
+    if (this.validateInput(url)) {
       await this.props.getSingleRecipe(url, this.props.user.id)
       this.setState({isSubmitted: true, loading: true})
       setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    } else {
+      alert(
+        'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form below!'
+      )
     }
   }
 

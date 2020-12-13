@@ -28,6 +28,15 @@ async function seed() {
       lastName: 'Wu',
       email: 'm@m.com',
       password: '123'
+    },
+    {
+      email: 'admin@savory-app.com',
+      password: '123',
+      isAdmin: true
+    },
+    {
+      email: 'beta@savory-app.com',
+      password: 'imafish'
     }
   ]
 

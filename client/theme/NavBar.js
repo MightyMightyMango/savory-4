@@ -52,7 +52,7 @@ const Navbar = styled.div`
 
   .logo {
     padding-top: 4px;
-    background-image: url('images/logos/savory-logo-white.png');
+    background-image: url('http://savory-2021.herokuapp.com/images/logos/savory-logo-white.png');
     background-size: 180px;
     background-repeat: no-repeat;
     width: 180px;
@@ -62,7 +62,7 @@ const Navbar = styled.div`
   }
 
   .logo:hover {
-    background-image: url('images/logos/savory-logo-gainsboro.png');
+    background-image: url('http://savory-2021.herokuapp.com/images/logos/savory-logo-gainsboro.png');
     background-size: 180px;
     background-repeat: no-repeat;
     width: 180px;

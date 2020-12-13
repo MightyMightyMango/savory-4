@@ -31,6 +31,11 @@ export const StyledButton = styled.button`
   a {
     color: #ffffff;
   }
+
+  .view-pages {
+    position-top: bottom;
+    margin: 10px;
+  }
 `
 
 const Button = ({primary, children, onClick, otherProps}) => {

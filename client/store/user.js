@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const SUBMIT_SUGGESTION = 'SUBMIT_SUGGESTION'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,9 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const submitSuggestion = () => ({
+  type: SUBMIT_SUGGESTION
+})
 
 /**
  * THUNK CREATORS
@@ -56,6 +60,18 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const submitSuggestionThunk = suggestion => {
+  return async dispatch => {
+    try {
+      console.log('in suggestion thunk')
+      await axios.post('/api/users/suggestions', suggestion)
+      dispatch(submitSuggestion())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -65,6 +81,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case SUBMIT_SUGGESTION:
+      return state
     default:
       return state
   }
