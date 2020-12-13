@@ -148,6 +148,25 @@ router.get('/draft/:userId', async (req, res, next) => {
   }
 })
 
+// Get recipe saved
+// GET /api/recipes/saved/:userId
+router.get('/saved/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId
+    const recipes = await Recipe.findAll({
+      where: {
+        userId: userId,
+        isDraft: false
+      },
+      order: [['updatedAt', 'DESC']]
+    })
+
+    res.json(recipes)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // Get all drafts for one user
 // GET /api/recipes/drafts/:userId
 router.get('/drafts/:userId', async (req, res, next) => {

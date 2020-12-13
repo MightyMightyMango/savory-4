@@ -202,10 +202,10 @@ export class Recipe extends React.Component {
                 <Loader />
               ) : (
                 <FadeIn>
-                  <p>
+                  <Saved>
                     Recipe Saved! You can view it in your drafts or make edits
                     below and press 'confirm' when you're done.
-                  </p>
+                  </Saved>
                   <RecipeForm
                     recipe={this.state}
                     handleSubmit={this.handleSubmit}
@@ -276,4 +276,8 @@ const Actions = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+`
+const Saved = styled.p`
+  margin: 20px;
+  text-align: center;
 `

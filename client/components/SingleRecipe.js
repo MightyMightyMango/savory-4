@@ -80,7 +80,7 @@ export class SingleRecipe extends React.Component {
       typeof dataToSend.instructions === 'string'
         ? dataToSend.instructions.split('\n')
         : dataToSend.instructions
-    dataToSend.isDraft = false
+    dataToSend.isDraft = true
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipeEdit(dataToSend)
     this.setState({canEdit: false})
@@ -323,6 +323,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 `
 
 const SingleRecipeHeader = styled.div`
@@ -373,7 +374,9 @@ const Image = styled.img`
 const ActionButtons = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0px;
 `
 
 const RecipeContainer = styled.div`
@@ -391,8 +394,8 @@ const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 68%;
-  padding-left: 20px;
+  //width: 68%;
+  //padding-left: 20px;
 `
 
 const Subtitle = styled.b`
@@ -415,6 +418,11 @@ const Instructions = styled.div`
   width: calc(100% - 450px);
   padding-top: 20px;
   padding-left: 20px;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 100%;
+    padding-left: 0px;
+  }
 `
 
 const Details = styled.ul`
