@@ -15,7 +15,8 @@ import {
   LoginSignup,
   MyBooks,
   Footer,
-  NotFound
+  NotFound,
+  Loader
 } from './components'
 import {me} from './store'
 

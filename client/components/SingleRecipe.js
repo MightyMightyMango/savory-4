@@ -65,6 +65,8 @@ export class SingleRecipe extends React.Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
+  formatEmailText() {}
+
   handleSubmit(evt) {
     evt.preventDefault()
     let dataToSend = this.state
@@ -86,6 +88,63 @@ export class SingleRecipe extends React.Component {
 
   render() {
     let recipe = this.props.recipe || {}
+
+    let {
+      name,
+      publisher,
+      url,
+      description,
+      prepTime,
+      cookTime,
+      ingredients,
+      instructions
+    } =
+      this.props.recipe || {}
+
+    // console.log('recipe ', recipe)
+    // console.log('ingredients ', ingredients)
+    // let ingredientList = ''
+    // if (ingredients) {
+    //   ingredientList = ingredients.join('%0D%0A')
+    // }
+
+    const emailText =
+      'Check out this recipe I saved with the Savory App!%0D%0A%0D%0A' +
+      name +
+      '%0D%0A%0D%0A' +
+      description +
+      '%0D%0A%0D%0A' +
+      //  +"Ingredients:%0D%0A%0D%0A"+ingredientList+"%0D%0A%0D%0A"
+      //         // +"Instructions:%0D%0A%0D%0A"+instructions.join("%0D%0A")+"%0D%0A%0D%0A"
+      prepTime +
+      '%0D%0A' +
+      cookTime +
+      '%0D%0A' +
+      this.props.recipe.yield +
+      '%0D%0A' +
+      publisher +
+      ' at:%0D%0A' +
+      url
+
+    // const emailText = `Check out this recipe I saved with the Savory App!
+    //         <P>${name}</P>
+    //         ${description}
+    //         <br>
+
+    //         Ingredients:
+    //         ${ingredients}
+
+    //         Instructions:
+    //         ${instructions}
+
+    //         ${prepTime}
+    //         ${cookTime}
+    //         ${this.props.recipe.yield}
+
+    //         ${publisher} at:
+    //         ${url}
+    //         `
+
     let displayIngredients =
       typeof recipe.ingredients === 'string'
         ? recipe.ingredients.split('\n')
@@ -128,9 +187,7 @@ export class SingleRecipe extends React.Component {
                     </Button>
                     <Button primary>
                       <a
-                        href={`mailto:?subject=${recipe.name}&body=${
-                          recipe.url
-                        }`}
+                        href={`mailto:?&subject=Mail from our Website&body=${emailText}`}
                         title="Share by Email"
                       >
                         Share by Email
