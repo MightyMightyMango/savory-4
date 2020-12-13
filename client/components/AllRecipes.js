@@ -6,7 +6,8 @@ import {
   deleteRecipeThunk,
   getUserCategoriesThunk,
   getRecipesInCategoryThunk,
-  submitCategory
+  submitCategory,
+  setAllFinalRecipesThunk
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 // import EditCategories from './EditCategories'
@@ -60,7 +61,7 @@ export const AllRecipes = props => {
         <FadeIn>
           {/* <Title>My Recipe Books</Title> */}
           {/* {getRecipesFromCategory} */}
-          <Title>My Recipes</Title>
+          <Title height="70px">My Recipes</Title>
           <CategoriesContainer>
             <h2>Categories</h2>
             <Categories>
@@ -89,11 +90,11 @@ export const AllRecipes = props => {
               recipes.map(recipe => (
                 <Recipe key={'r' + recipe.id}>
                   <Image src={recipe.imageUrl} />
-                  <Title>{recipe.name}</Title>
-                  {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
-                  <NavLink to={`/recipes/${recipe.id}`}>
+                  <NavLink className="navlink" to={`/recipes/${recipe.id}`}>
                     <Button primary>View Recipe</Button>
                   </NavLink>
+                  <Title>{recipe.name}</Title>
+                  {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
                   {/* {recipe.isDraft ? (
                   <button
                     type="submit"
@@ -165,7 +166,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
+  getAllRecipes: userId => dispatch(setAllFinalRecipesThunk(userId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
   getRecipesInCategory: (userId, categoryId) =>
@@ -186,9 +187,16 @@ const Container = styled.div`
 const Title = styled.h1`
   // margin: 20px;
   // text-align: center;
-  // font-size: 1.5em;
+  font-size: 1.7em;
   font-family: 'Merriweather', serif;
   margin-top: 30px;
+  padding: 5px;
+  padding-bottom: 20px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin: 0px 5px;
+    font-size: 1.5em;
+    margin-top: ${props => props.height};
+  }
 `
 
 const RecipesContainer = styled.div`
@@ -198,6 +206,14 @@ const RecipesContainer = styled.div`
   align-self: center;
   width: 100%;
   padding-top: 20px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-top: 0px;
+  }
+
+  .navlink {
+    position: absolute;
+    top: 250px;
+  }
 `
 
 const CategoriesContainer = styled.div`
@@ -212,8 +228,12 @@ const Recipe = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-contents: flex-start;
+  align-items: center;
   width: 33.33333%;
+  position: relative;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 100%;
+  }
 `
 
 const Subtitle = styled.div`
@@ -227,13 +247,16 @@ const Image = styled.img`
   object-fit: cover;
   overflow: hidden;
   padding-bottom: 20px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin-top: 50px;
+  }
 `
 
 const Categories = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 10px;
   flex-wrap: wrap;
 `

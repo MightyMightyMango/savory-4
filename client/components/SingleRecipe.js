@@ -3,8 +3,9 @@ import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import history from '../history'
-import {submitRecipe} from '../store/singleRecipe'
+// import {resetRecipeState} from '../store/singleRecipe'
 import {
+  submitRecipeEdit,
   setSingleRecipeThunk,
   deleteRecipeThunk,
   deleteDraftThunk
@@ -65,6 +66,8 @@ export class SingleRecipe extends React.Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
+  formatEmailText() {}
+
   handleSubmit(evt) {
     evt.preventDefault()
     let dataToSend = this.state
@@ -77,15 +80,72 @@ export class SingleRecipe extends React.Component {
       typeof dataToSend.instructions === 'string'
         ? dataToSend.instructions.split('\n')
         : dataToSend.instructions
-    dataToSend.isDraft = false
+    dataToSend.isDraft = true
     console.log('DATA SENT TO DB', dataToSend)
-    this.props.submitRecipe(dataToSend)
+    this.props.submitRecipeEdit(dataToSend)
     this.setState({canEdit: false})
     this.props.getRecipe(dataToSend.id)
   }
 
   render() {
     let recipe = this.props.recipe || {}
+
+    let {
+      name,
+      publisher,
+      url,
+      description,
+      prepTime,
+      cookTime,
+      ingredients,
+      instructions
+    } =
+      this.props.recipe || {}
+
+    // console.log('recipe ', recipe)
+    // console.log('ingredients ', ingredients)
+    // let ingredientList = ''
+    // if (ingredients) {
+    //   ingredientList = ingredients.join('%0D%0A')
+    // }
+
+    const emailText =
+      'Check out this recipe I saved with the Savory App!%0D%0A%0D%0A' +
+      name +
+      '%0D%0A%0D%0A' +
+      description +
+      '%0D%0A%0D%0A' +
+      //  +"Ingredients:%0D%0A%0D%0A"+ingredientList+"%0D%0A%0D%0A"
+      //         // +"Instructions:%0D%0A%0D%0A"+instructions.join("%0D%0A")+"%0D%0A%0D%0A"
+      prepTime +
+      '%0D%0A' +
+      cookTime +
+      '%0D%0A' +
+      this.props.recipe.yield +
+      '%0D%0A' +
+      publisher +
+      ' at:%0D%0A' +
+      url
+
+    // const emailText = `Check out this recipe I saved with the Savory App!
+    //         <P>${name}</P>
+    //         ${description}
+    //         <br>
+
+    //         Ingredients:
+    //         ${ingredients}
+
+    //         Instructions:
+    //         ${instructions}
+
+    //         ${prepTime}
+    //         ${cookTime}
+    //         ${this.props.recipe.yield}
+
+    //         ${publisher} at:
+    //         ${url}
+    //         `
+
     let displayIngredients =
       typeof recipe.ingredients === 'string'
         ? recipe.ingredients.split('\n')
@@ -128,9 +188,7 @@ export class SingleRecipe extends React.Component {
                     </Button>
                     <Button primary>
                       <a
-                        href={`mailto:?subject=${recipe.name}&body=${
-                          recipe.url
-                        }`}
+                        href={`mailto:?&subject=Mail from our Website&body=${emailText}`}
                         title="Share by Email"
                       >
                         Share by Email
@@ -250,9 +308,10 @@ const mapDispatch = dispatch => ({
   getRecipe: recipeId => dispatch(setSingleRecipeThunk(recipeId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId)),
-  submitRecipe: recipe => {
-    dispatch(submitRecipe(recipe))
-  }
+  submitRecipeEdit: recipe => {
+    dispatch(submitRecipeEdit(recipe))
+  },
+  resetRecipeState: () => dispatch(resetRecipeState())
 })
 
 export default connect(mapState, mapDispatch)(SingleRecipe)
@@ -264,6 +323,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 `
 
 const SingleRecipeHeader = styled.div`
@@ -314,7 +374,9 @@ const Image = styled.img`
 const ActionButtons = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0px;
 `
 
 const RecipeContainer = styled.div`
@@ -332,8 +394,8 @@ const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 68%;
-  padding-left: 20px;
+  //width: 68%;
+  //padding-left: 20px;
 `
 
 const Subtitle = styled.b`
@@ -356,6 +418,11 @@ const Instructions = styled.div`
   width: calc(100% - 450px);
   padding-top: 20px;
   padding-left: 20px;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 100%;
+    padding-left: 0px;
+  }
 `
 
 const Details = styled.ul`

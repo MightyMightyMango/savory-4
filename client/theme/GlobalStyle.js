@@ -13,6 +13,7 @@ html, body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 * {
@@ -90,6 +91,24 @@ img {
 .fade-exit.fade-exit-active {
     opacity: 0;
     transition: opacity 150ms linear;
+}
+
+.showconfirmation-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.showconfirmation-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.showconfirmation-exit {
+  opacity: 1;
+}
+.showconfirmation-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }
 
 `

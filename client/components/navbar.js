@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import Navigation from '../theme/NavBar'
+import styled from 'styled-components'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <Navigation>
@@ -12,60 +13,53 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     </Link>
     <div>
       {isLoggedIn ? (
-        <div>
+        <Nav>
           {/* available after you log in */}
           <ul>
-            <li>
-              <NavLink to="/books" activeClassName="focused">
-                MY BOOKS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/myrecipes" activeClassName="focused">
-                MY RECIPES
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/drafts" activeClassName="focused">
-                MY DRAFTS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/recipes" activeClassName="focused" as="/savenew">
-                SAVE NEW RECIPES
-              </NavLink>
-              {/* <a href="/recipes">SAVE NEW RECIPES</a> */}
-            </li>
-            <li>
-              <NavLink to="/home" activeClassName="focused">
-                ACCOUNT
-              </NavLink>
-            </li>
-            <li>
-              <a href="#" onClick={handleClick}>
-                LOGOUT
-              </a>
-            </li>
+            <NavLink className="navlink" to="/books" activeClassName="focused">
+              MY BOOKS
+            </NavLink>
+            <NavLink
+              className="navlink"
+              to="/myrecipes"
+              activeClassName="focused"
+            >
+              MY RECIPES
+            </NavLink>
+            <NavLink className="navlink" to="/drafts" activeClassName="focused">
+              MY DRAFTS
+            </NavLink>
+            <NavLink
+              className="navlink"
+              to="/recipes"
+              activeClassName="focused"
+              as="/savenew"
+            >
+              SAVE NEW RECIPES
+            </NavLink>
+            {/* <a href="/recipes">SAVE NEW RECIPES</a> */}
+            <NavLink className="navlink" to="/home" activeClassName="focused">
+              ACCOUNT
+            </NavLink>
+            <a href="#" onClick={handleClick}>
+              LOGOUT
+            </a>
           </ul>
-        </div>
+        </Nav>
       ) : (
-        <div>
+        <Nav>
           {/* available before you log in */}
           <ul>
-            {/* <li><Link to="/home">HOME</Link></li> */}
-            <li>
-              <NavLink to="/login" activeClassName="focused">
-                LOGIN
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/signup" activeClassName="focused">
-                SIGN-UP
-              </NavLink>
-            </li>
-            {/* <li><Link to="/signup">SIGN-UP</Link></li> */}
+            {/* <Link to="/home">HOME</Link>*/}
+            <NavLink className="navlink" to="/login" activeClassName="focused">
+              LOGIN
+            </NavLink>
+            <NavLink className="navlink" to="/signup" activeClassName="focused">
+              SIGN-UP
+            </NavLink>
+            {/* <Link to="/signup">SIGN-UP</Link> */}
           </ul>
-        </div>
+        </Nav>
       )}
     </div>
   </Navigation>
@@ -97,3 +91,5 @@ Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
+
+const Nav = styled.div``

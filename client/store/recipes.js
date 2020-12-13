@@ -20,10 +20,9 @@ export const setAllDrafts = recipes => ({
   recipes
 })
 
-export const setSingleRecipe = recipe => ({
-  type: SET_SINGLE_RECIPE,
-  recipe
-})
+export const setSingleRecipe = recipe => {
+  return {type: SET_SINGLE_RECIPE, recipe}
+}
 
 export const deleteRecipe = recipeId => ({
   type: DELETE_RECIPE,
@@ -59,6 +58,18 @@ export const setAllRecipesThunk = userId => {
   return async dispatch => {
     try {
       const res = await axios.get(`/api/recipes/user/${userId}`)
+      dispatch(setAllRecipes(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+// ALL FINAL RECIPES
+export const setAllFinalRecipesThunk = userId => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`/api/recipes/saved/${userId}`)
       dispatch(setAllRecipes(res.data))
     } catch (error) {
       console.error(error)
@@ -151,6 +162,20 @@ export const submitCategory = (userId, category, data) => {
       })
       console.log('res.data', res.data)
       dispatch(setCategory(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const submitRecipeEdit = recipe => {
+  console.log(recipe)
+  return async dispatch => {
+    try {
+      let recipeId = recipe.id
+      const res = await axios.put(`/api/recipes/${recipeId}`, recipe)
+      console.log(res.data)
+      dispatch(setSingleRecipe(res.data))
     } catch (error) {
       console.error(error)
     }

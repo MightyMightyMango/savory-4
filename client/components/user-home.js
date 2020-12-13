@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import SuggestionBox from './SuggestionBox'
+
 import Container from '../theme/Container'
 import styled from 'styled-components'
 import Button from '../theme/Button'
@@ -11,7 +13,7 @@ import FadeIn from 'react-fade-in'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {firstName, lastName, email} = props
+  const {firstName, lastName, email, userId} = props
 
   return (
     <Container primary>
@@ -74,6 +76,8 @@ export const UserHome = props => {
             </Column>
           </Row>
         </UserAccount>
+
+        <SuggestionBox />
       </FadeIn>
     </Container>
   )
@@ -86,7 +90,8 @@ const mapState = state => {
   return {
     email: state.user.email,
     firstName: state.user.firstName,
-    lastName: state.user.lastName
+    lastName: state.user.lastName,
+    userId: state.user.id
   }
 }
 

@@ -28,6 +28,15 @@ async function seed() {
       lastName: 'Wu',
       email: 'm@m.com',
       password: '123'
+    },
+    {
+      email: 'admin@savory-app.com',
+      password: '123',
+      isAdmin: true
+    },
+    {
+      email: 'beta@savory-app.com',
+      password: 'imafish'
     }
   ]
 
@@ -72,7 +81,10 @@ async function seed() {
         'Do Ahead: Sauce can be made 1 week ahead. Cover and chill.'
       ],
       isDraft: false,
-      categoryIds: [thanksgiving.id]
+      categoryIds: [thanksgiving.id],
+      yield: 'Makes about 2½ cups',
+      prepTime: '15 minutes',
+      cookTime: '6 hours'
     },
     {
       name: 'Gluten-Free Carrot Cake',
@@ -115,7 +127,10 @@ async function seed() {
         '1 tsp. vanilla extract',
         'Pinch of kosher salt'
       ],
-      categoryIds: [western.id, dessert.id]
+      categoryIds: [western.id, dessert.id],
+      yield: '8-12 servings',
+      prepTime: '45 minutes',
+      cookTime: '30 minutes'
     },
     {
       name: 'Grilled Crispy-Skinned Salmon with Whole Lemon-Sesame Sauce',
@@ -142,7 +157,10 @@ async function seed() {
         'Clean and oil grate, then immediately place salmon on grill skin side down. Cover grill and cook, skin side down the entire time, until skin is lightly charred and fish is opaque, 6–8 minutes. Transfer salmon to a plate and let cool slightly.',
         'Divide salmon among plates. Top with basil. Spoon lemon-sesame sauce over.'
       ],
-      categoryIds: [dinner.id]
+      categoryIds: [dinner.id],
+      yield: '4 servings',
+      prepTime: '20 minutes',
+      cookTime: '30 minutes'
     },
     {
       name: "BA's Best Pesto",
@@ -168,7 +186,9 @@ async function seed() {
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
       isDraft: false,
-      categoryIds: []
+      categoryIds: [],
+      yield: 'Makes about 1½ cups',
+      prepTime: '10 minutes'
     },
     {
       name: 'Lemon Pound Cake',
@@ -202,7 +222,10 @@ async function seed() {
         'Run a butter knife around edges of pan to loosen. Using parchment overhang, lift cake onto a wire rack; remove parchment.”,”Now, pour the lemon zest glaze over cake, letting it fall down the sides. Let icing set for at least 10 minutes before slicing. Serve on its own, or with a spoonful of Greek yogurt, a dollop of whipped cream, or a scoop of ice cream on top. (You deserve it!)'
       ],
       isDraft: false,
-      categoryIds: []
+      categoryIds: [],
+      yield: 'Makes one 9x4" loaf',
+      prepTime: '20 minutes',
+      cookTime: '60 minutes'
     },
     {
       name: "BA's Best Pesto",
@@ -226,7 +249,9 @@ async function seed() {
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
       isDraft: false,
-      categoryIds: []
+      categoryIds: [],
+      yield: 'Makes about 1½ cups',
+      prepTime: '10 minutes'
     },
     {
       name: 'Chicken Paprikash with Buttered Egg Noodles',
@@ -263,7 +288,10 @@ async function seed() {
         "Carefully remove skillet from oven (handle will be hot!). Using tongs, transfer chicken skin side up to a clean plate. Taste sauce and season with more salt and pepper, if needed. Spoon about ¼ cup sauce into a small bowl and stir in sour cream until smooth (this slowly brings up the temperature of the sour cream so it doesn't split when it hits the hot skillet). Pour back into skillet and stir to combine.",
         'Arrange chicken thighs and juices back in skillet and top with remaining chopped parsley. Serve over noodles.'
       ],
-      categoryIds: []
+      categoryIds: [],
+      yield: '4 servings',
+      prepTime: '20 minutes',
+      cookTime: '45 minutes'
     },
     {
       name: 'Ramen Noodles with Miso Pesto',
@@ -294,7 +322,10 @@ async function seed() {
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
       isDraft: false,
-      categoryIds: [dinner.id]
+      categoryIds: [dinner.id],
+      yield: '3-4 servings',
+      prepTime: '10 minutes',
+      cookTime: '1 hour, 5 minutes'
     },
     {
       name: 'Classic Focaccia Bread',
@@ -324,7 +355,10 @@ async function seed() {
         'Bake focaccia until surface is deep golden brown all over, 25–35 minutes. Let cool in pan 10 minutes. Slide a thin metal spatula underneath focaccia to loosen from sheet pan (it may stick in a couple of places, so use some elbow grease to get underneath) and transfer to a wire rack. Let cool completely before cutting as desired.'
       ],
       isDraft: false,
-      categoryIds: []
+      categoryIds: [],
+      yield: 'Makes one 18x13" pan',
+      prepTime: '20 minutes',
+      cookTime: '55 minutes'
     }
   ]
 
