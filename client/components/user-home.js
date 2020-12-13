@@ -76,7 +76,8 @@ export const UserHome = props => {
             </Column>
           </Row>
         </UserAccount>
-        <SuggestionBox userId={userId} />
+
+        <SuggestionBox />
       </FadeIn>
     </Container>
   )

@@ -15,6 +15,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// PUT /api/users
+router.put('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    const updatedUser = await user.update(req.body)
+    res.json(updatedUser)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // POST /api/users/suggestions
 router.post('/suggestions', async (req, res, next) => {
   try {
