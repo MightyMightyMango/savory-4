@@ -1,15 +1,24 @@
 const router = require('express').Router()
 const {User, Recipe, Suggestion} = require('../db/models')
+const isAdmin = require('../auth/helper')
 module.exports = router
 
 // GET /api/users
 router.get('/', async (req, res, next) => {
+  if (req.user === undefined) {
+    res.sendStatus(404)
+  }
+  const returned = await isAdmin(req.user.dataValues.id)
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'email'],
-      include: Recipe
-    })
-    res.json(users)
+    if (returned) {
+      const users = await User.findAll({
+        attributes: ['id', 'email'],
+        include: Recipe
+      })
+      res.json(users)
+    } else {
+      res.sendStatus(404)
+    }
   } catch (err) {
     next(err)
   }
@@ -41,12 +50,18 @@ router.post('/suggestions', async (req, res, next) => {
 // written for the future, admins can pull all the suggestions for their ccount
 // GET // /api/users/suggestions
 router.get('/suggestions', async (req, res, next) => {
+  if (req.user === undefined) {
+    res.sendStatus(404)
+  }
+  const returned = await isAdmin(req.user.dataValues.id)
   try {
-    // const suggestion = req.body
-    const suggestions = await Suggestion.findAll()
-    res.json(suggestions)
-  } catch (error) {
-    console.error(error)
-    //next (error)
+    if (returned) {
+      const suggestions = await Suggestion.findAll()
+      res.json(suggestions)
+    } else {
+      res.sendStatus(404)
+    }
+  } catch (err) {
+    next(err)
   }
 })
