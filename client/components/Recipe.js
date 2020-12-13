@@ -1,10 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setRecipeDraft, submitRecipe} from '../store/singleRecipe'
-import {deleteDraftThunk, resetRecipeState} from '../store/recipes'
+import {
+  setRecipeDraft,
+  submitRecipe,
+  resetRecipeState
+} from '../store/singleRecipe'
+import {deleteDraftThunk} from '../store/recipes'
 import history from '../history'
 import styled from 'styled-components'
-import {render} from 'enzyme'
 import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
 // import Container from '../theme/Container'
@@ -43,7 +46,8 @@ export class Recipe extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.recipe.id !== prevState.id) {
+    console.log('nextProps in get derived state from props', nextProps)
+    if (nextProps.recipe.id && nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
         ? nextProps.recipe.ingredients.join('\n')
@@ -61,7 +65,7 @@ export class Recipe extends React.Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault()
     let dataToSend = this.state
     delete dataToSend.isSubmitted
@@ -76,13 +80,15 @@ export class Recipe extends React.Component {
         : dataToSend.instructions
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
-    this.props.submitRecipe(dataToSend)
+    await this.props.submitRecipe(dataToSend)
     window.alert('Recipe Saved!')
     this.props.resetRecipeState()
+    this.setState(defaultState)
     history.push(`/recipes/${dataToSend.id}`)
   }
 
   async componentWillUnmount() {
+    console.log('componentWillUnmount')
     await this.props.resetRecipeState()
   }
 
@@ -114,8 +120,8 @@ export class Recipe extends React.Component {
   }
 
   render() {
-    console.log('this.props in render', this.props)
-    console.log('this.state in render', this.state)
+    // console.log('this.props in render', this.props)
+    // console.log('this.state in render', this.state)
     return (
       <>
         <FadeIn>

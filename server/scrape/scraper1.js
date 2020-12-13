@@ -12,6 +12,7 @@ const scraper1 = async (url, publisher, userId) => {
     const $ = cheerio.load(html.data)
     let info = $('script[type="application/ld+json"]').html()
     let parsed = JSON.parse(info)
+    console.log(parsed)
     let instructions = parsed.recipeInstructions || ''
     //if instructions are array, map over them
     if (Array.isArray(parsed.recipeInstructions)) {
@@ -24,6 +25,10 @@ const scraper1 = async (url, publisher, userId) => {
     imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
     let prepTime = parsed.prepTime ? timescrape1(parsed.prepTime) : ''
     let cookTime = parsed.cookTime ? timescrape1(parsed.cookTime) : ''
+    let recipeYield =
+      publisher === 'Bon Appetit' && parsed.servingSizeInfo
+        ? parsed.servingSizeInfo.description
+        : parsed.recipeYield
     recipeEntry = {
       url: url,
       name: parsed.name || '',
@@ -32,7 +37,7 @@ const scraper1 = async (url, publisher, userId) => {
       publisher: publisher,
       ingredients: parsed.recipeIngredient || [],
       instructions: instructions || [],
-      yield: parsed.recipeYield || '',
+      yield: recipeYield || '',
       prepTime: prepTime || '',
       cookTime: cookTime || '',
       categories: [],

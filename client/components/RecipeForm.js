@@ -1,6 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {setRecipeDraft, submitRecipe, getUserDraft} from '../store/singleRecipe'
 import styled from 'styled-components'
 import Button from '../theme/Button'
 
@@ -103,9 +101,9 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
       </form>
-      <Button primary onClick={props.handleSubmit}>
+      {/* <Button primary onClick={props.handleSubmit}>
         Confirm Changes
-      </Button>
+      </Button> */}
     </Container>
   )
 }
