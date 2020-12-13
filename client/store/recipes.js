@@ -77,17 +77,6 @@ export const setSingleRecipeThunk = recipeId => {
   }
 }
 
-//RESET RECIPE STATE
-export const resetRecipeState = () => {
-  return dispatch => {
-    try {
-      dispatch(setSingleRecipe({}))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
-
 // ALL DRAFTS
 export const setAllDraftsThunk = userId => {
   return async dispatch => {
@@ -161,6 +150,20 @@ export const submitCategory = (userId, category, data) => {
       })
       console.log('res.data', res.data)
       dispatch(setCategory(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const submitRecipeEdit = recipe => {
+  console.log(recipe)
+  return async dispatch => {
+    try {
+      let recipeId = recipe.id
+      const res = await axios.put(`/api/recipes/${recipeId}`, recipe)
+      console.log(res.data)
+      dispatch(setSingleRecipe(res.data))
     } catch (error) {
       console.error(error)
     }

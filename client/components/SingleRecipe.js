@@ -3,8 +3,9 @@ import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import history from '../history'
-import {submitRecipe} from '../store/singleRecipe'
+// import {resetRecipeState} from '../store/singleRecipe'
 import {
+  submitRecipeEdit,
   setSingleRecipeThunk,
   deleteRecipeThunk,
   deleteDraftThunk
@@ -79,7 +80,7 @@ export class SingleRecipe extends React.Component {
         : dataToSend.instructions
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
-    this.props.submitRecipe(dataToSend)
+    this.props.submitRecipeEdit(dataToSend)
     this.setState({canEdit: false})
     this.props.getRecipe(dataToSend.id)
   }
@@ -250,9 +251,10 @@ const mapDispatch = dispatch => ({
   getRecipe: recipeId => dispatch(setSingleRecipeThunk(recipeId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   deleteDraft: recipeId => dispatch(deleteDraftThunk(recipeId)),
-  submitRecipe: recipe => {
-    dispatch(submitRecipe(recipe))
-  }
+  submitRecipeEdit: recipe => {
+    dispatch(submitRecipeEdit(recipe))
+  },
+  resetRecipeState: () => dispatch(resetRecipeState())
 })
 
 export default connect(mapState, mapDispatch)(SingleRecipe)

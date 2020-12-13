@@ -2,12 +2,23 @@ import axios from 'axios'
 
 // import history from '../history'
 
-const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
+const SET_A_SINGLE_RECIPE = 'SET_A_SINGLE_RECIPE'
 
-export const setSingleRecipe = recipe => ({
-  type: SET_SINGLE_RECIPE,
+export const setASingleRecipe = recipe => ({
+  type: SET_A_SINGLE_RECIPE,
   recipe: recipe
 })
+
+//RESET RECIPE STATE
+export const resetRecipeState = () => {
+  return dispatch => {
+    try {
+      dispatch(setASingleRecipe({}))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 export const setRecipeDraft = (url, userId) => {
   return async dispatch => {
@@ -17,7 +28,7 @@ export const setRecipeDraft = (url, userId) => {
         url: url,
         userId: userId
       })
-      dispatch(setSingleRecipe(res.data))
+      dispatch(setASingleRecipe(res.data))
     } catch (error) {
       console.error(error)
     }
@@ -29,7 +40,7 @@ export const getUserDraft = userId => {
     try {
       const res = await axios.get(`/api/recipes/draft/${userId}`)
       // console.log('res.data in draft thunk', res.data)
-      dispatch(setSingleRecipe(res.data))
+      dispatch(setASingleRecipe(res.data))
     } catch (error) {
       console.error(error)
     }
@@ -42,7 +53,7 @@ export const submitRecipe = recipe => {
       let recipeId = recipe.id
       const res = await axios.put(`/api/recipes/${recipeId}`, recipe)
       // console.log(res.data)
-      dispatch(setSingleRecipe(res.data))
+      // dispatch(setASingleRecipe(res.data))
     } catch (error) {
       console.error(error)
     }
@@ -53,7 +64,7 @@ const initialState = {}
 
 function singleRecipeReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_SINGLE_RECIPE:
+    case SET_A_SINGLE_RECIPE:
       return action.recipe
     default:
       return state
