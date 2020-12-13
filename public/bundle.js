@@ -280,7 +280,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_fade_in__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-fade-in */ "./node_modules/react-fade-in/lib/index.js");
 /* harmony import */ var react_fade_in__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_fade_in__WEBPACK_IMPORTED_MODULE_6__);
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 50px;\n  flex-wrap: wrap;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 10px;\n  flex-wrap: wrap;\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -290,7 +290,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 300px;\n  object-fit: cover;\n  overflow: hidden;\n  padding-bottom: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 300px;\n  object-fit: cover;\n  overflow: hidden;\n  padding-bottom: 20px;\n  @media (max-width: ", ") {\n    margin-top: 50px;\n  }\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -310,7 +310,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  justify-contents: flex-start;\n  width: 33.33333%;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  align-items: center;\n  width: 33.33333%;\n  position: relative;\n  @media (max-width: ", ") {\n    width: 100%;\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -330,7 +330,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  align-self: center;\n  width: 100%;\n  padding-top: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  align-self: center;\n  width: 100%;\n  padding-top: 20px;\n  @media (max-width: ", ") {\n    padding-top: 0px;\n  }\n\n  .navlink {\n    position: absolute;\n    top: 250px;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -340,7 +340,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  // margin: 20px;\n  // text-align: center;\n  // font-size: 1.5em;\n  font-family: 'Merriweather', serif;\n  margin-top: 30px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  // margin: 20px;\n  // text-align: center;\n  // font-size: 1.5em;\n  font-family: 'Merriweather', serif;\n  margin-top: 30px;\n  @media (max-width: ", ") {\n    margin: 0px 5px;\n    font-size: 1.5em;\n    margin-top: ", ";\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -424,7 +424,9 @@ var AllRecipes = function AllRecipes(props) {
   // }
 
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_fade_in__WEBPACK_IMPORTED_MODULE_6___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "My Recipes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategoriesContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Categories"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Categories, null, Array.isArray(categories) ? categories.map(function (category) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_fade_in__WEBPACK_IMPORTED_MODULE_6___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, {
+    height: "70px"
+  }, "My Recipes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategoriesContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Categories"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Categories, null, Array.isArray(categories) ? categories.map(function (category) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_theme_Button__WEBPACK_IMPORTED_MODULE_5__["StyledButton"], {
       key: 'c' + category.id,
       type: "submit",
@@ -442,11 +444,12 @@ var AllRecipes = function AllRecipes(props) {
       key: 'r' + recipe.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
       src: recipe.imageUrl
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, recipe.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+      className: "navlink",
       to: "/recipes/".concat(recipe.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_theme_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
       primary: true
-    }, "View Recipe")));
+    }, "View Recipe")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, recipe.name));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)))));
 };
 
@@ -481,12 +484,22 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapDispatch)(AllRecipes));
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h1(_templateObject2());
-var RecipesContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h1(_templateObject2(), function (props) {
+  return props.theme.breakpoints.mobile;
+}, function (props) {
+  return props.height;
+});
+var RecipesContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3(), function (props) {
+  return props.theme.breakpoints.mobile;
+});
 var CategoriesContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4());
-var Recipe = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject5());
+var Recipe = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject5(), function (props) {
+  return props.theme.breakpoints.mobile;
+});
 var Subtitle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject6());
-var Image = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img(_templateObject7());
+var Image = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img(_templateObject7(), function (props) {
+  return props.theme.breakpoints.mobile;
+});
 var Categories = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject8());
 
 /***/ }),
@@ -623,8 +636,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _theme_HomePageBG__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/HomePageBG */ "./client/theme/HomePageBG.js");
 /* harmony import */ var react_fade_in__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-fade-in */ "./node_modules/react-fade-in/lib/index.js");
 /* harmony import */ var react_fade_in__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_fade_in__WEBPACK_IMPORTED_MODULE_4__);
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  width: 100%;\n  justify-content: space-around;\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  height: auto;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  width: 20%;\n  height: auto;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  justify-contents: center;\n  align-items: center;\n  background-color: #ffffff;\n  padding: 30px;\n  border-radius: 50%;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  z-index: 1;\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 1em;\n  text-align: center;\n  margin: 20px;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -634,7 +677,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  width: 20%;\n  height: auto;\n"]);
+  var data = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 1.8em;\n  font-weight: bold;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -644,7 +687,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 1em;\n  text-align: center;\n  margin: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -654,7 +697,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  margin: 20px;\n  text-align: center;\n  font-size: 1.5em;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-bottom: 250px;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -674,16 +717,29 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var Homepage = function Homepage() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_fade_in__WEBPACK_IMPORTED_MODULE_4___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_theme_Container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     primary: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Welcome to"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HomepageContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Welcome to"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Logo, {
     src: "images/savory-logo.png"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Log-in to save recipes!"))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Log-in to save recipes!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HomepageContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Why Savory?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Tired of keeping track of recipes from around the web in various places like your notes and screenshots? Well now you can keep them all in one place, with Savory.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HomepageContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Number, null, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Fetch a Recipe"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Enter a recipe that you would like to save. Make any edits you would like in the form, then confirm the recipe."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
+    src: "images/homepage/fetch-recipe.png"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
+    src: "images/homepage/form.png"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HomepageContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Number, null, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Manage your recipe books "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "To add a recipe book, go to the recipe books page and enter the name of the book and check off which of your recipes you would like to add to it."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
+    src: "images/homepage/recipe-book.png"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HomepageContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Number, null, "3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "View your recipes by category "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Subtitle, null, "Go the the My Recipes page to enjoy your personalized collection of recipes and recipe books!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
+    src: "images/homepage/cocktails.png"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Image, {
+    src: "images/homepage/all.png"
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Homepage);
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
-var Subtitle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h3(_templateObject2());
-var Logo = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img(_templateObject3());
-var Circle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4());
+var HomepageContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject2());
+var Number = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
+var Subtitle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h3(_templateObject4());
+var Logo = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img(_templateObject5());
+var Image = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img(_templateObject6());
+var TwoCol = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject7());
 
 /***/ }),
 
@@ -1064,6 +1120,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
  // import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
+var defaultState = {
+  url: '',
+  name: '',
+  description: '',
+  imageUrl: '',
+  publisher: '',
+  ingredients: [],
+  instructions: [],
+  "yield": '',
+  prepTime: '',
+  cookTime: '',
+  categories: {},
+  userId: '',
+  isDraft: '',
+  isSubmitted: false,
+  loading: false
+};
 var Recipe = /*#__PURE__*/function (_React$Component) {
   _inherits(Recipe, _React$Component);
 
@@ -1081,21 +1154,16 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
 
       _this.props.deleteDraft(_this.state.id);
 
-      _this.setState({
-        isSubmitted: false
-      });
+      _this.props.resetRecipeState();
 
-      console.log(_this.state);
+      _this.setState(defaultState);
     });
 
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.submitUrl = _this.submitUrl.bind(_assertThisInitialized(_this));
     _this.handleKeyPress = _this.handleKeyPress.bind(_assertThisInitialized(_this));
-    _this.state = {
-      isSubmitted: false,
-      loading: false
-    };
+    _this.state = defaultState;
     return _this;
   }
 
@@ -1110,39 +1178,64 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
       evt.preventDefault();
       var dataToSend = this.state;
       delete dataToSend.isSubmitted;
+      delete dataToSend.loading;
       dataToSend.ingredients = typeof dataToSend.ingredients === 'string' ? dataToSend.ingredients.split('\n') : dataToSend.ingredients;
       dataToSend.instructions = typeof dataToSend.instructions === 'string' ? dataToSend.instructions.split('\n') : dataToSend.instructions;
       dataToSend.isDraft = false;
       console.log('DATA SENT TO DB', dataToSend);
       this.props.submitRecipe(dataToSend);
       window.alert('Recipe Saved!');
+      this.props.resetRecipeState();
       _history__WEBPACK_IMPORTED_MODULE_4__["default"].push("/recipes/".concat(dataToSend.id));
     }
   }, {
-    key: "submitUrl",
+    key: "componentWillUnmount",
     value: function () {
-      var _submitUrl = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        var _this2 = this;
-
-        var url;
+      var _componentWillUnmount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.props.resetRecipeState();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentWillUnmount() {
+        return _componentWillUnmount.apply(this, arguments);
+      }
+
+      return componentWillUnmount;
+    }()
+  }, {
+    key: "submitUrl",
+    value: function () {
+      var _submitUrl = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+        var _this2 = this;
+
+        var url;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 event.preventDefault();
                 url = document.getElementById('url-input').value;
 
                 if (!(url.length !== 0)) {
-                  _context.next = 7;
+                  _context2.next = 7;
                   break;
                 }
 
-                _context.next = 5;
+                _context2.next = 5;
                 return this.props.getSingleRecipe(url, this.props.user.id);
 
               case 5:
-                // document.getElementById('url-input').value = '
-                // setTimeout(() => this.setState({isSubmitted: true, loading: true}), 3000)
                 this.setState({
                   isSubmitted: true,
                   loading: true
@@ -1156,10 +1249,10 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
 
               case 7:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function submitUrl(_x) {
@@ -1171,40 +1264,35 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleKeyPress",
     value: function () {
-      var _handleKeyPress = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+      var _handleKeyPress = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
         var url;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 event.preventDefault();
-                console.log('key pressed, charCode', event.charCode);
-                console.log('key pressed, keyCode', event.keyCode);
-                console.log('key pressed, keyCode', event.key);
-                console.log('event ', event);
-                console.log('event.value ', event.value);
 
                 if (!(event.keyCode == 13 || event.key == 'Enter')) {
-                  _context2.next = 11;
+                  _context3.next = 6;
                   break;
                 }
 
                 url = document.getElementById('url-input').value;
-                _context2.next = 10;
+                _context3.next = 5;
                 return this.props.getSingleRecipe(url, this.props.user.id);
 
-              case 10:
+              case 5:
                 // document.getElementById('url-input').value = ' '
                 this.setState({
                   isSubmitted: true
                 });
 
-              case 11:
+              case 6:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function handleKeyPress(_x2) {
@@ -1218,6 +1306,8 @@ var Recipe = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      console.log('this.props in render', this.props);
+      console.log('this.state in render', this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_fade_in__WEBPACK_IMPORTED_MODULE_10___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, null, !this.state.isSubmitted && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RecipeScrape, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Title, null, "Enter Recipe Url:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Form, {
         onSubmit: function onSubmit() {
           return _this3.submitUrl(event);
@@ -1286,6 +1376,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     deleteDraft: function deleteDraft(recipeId) {
       return dispatch(Object(_store_recipes__WEBPACK_IMPORTED_MODULE_3__["deleteDraftThunk"])(recipeId));
+    },
+    resetRecipeState: function resetRecipeState() {
+      return dispatch(Object(_store_recipes__WEBPACK_IMPORTED_MODULE_3__["resetRecipeState"])());
     }
   };
 };
@@ -1368,11 +1461,6 @@ var RecipeForm = function RecipeForm(props) {
     type: "text",
     name: "publisher",
     value: props.recipe.publisher,
-    onChange: props.handleChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "SOURCE URL:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "url",
-    value: props.recipe.url,
     onChange: props.handleChange
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "IMAGE URL:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
@@ -1464,7 +1552,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  width: calc(100% - 450px);\n  padding-top: 20px;\n  padding-left: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: calc(100% - 450px);\n  padding-top: 20px;\n  padding-left: 20px;\n\n  @media (max-width: ", ") {\n    width: 100%;\n    padding-left: 0px;\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -1504,7 +1592,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  width: 68%;\n  padding-left: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  //width: 68%;\n  //padding-left: 20px;\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -1524,7 +1612,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: space-evenly;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  flex-wrap: wrap;\n  padding: 20px 0px;\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -1817,7 +1905,9 @@ var DetailsContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"]
 var Subtitle = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].b(_templateObject10());
 var ListItem = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].li(_templateObject11());
 var Ingredients = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject12());
-var Instructions = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject13());
+var Instructions = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject13(), function (props) {
+  return props.theme.breakpoints.mobile;
+});
 var Details = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].ul(_templateObject14());
 
 /***/ }),
@@ -1875,7 +1965,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  width: 600px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  align-self: center;\n  background-color: white;\n  padding-top: 50px;\n  padding-bottom: 50px;\n  border-radius: 2px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);\n\n  a {\n    color: darkseagreen;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 600px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  align-self: center;\n  background-color: white;\n  padding-top: 50px;\n  padding-bottom: 50px;\n  border-radius: 2px;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);\n\n  a {\n    color: darkseagreen;\n  }\n\n  @media (max-width: ", ") {\n    width: 90%;\n    padding: 20px;\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -1885,7 +1975,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: ", ";\n  text-align: center;\n  align-items: center;\n  width: 100%;\n  height: 100vh;\n  padding-top: 180px;\n  padding-bottom: 50px;\n  background-color: darkseagreen;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: ", ";\n  text-align: center;\n  align-items: center;\n  // width: 100%;\n  height: 100vh;\n  padding-top: 180px;\n  padding-bottom: 50px;\n  background-color: darkseagreen;\n  justify-content: center;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -1915,9 +2005,9 @@ var AuthForm = function AuthForm(props) {
       displayName = props.displayName,
       handleSubmit = props.handleSubmit,
       error = props.error;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_fade_in__WEBPACK_IMPORTED_MODULE_7___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
     primary: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_fade_in__WEBPACK_IMPORTED_MODULE_7___default.a, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoginSignupWrapper, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoginSignupWrapper, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit,
     name: name
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoginFieldDiv, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -1997,7 +2087,9 @@ AuthForm.propTypes = {
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject(), function (props) {
   return props.primary ? 'column' : 'row';
 });
-var LoginSignupWrapper = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject2());
+var LoginSignupWrapper = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject2(), function (props) {
+  return props.theme.breakpoints.mobile;
+});
 var Password = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].input(_templateObject3());
 var LoginFieldDiv = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject4());
 var ButtonDiv = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject5());
@@ -2544,7 +2636,7 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!*********************************!*\
   !*** ./client/store/recipes.js ***!
   \*********************************/
-/*! exports provided: setAllRecipes, setAllDrafts, setSingleRecipe, deleteRecipe, deleteDraft, getUserCategories, getRecipesInCategory, setCategory, editCategory, setAllRecipesThunk, setSingleRecipeThunk, setAllDraftsThunk, deleteRecipeThunk, deleteDraftThunk, getUserCategoriesThunk, getRecipesInCategoryThunk, submitCategory, editCategoryThunk, default */
+/*! exports provided: setAllRecipes, setAllDrafts, setSingleRecipe, deleteRecipe, deleteDraft, getUserCategories, getRecipesInCategory, setCategory, editCategory, setAllRecipesThunk, setSingleRecipeThunk, resetRecipeState, setAllDraftsThunk, deleteRecipeThunk, deleteDraftThunk, getUserCategoriesThunk, getRecipesInCategoryThunk, submitCategory, editCategoryThunk, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2560,6 +2652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editCategory", function() { return editCategory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAllRecipesThunk", function() { return setAllRecipesThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSingleRecipeThunk", function() { return setSingleRecipeThunk; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetRecipeState", function() { return resetRecipeState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAllDraftsThunk", function() { return setAllDraftsThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRecipeThunk", function() { return deleteRecipeThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteDraftThunk", function() { return deleteDraftThunk; });
@@ -2716,6 +2809,16 @@ var setSingleRecipeThunk = function setSingleRecipeThunk(recipeId) {
       return _ref2.apply(this, arguments);
     };
   }();
+}; //RESET RECIPE STATE
+
+var resetRecipeState = function resetRecipeState() {
+  return function (dispatch) {
+    try {
+      dispatch(setSingleRecipe({}));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }; // ALL DRAFTS
 
 var setAllDraftsThunk = function setAllDraftsThunk(userId) {
@@ -3431,10 +3534,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _theme_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme.js */ "./client/theme/theme.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  background-color: ", ";\n  color: #ffffff;\n  border-radius: 2px;\n  padding: 10px 5px;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 10px 20px;\n  border: none;\n  transition-duration: 0.4s;\n  height: 50px;\n  font-size: 1.25em;\n  font-family: 'Raleway', sans-serif;\n  font-weight: 500;\n  letter-spacing: 0.0625em;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);\n  max-width: 300px;\n\n  :hover {\n    background-color: ", ";\n  }\n\n  :focus {\n    outline: 2px solid gray;\n  }\n\n  a {\n    color: #ffffff;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  background-color: ", ";\n  color: #ffffff;\n  border-radius: 2px;\n  padding: 10px 5px;\n  margin: 10px;\n  margin-bottom: 10px;\n  border: none;\n  transition-duration: 0.4s;\n  font-size: 1.25em;\n  font-family: 'Raleway', sans-serif;\n  font-weight: 500;\n  letter-spacing: 0.0625em;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);\n  max-width: 300px;\n  overflow: wrap;\n\n  :hover {\n    background-color: ", ";\n  }\n\n  :focus {\n    outline: 2px solid gray;\n  }\n\n  a {\n    color: #ffffff;\n  }\n\n  @media (max-width: ", ") {\n    font-size: 1em;\n    margin: 5px;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -3447,11 +3551,12 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
+
 var StyledButton = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].button(_templateObject(), function (props) {
   return props.primary ? '#8fbc8b' : '#C0C0C0';
 }, function (props) {
   return props.primary ? '#a0b39e' : '#DCDCDC';
-});
+}, _theme_js__WEBPACK_IMPORTED_MODULE_2__["default"].breakpoints.mobile);
 
 var Button = function Button(_ref) {
   var primary = _ref.primary,
@@ -3482,7 +3587,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: ", ";\n  text-align: center;\n  align-items: center;\n  width: 100%;\n  height: 100vh;\n  padding-top: 180px;\n  padding-bottom: 50px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: ", ";\n  text-align: center;\n  align-items: center;\n  width: 100%;\n  padding-top: 180px;\n  padding-bottom: 50px;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -3530,7 +3635,7 @@ var Container = function Container(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n\nhtml, body {\n  width:100%;\n  height: 100vh;\n  font-family: 'Poppins', sans-serif;\n  height: 100vh;\n  font-size: 1em;\n  scrollbar-width: thin;\n  letter-spacing: 0.0625em;\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n}\n\n* {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n}\n\nh1 {\n  padding-bottom: 20px;\n  font-family: 'Oswald', sans serif;\n}\n\nh2, h3, h4, h5, h6 {\n  padding-bottom: 20px;\n  font-weight: 700;\n}\n\na {\n  text-decoration: none;\n  transition-duration: 0.4s;\n}\n\nlabel {\n  display: block;\n}\n\nb {\n  font-family: 'Raleway', sans-serif;\n  font-weight: 700;\n}\n\nul {\n  list-style-type: none;\n}\n\nli {\n  list-style-type: none;\n}\n\nimg {\n  border:none;\n}\n\n.row {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  width: 100%;\n}\n\n.column {\n  display: flex;\n  flex-direction: column;\n  flex-basis: 100%;\n  flex: 1;\n  text-align: left;\n}\n\n.fade-appear,\n.fade-enter {\n    opacity: 0;\n    z-index: 1;\n}\n.fade-appear-active,\n.fade-enter.fade-enter-active {\n    opacity: 1;\n    transition: opacity 300ms linear 150ms;\n}\n\n.fade-exit {\n    opacity: 1;\n}\n\n.fade-exit.fade-exit-active {\n    opacity: 0;\n    transition: opacity 150ms linear;\n}\n\n"]);
+  var data = _taggedTemplateLiteral(["\n\nhtml, body {\n  width:100%;\n  height: 100vh;\n  font-family: 'Poppins', sans-serif;\n  height: 100vh;\n  font-size: 1em;\n  scrollbar-width: thin;\n  letter-spacing: 0.0625em;\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n  overflow-x: hidden;\n}\n\n* {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n}\n\nh1 {\n  padding-bottom: 20px;\n  font-family: 'Oswald', sans serif;\n}\n\nh2, h3, h4, h5, h6 {\n  padding-bottom: 20px;\n  font-weight: 700;\n}\n\na {\n  text-decoration: none;\n  transition-duration: 0.4s;\n}\n\nlabel {\n  display: block;\n}\n\nb {\n  font-family: 'Raleway', sans-serif;\n  font-weight: 700;\n}\n\nul {\n  list-style-type: none;\n}\n\nli {\n  list-style-type: none;\n}\n\nimg {\n  border:none;\n}\n\n.row {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  width: 100%;\n}\n\n.column {\n  display: flex;\n  flex-direction: column;\n  flex-basis: 100%;\n  flex: 1;\n  text-align: left;\n}\n\n.fade-appear,\n.fade-enter {\n    opacity: 0;\n    z-index: 1;\n}\n.fade-appear-active,\n.fade-enter.fade-enter-active {\n    opacity: 1;\n    transition: opacity 300ms linear 150ms;\n}\n\n.fade-exit {\n    opacity: 1;\n}\n\n.fade-exit.fade-exit-active {\n    opacity: 0;\n    transition: opacity 150ms linear;\n}\n\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13264,10 +13369,10 @@ exports.isHtml = function(str) {
 /*!*******************************************!*\
   !*** ./node_modules/cheerio/package.json ***!
   \*******************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, dependencies, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"cheerio@1.0.0-rc.3\",\"/Users/ellengranoff/Repos/senior-phase/capstone/savory-4\"]],\"_from\":\"cheerio@1.0.0-rc.3\",\"_id\":\"cheerio@1.0.0-rc.3\",\"_inBundle\":false,\"_integrity\":\"sha512-0td5ijfUPuubwLUu0OBoe98gZj8C/AA+RW3v67GPlGOrvxWjZmBXiBCRU+I8VEiNyJzjth40POfHiz2RB3gImA==\",\"_location\":\"/cheerio\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"cheerio@1.0.0-rc.3\",\"name\":\"cheerio\",\"escapedName\":\"cheerio\",\"rawSpec\":\"1.0.0-rc.3\",\"saveSpec\":null,\"fetchSpec\":\"1.0.0-rc.3\"},\"_requiredBy\":[\"/\",\"/enzyme\"],\"_resolved\":\"https://registry.npmjs.org/cheerio/-/cheerio-1.0.0-rc.3.tgz\",\"_spec\":\"1.0.0-rc.3\",\"_where\":\"/Users/ellengranoff/Repos/senior-phase/capstone/savory-4\",\"author\":{\"name\":\"Matt Mueller\",\"email\":\"mattmuelle@gmail.com\",\"url\":\"mat.io\"},\"bugs\":{\"url\":\"https://github.com/cheeriojs/cheerio/issues\"},\"dependencies\":{\"css-select\":\"~1.2.0\",\"dom-serializer\":\"~0.1.1\",\"entities\":\"~1.1.1\",\"htmlparser2\":\"^3.9.1\",\"lodash\":\"^4.15.0\",\"parse5\":\"^3.0.1\"},\"description\":\"Tiny, fast, and elegant implementation of core jQuery designed specifically for the server\",\"devDependencies\":{\"benchmark\":\"^2.1.0\",\"coveralls\":\"^2.11.9\",\"expect.js\":\"~0.3.1\",\"istanbul\":\"^0.4.3\",\"jquery\":\"^3.0.0\",\"jsdom\":\"^9.2.1\",\"jshint\":\"^2.9.2\",\"mocha\":\"^3.1.2\",\"xyz\":\"~1.1.0\"},\"engines\":{\"node\":\">= 0.6\"},\"files\":[\"index.js\",\"lib\"],\"homepage\":\"https://github.com/cheeriojs/cheerio#readme\",\"keywords\":[\"htmlparser\",\"jquery\",\"selector\",\"scraper\",\"parser\",\"html\"],\"license\":\"MIT\",\"main\":\"./index.js\",\"name\":\"cheerio\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/cheeriojs/cheerio.git\"},\"scripts\":{\"test\":\"make test\"},\"version\":\"1.0.0-rc.3\"}");
+module.exports = JSON.parse("{\"_from\":\"cheerio@^1.0.0-rc.3\",\"_id\":\"cheerio@1.0.0-rc.3\",\"_inBundle\":false,\"_integrity\":\"sha512-0td5ijfUPuubwLUu0OBoe98gZj8C/AA+RW3v67GPlGOrvxWjZmBXiBCRU+I8VEiNyJzjth40POfHiz2RB3gImA==\",\"_location\":\"/cheerio\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"cheerio@^1.0.0-rc.3\",\"name\":\"cheerio\",\"escapedName\":\"cheerio\",\"rawSpec\":\"^1.0.0-rc.3\",\"saveSpec\":null,\"fetchSpec\":\"^1.0.0-rc.3\"},\"_requiredBy\":[\"/\",\"/enzyme\"],\"_resolved\":\"https://registry.npmjs.org/cheerio/-/cheerio-1.0.0-rc.3.tgz\",\"_shasum\":\"094636d425b2e9c0f4eb91a46c05630c9a1a8bf6\",\"_spec\":\"cheerio@^1.0.0-rc.3\",\"_where\":\"/Users/leaoverend/GraceHopper/savory-4\",\"author\":{\"name\":\"Matt Mueller\",\"email\":\"mattmuelle@gmail.com\",\"url\":\"mat.io\"},\"bugs\":{\"url\":\"https://github.com/cheeriojs/cheerio/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"css-select\":\"~1.2.0\",\"dom-serializer\":\"~0.1.1\",\"entities\":\"~1.1.1\",\"htmlparser2\":\"^3.9.1\",\"lodash\":\"^4.15.0\",\"parse5\":\"^3.0.1\"},\"deprecated\":false,\"description\":\"Tiny, fast, and elegant implementation of core jQuery designed specifically for the server\",\"devDependencies\":{\"benchmark\":\"^2.1.0\",\"coveralls\":\"^2.11.9\",\"expect.js\":\"~0.3.1\",\"istanbul\":\"^0.4.3\",\"jquery\":\"^3.0.0\",\"jsdom\":\"^9.2.1\",\"jshint\":\"^2.9.2\",\"mocha\":\"^3.1.2\",\"xyz\":\"~1.1.0\"},\"engines\":{\"node\":\">= 0.6\"},\"files\":[\"index.js\",\"lib\"],\"homepage\":\"https://github.com/cheeriojs/cheerio#readme\",\"keywords\":[\"htmlparser\",\"jquery\",\"selector\",\"scraper\",\"parser\",\"html\"],\"license\":\"MIT\",\"main\":\"./index.js\",\"name\":\"cheerio\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/cheeriojs/cheerio.git\"},\"scripts\":{\"test\":\"make test\"},\"version\":\"1.0.0-rc.3\"}");
 
 /***/ }),
 

@@ -18,8 +18,8 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Container primary>
-      <FadeIn>
+    <FadeIn>
+      <Container primary>
         <LoginSignupWrapper>
           <form onSubmit={handleSubmit} name={name}>
             <LoginFieldDiv>
@@ -52,8 +52,8 @@ const AuthForm = props => {
             {error && error.response && <div> {error.response.data} </div>}
           </form>
         </LoginSignupWrapper>
-      </FadeIn>
-    </Container>
+      </Container>
+    </FadeIn>
   )
 }
 
@@ -111,11 +111,12 @@ const Container = styled.div`
   flex-direction: ${props => (props.primary ? 'column' : 'row')};
   text-align: center;
   align-items: center;
-  width: 100%;
+  // width: 100%;
   height: 100vh;
   padding-top: 180px;
   padding-bottom: 50px;
   background-color: darkseagreen;
+  justify-content: center;
 `
 
 const LoginSignupWrapper = styled.div`
@@ -133,6 +134,11 @@ const LoginSignupWrapper = styled.div`
 
   a {
     color: darkseagreen;
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 90%;
+    padding: 20px;
   }
 `
 

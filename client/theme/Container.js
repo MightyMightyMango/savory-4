@@ -8,7 +8,6 @@ const ContentWrapper = styled.div`
   text-align: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
   padding-top: 180px;
   padding-bottom: 50px;
 `

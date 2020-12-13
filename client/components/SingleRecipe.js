@@ -314,7 +314,9 @@ const Image = styled.img`
 const ActionButtons = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 0px;
 `
 
 const RecipeContainer = styled.div`
@@ -332,8 +334,8 @@ const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 68%;
-  padding-left: 20px;
+  //width: 68%;
+  //padding-left: 20px;
 `
 
 const Subtitle = styled.b`
@@ -356,6 +358,11 @@ const Instructions = styled.div`
   width: calc(100% - 450px);
   padding-top: 20px;
   padding-left: 20px;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 100%;
+    padding-left: 0px;
+  }
 `
 
 const Details = styled.ul`
