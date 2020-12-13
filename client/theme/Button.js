@@ -31,10 +31,15 @@ export const StyledButton = styled.button`
     color: #ffffff;
   }
 
+
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1em;
     margin: 5px;
     max-width: ${props => (props.fullWidth ? '100%' : 'initial')};
+
+  .view-pages {
+    position-top: bottom;
+    margin: 10px;
   }
 `
 

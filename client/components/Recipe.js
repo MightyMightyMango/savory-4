@@ -1,10 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setRecipeDraft, submitRecipe} from '../store/singleRecipe'
-import {deleteDraftThunk, resetRecipeState} from '../store/recipes'
+import {
+  setRecipeDraft,
+  submitRecipe,
+  resetRecipeState
+} from '../store/singleRecipe'
+import {deleteDraftThunk} from '../store/recipes'
 import history from '../history'
 import styled from 'styled-components'
-import {render} from 'enzyme'
 import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
 // import Container from '../theme/Container'
@@ -39,11 +42,13 @@ export class Recipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.submitUrl = this.submitUrl.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.validateInput = this.validateInput.bind(this)
     this.state = defaultState
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.recipe.id !== prevState.id) {
+    console.log('nextProps in get derived state from props', nextProps)
+    if (nextProps.recipe.id && nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
         ? nextProps.recipe.ingredients.join('\n')
@@ -61,7 +66,7 @@ export class Recipe extends React.Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault()
     let dataToSend = this.state
     delete dataToSend.isSubmitted
@@ -76,13 +81,15 @@ export class Recipe extends React.Component {
         : dataToSend.instructions
     dataToSend.isDraft = false
     console.log('DATA SENT TO DB', dataToSend)
-    this.props.submitRecipe(dataToSend)
+    await this.props.submitRecipe(dataToSend)
     window.alert('Recipe Saved!')
     this.props.resetRecipeState()
+    this.setState(defaultState)
     history.push(`/recipes/${dataToSend.id}`)
   }
 
   async componentWillUnmount() {
+    console.log('componentWillUnmount')
     await this.props.resetRecipeState()
   }
 
@@ -93,13 +100,38 @@ export class Recipe extends React.Component {
     this.setState(defaultState)
   }
 
+  validateInput = url => {
+    if (url.length !== 0) {
+      if (url.includes('bonappetit.com/recipe')) {
+        return true
+      } else if (url.includes('cooking.nytimes.com/recipes')) {
+        return true
+      } else if (url.includes('simplyrecipes.com/recipes')) {
+        return true
+      } else if (url.includes('allrecipes.com/recipe')) {
+        return true
+      } else if (url.includes('foodnetwork.com/recipes')) {
+        return true
+      } else if (url.includes('eatingwell.com/recipe')) {
+        return true
+      } else {
+        return false
+      }
+    }
+    return false
+  }
+
   async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    if (url.length !== 0) {
+    if (this.validateInput(url)) {
       await this.props.getSingleRecipe(url, this.props.user.id)
       this.setState({isSubmitted: true, loading: true})
       setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    } else {
+      alert(
+        'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form below!'
+      )
     }
   }
 
@@ -114,8 +146,8 @@ export class Recipe extends React.Component {
   }
 
   render() {
-    console.log('this.props in render', this.props)
-    console.log('this.state in render', this.state)
+    // console.log('this.props in render', this.props)
+    // console.log('this.state in render', this.state)
     return (
       <>
         <FadeIn>
