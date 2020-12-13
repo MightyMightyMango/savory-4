@@ -6,7 +6,8 @@ import {
   deleteRecipeThunk,
   getUserCategoriesThunk,
   getRecipesInCategoryThunk,
-  submitCategory
+  submitCategory,
+  setAllFinalRecipesThunk
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 // import EditCategories from './EditCategories'
@@ -165,7 +166,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
+  getAllRecipes: userId => dispatch(setAllFinalRecipesThunk(userId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
   getRecipesInCategory: (userId, categoryId) =>
@@ -186,9 +187,11 @@ const Container = styled.div`
 const Title = styled.h1`
   // margin: 20px;
   // text-align: center;
-  // font-size: 1.5em;
+  font-size: 1.7em;
   font-family: 'Merriweather', serif;
   margin-top: 30px;
+  padding: 5px;
+  padding-bottom: 20px;
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     margin: 0px 5px;
     font-size: 1.5em;

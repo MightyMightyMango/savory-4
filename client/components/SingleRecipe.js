@@ -77,7 +77,7 @@ export class SingleRecipe extends React.Component {
       typeof dataToSend.instructions === 'string'
         ? dataToSend.instructions.split('\n')
         : dataToSend.instructions
-    dataToSend.isDraft = false
+    dataToSend.isDraft = true
     console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipe(dataToSend)
     this.setState({canEdit: false})
@@ -264,6 +264,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 `
 
 const SingleRecipeHeader = styled.div`

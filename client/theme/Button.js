@@ -34,6 +34,7 @@ export const StyledButton = styled.button`
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1em;
     margin: 5px;
+    max-width: ${props => (props.fullWidth ? '100%' : 'initial')};
   }
 `
 

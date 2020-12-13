@@ -65,6 +65,18 @@ export const setAllRecipesThunk = userId => {
   }
 }
 
+// ALL FINAL RECIPES
+export const setAllFinalRecipesThunk = userId => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(`/api/recipes/saved/${userId}`)
+      dispatch(setAllRecipes(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 // SINGLE RECIPE
 export const setSingleRecipeThunk = recipeId => {
   return async dispatch => {

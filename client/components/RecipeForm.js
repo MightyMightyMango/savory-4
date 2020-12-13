@@ -11,7 +11,7 @@ const RecipeForm = props => {
     <Container>
       <FadeIn>
         <Heading>
-          <img width="250px" src={props.recipe.imageUrl} />
+          <img className="rcp-img" src={props.recipe.imageUrl} />
         </Heading>
       </FadeIn>
       {/* Edit recipe details for <em>{recipe.name}</em> below, then click */}
@@ -103,7 +103,7 @@ const RecipeForm = props => {
           onChange={props.handleChange}
         />
       </form>
-      <Button primary onClick={props.handleSubmit}>
+      <Button fullWidth primary onClick={props.handleSubmit}>
         Confirm Changes
       </Button>
     </Container>
@@ -115,14 +115,23 @@ export default RecipeForm
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   flex-wrap: wrap;
+  margin: 20px;
+
+  .rcp-img {
+    width: 300px;
+
+    @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+      width: 100%;
+    }
+  }
 `
 
 const Heading = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: center;
 `
 
 const Text = styled.div`
