@@ -17,6 +17,8 @@ const processUrl = async (url, userId) => {
     return scraper2(url, 'The Food Network', userId)
   } else if (url.includes('eatingwell.com/recipe')) {
     return scraper2(url, 'Eating Well', userId)
+  } else if (url.includes('tasty.co/recipe')) {
+    return scraper1(url, 'Tasty', userId)
   } else {
     return 'error'
   }
