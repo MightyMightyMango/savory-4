@@ -1,10 +1,10 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
-import Container from '../theme/Container'
+import styled from 'styled-components'
 
 const Loader = props => (
   <>
-    <Container>
+    <LoaderContainer>
       <ContentLoader
         speed={2}
         width={400}
@@ -23,8 +23,16 @@ const Loader = props => (
         <circle cx="282" cy="149" r="12" />
         <circle cx="339" cy="134" r="19" />
       </ContentLoader>
-    </Container>
+    </LoaderContainer>
   </>
 )
 
 export default Loader
+
+const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+`

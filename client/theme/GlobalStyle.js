@@ -71,47 +71,7 @@ img {
   flex-basis: 100%;
   flex: 1;
   text-align: left;
-}
-
-.fade-appear,
-.fade-enter {
-    opacity: 0;
-    z-index: 1;
-}
-.fade-appear-active,
-.fade-enter.fade-enter-active {
-    opacity: 1;
-    transition: opacity 300ms linear 150ms;
-}
-
-.fade-exit {
-    opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-    opacity: 0;
-    transition: opacity 150ms linear;
-}
-
-.showconfirmation-enter {
-  opacity: 0;
-  transform: scale(0.9);
-}
-.showconfirmation-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 300ms, transform 300ms;
-}
-.showconfirmation-exit {
-  opacity: 1;
-}
-.showconfirmation-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
-}
-
-`
+}`
 
 //can also keep any styled components here that are the same globally,
 

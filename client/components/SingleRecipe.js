@@ -90,61 +90,7 @@ export class SingleRecipe extends React.Component {
   render() {
     let recipe = this.props.recipe || {}
 
-    let {
-      name,
-      publisher,
-      url,
-      description,
-      prepTime,
-      cookTime,
-      ingredients,
-      instructions
-    } =
-      this.props.recipe || {}
-
-    // console.log('recipe ', recipe)
-    // console.log('ingredients ', ingredients)
-    // let ingredientList = ''
-    // if (ingredients) {
-    //   ingredientList = ingredients.join('%0D%0A')
-    // }
-
-    const emailText =
-      'Check out this recipe I saved with the Savory App!%0D%0A%0D%0A' +
-      name +
-      '%0D%0A%0D%0A' +
-      description +
-      '%0D%0A%0D%0A' +
-      //  +"Ingredients:%0D%0A%0D%0A"+ingredientList+"%0D%0A%0D%0A"
-      //         // +"Instructions:%0D%0A%0D%0A"+instructions.join("%0D%0A")+"%0D%0A%0D%0A"
-      prepTime +
-      '%0D%0A' +
-      cookTime +
-      '%0D%0A' +
-      this.props.recipe.yield +
-      '%0D%0A' +
-      publisher +
-      ' at:%0D%0A' +
-      url
-
-    // const emailText = `Check out this recipe I saved with the Savory App!
-    //         <P>${name}</P>
-    //         ${description}
-    //         <br>
-
-    //         Ingredients:
-    //         ${ingredients}
-
-    //         Instructions:
-    //         ${instructions}
-
-    //         ${prepTime}
-    //         ${cookTime}
-    //         ${this.props.recipe.yield}
-
-    //         ${publisher} at:
-    //         ${url}
-    //         `
+    // FORMAT INGREDIENTS AND INSTRUCTIONS FOR RENDER
 
     let displayIngredients =
       typeof recipe.ingredients === 'string'
@@ -156,6 +102,45 @@ export class SingleRecipe extends React.Component {
         : recipe.instructions
     displayInstructions = displayInstructions || []
     displayIngredients = displayIngredients || []
+
+    // FORMAT RECIPE FOR EMAIL
+
+    const {name, publisher, url, description, prepTime, cookTime} =
+      this.props.recipe || {}
+
+    const ingredientList = displayIngredients.join('%0D%0A')
+    let instructionList = ''
+    if (displayInstructions.length > 0) {
+      instructionList = displayInstructions.reduce((list, instruction) => {
+        return list + `${instruction}%0D%0A%0D%0A`
+      })
+    }
+
+    const emailText =
+      'Check out this recipe I saved with the Savory App! http://www.savory-app.com%0D%0A%0D%0A' +
+      name +
+      '%0D%0A%0D%0A' +
+      description +
+      '%0D%0A%0D%0A' +
+      'Ingredients%0D%0A%0D%0A' +
+      ingredientList +
+      '%0D%0A%0D%0A' +
+      'Instructions%0D%0A%0D%0A' +
+      instructionList +
+      'Prep Time: ' +
+      prepTime +
+      '%0D%0A' +
+      'Cook Time: ' +
+      cookTime +
+      '%0D%0A' +
+      'Yield: ' +
+      this.props.recipe.yield +
+      '%0D%0A' +
+      'Publisher: ' +
+      this.props.recipe.publisher +
+      ' at:%0D%0A' +
+      this.props.recipe.url
+
     if (!this.state.canEdit) {
       return (
         <>
@@ -188,7 +173,9 @@ export class SingleRecipe extends React.Component {
                     </Button>
                     <Button primary>
                       <a
-                        href={`mailto:?&subject=Mail from our Website&body=${emailText}`}
+                        href={`mailto:?&subject=Shared from Savory: ${
+                          recipe.name
+                        }&body=${emailText}`}
                         title="Share by Email"
                       >
                         Share by Email
@@ -332,10 +319,13 @@ const SingleRecipeHeader = styled.div`
   height: 200px;
   border-bottom: none;
   flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
 `
 
 const Title = styled.h1`
   // height: 200px;
+  padding-top: 10px;
   text-align: center;
   font-family: 'Oswald', sans-serif;
   background: transparent;

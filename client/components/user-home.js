@@ -38,9 +38,9 @@ export const UserHome = props => {
             <Column>
               <h3>{firstName}</h3>
             </Column>
-            <Column>
+            {/* <Column>
               <Button primary>Edit</Button>
-            </Column>
+            </Column> */}
           </Row>
           <Row>
             <Column className="col-left">
@@ -49,9 +49,9 @@ export const UserHome = props => {
             <Column>
               <h3>{lastName}</h3>
             </Column>
-            <Column>
+            {/* <Column>
               <Button primary>Edit</Button>
-            </Column>
+            </Column> */}
           </Row>
           <Row>
             <Column className="col-left">
@@ -60,9 +60,9 @@ export const UserHome = props => {
             <Column>
               <h3>{email}</h3>
             </Column>
-            <Column>
+            {/* <Column>
               <Button primary>Edit</Button>
-            </Column>
+            </Column> */}
           </Row>
           <Row>
             <Column className="col-left">
@@ -71,9 +71,9 @@ export const UserHome = props => {
             <Column>
               <h3>(hidden)</h3>
             </Column>
-            <Column>
+            {/* <Column>
               <Button primary>Edit</Button>
-            </Column>
+            </Column> */}
           </Row>
         </UserAccount>
 
