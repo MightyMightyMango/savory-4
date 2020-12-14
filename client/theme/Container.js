@@ -8,8 +8,10 @@ const ContentWrapper = styled.div`
   text-align: center;
   align-items: center;
   width: 100%;
-  padding-top: 180px;
+  padding-top: 130px;
   padding-bottom: 50px;
+
+  transition-duration: 5s;
 `
 
 // const ContentWrapperWithMargins = styled(ContentWrapper)`
