@@ -3,6 +3,7 @@ const cheerio = require('cheerio')
 const axios = require('axios')
 const {scraper1} = require('../scrape/scraper1')
 const {scraper2} = require('../scrape/scraper2')
+const {scraper4} = require('../scrape/scraper4')
 
 const processUrl = async (url, userId) => {
   if (url.includes('bonappetit.com/recipe')) {
@@ -17,6 +18,14 @@ const processUrl = async (url, userId) => {
     return scraper2(url, 'The Food Network', userId)
   } else if (url.includes('eatingwell.com/recipe')) {
     return scraper2(url, 'Eating Well', userId)
+  } else if (url.includes('tasty.co/recipe')) {
+    return scraper1(url, 'Tasty', userId)
+  } else if (url.includes('cookingclassy.com')) {
+    return scraper4(url, 'CookingClassy', userId)
+  } else if (url.includes('spendwithpennies.com')) {
+    return scraper4(url, 'Spend with Pennies', userId)
+  } else if (url.includes('gimmedelicious.com')) {
+    return scraper4(url, 'Gimme Delicious', userId)
   } else {
     return 'error'
   }

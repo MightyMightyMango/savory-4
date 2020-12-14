@@ -114,11 +114,18 @@ export class Recipe extends React.Component {
         return true
       } else if (url.includes('eatingwell.com/recipe')) {
         return true
+      } else if (url.includes('cookingclassy.com')) {
+        return true
+      } else if (url.includes('spendwithpennies.com')) {
+        return true
+      } else if (url.includes('gimmedelicious.com')) {
+        return true
+      } else if (url.includes('tasty.co/recipe')) {
+        return true
       } else {
         return false
       }
     }
-    return false
   }
 
   async submitUrl(event) {
