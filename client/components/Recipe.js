@@ -10,7 +10,7 @@ import history from '../history'
 import styled from 'styled-components'
 import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
-// import Container from '../theme/Container'
+import SuggestionBox from './SuggestionBox'
 
 import Loader from './Loader'
 import FadeIn from 'react-fade-in'
@@ -130,7 +130,7 @@ export class Recipe extends React.Component {
       setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
     } else {
       alert(
-        'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form below!'
+        'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form at the bottom of this page.'
       )
     }
   }
@@ -153,19 +153,55 @@ export class Recipe extends React.Component {
         <FadeIn>
           <Container>
             {!this.state.isSubmitted && (
-              <RecipeScrape>
-                <Title>Enter Recipe Url:</Title>
-                <Form onSubmit={() => this.submitUrl(event)}>
-                  <input type="text" id="url-input" required />
-                </Form>
-                <Button
-                  primary
-                  type="submit"
-                  onClick={() => this.submitUrl(event)}
-                >
-                  Get Recipe
-                </Button>
-              </RecipeScrape>
+              <>
+                <RecipeScrape>
+                  <Title>Enter Recipe Url:</Title>
+                  <Form onSubmit={() => this.submitUrl(event)}>
+                    <input type="text" id="url-input" required />
+                  </Form>
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={() => this.submitUrl(event)}
+                  >
+                    Get Recipe
+                  </Button>
+                </RecipeScrape>
+
+                <Supported>
+                  <Title>Supported Sites:</Title>
+                  <Logos>
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/all-recipes.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/bon-appetit.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/eating-well.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/food-network.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/nyt-cooking.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/simply-recipes.png"
+                    />
+                  </Logos>
+                </Supported>
+
+                <Submission>
+                  <SuggestionBox />
+                </Submission>
+              </>
             )}
             {this.state.isSubmitted && (
               <FadeIn>
@@ -245,7 +281,6 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   padding-top: 50px;
-  height: 100vh;
 `
 
 const RecipeScrape = styled.div`
@@ -254,9 +289,19 @@ const RecipeScrape = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-top: 45px;
+  // margin-bottom: 45px;
+  padding: 50px 20px;
+  border: 1px solid black;
   // top: 50%;
   // left: 50%;
   // transform: translate(-50%, -50%);
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: 20px;
+    width: 90%;
+    padding-bottom: 30px;
+    margin-top: 10px;
+  }
 `
 
 const Title = styled.div`
@@ -278,6 +323,47 @@ const Actions = styled.div`
   justify-content: space-between;
 `
 const Saved = styled.p`
+  padding-top: 50px;
   margin: 20px;
   text-align: center;
+`
+
+const Supported = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-contents: center;
+  padding-top: 80px;
+  width: 70%;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 90%;
+  }
+`
+const Logos = styled.div`
+  padding-top: 25px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .supported-logo {
+    padding: 10px;
+    height: 55px;
+    @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+      height: 40px;
+      padding: 7px;
+    }
+  }
+`
+
+const Submission = styled.div`
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: 10px;
+    padding-bottom: 20px;
+    width: 90%;
+    margin-top: 10px;
+  }
 `

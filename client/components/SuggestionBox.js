@@ -5,7 +5,18 @@ import Button from '../theme/Button'
 import styled from 'styled-components'
 
 const SubmissionForm = styled.div`
-  padding-top: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`
+
+const Title = styled.div`
+  margin: 20px;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Merriweather', sans serif;
 `
 
 export const SuggestionBox = props => {
@@ -32,7 +43,7 @@ export const SuggestionBox = props => {
   return (
     <>
       <SubmissionForm>
-        <h2>Tell us which site you would like us to support!</h2>
+        <Title>Want us to support a site? Let us know!</Title>
         <form onSubmit={() => handleSubmitSuggestion(event)}>
           <label>Name:</label>
           <input type="text" id="suggestion-name" required />
