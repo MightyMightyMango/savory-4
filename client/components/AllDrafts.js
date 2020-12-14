@@ -31,7 +31,7 @@ export const AllDrafts = props => {
     <>
       <Container>
         <FadeIn>
-          <Title>My Recipe Drafts</Title>
+          <Title height="70px">My Recipe Drafts</Title>
           <RecipesContainer>
             {recipes
               ? recipes.map(recipe => (
@@ -39,7 +39,7 @@ export const AllDrafts = props => {
                     <Image src={recipe.imageUrl} />
                     <Title>{recipe.name}</Title>
                     {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
-                    <NavLink to={`/recipes/${recipe.id}`}>
+                    <NavLink className="navlink" to={`/recipes/${recipe.id}`}>
                       <Button primary>View Recipe</Button>
                     </NavLink>
                     {/* <button
@@ -87,8 +87,16 @@ const Container = styled.div`
 const Title = styled.h1`
   // margin: 20px;
   // text-align: center;
-  // font-size: 1.5em;
+  font-size: 1.7em;
+  margin-top: 30px;
   font-family: 'Merriweather', serif;
+  padding: 5px;
+  padding-bottom: 20px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin: 0px 5px;
+    font-size: 1.5em;
+    margin-top: ${props => props.height};
+  }
 `
 
 const RecipesContainer = styled.div`
@@ -98,6 +106,14 @@ const RecipesContainer = styled.div`
   align-self: center;
   width: 100%;
   padding-top: 20px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-top: 0px;
+  }
+
+  .navlink {
+    position: absolute;
+    top: 250px;
+  }
 `
 
 const Recipe = styled.div`
@@ -105,7 +121,13 @@ const Recipe = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-contents: flex-start;
+  align-items: center;
   width: 33.33333%;
+  position: relative;
+  width: 33.33333%;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 100%;
+  }
 `
 
 const Subtitle = styled.div`
