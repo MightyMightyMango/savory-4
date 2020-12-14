@@ -248,7 +248,7 @@ export class SingleRecipe extends React.Component {
                 {/* INSTRUCTIONS */}
                 <Instructions>
                   <b>Instructions</b>
-                  <ul>
+                  <ol>
                     {displayInstructions.map(function(instruction) {
                       return (
                         <ListItem
@@ -258,7 +258,7 @@ export class SingleRecipe extends React.Component {
                         </ListItem>
                       )
                     })}
-                  </ul>
+                  </ol>
                 </Instructions>
               </RecipeContainer>
             </Container>
@@ -395,7 +395,7 @@ const Subtitle = styled.b`
 `
 
 const ListItem = styled.li`
-  list-style-type: none;
+  list-style-type: decimal;
 `
 
 const Ingredients = styled.div`
