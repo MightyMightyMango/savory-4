@@ -114,6 +114,8 @@ export class Recipe extends React.Component {
         return true
       } else if (url.includes('eatingwell.com/recipe')) {
         return true
+      } else if (url.includes('tasty.co/recipe')) {
+        return true
       } else {
         return false
       }
