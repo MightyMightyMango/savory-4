@@ -18,6 +18,8 @@ import {
   NotFound,
   Loader
 } from './components'
+import ScrapeError from './components/ScrapeError'
+import NotAccepted from './components/NotAccepted'
 import {me} from './store'
 
 class Routes extends Component {
@@ -44,6 +46,8 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/drafts" component={AllDrafts} />
             <Route path="/books" component={MyBooks} />
+            <Route path="/error" component={ScrapeError} />
+            <Route path="/notAccepted" component={NotAccepted} />
 
             <Route
               path="/recipes/:recipeId"
