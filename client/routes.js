@@ -47,7 +47,7 @@ class Routes extends Component {
             <Route path="/drafts" component={AllDrafts} />
             <Route path="/books" component={MyBooks} />
             <Route path="/error" component={ScrapeError} />
-            <Route path="/notAccepted" component={NotAccepted} />
+            <Route path="/notaccepted" component={NotAccepted} />
 
             <Route
               path="/recipes/:recipeId"

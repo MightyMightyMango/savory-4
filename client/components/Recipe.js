@@ -50,7 +50,6 @@ export class Recipe extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('nextProps in get derived state from props', nextProps)
     if (nextProps.recipe.id && nextProps.recipe.id !== prevState.id) {
       let newState = nextProps.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
@@ -61,11 +60,30 @@ export class Recipe extends React.Component {
         : nextProps.recipe.instructions
       return newState
     } else if (nextProps.recipe === 'error') {
+      console.log('ERROR')
       return {errorScraping: true}
+      // history.push('/error')
+      // return null
+      // return defaultState
     } else if (nextProps.recipe === 'notAccepted') {
+      console.log('NOTACCEPTED')
       return {notAccepted: true}
+      // history.push('/notaccepted')
+      // return null
+      // return defaultState
     } else {
       return null
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.errorScraping) {
+      this.setState(defaultState)
+      history.push('/error')
+    }
+    if (this.state.notAccepted) {
+      this.setState(defaultState)
+      history.push('/notaccepted')
     }
   }
 
@@ -97,10 +115,10 @@ export class Recipe extends React.Component {
     history.push(`/recipes/${dataToSend.id}`)
   }
 
-  async componentWillUnmount() {
-    console.log('componentWillUnmount')
-    await this.props.resetRecipeState()
-  }
+  // async componentWillUnmount() {
+  //   console.log('componentWillUnmount')
+  //   await this.props.resetRecipeState()
+  // }
 
   handleDeleteDraft = event => {
     event.preventDefault()
@@ -166,102 +184,102 @@ export class Recipe extends React.Component {
   render() {
     // console.log('this.props in render', this.props)
     // console.log('this.state in render', this.state)
-    console.log('this.state.errorScraping', this.state.errorScraping)
-    console.log('this.state.notAccepted ', this.state.notAccepted)
+    // console.log('this.state.errorScraping', this.state.errorScraping)
+    // console.log('this.state.notAccepted ', this.state.notAccepted)
     return (
       <>
         <FadeIn>
           <Container>
-            {this.state.errorScraping && <ScrapeError />}
-            {this.state.notAccepted && <NotAccepted />}
-            {!this.state.isSubmitted &&
-              !this.state.errorScraping &&
-              !this.state.notAccepted && (
-                <>
-                  <RecipeScrape>
-                    <Title>Enter Recipe Url:</Title>
-                    <Form onSubmit={() => this.submitUrl(event)}>
-                      <input type="text" id="url-input" required />
-                    </Form>
-                    <Button
-                      primary
-                      type="submit"
-                      onClick={() => this.submitUrl(event)}
-                    >
-                      Get Recipe
-                    </Button>
-                  </RecipeScrape>
+            {/* {this.state.errorScraping && <ScrapeError />}
+            {this.state.notAccepted && <NotAccepted />} */}
+            {!this.state.isSubmitted && (
+              // !this.state.errorScraping &&
+              // !this.state.notAccepted &&
+              <>
+                <RecipeScrape>
+                  <Title>Enter Recipe Url:</Title>
+                  <Form onSubmit={() => this.submitUrl(event)}>
+                    <input type="text" id="url-input" required />
+                  </Form>
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={() => this.submitUrl(event)}
+                  >
+                    Get Recipe
+                  </Button>
+                </RecipeScrape>
 
-                  <Supported>
-                    <Title>Supported Sites:</Title>
-                    <Logos>
-                      <img
-                        className="supported-logo"
-                        src="/images/supported/all-recipes.png"
-                      />
-                      <img
-                        className="supported-logo"
-                        src="/images/supported/bon-appetit.png"
-                      />
-                      <img
-                        className="supported-logo"
-                        src="/images/supported/eating-well.png"
-                      />
-                      <img
-                        className="supported-logo"
-                        src="/images/supported/food-network.png"
-                      />
-                      <img
-                        className="supported-logo"
-                        src="/images/supported/nyt-cooking.png"
-                      />
-                      <img
-                        className="supported-logo"
-                        src="/images/supported/simply-recipes.png"
-                      />
-                    </Logos>
-                  </Supported>
+                <Supported>
+                  <Title>Supported Sites:</Title>
+                  <Logos>
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/all-recipes.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/bon-appetit.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/eating-well.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/food-network.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/nyt-cooking.png"
+                    />
+                    <img
+                      className="supported-logo"
+                      src="/images/supported/simply-recipes.png"
+                    />
+                  </Logos>
+                </Supported>
 
-                  <Submission>
-                    <SuggestionBox />
-                  </Submission>
-                </>
-              )}
+                <Submission>
+                  <SuggestionBox />
+                </Submission>
+              </>
+            )}
+            {this.state.isSubmitted && (
+              // !this.state.errorScraping &&
+              // !this.state.notAccepted &&
+              <FadeIn>
+                <Actions>
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Are you sure you want to abandon your draft? It will not be saved.'
+                        )
+                      ) {
+                        this.handleDeleteDraft(event)
+                      }
+                    }}
+                  >
+                    Abandon Draft
+                  </Button>
+                  <Button
+                    primary
+                    type="submit"
+                    onClick={() => {
+                      this.handleSubmit(event)
+                    }}
+                  >
+                    Confirm Changes
+                  </Button>
+                </Actions>
+              </FadeIn>
+            )}
             {this.state.isSubmitted &&
-              !this.state.errorScraping &&
-              !this.state.notAccepted && (
-                <FadeIn>
-                  <Actions>
-                    <Button
-                      primary
-                      type="submit"
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            'Are you sure you want to abandon your draft? It will not be saved.'
-                          )
-                        ) {
-                          this.handleDeleteDraft(event)
-                        }
-                      }}
-                    >
-                      Abandon Draft
-                    </Button>
-                    <Button
-                      primary
-                      type="submit"
-                      onClick={() => {
-                        this.handleSubmit(event)
-                      }}
-                    >
-                      Confirm Changes
-                    </Button>
-                  </Actions>
-                </FadeIn>
-              )}
-            {this.state.isSubmitted &&
-              !this.state.errorScraping &&
-              !this.state.notAccepted &&
+              // !this.state.errorScraping &&
+              // !this.state.notAccepted &&
               (this.state.loading ? (
                 <Loader />
               ) : (
