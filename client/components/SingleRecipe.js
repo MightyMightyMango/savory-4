@@ -267,8 +267,8 @@ export class SingleRecipe extends React.Component {
       )
     } else {
       return (
-        <div>
-          <FadeIn>
+        <FadeIn>
+          <Confirm>
             <Button
               primary
               onClick={() => {
@@ -279,8 +279,8 @@ export class SingleRecipe extends React.Component {
             </Button>
             <p>Make your changes below and when you're done click confirm!</p>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
-          </FadeIn>
-        </div>
+          </Confirm>
+        </FadeIn>
       )
     }
   }
@@ -311,6 +311,12 @@ const Container = styled.div`
   width: 100%;
   flex-wrap: wrap;
   margin-bottom: 30px;
+`
+
+const Confirm = styled.div`
+  // display: flex;
+  text-align: center;
+  padding-top: 20px;
 `
 
 const SingleRecipeHeader = styled.div`
