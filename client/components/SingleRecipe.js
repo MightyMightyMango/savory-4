@@ -279,6 +279,14 @@ export class SingleRecipe extends React.Component {
             </Button>
             <p>Make your changes below and when you're done click confirm!</p>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
+            <Button
+              primary
+              onClick={() => {
+                this.handleSubmit(event)
+              }}
+            >
+              Confirm Changes
+            </Button>
           </FadeIn>
         </div>
       )
