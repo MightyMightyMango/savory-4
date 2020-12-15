@@ -6,17 +6,13 @@ const Category = db.define('category', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: ''
+  },
+  colorCSS: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue:
+      'linear-gradient(to bottom, rgb(131, 178, 226), rgb(91,124,158))'
   }
-  // userId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   defaultValue: 0
-  // },
-  // recipeId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   defaultValue: 0
-  // }
 })
 
 module.exports = Category

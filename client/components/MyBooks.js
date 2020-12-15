@@ -34,8 +34,8 @@ const MyBooks = props => {
 
   const handleSubmit = event => {
     console.log(recipesToBeAdded)
-
-    submitCat(user.id, newCategory, recipesToBeAdded)
+    const color = setBackgroundColor()
+    submitCat(user.id, newCategory, recipesToBeAdded, color)
   }
 
   const onChange = event => {
@@ -79,7 +79,7 @@ const MyBooks = props => {
               <CategoryItem key={item.id}>
                 <Book
                   style={{
-                    background: setBackgroundColor(),
+                    background: item.colorCSS,
                     transform: setBookPosition()
                   }}
                 >
