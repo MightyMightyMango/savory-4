@@ -47,13 +47,13 @@ export class SingleRecipe extends React.Component {
 
   handleDeleteDraft = event => {
     event.preventDefault()
-    this.props.deleteDraft(recipeId)
+    this.props.deleteDraft(this.props.recipe.id)
     history.push('/drafts')
   }
 
   handleDeleteRecipe = event => {
     event.preventDefault()
-    this.props.deleteRecipe(recipeId)
+    this.props.deleteRecipe(this.props.recipe.id)
     history.push('/myrecipes')
   }
 
