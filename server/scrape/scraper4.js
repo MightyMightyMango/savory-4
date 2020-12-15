@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 const cheerio = require('cheerio')
 const axios = require('axios')
-const {timescrape2} = require('./timescrape2')
+const {timescrape3} = require('./timescrape3')
 
 //Scrape function for websites with script tag metadata in object format
 const scraper4 = async (url, publisher, userId) => {
@@ -26,19 +26,29 @@ const scraper4 = async (url, publisher, userId) => {
 
     //if instructions are array, map over them
     if (Array.isArray(parsed.recipeInstructions)) {
-      instructions = parsed.recipeInstructions.map(item => {
-        //removenewline symbols
-        return item.text.replace(/(\r\n|\n|\r)/gm, '')
+      let mapped = []
+      parsed.recipeInstructions.map(item => {
+        if (item.itemListElement) {
+          item.itemListElement.map(step => {
+            mapped.push(step.text)
+          })
+        } else {
+          mapped.push(item.text)
+        }
       })
+      instructions = mapped
+      console.log(instructions)
+      // return item.text.replace(/(\r\n|\n|\r)/gm, '')
     }
+
     let imageUrl = parsed.thumbnailUrl ? parsed.thumbnailUrl : parsed.image
     imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
 
     console.log('prep time', parsed.prepTime)
-    // let prepTime = parsed.prepTime ? timescrape1(parsed.prepTime) : ''
-    // let cookTime = parsed.cookTime ? timescrape1(parsed.cookTime) : ''
-    let prepTime = parsed.prepTime
-    let cookTime = parsed.cookTime
+    let prepTime = parsed.prepTime ? timescrape3(parsed.prepTime) : ''
+    let cookTime = parsed.cookTime ? timescrape3(parsed.cookTime) : ''
+    // let prepTime = parsed.prepTime
+    // let cookTime = parsed.cookTime
 
     let recipeYield = Array.isArray(parsed.recipeYield)
       ? parsed.recipeYield[0]
@@ -82,3 +92,9 @@ scraper4(
   'Gimme Delicious',
   1
 )
+
+// scraper4(
+//     'https://gimmedelicious.com/pecan-pie-cheesecake/',
+//     'Gimme Delicious',
+//     1
+//   )
