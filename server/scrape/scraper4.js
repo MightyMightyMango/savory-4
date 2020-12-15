@@ -5,7 +5,6 @@ const {timescrape3} = require('./timescrape3')
 
 //Scrape function for websites with script tag metadata in object format
 const scraper4 = async (url, publisher, userId) => {
-  console.log(url.length)
   let recipeEntry
   try {
     const html = await axios.get(url)
@@ -37,14 +36,12 @@ const scraper4 = async (url, publisher, userId) => {
         }
       })
       instructions = mapped
-      console.log(instructions)
       // return item.text.replace(/(\r\n|\n|\r)/gm, '')
     }
 
     let imageUrl = parsed.thumbnailUrl ? parsed.thumbnailUrl : parsed.image
     imageUrl = Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
 
-    console.log('prep time', parsed.prepTime)
     let prepTime = parsed.prepTime ? timescrape3(parsed.prepTime) : ''
     let cookTime = parsed.cookTime ? timescrape3(parsed.cookTime) : ''
     // let prepTime = parsed.prepTime
@@ -68,7 +65,6 @@ const scraper4 = async (url, publisher, userId) => {
       categories: [],
       userId: userId || 0
     }
-    console.log(recipeEntry)
     return recipeEntry
   } catch (error) {
     console.error(error)

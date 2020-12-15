@@ -32,7 +32,8 @@ const defaultState = {
   userId: '',
   isDraft: '',
   isSubmitted: false,
-  loading: false
+  loading: false,
+  errorScraping: false
 }
 
 export class Recipe extends React.Component {
@@ -57,6 +58,8 @@ export class Recipe extends React.Component {
         ? nextProps.recipe.instructions.join('\n')
         : nextProps.recipe.instructions
       return newState
+    } else if (nextProps.recipe === 'error') {
+      return {errorScraping: true}
     } else {
       return null
     }
@@ -71,6 +74,7 @@ export class Recipe extends React.Component {
     let dataToSend = this.state
     delete dataToSend.isSubmitted
     delete dataToSend.loading
+    delete dataToSend.errorScraping
     dataToSend.ingredients =
       typeof dataToSend.ingredients === 'string'
         ? dataToSend.ingredients.split('\n')
@@ -152,95 +156,101 @@ export class Recipe extends React.Component {
     }
   }
 
+  // eslint-disable-next-line complexity
   render() {
     // console.log('this.props in render', this.props)
     // console.log('this.state in render', this.state)
+    console.log(this.state.errorScraping)
     return (
       <>
         <FadeIn>
           <Container>
-            {!this.state.isSubmitted && (
-              <>
-                <RecipeScrape>
-                  <Title>Enter Recipe Url:</Title>
-                  <Form onSubmit={() => this.submitUrl(event)}>
-                    <input type="text" id="url-input" required />
-                  </Form>
-                  <Button
-                    primary
-                    type="submit"
-                    onClick={() => this.submitUrl(event)}
-                  >
-                    Get Recipe
-                  </Button>
-                </RecipeScrape>
+            {this.state.errorScraping && <h1>UH OH!</h1>}
+            {!this.state.isSubmitted &&
+              !this.state.errorScraping && (
+                <>
+                  <RecipeScrape>
+                    <Title>Enter Recipe Url:</Title>
+                    <Form onSubmit={() => this.submitUrl(event)}>
+                      <input type="text" id="url-input" required />
+                    </Form>
+                    <Button
+                      primary
+                      type="submit"
+                      onClick={() => this.submitUrl(event)}
+                    >
+                      Get Recipe
+                    </Button>
+                  </RecipeScrape>
 
-                <Supported>
-                  <Title>Supported Sites:</Title>
-                  <Logos>
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/all-recipes.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/bon-appetit.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/eating-well.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/food-network.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/nyt-cooking.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/simply-recipes.png"
-                    />
-                  </Logos>
-                </Supported>
+                  <Supported>
+                    <Title>Supported Sites:</Title>
+                    <Logos>
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/all-recipes.png"
+                      />
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/bon-appetit.png"
+                      />
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/eating-well.png"
+                      />
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/food-network.png"
+                      />
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/nyt-cooking.png"
+                      />
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/simply-recipes.png"
+                      />
+                    </Logos>
+                  </Supported>
 
-                <Submission>
-                  <SuggestionBox />
-                </Submission>
-              </>
-            )}
-            {this.state.isSubmitted && (
-              <FadeIn>
-                <Actions>
-                  <Button
-                    primary
-                    type="submit"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          'Are you sure you want to abandon your draft? It will not be saved.'
-                        )
-                      ) {
-                        this.handleDeleteDraft(event)
-                      }
-                    }}
-                  >
-                    Abandon Draft
-                  </Button>
-                  <Button
-                    primary
-                    type="submit"
-                    onClick={() => {
-                      this.handleSubmit(event)
-                    }}
-                  >
-                    Confirm Changes
-                  </Button>
-                </Actions>
-              </FadeIn>
-            )}
+                  <Submission>
+                    <SuggestionBox />
+                  </Submission>
+                </>
+              )}
             {this.state.isSubmitted &&
+              !this.state.errorScraping && (
+                <FadeIn>
+                  <Actions>
+                    <Button
+                      primary
+                      type="submit"
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            'Are you sure you want to abandon your draft? It will not be saved.'
+                          )
+                        ) {
+                          this.handleDeleteDraft(event)
+                        }
+                      }}
+                    >
+                      Abandon Draft
+                    </Button>
+                    <Button
+                      primary
+                      type="submit"
+                      onClick={() => {
+                        this.handleSubmit(event)
+                      }}
+                    >
+                      Confirm Changes
+                    </Button>
+                  </Actions>
+                </FadeIn>
+              )}
+            {this.state.isSubmitted &&
+              !this.state.errorScraping &&
               (this.state.loading ? (
                 <Loader />
               ) : (
