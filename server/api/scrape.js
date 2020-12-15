@@ -7,10 +7,11 @@ const Recipe = require('../db/models/recipe')
 router.post('/', async (req, res, next) => {
   try {
     const url = req.body.url
-    // console.log(url)
     const userId = req.body.userId
     let data = await processUrl(url, userId)
-    console.log(data)
+    if (data === 'notAccepted') {
+      res.send('notAccepted')
+    }
     if (data !== 'error' && data.url !== '' && data.name !== '') {
       const newRecipe = await Recipe.create(data)
       res.status(200).send(newRecipe)

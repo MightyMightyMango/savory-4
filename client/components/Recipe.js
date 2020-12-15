@@ -9,9 +9,10 @@ import {deleteDraftThunk} from '../store/recipes'
 import history from '../history'
 import styled from 'styled-components'
 import RecipeForm from './RecipeForm'
+import ScrapeError from './ScrapeError'
+import NotAccepted from './NotAccepted'
 import Button from '../theme/Button'
 import SuggestionBox from './SuggestionBox'
-
 import Loader from './Loader'
 import FadeIn from 'react-fade-in'
 
@@ -33,7 +34,8 @@ const defaultState = {
   isDraft: '',
   isSubmitted: false,
   loading: false,
-  errorScraping: false
+  errorScraping: false,
+  notAccepted: false
 }
 
 export class Recipe extends React.Component {
@@ -43,7 +45,7 @@ export class Recipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.submitUrl = this.submitUrl.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
-    this.validateInput = this.validateInput.bind(this)
+    // this.validateInput = this.validateInput.bind(this)
     this.state = defaultState
   }
 
@@ -60,6 +62,8 @@ export class Recipe extends React.Component {
       return newState
     } else if (nextProps.recipe === 'error') {
       return {errorScraping: true}
+    } else if (nextProps.recipe === 'notAccepted') {
+      return {notAccepted: true}
     } else {
       return null
     }
@@ -75,6 +79,7 @@ export class Recipe extends React.Component {
     delete dataToSend.isSubmitted
     delete dataToSend.loading
     delete dataToSend.errorScraping
+    delete dataToSend.notAccepted
     dataToSend.ingredients =
       typeof dataToSend.ingredients === 'string'
         ? dataToSend.ingredients.split('\n')
@@ -104,46 +109,47 @@ export class Recipe extends React.Component {
     this.setState(defaultState)
   }
 
-  validateInput = url => {
-    if (url.length !== 0) {
-      if (url.includes('bonappetit.com/recipe')) {
-        return true
-      } else if (url.includes('cooking.nytimes.com/recipes')) {
-        return true
-      } else if (url.includes('simplyrecipes.com/recipes')) {
-        return true
-      } else if (url.includes('allrecipes.com/recipe')) {
-        return true
-      } else if (url.includes('foodnetwork.com/recipes')) {
-        return true
-      } else if (url.includes('eatingwell.com/recipe')) {
-        return true
-      } else if (url.includes('cookingclassy.com')) {
-        return true
-      } else if (url.includes('spendwithpennies.com')) {
-        return true
-      } else if (url.includes('gimmedelicious.com')) {
-        return true
-      } else if (url.includes('tasty.co/recipe')) {
-        return true
-      } else {
-        return false
-      }
-    }
-  }
+  // validateInput = (url) => {
+  //   if (url.length !== 0) {
+  //     if (url.includes('bonappetit.com/recipe')) {
+  //       return true
+  //     } else if (url.includes('cooking.nytimes.com/recipes')) {
+  //       return true
+  //     } else if (url.includes('simplyrecipes.com/recipes')) {
+  //       return true
+  //     } else if (url.includes('allrecipes.com/recipe')) {
+  //       return true
+  //     } else if (url.includes('foodnetwork.com/recipes')) {
+  //       return true
+  //     } else if (url.includes('eatingwell.com/recipe')) {
+  //       return true
+  //     } else if (url.includes('cookingclassy.com')) {
+  //       return true
+  //     } else if (url.includes('spendwithpennies.com')) {
+  //       return true
+  //     } else if (url.includes('gimmedelicious.com')) {
+  //       return true
+  //     } else if (url.includes('tasty.co/recipe')) {
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //   }
+  // }
 
   async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    if (this.validateInput(url)) {
-      await this.props.getSingleRecipe(url, this.props.user.id)
-      this.setState({isSubmitted: true, loading: true})
-      setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
-    } else {
-      alert(
-        'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form at the bottom of this page.'
-      )
-    }
+    // if (this.validateInput(url)) {
+    await this.props.getSingleRecipe(url, this.props.user.id)
+    this.setState({isSubmitted: true, loading: true})
+    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
+    // }
+    // else {
+    //   alert(
+    //     'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form at the bottom of this page.'
+    //   )
+    // }
   }
 
   async handleKeyPress(event) {
@@ -160,14 +166,17 @@ export class Recipe extends React.Component {
   render() {
     // console.log('this.props in render', this.props)
     // console.log('this.state in render', this.state)
-    console.log(this.state.errorScraping)
+    console.log('this.state.errorScraping', this.state.errorScraping)
+    console.log('this.state.notAccepted ', this.state.notAccepted)
     return (
       <>
         <FadeIn>
           <Container>
-            {this.state.errorScraping && <h1>UH OH!</h1>}
+            {this.state.errorScraping && <ScrapeError />}
+            {this.state.notAccepted && <NotAccepted />}
             {!this.state.isSubmitted &&
-              !this.state.errorScraping && (
+              !this.state.errorScraping &&
+              !this.state.notAccepted && (
                 <>
                   <RecipeScrape>
                     <Title>Enter Recipe Url:</Title>
@@ -219,7 +228,8 @@ export class Recipe extends React.Component {
                 </>
               )}
             {this.state.isSubmitted &&
-              !this.state.errorScraping && (
+              !this.state.errorScraping &&
+              !this.state.notAccepted && (
                 <FadeIn>
                   <Actions>
                     <Button
@@ -251,6 +261,7 @@ export class Recipe extends React.Component {
               )}
             {this.state.isSubmitted &&
               !this.state.errorScraping &&
+              !this.state.notAccepted &&
               (this.state.loading ? (
                 <Loader />
               ) : (
