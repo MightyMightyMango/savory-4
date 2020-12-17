@@ -8,8 +8,8 @@ const ContentWrapper = styled.div`
   text-align: center;
   align-items: center;
   width: 100%;
-  padding-top: 130px;
-  padding-bottom: 50px;
+  padding-top: 120px;
+  padding-bottom: 100px;
 
   transition-duration: 5s;
 `
