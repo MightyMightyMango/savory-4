@@ -134,7 +134,10 @@ const Arrow = styled.img``
 const SmallTxt = styled.div`
   color: ${props => props.theme.colors.sage};
   font-size: 8px;
-  margin-top: 120px;
+  margin-top: 150px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin-top: 300px;
+  }
 `
 const TwoCol = styled.div`
   display: flex;
