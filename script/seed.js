@@ -462,6 +462,18 @@ async function seed() {
     {
       userId: 1,
       categoryId: 4
+    },
+    {
+      userId: 1,
+      categoryId: 5
+    },
+    {
+      userId: 1,
+      categoryId: 6
+    },
+    {
+      userId: 1,
+      categoryId: 7
     }
   ]
 
