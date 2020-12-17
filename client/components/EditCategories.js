@@ -5,18 +5,26 @@ import {StyledButton} from '../theme/Button'
 const EditCategories = props => {
   return (
     <>
-      <h4>
-        Enter the name of your book and check off which of your saved recipes
-        you would like to include
-      </h4>
+      {props.add ? (
+        <h4>
+          Enter the name of your book and check off which of your saved recipes
+          you would like to include.
+        </h4>
+      ) : (
+        <h4>Check off which recipes you would like to add to this book.</h4>
+      )}
       <form onSubmit={props.handleSubmit}>
-        <label>Recipe Book Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={props.newCategory}
-          onChange={props.handleChange}
-        />
+        {props.add && (
+          <>
+            <label>Recipe Book Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={props.newCategory}
+              onChange={props.handleChange}
+            />
+          </>
+        )}
         {props.recipes.map(item => (
           <Li key={'i' + item.id}>
             <input
@@ -28,7 +36,9 @@ const EditCategories = props => {
             <label htmlFor={item.name}>{item.name}</label>
           </Li>
         ))}
-        <StyledButton type="submit">Add Recipe Book</StyledButton>
+        <StyledButton type="submit">
+          {props.add ? 'Add Recipe Book' : 'Update Recipe Book'}
+        </StyledButton>
       </form>
     </>
   )
@@ -42,6 +52,7 @@ const Li = styled.div`
   input[type='checkbox'] {
     margin-top: 12px;
     margin-right: 7px;
+    margin-bottom: 10px;
   }
   label {
     text-align: left;
