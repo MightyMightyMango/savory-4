@@ -45,7 +45,6 @@ export class Recipe extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.props.recipe', this.props.recipe)
     if (this.props.recipe.id && this.props.recipe.id !== prevProps.recipe.id) {
       let newState = this.props.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
@@ -77,8 +76,6 @@ export class Recipe extends React.Component {
     let dataToSend = this.state
     delete dataToSend.isSubmitted
     delete dataToSend.loading
-    delete dataToSend.errorScraping
-    delete dataToSend.notAccepted
     dataToSend.ingredients =
       typeof dataToSend.ingredients === 'string'
         ? dataToSend.ingredients.split('\n')
@@ -88,7 +85,6 @@ export class Recipe extends React.Component {
         ? dataToSend.instructions.split('\n')
         : dataToSend.instructions
     dataToSend.isDraft = false
-    console.log('DATA SENT TO DB', dataToSend)
     await this.props.submitRecipe(dataToSend)
     window.alert('Recipe Saved!')
     this.props.resetRecipeState()
