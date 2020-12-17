@@ -46,41 +46,17 @@ const MyBooks = props => {
     console.log(event.target.name, event.target.checked, event.target.id)
   }
 
-  // BOOKS BACKGROUND
-
-  const setBackgroundColor = () => {
-    const colors = [
-      'linear-gradient(to bottom, rgb(131, 178, 226), rgb(91,124,158))',
-      'linear-gradient(to bottom, rgb(229,161,54), rgb(183,128,43))',
-      'linear-gradient(to bottom, rgb(164,84,80), rgb(131,67,64))',
-      'linear-gradient(to bottom, rgb(68,122,106), rgb(47,85,74))',
-      'linear-gradient(to bottom, rgb(154,142,179), rgb(123,113,143))',
-      'linear-gradient(to bottom, rgb(70,130,180), rgb(49,91,125))'
-    ]
-    return colors[Math.floor(Math.random() * Math.floor(6))]
-  }
-
-  const setBookPosition = () => {
-    const xAmount = Math.floor(Math.random() * Math.floor(10)) * 10
-    const posNeg = Math.round(Math.random()) * 2 - 1
-    return 'translateX(' + xAmount * posNeg + 'px)'
-  }
-
-  // SORT BOOKS ALPHABETICALLY
-
-  console.log(recipesToBeAdded)
   return (
     <>
       <FadeIn>
         <Container>
           <RecipesContainer>
-            <h1>My Books</h1>
+            <h1>My Books Test I've changed the title</h1>
             {categories.map(item => (
               <CategoryItem key={item.id}>
                 <Book
                   style={{
-                    background: item.colorCSS,
-                    transform: setBookPosition()
+                    background: item.colorCSS
                   }}
                 >
                   <Band1 className="content" />
@@ -178,18 +154,8 @@ const Book = styled.div`
   transition-duration: 0.4s;
   z-index: 1;
 
-  // :before {
-  //   transform: translate(-50%, 0);
-  //   transition-duration: 0.4s;
-  // }
-
-  // :after {
-  //   transform: translate(-50%, 0);
-  //   transition-duration: 0.4s;
-  // }
-
   &:hover {
-    transform: translateY(-5.5em);
+    transform: translateX(-20px);
     transition-duration: 0.4s;
     // -moz-transform : translate(50%, 10%) rotate(20deg) scale(0.75);
     // -o-transform : translate(50%, 10%) rotate(20deg) scale(0.75);
