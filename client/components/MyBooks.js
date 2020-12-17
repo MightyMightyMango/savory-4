@@ -80,7 +80,7 @@ const MyBooks = props => {
         <ColContainer>
           <Box>
             <>
-              <h1>Add a new Cateogry/Book</h1>
+              <h1>Add a new Category/Book</h1>
               <EditCategories
                 add={true}
                 handleChange={handleChange}
