@@ -11,7 +11,6 @@ import styled from 'styled-components'
 import RecipeForm from './RecipeForm'
 import Button from '../theme/Button'
 import SuggestionBox from './SuggestionBox'
-
 import Loader from './Loader'
 import FadeIn from 'react-fade-in'
 
@@ -42,23 +41,30 @@ export class Recipe extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.submitUrl = this.submitUrl.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
-    this.validateInput = this.validateInput.bind(this)
     this.state = defaultState
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('nextProps in get derived state from props', nextProps)
-    if (nextProps.recipe.id && nextProps.recipe.id !== prevState.id) {
-      let newState = nextProps.recipe
+  componentDidUpdate(prevProps, prevState) {
+    console.log('this.props.recipe', this.props.recipe)
+    if (this.props.recipe.id && this.props.recipe.id !== prevProps.recipe.id) {
+      let newState = this.props.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
-        ? nextProps.recipe.ingredients.join('\n')
-        : nextProps.recipe.ingredients
+        ? this.props.recipe.ingredients.join('\n')
+        : this.props.recipe.ingredients
       newState.instructions = Array.isArray(newState.instructions)
-        ? nextProps.recipe.instructions.join('\n')
-        : nextProps.recipe.instructions
-      return newState
-    } else {
-      return null
+        ? this.props.recipe.instructions.join('\n')
+        : this.props.recipe.instructions
+      this.setState(newState)
+    }
+    if (this.props.recipe === 'error') {
+      this.setState(defaultState)
+      this.props.resetRecipeState()
+      history.push('/error')
+    }
+    if (this.props.recipe === 'notAccepted') {
+      this.setState(defaultState)
+      this.props.resetRecipeState()
+      history.push('/notaccepted')
     }
   }
 
@@ -71,6 +77,8 @@ export class Recipe extends React.Component {
     let dataToSend = this.state
     delete dataToSend.isSubmitted
     delete dataToSend.loading
+    delete dataToSend.errorScraping
+    delete dataToSend.notAccepted
     dataToSend.ingredients =
       typeof dataToSend.ingredients === 'string'
         ? dataToSend.ingredients.split('\n')
@@ -88,11 +96,6 @@ export class Recipe extends React.Component {
     history.push(`/recipes/${dataToSend.id}`)
   }
 
-  async componentWillUnmount() {
-    console.log('componentWillUnmount')
-    await this.props.resetRecipeState()
-  }
-
   handleDeleteDraft = event => {
     event.preventDefault()
     this.props.deleteDraft(this.state.id)
@@ -100,46 +103,12 @@ export class Recipe extends React.Component {
     this.setState(defaultState)
   }
 
-  validateInput = url => {
-    if (url.length !== 0) {
-      if (url.includes('bonappetit.com/recipe')) {
-        return true
-      } else if (url.includes('cooking.nytimes.com/recipes')) {
-        return true
-      } else if (url.includes('simplyrecipes.com/recipes')) {
-        return true
-      } else if (url.includes('allrecipes.com/recipe')) {
-        return true
-      } else if (url.includes('foodnetwork.com/recipes')) {
-        return true
-      } else if (url.includes('eatingwell.com/recipe')) {
-        return true
-      } else if (url.includes('cookingclassy.com')) {
-        return true
-      } else if (url.includes('spendwithpennies.com')) {
-        return true
-      } else if (url.includes('gimmedelicious.com')) {
-        return true
-      } else if (url.includes('tasty.co/recipe')) {
-        return true
-      } else {
-        return false
-      }
-    }
-  }
-
   async submitUrl(event) {
     event.preventDefault()
     const url = document.getElementById('url-input').value
-    if (this.validateInput(url)) {
-      await this.props.getSingleRecipe(url, this.props.user.id)
-      this.setState({isSubmitted: true, loading: true})
-      setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
-    } else {
-      alert(
-        'Sorry that is an invalid url. Want us to support recipe collection from this site? Fill out the form at the bottom of this page.'
-      )
-    }
+    await this.props.getSingleRecipe(url, this.props.user.id)
+    this.setState({isSubmitted: true, loading: true})
+    setTimeout(() => this.setState({isSubmitted: true, loading: false}), 3000)
   }
 
   async handleKeyPress(event) {
@@ -147,14 +116,11 @@ export class Recipe extends React.Component {
     if (event.keyCode == 13 || event.key == 'Enter') {
       const url = document.getElementById('url-input').value
       await this.props.getSingleRecipe(url, this.props.user.id)
-      // document.getElementById('url-input').value = ' '
       this.setState({isSubmitted: true})
     }
   }
 
   render() {
-    // console.log('this.props in render', this.props)
-    // console.log('this.state in render', this.state)
     return (
       <>
         <FadeIn>

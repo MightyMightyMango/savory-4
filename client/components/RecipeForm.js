@@ -102,9 +102,9 @@ const RecipeForm = props => {
         />
       </form>
 
-      <Button fullWidth primary onClick={props.handleSubmit}>
+      {/* <Button fullWidth primary onClick={props.handleSubmit(evt)}>
         Confirm Changes
-      </Button>
+      </Button> */}
     </Container>
   )
 }
