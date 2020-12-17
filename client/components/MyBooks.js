@@ -51,7 +51,7 @@ const MyBooks = props => {
       <FadeIn>
         <Container>
           <RecipesContainer>
-            <h1>My Books Test I've changed the title</h1>
+            <h1>My Books</h1>
             {categories.map(item => (
               <CategoryItem key={item.id}>
                 <Book
