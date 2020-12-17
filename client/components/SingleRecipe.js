@@ -267,8 +267,8 @@ export class SingleRecipe extends React.Component {
       )
     } else {
       return (
-        <div>
-          <FadeIn>
+        <FadeIn>
+          <Confirm>
             <Button
               primary
               onClick={() => {
@@ -287,8 +287,8 @@ export class SingleRecipe extends React.Component {
             >
               Confirm Changes
             </Button>
-          </FadeIn>
-        </div>
+          </Confirm>
+        </FadeIn>
       )
     }
   }
