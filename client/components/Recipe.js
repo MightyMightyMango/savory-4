@@ -31,9 +31,7 @@ const defaultState = {
   userId: '',
   isDraft: '',
   isSubmitted: false,
-  loading: false,
-  error: false,
-  notAccepted: false
+  loading: false
 }
 
 export class Recipe extends React.Component {
