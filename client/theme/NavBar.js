@@ -103,6 +103,7 @@ const Navbar = styled.div`
     padding-right: 10px;
     font-size: 0.6em;
     height: 100px;
+    position: relative !important;
   }
 `
 
