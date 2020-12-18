@@ -311,6 +311,7 @@ const mapDispatch = dispatch => ({
 
 export default connect(mapState, mapDispatch)(SingleRecipe)
 
+const Confirm = styled.div``
 const Container = styled.div`
   display: flex;
   text-align: center;
