@@ -4,7 +4,7 @@ import theme from './theme'
 
 const Navbar = styled.div`
   background-color: #8fbc8b;
-  position: sticky;
+  position: sticky !important;
   top: 0px;
   left: 0px;
   color: black;
@@ -101,6 +101,7 @@ const Navbar = styled.div`
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding-left: 10px;
     padding-right: 10px;
+    position: sticky !important;
     font-size: 0.6em;
     height: 100px;
   }
