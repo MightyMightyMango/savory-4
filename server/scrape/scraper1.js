@@ -5,14 +5,12 @@ const {timescrape1} = require('./timescrape1')
 
 //Scrape function for websites with script tag metadata in object format
 const scraper1 = async (url, publisher, userId) => {
-  console.log(url.length)
   let recipeEntry
   try {
     const html = await axios.get(url)
     const $ = cheerio.load(html.data)
     let info = $('script[type="application/ld+json"]').html()
     let parsed = JSON.parse(info)
-    console.log(parsed)
     let instructions = parsed.recipeInstructions || ''
     //if instructions are array, map over them
     if (Array.isArray(parsed.recipeInstructions)) {

@@ -182,7 +182,7 @@ const Container = styled.div`
   flex-direction: column;
   text-align: center;
   width: 100%;
-  height: 100vh;
+  margin-bottom: 70px;
 `
 const Title = styled.h1`
   // margin: 20px;
@@ -248,7 +248,7 @@ const Image = styled.img`
   overflow: hidden;
   padding-bottom: 20px;
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    margin-top: 50px;
+    margin-top: 50px;100
   }
 `
 

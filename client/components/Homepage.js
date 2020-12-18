@@ -12,9 +12,9 @@ const Homepage = () => {
       <FadeIn>
         <Container primary>
           <HomepageContainer>
-            <Title>Welcome to</Title>
+            <LogoTitle>less time looking...</LogoTitle>
             <Logo src="images/savory-logo.png" />
-            <Title>Log-in to save recipes!</Title>
+            <LogoTitle2>...more time cooking.</LogoTitle2>
             <SmallTxt>scroll for more</SmallTxt>
             <Arrow src="images/homepage/arrow.png" />
           </HomepageContainer>
@@ -86,12 +86,22 @@ const HomepageContainer = styled.div`
 `
 
 const Title = styled.div`
-  margin: 20px;
+  margin: 7px;
   text-align: center;
   font-size: 1.5em;
   animation: rotate 1s linear infinite;
   animation-play-state: paused;
   animation-delay: calc(var(--scroll) * -1s);
+`
+const LogoTitle = styled.div`
+  margin: 0px;
+  text-align: center;
+  font-size: 1.2em;
+`
+const LogoTitle2 = styled.div`
+  margin: 0px;
+  text-align: center;
+  font-size: 1.5em;
 `
 
 const Number = styled.div`
@@ -107,8 +117,11 @@ const Subtitle = styled.h3`
 
 const Logo = styled.img`
   position: relative;
-  width: 20%;
+  width: 30%;
   height: auto;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 50%;
+  }
 `
 
 const Image = styled.img`
@@ -121,7 +134,10 @@ const Arrow = styled.img``
 const SmallTxt = styled.div`
   color: ${props => props.theme.colors.sage};
   font-size: 8px;
-  margin-top: 120px;
+  margin-top: 150px;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin-top: 300px;
+  }
 `
 const TwoCol = styled.div`
   display: flex;

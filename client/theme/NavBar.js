@@ -14,8 +14,8 @@ const Navbar = styled.div`
   font-size: 0.7em;
   justify-content: space-between;
   align-items: center;
-  padding-left: 70px;
-  padding-right: 70px;
+  padding-left: 50px;
+  padding-right: 50px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);
   z-index: 6;
 

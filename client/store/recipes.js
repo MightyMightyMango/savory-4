@@ -152,7 +152,9 @@ export const getRecipesInCategoryThunk = (userId, categoryId) => {
   }
 }
 
+
 export const submitCategory = (userId, category, data, colorCSS) => {
+
   console.log('in thunk', userId, category, data)
   return async dispatch => {
     try {
@@ -163,6 +165,22 @@ export const submitCategory = (userId, category, data, colorCSS) => {
       })
       console.log('res.data', res.data)
       dispatch(setCategory(res.data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+//UPDATE CATEGORY WITH NEW RECIPES
+export const updateCategory = (userId, category, data) => {
+  console.log('in thunk', userId, category, data)
+  return async dispatch => {
+    try {
+      const res = await axios.put(`/api/recipes/categories/update/${userId}`, {
+        category: category,
+        recipes: data
+      })
+      console.log('res.data', res.data)
     } catch (error) {
       console.error(error)
     }

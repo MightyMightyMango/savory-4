@@ -203,6 +203,7 @@ router.get('/categories/:categoryId', async (req, res, next) => {
   }
 })
 
+//CREATE A NEW CATEGORY AND ADD RECIPES
 // PUT   /api/recipes/categories/:userId
 router.put('/categories/user/:userId', async (req, res, next) => {
   try {
@@ -225,13 +226,42 @@ router.put('/categories/user/:userId', async (req, res, next) => {
       colorCSS: colorCSS
     })
 
-    //NEED TO FIGURE THIS OUT
-    // await data.forEach(item=> {
-    //  RecipeCategory.create({
-    //     recipeId: item,
-    //     categoryId: newCategory[0].id
-    // });
-    // })
+    for (const [key, value] of Object.entries(data)) {
+      if (value === true) {
+        console.log('key', key)
+        await RecipeCategory.create({
+          recipeId: key,
+          categoryId: newCategory[0].id
+        })
+      }
+    }
+
+    res.status(200).send(newCategory[0])
+  } catch (error) {
+    next(error)
+  }
+})
+
+//UPDATE EXISTING CATEGORY WITH RECIPES
+// PUT   /api/recipes/categories/update/:userId
+router.put('/categories/update/:userId', async (req, res, next) => {
+  try {
+    const category = req.body.category
+    const userId = req.params.userId
+    const data = req.body.recipes
+
+    const recipeId = req.body.recipeId
+    console.log('Data in route', data)
+    const newCategory = await Category.findOrCreate({
+      where: {
+        category: category
+      }
+    })
+    await UserCategory.findOne({
+      userId: userId,
+      categoryId: newCategory[0].id
+    })
+
     for (const [key, value] of Object.entries(data)) {
       if (value === true) {
         console.log('key', key)
