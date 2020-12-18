@@ -4,9 +4,8 @@ const GlobalStyle = createGlobalStyle`
 
 html, body {
   width:100%;
-
   font-family: 'Poppins', sans-serif;
-
+  height: 100vh;
   font-size: 1em;
   scrollbar-width: thin;
   letter-spacing: 0.0625em;
@@ -15,6 +14,10 @@ html, body {
   box-sizing: border-box;
   overflow-x: hidden;
   max-width: 2560px;
+}
+
+@media(max-width: 679px){
+  height: auto;
 }
 
 * {
