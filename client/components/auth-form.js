@@ -117,6 +117,10 @@ const Container = styled.div`
   padding-bottom: 50px;
   background-color: darkseagreen;
   justify-content: center;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-top: 50px;
+    padding-bottom: 100px;
+  }
 `
 
 const LoginSignupWrapper = styled.div`

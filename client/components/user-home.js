@@ -106,6 +106,9 @@ UserHome.propTypes = {
 
 const UserAccount = styled.div`
   text-align: left;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    margin-left: 20px;
+  }
 `
 
 const Row = styled.div`

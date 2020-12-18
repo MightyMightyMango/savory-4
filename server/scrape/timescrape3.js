@@ -17,6 +17,5 @@ const timescrape3 = time => {
     return `${min} minutes`
   }
 }
-console.log(timescrape3('PT9M'))
 
 module.exports = {timescrape3}
