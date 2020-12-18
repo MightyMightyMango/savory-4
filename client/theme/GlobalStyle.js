@@ -4,8 +4,8 @@ const GlobalStyle = createGlobalStyle`
 
 html, body {
   width:100%;
-  font-family: 'Poppins', sans-serif;
   height: 100vh;
+  font-family: 'Poppins', sans-serif;
   font-size: 1em;
   scrollbar-width: thin;
   letter-spacing: 0.0625em;
@@ -76,7 +76,5 @@ img {
   flex: 1;
   text-align: left;
 }`
-
-//can also keep any styled components here that are the same globally,
 
 export default GlobalStyle
