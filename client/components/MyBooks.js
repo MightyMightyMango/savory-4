@@ -83,22 +83,22 @@ const MyBooks = props => {
     <>
       <FadeIn>
         <RecipesContainer>
-            <h1>My Books</h1>
-            {categories.map(item => (
-              <CategoryItem key={item.id}>
-                <Book
-                  style={{
-                    background: item.colorCSS
-                  }}
-                >
-                  <Band1 className="content" />
-                  <Band2 className="content" />
-                  <BookTitle className="content">{item.category}</BookTitle>
-                  <Band3 className="content" />
-                  <Band4 className="content" />
-                </Book>
-              </CategoryItem>
-            ))}
+          <h1>My Books</h1>
+          {categories.map(item => (
+            <CategoryItem key={item.id}>
+              <Book
+                style={{
+                  background: item.colorCSS
+                }}
+              >
+                <Band1 className="content" />
+                <Band2 className="content" />
+                <BookTitle className="content">{item.category}</BookTitle>
+                <Band3 className="content" />
+                <Band4 className="content" />
+              </Book>
+            </CategoryItem>
+          ))}
         </RecipesContainer>
         <ColContainer>
           <Box>
@@ -236,6 +236,11 @@ const Book = styled.div`
   }
   .content {
     display: inline-block;
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 `
 const Band1 = styled.div`

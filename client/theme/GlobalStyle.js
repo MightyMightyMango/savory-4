@@ -14,6 +14,7 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  max-width: 2560px;
 }
 
 * {
