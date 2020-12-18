@@ -178,30 +178,66 @@ export class Recipe extends React.Component {
                 <Supported>
                   <Title>Supported Sites:</Title>
                   <Logos>
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/all-recipes.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/bon-appetit.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/eating-well.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/food-network.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/nyt-cooking.png"
-                    />
-                    <img
-                      className="supported-logo"
-                      src="/images/supported/simply-recipes.png"
-                    />
+                    <a href="https://www.allrecipes.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/all-recipes-bw.png"
+                      />
+                    </a>
+                    <a href="https://www.bonappetit.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/bon-appetit.png"
+                      />
+                    </a>
+                    <a href="http://www.eatingwell.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/eating-well-bw.png"
+                      />
+                    </a>
+                    <a href="https://www.foodnetwork.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/food-network-bw.png"
+                      />
+                    </a>
+                    <a href="https://cooking.nytimes.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/nyt-cooking-bw.png"
+                      />
+                    </a>
+                    <a href="https://www.simplyrecipes.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/simply-recipes-bw.png"
+                      />
+                    </a>
+                    <a href="https://gimmedelicious.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/gimme-delicious-bw.png"
+                      />
+                    </a>
+                    <a href="https://tasty.co/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/tasty-bw.png"
+                      />
+                    </a>
+                    <a href="https://www.cookingclassy.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/cooking-classy-bw.png"
+                      />
+                    </a>
+                    <a href="https://www.spendwithpennies.com/" target="_blank">
+                      <img
+                        className="supported-logo"
+                        src="/images/supported/spend-with-pennies-bw.jpg"
+                      />
+                    </a>
                   </Logos>
                 </Supported>
 
