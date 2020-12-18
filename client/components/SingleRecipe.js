@@ -322,6 +322,12 @@ const Container = styled.div`
   margin-bottom: 30px;
 `
 
+const Confirm = styled.div`
+  // display: flex;
+  text-align: center;
+  padding-top: 20px;
+`
+
 const SingleRecipeHeader = styled.div`
   display: flex;
   background-color: black;

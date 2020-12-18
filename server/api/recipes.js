@@ -210,6 +210,7 @@ router.put('/categories/user/:userId', async (req, res, next) => {
     const category = req.body.category
     const userId = req.params.userId
     const data = req.body.recipes
+    const colorCSS = req.body.colorCSS
 
     //const categoryId = req.body.categoryId
     const recipeId = req.body.recipeId
@@ -221,7 +222,8 @@ router.put('/categories/user/:userId', async (req, res, next) => {
     })
     await UserCategory.create({
       userId: userId,
-      categoryId: newCategory[0].id
+      categoryId: newCategory[0].id,
+      colorCSS: colorCSS
     })
 
     for (const [key, value] of Object.entries(data)) {

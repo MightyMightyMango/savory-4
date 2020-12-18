@@ -46,15 +46,48 @@ async function seed() {
 
   // CREATE CATEGORIES
   const categories = [
-    {category: 'dessert'},
-    {category: 'dinner'},
-    {category: 'western'},
-    {category: 'thanksgiving'}
+    {
+      category: 'dessert',
+      colorCSS:
+        'linear-gradient(to bottom, rgb(131, 178, 226), rgb(91,124,158))'
+    },
+    {
+      category: 'dinner',
+      colorCSS: 'linear-gradient(to bottom, rgb(229,161,54), rgb(183,128,43))'
+    },
+    {
+      category: 'western',
+      colorCSS: 'linear-gradient(to bottom, rgb(164,84,80), rgb(131,67,64))'
+    },
+    {
+      category: 'thanksgiving',
+      colorCSS: 'linear-gradient(to bottom, rgb(68,122,106), rgb(47,85,74))'
+    },
+    {
+      category: 'holiday',
+      colorCSS: 'linear-gradient(to bottom, rgb(164,84,80), rgb(131,67,64))'
+    },
+    {
+      category: 'noodles',
+      colorCSS: 'linear-gradient(to bottom, rgb(154,142,179), rgb(123,113,143))'
+    },
+    {
+      category: 'easy',
+      colorCSS: 'linear-gradient(to bottom, rgb(70,130,180), rgb(49,91,125))'
+    }
   ]
 
-  const [dessert, dinner, western, thanksgiving] = await Category.bulkCreate(
-    categories
-  )
+  const [
+    dessert,
+    dinner,
+    western,
+    thanksgiving,
+    holiday,
+    noodles,
+    easy
+  ] = await Category.bulkCreate(categories)
+
+  console.log(`seeded ${categories.length} users`)
 
   // CREATE RECIPES
   const recipes = [
@@ -81,7 +114,7 @@ async function seed() {
         'Do Ahead: Sauce can be made 1 week ahead. Cover and chill.'
       ],
       isDraft: false,
-      categoryIds: [thanksgiving.id],
+      categoryIds: [thanksgiving.id, easy.id, holiday.id],
       yield: 'Makes about 2½ cups',
       prepTime: '15 minutes',
       cookTime: '6 hours'
@@ -157,7 +190,7 @@ async function seed() {
         'Clean and oil grate, then immediately place salmon on grill skin side down. Cover grill and cook, skin side down the entire time, until skin is lightly charred and fish is opaque, 6–8 minutes. Transfer salmon to a plate and let cool slightly.',
         'Divide salmon among plates. Top with basil. Spoon lemon-sesame sauce over.'
       ],
-      categoryIds: [dinner.id],
+      categoryIds: [dinner.id, easy.id],
       yield: '4 servings',
       prepTime: '20 minutes',
       cookTime: '30 minutes'
@@ -288,7 +321,7 @@ async function seed() {
         "Carefully remove skillet from oven (handle will be hot!). Using tongs, transfer chicken skin side up to a clean plate. Taste sauce and season with more salt and pepper, if needed. Spoon about ¼ cup sauce into a small bowl and stir in sour cream until smooth (this slowly brings up the temperature of the sour cream so it doesn't split when it hits the hot skillet). Pour back into skillet and stir to combine.",
         'Arrange chicken thighs and juices back in skillet and top with remaining chopped parsley. Serve over noodles.'
       ],
-      categoryIds: [],
+      categoryIds: [noodles.id],
       yield: '4 servings',
       prepTime: '20 minutes',
       cookTime: '45 minutes'
@@ -322,7 +355,7 @@ async function seed() {
         'Divide pasta among bowls. Top with finely grated Parmesan.'
       ],
       isDraft: false,
-      categoryIds: [dinner.id],
+      categoryIds: [dinner.id, noodles.id],
       yield: '3-4 servings',
       prepTime: '10 minutes',
       cookTime: '1 hour, 5 minutes'
@@ -429,8 +462,22 @@ async function seed() {
     {
       userId: 1,
       categoryId: 4
+    },
+    {
+      userId: 1,
+      categoryId: 5
+    },
+    {
+      userId: 1,
+      categoryId: 6
+    },
+    {
+      userId: 1,
+      categoryId: 7
     }
   ]
+
+  console.log('Seeded user_categories')
 
   await UserCategory.bulkCreate(userCategories)
 
