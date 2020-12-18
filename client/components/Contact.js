@@ -36,7 +36,7 @@ const Contact = props => {
             className="profile-pics"
             src="/images/profile/micheline-crop.png"
           />
-          <h3>Lea Overend</h3>
+          <h3>Micheline Wu</h3>
           <p>
             <a href="https://www.linkedin.com/in/micheline-wu/" target="_blank">
               LinkedIn
