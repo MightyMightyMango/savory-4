@@ -27,7 +27,7 @@ const processUrl = async (url, userId) => {
   } else if (url.includes('gimmedelicious.com')) {
     return scraper4(url, 'Gimme Delicious', userId)
   } else {
-    return 'error'
+    return 'notAccepted'
   }
 }
 

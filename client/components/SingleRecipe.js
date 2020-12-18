@@ -47,13 +47,13 @@ export class SingleRecipe extends React.Component {
 
   handleDeleteDraft = event => {
     event.preventDefault()
-    this.props.deleteDraft(recipeId)
+    this.props.deleteDraft(this.props.recipe.id)
     history.push('/drafts')
   }
 
   handleDeleteRecipe = event => {
     event.preventDefault()
-    this.props.deleteRecipe(recipeId)
+    this.props.deleteRecipe(this.props.recipe.id)
     history.push('/myrecipes')
   }
 
@@ -267,8 +267,8 @@ export class SingleRecipe extends React.Component {
       )
     } else {
       return (
-        <div>
-          <FadeIn>
+        <FadeIn>
+          <Confirm>
             <Button
               primary
               onClick={() => {
@@ -279,8 +279,16 @@ export class SingleRecipe extends React.Component {
             </Button>
             <p>Make your changes below and when you're done click confirm!</p>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
-          </FadeIn>
-        </div>
+            <Button
+              primary
+              onClick={() => {
+                this.handleSubmit(event)
+              }}
+            >
+              Confirm Changes
+            </Button>
+          </Confirm>
+        </FadeIn>
       )
     }
   }
@@ -311,6 +319,10 @@ const Container = styled.div`
   width: 100%;
   flex-wrap: wrap;
   margin-bottom: 30px;
+`
+
+const Confirm = styled.div`
+  padding-top: 20px;
 `
 
 const SingleRecipeHeader = styled.div`
