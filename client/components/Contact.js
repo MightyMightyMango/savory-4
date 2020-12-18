@@ -65,7 +65,7 @@ const ContactLink = styled.div`
 const Profiles = styled.div`
   display: flex;
   flex-direction: row;
-  justify-contents: center;
+  justify-content: center;
   padding: 20px;
   flex-wrap: wrap;
 
