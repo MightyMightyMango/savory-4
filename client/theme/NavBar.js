@@ -30,11 +30,6 @@ const Navbar = styled.div`
     color: gainsboro;
   }
 
-  // a:focus {
-  //   text-decoration: underline;
-  //   text-underline-position: under;
-  // }
-
   .focused {
     text-decoration: underline;
     text-underline-position: under;
@@ -103,6 +98,7 @@ const Navbar = styled.div`
     padding-right: 10px;
     font-size: 0.6em;
     height: 100px;
+    position: sticky !important;
   }
 `
 
