@@ -122,6 +122,8 @@ const Container = styled.div`
 
     @media (max-width: ${props => props.theme.breakpoints.mobile}) {
       width: 100%;
+      max-height: 320px;
+      overflow: hidden;
     }
   }
 `
