@@ -123,6 +123,7 @@ const Container = styled.div`
     @media (max-width: ${props => props.theme.breakpoints.mobile}) {
       width: 250px;
       height: 250px;
+      object-fit: cover;
       overflow: hidden;
     }
   }

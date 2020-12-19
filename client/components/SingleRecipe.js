@@ -353,6 +353,9 @@ const Title = styled.h1`
   // left: 50%;
   // transform: translate(-50%, -50%);
   z-index: 2;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: 2em;
+  }
 `
 
 const HeaderImage = styled.img`
@@ -367,6 +370,9 @@ const Description = styled.div`
   padding-bottom: 20px;
   width: 80%;
   justify-content: space-evenly;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 90%;
+  }
 `
 const Image = styled.img`
   width: 450px;
@@ -436,7 +442,7 @@ const Details = styled.ul`
   list-style-type: none;
 `
 const ConfirmHeading = styled.div`
-  margin-left: 20px;
+  padding: 20px;
   p {
     margin-left: 8px;
   }
