@@ -269,24 +269,28 @@ export class SingleRecipe extends React.Component {
       return (
         <FadeIn>
           <Confirm>
-            <Button
-              primary
-              onClick={() => {
-                this.handleSubmit(event)
-              }}
-            >
-              Confirm Changes
-            </Button>
-            <p>Make your changes below and when you're done click confirm!</p>
+            <ConfirmHeading>
+              <Button
+                primary
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </Button>
+              <p>Make your changes below and when you're done click confirm!</p>
+            </ConfirmHeading>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
-            <Button
-              primary
-              onClick={() => {
-                this.handleSubmit(event)
-              }}
-            >
-              Confirm Changes
-            </Button>
+            <ConfirmHeading>
+              <Button
+                primary
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </Button>
+            </ConfirmHeading>
           </Confirm>
         </FadeIn>
       )
@@ -323,6 +327,7 @@ const Container = styled.div`
 
 const Confirm = styled.div`
   padding-top: 20px;
+  margin-bottom: 30px;
 `
 
 const SingleRecipeHeader = styled.div`
@@ -429,4 +434,10 @@ const Instructions = styled.div`
 
 const Details = styled.ul`
   list-style-type: none;
+`
+const ConfirmHeading = styled.div`
+  margin-left: 20px;
+  p {
+    margin-left: 8px;
+  }
 `
