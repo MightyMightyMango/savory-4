@@ -113,12 +113,12 @@ const Container = styled.div`
   align-items: center;
   // width: 100%;
   padding-top: 180px;
-  padding-bottom: 50px;
+  padding-bottom: 200px;
   background-color: darkseagreen;
   justify-content: center;
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding-top: 50px;
-    padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 200px;
   }
 `
 
