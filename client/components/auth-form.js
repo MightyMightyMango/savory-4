@@ -112,26 +112,26 @@ const Container = styled.div`
   text-align: center;
   align-items: center;
   // width: 100%;
-  padding-top: 180px;
-  padding-bottom: 200px;
+  padding-top: 100px;
+  padding-bottom: 150px;
   background-color: darkseagreen;
   justify-content: center;
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
     padding-top: 100px;
-    padding-bottom: 200px;
+    padding-bottom: 150px;
   }
 `
 
 const LoginSignupWrapper = styled.div`
-  width: 600px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: center;
   background-color: white;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   border-radius: 2px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 6px 0 rgba(0, 0, 0, 0.05);
 
