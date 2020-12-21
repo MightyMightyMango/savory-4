@@ -45,6 +45,7 @@ export class Recipe extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('in CDU')
     if (this.props.recipe.id && this.props.recipe.id !== prevProps.recipe.id) {
       let newState = this.props.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
