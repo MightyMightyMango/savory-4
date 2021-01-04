@@ -8,7 +8,7 @@ const Contact = props => {
       <h2>
         Want to get in touch? Contact us at{' '}
         <ContactLink>
-          <a href="mailto:savoryapp@gmail.com">savoryapp@gmail.com</a>!
+          <a href="mailto:savory2021@gmail.com">savory2021@gmail.com</a>!
         </ContactLink>
       </h2>
       <h2>About Us:</h2>
