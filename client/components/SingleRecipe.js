@@ -327,7 +327,11 @@ const Container = styled.div`
 
 const Confirm = styled.div`
   padding-top: 20px;
+<<<<<<< HEAD
   margin-bottom: 30px;
+=======
+  text-align: center;
+>>>>>>> 4031df4f03065d5027cb8a4bfe2d062173296c29
 `
 
 const SingleRecipeHeader = styled.div`
