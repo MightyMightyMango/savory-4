@@ -36,19 +36,6 @@ const MyBooks = props => {
     setNewCategory(event.target.value)
   }
 
-  const handleSubmit = event => {
-    console.log(recipesToBeAdded)
-    const color = setBackgroundColor()
-    submitCat(user.id, newCategory, recipesToBeAdded, color)
-  }
-
-  const onChange = event => {
-    setRecipesToBeAdded({
-      ...recipesToBeAdded,
-      [event.target.id]: event.target.checked
-    })
-    console.log(event.target.name, event.target.checked, event.target.id)
-  }
   // BOOKS BACKGROUND
 
   const setBackgroundColor = () => {
@@ -61,6 +48,20 @@ const MyBooks = props => {
       'linear-gradient(to bottom, rgb(70,130,180), rgb(49,91,125))'
     ]
     return colors[Math.floor(Math.random() * Math.floor(6))]
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    const color = setBackgroundColor()
+    submitCat(user.id, newCategory, recipesToBeAdded, color)
+  }
+
+  const onChange = event => {
+    setRecipesToBeAdded({
+      ...recipesToBeAdded,
+      [event.target.id]: event.target.checked
+    })
+    console.log(event.target.name, event.target.checked, event.target.id)
   }
 
   const onClickCategory = name => {
@@ -83,22 +84,22 @@ const MyBooks = props => {
     <>
       <FadeIn>
         <RecipesContainer>
-            <h1>My Books</h1>
-            {categories.map(item => (
-              <CategoryItem key={item.id}>
-                <Book
-                  style={{
-                    background: item.colorCSS
-                  }}
-                >
-                  <Band1 className="content" />
-                  <Band2 className="content" />
-                  <BookTitle className="content">{item.category}</BookTitle>
-                  <Band3 className="content" />
-                  <Band4 className="content" />
-                </Book>
-              </CategoryItem>
-            ))}
+          <h1>My Books</h1>
+          {categories.map(item => (
+            <CategoryItem key={item.id}>
+              <Book
+                style={{
+                  background: item.colorCSS
+                }}
+              >
+                <Band1 className="content" />
+                <Band2 className="content" />
+                <BookTitle className="content">{item.category}</BookTitle>
+                <Band3 className="content" />
+                <Band4 className="content" />
+              </Book>
+            </CategoryItem>
+          ))}
         </RecipesContainer>
         <ColContainer>
           <Box>
@@ -151,8 +152,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
-  submitCat: (userId, category, data) => {
-    dispatch(submitCategory(userId, category, data))
+  submitCat: (userId, category, data, colorCSS) => {
+    dispatch(submitCategory(userId, category, data, colorCSS))
   },
   updateCat: (userId, category, data) => {
     dispatch(updateCategory(userId, category, data))

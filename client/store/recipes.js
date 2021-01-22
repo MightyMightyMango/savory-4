@@ -45,7 +45,7 @@ export const getRecipesInCategory = recipes => ({
 })
 export const setCategory = category => ({
   type: SET_CATEGORY,
-  category
+  category: category
 })
 
 export const editCategory = category => ({
@@ -152,10 +152,7 @@ export const getRecipesInCategoryThunk = (userId, categoryId) => {
   }
 }
 
-
 export const submitCategory = (userId, category, data, colorCSS) => {
-
-  console.log('in thunk', userId, category, data)
   return async dispatch => {
     try {
       const res = await axios.put(`/api/recipes/categories/user/${userId}`, {
@@ -163,7 +160,6 @@ export const submitCategory = (userId, category, data, colorCSS) => {
         recipes: data,
         colorCSS: colorCSS
       })
-      console.log('res.data', res.data)
       dispatch(setCategory(res.data))
     } catch (error) {
       console.error(error)
@@ -173,14 +169,12 @@ export const submitCategory = (userId, category, data, colorCSS) => {
 
 //UPDATE CATEGORY WITH NEW RECIPES
 export const updateCategory = (userId, category, data) => {
-  console.log('in thunk', userId, category, data)
   return async dispatch => {
     try {
       const res = await axios.put(`/api/recipes/categories/update/${userId}`, {
         category: category,
         recipes: data
       })
-      console.log('res.data', res.data)
     } catch (error) {
       console.error(error)
     }
@@ -249,7 +243,8 @@ function recipesReducer(state = initialState, action) {
     case GET_RECIPES_IN_CATEGORY:
       return {...state, allRecipes: action.recipes}
     case SET_CATEGORY:
-      const newCategories = state.categories.push(action.category)
+      const oldCategories = state.categories
+      const newCategories = [...oldCategories, action.category]
       return {...state, categories: newCategories}
     case EDIT_CATEGORY:
       const updatedCategories = state.categories.map(category => {
