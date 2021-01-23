@@ -59,7 +59,6 @@ export const AllRecipes = props => {
     if (sortedByParams.length === 0) {
       // if the sort parameters have not been set
       const sorted = []
-      // console.log('recipes is currently ', recipes)
       recipes.forEach(recipe => {
         // split name into an array
         const recipeName = recipe.name.split(' ')
@@ -73,10 +72,10 @@ export const AllRecipes = props => {
           }
         })
       })
-      // console.log('sorted ', sorted)
       setSorted(sorted)
     }
 
+    console.log('in handleSort')
     filterRecipes(value, sortedByParams)
   }
 

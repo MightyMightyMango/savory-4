@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {filter} from 'compression'
 
 const SET_ALL_RECIPES = 'SET_ALL_RECIPES'
 const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
@@ -22,9 +21,10 @@ export const setAllDrafts = recipes => ({
   recipes
 })
 
-export const setSingleRecipe = recipe => {
-  return {type: SET_SINGLE_RECIPE, recipe}
-}
+export const setSingleRecipe = recipe => ({
+  type: SET_SINGLE_RECIPE,
+  recipe
+})
 
 export const deleteRecipe = recipeId => ({
   type: DELETE_RECIPE,
@@ -38,7 +38,7 @@ export const deleteDraft = recipeId => ({
 
 export const setFilteredRecipes = recipeIds => ({
   type: FILTER_RECIPES,
-  recipeIds
+  recipeIds: recipeIds
 })
 
 export const getUserCategories = categories => ({
@@ -135,61 +135,68 @@ export const deleteDraftThunk = recipeId => {
 // FILTER RECIPES
 export const filterRecipes = (filterBy, sortedByParams) => {
   console.log('in filter thunk')
-  // return dispatch => {
-  const searchTerms = filterBy.split(' ')
 
-  // filter out only recipes that match the search term(s)
-  const matchingSearchTerms = sortedByParams.filter(recipeKeyVals => {
-    const filtered = searchTerms.filter(word => {
-      if (recipeKeyVals.keyword.startsWith(word)) {
-        return recipeKeyVals.recipeId // only returns recipeId
-      }
-    })
-    if (filtered.length > 0) {
-      return filtered
-    }
-  })
+  return dispatch => {
+    console.log('in dispatch')
+    dispatch(setFilteredRecipes([1]))
 
-  // send to reducer
-  if (searchTerms.length === 1) {
-    // if there's only one search term
-    console.log('one search term. dispatching ', matchingSearchTerms)
-    return setFilteredRecipes(matchingSearchTerms)
-    // return dispatch(setFilteredRecipes(matchingSearchTerms))
-  } else if (matchingSearchTerms.length > 0) {
-    // if there are multiple search terms, find the one(s) that meets all the criteria
-    // this will be the one with the most frequent recipeId
-    matchingSearchTerms.reverse()
-    // count frequency
-    let frequencyTracker = []
-    let currentRecipeId = matchingSearchTerms[0].recipeId
-    let counter = 1
-    for (let i = 1; i < matchingSearchTerms.length; i++) {
-      if (currentRecipeId !== matchingSearchTerms[i].recipeId) {
-        frequencyTracker.push({recipeId: currentRecipeId, frequency: counter})
-        currentRecipeId = matchingSearchTerms[i].recipeId
-        counter = 1
-      } else {
-        counter++
-      }
-    }
-    frequencyTracker.push({recipeId: currentRecipeId, frequency: counter})
-    console.log('frequencyTracker', frequencyTracker)
-    const maxFrequency = frequencyTracker[frequencyTracker.length - 1].frequency
+    // const searchTerms = filterBy.split(' ')
 
-    let matchingRecipes = frequencyTracker.filter(recipe => {
-      if (recipe.frequency === maxFrequency) {
-        return recipe.recipeId
-      }
-    })
-    return setFilteredRecipes(matchingRecipes)
-    // return dispatch(setFilteredRecipes(matchingRecipes))
-  } else {
-    console.log('no matches')
-    // return dispatch(setFilteredRecipes([]))
-    return setFilteredRecipes([])
+    // // filter out only recipes that match the search term(s)
+    // const matchingSearchTerms = sortedByParams.filter(recipeKeyVals => {
+    //   const filtered = searchTerms.filter(word => {
+    //     if (recipeKeyVals.keyword.startsWith(word)) {
+    //       return recipeKeyVals.recipeId // only returns recipeId
+    //     }
+    //   })
+    //   if (filtered.length > 0) {
+    //     return filtered
+    //   }
+    // })
+
+    // // send to reducer
+    // if (searchTerms.length === 1) {
+    //   // if there's only one search term
+    //   console.log('one search term. dispatching ', matchingSearchTerms)
+    //   dispatch(setFilteredRecipes(matchingSearchTerms))
+    // } else if (matchingSearchTerms.length > 0) {
+    //   // if there are multiple search terms, find the one(s) that meets all the criteria
+    //   // this will be the one with the most frequent recipeId
+
+    //   // count frequency
+    //   let frequencyTracker = []
+    //   let currentRecipeId = matchingSearchTerms[0].recipeId
+    //   let counter = 1
+    //   for (let i = 1; i < matchingSearchTerms.length; i++) {
+    //     if (currentRecipeId !== matchingSearchTerms[i].recipeId) {
+    //       frequencyTracker.push({recipeId: currentRecipeId, frequency: counter})
+    //       currentRecipeId = matchingSearchTerms[i].recipeId
+    //       counter = 1
+    //     } else {
+    //       counter++
+    //     }
+    //   }
+    //   frequencyTracker.push({recipeId: currentRecipeId, frequency: counter})
+    //   console.log('frequencyTracker', frequencyTracker)
+    //   const maxFrequency = frequencyTracker[0].frequency
+    //   console.log('maxFrequency = ', maxFrequency)
+    //   if (maxFrequency === 1) {
+    //     console.log('multiple terms, no matches')
+    //     dispatch(setFilteredRecipes([]))
+    //   } else {
+    //     let matchingRecipes = frequencyTracker.filter(recipe => {
+    //       if (recipe.frequency === maxFrequency) {
+    //         return recipe.recipeId
+    //       }
+    //     })
+    //     console.log('multiple terms, returning ', matchingRecipes)
+    //     dispatch(setFilteredRecipes(matchingRecipes))
+    //   }
+    // } else {
+    //   console.log('no matches')
+    //   dispatch(setFilteredRecipes([]))
+    // }
   }
-  // }
 }
 
 // USER CATEGORIES
@@ -206,7 +213,6 @@ export const getUserCategoriesThunk = userId => {
 
 // RECIPES IN ONE CATEGORIES FOR ONE USER
 export const getRecipesInCategoryThunk = (userId, categoryId) => {
-  console.log('in thunk')
   return async dispatch => {
     try {
       const res = await axios.get(
@@ -249,12 +255,10 @@ export const updateCategory = (userId, category, data) => {
 }
 
 export const submitRecipeEdit = recipe => {
-  console.log(recipe)
   return async dispatch => {
     try {
       let recipeId = recipe.id
       const res = await axios.put(`/api/recipes/${recipeId}`, recipe)
-      console.log(res.data)
       dispatch(setSingleRecipe(res.data))
     } catch (error) {
       console.error(error)
@@ -264,13 +268,11 @@ export const submitRecipeEdit = recipe => {
 
 //edit categories
 export const editCategoryThunk = (categoryId, category) => {
-  console.log('in thunk', categoryId, category)
   return async dispatch => {
     try {
       const res = await axios.put(`/api/recipes/categories/${categoryId}`, {
         category: category
       })
-      console.log('res.data', res.data)
       dispatch(editCategory(res.data))
     } catch (error) {
       console.error(error)
@@ -306,6 +308,7 @@ function recipesReducer(state = initialState, action) {
       return {...state, allDrafts: drafts}
     }
     case FILTER_RECIPES: {
+      console.log('filtering recipes')
       const recipes = state.allRecipes
       const recipeIds = action.recipeIds
       console.log('current recipes ', recipes)
