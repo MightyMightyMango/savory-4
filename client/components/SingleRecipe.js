@@ -1,9 +1,8 @@
 /* eslint-disable complexity */
-import React, {useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import history from '../history'
-// import {resetRecipeState} from '../store/singleRecipe'
 import {
   submitRecipeEdit,
   setSingleRecipeThunk,
@@ -81,7 +80,6 @@ export class SingleRecipe extends React.Component {
         ? dataToSend.instructions.split('\n')
         : dataToSend.instructions
     dataToSend.isDraft = true
-    console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipeEdit(dataToSend)
     this.setState({canEdit: false})
     this.props.getRecipe(dataToSend.id)
@@ -101,6 +99,10 @@ export class SingleRecipe extends React.Component {
         ? recipe.instructions.split('\n')
         : recipe.instructions
     displayInstructions = displayInstructions || []
+    if (displayInstructions.length > 0)
+      displayInstructions = displayInstructions.filter(
+        instruction => instruction !== ''
+      )
     displayIngredients = displayIngredients || []
 
     // FORMAT RECIPE FOR EMAIL
