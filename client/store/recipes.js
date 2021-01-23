@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {filter} from 'compression'
 
 const SET_ALL_RECIPES = 'SET_ALL_RECIPES'
 const SET_SINGLE_RECIPE = 'SET_SINGLE_RECIPE'
@@ -9,6 +10,7 @@ const GET_USER_CATEGORIES = 'GET_USER_CATEGORIES'
 const GET_RECIPES_IN_CATEGORY = 'GET_RECIPES_IN_CATEGORY'
 const SET_CATEGORY = 'SET_CATEGORY'
 const EDIT_CATEGORY = 'EDIT_CATEGORY'
+const FILTER_RECIPES = 'FILTER_RECIPES'
 
 export const setAllRecipes = recipes => ({
   type: SET_ALL_RECIPES,
@@ -32,6 +34,11 @@ export const deleteRecipe = recipeId => ({
 export const deleteDraft = recipeId => ({
   type: DELETE_DRAFT,
   recipeId
+})
+
+export const setFilteredRecipes = recipeIds => ({
+  type: FILTER_RECIPES,
+  recipeIds
 })
 
 export const getUserCategories = categories => ({
@@ -123,6 +130,66 @@ export const deleteDraftThunk = recipeId => {
       console.error(error)
     }
   }
+}
+
+// FILTER RECIPES
+export const filterRecipes = (filterBy, sortedByParams) => {
+  console.log('in filter thunk')
+  // return dispatch => {
+  const searchTerms = filterBy.split(' ')
+
+  // filter out only recipes that match the search term(s)
+  const matchingSearchTerms = sortedByParams.filter(recipeKeyVals => {
+    const filtered = searchTerms.filter(word => {
+      if (recipeKeyVals.keyword.startsWith(word)) {
+        return recipeKeyVals.recipeId // only returns recipeId
+      }
+    })
+    if (filtered.length > 0) {
+      return filtered
+    }
+  })
+
+  // send to reducer
+  if (searchTerms.length === 1) {
+    // if there's only one search term
+    console.log('one search term. dispatching ', matchingSearchTerms)
+    return setFilteredRecipes(matchingSearchTerms)
+    // return dispatch(setFilteredRecipes(matchingSearchTerms))
+  } else if (matchingSearchTerms.length > 0) {
+    // if there are multiple search terms, find the one(s) that meets all the criteria
+    // this will be the one with the most frequent recipeId
+    matchingSearchTerms.reverse()
+    // count frequency
+    let frequencyTracker = []
+    let currentRecipeId = matchingSearchTerms[0].recipeId
+    let counter = 1
+    for (let i = 1; i < matchingSearchTerms.length; i++) {
+      if (currentRecipeId !== matchingSearchTerms[i].recipeId) {
+        frequencyTracker.push({recipeId: currentRecipeId, frequency: counter})
+        currentRecipeId = matchingSearchTerms[i].recipeId
+        counter = 1
+      } else {
+        counter++
+      }
+    }
+    frequencyTracker.push({recipeId: currentRecipeId, frequency: counter})
+    console.log('frequencyTracker', frequencyTracker)
+    const maxFrequency = frequencyTracker[frequencyTracker.length - 1].frequency
+
+    let matchingRecipes = frequencyTracker.filter(recipe => {
+      if (recipe.frequency === maxFrequency) {
+        return recipe.recipeId
+      }
+    })
+    return setFilteredRecipes(matchingRecipes)
+    // return dispatch(setFilteredRecipes(matchingRecipes))
+  } else {
+    console.log('no matches')
+    // return dispatch(setFilteredRecipes([]))
+    return setFilteredRecipes([])
+  }
+  // }
 }
 
 // USER CATEGORIES
@@ -237,6 +304,21 @@ function recipesReducer(state = initialState, action) {
         draft => draft.id !== action.recipeId
       )
       return {...state, allDrafts: drafts}
+    }
+    case FILTER_RECIPES: {
+      const recipes = state.allRecipes
+      const recipeIds = action.recipeIds
+      console.log('current recipes ', recipes)
+      console.log('recipeIds ', recipeIds)
+      const filteredRecipes = recipes.filter(recipe => {
+        const filtered = recipeIds.map(id => recipe.id === id)
+        return filtered
+      })
+
+      console.log('filtered recipes ', filteredRecipes)
+
+      return {...state}
+      // return {...state, allRecipes: action.recipes}
     }
     case GET_USER_CATEGORIES:
       return {...state, categories: action.categories}

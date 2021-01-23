@@ -7,21 +7,27 @@ import {
   getUserCategoriesThunk,
   getRecipesInCategoryThunk,
   submitCategory,
-  setAllFinalRecipesThunk
+  setAllFinalRecipesThunk,
+  filterRecipes
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
 // import EditCategories from './EditCategories'
 import Button from '../theme/Button'
 import {StyledButton} from '../theme/Button.js'
 import Link from 'react-router-dom'
+import Search from './Search'
 
 import FadeIn from 'react-fade-in'
+import {use} from 'chai'
+import {filter} from 'compression'
 
 export const AllRecipes = props => {
   // categories contains all the categories
   // to filter by category, pass the userId and categoryId into getRecipesInCategory
   const [showForm, toggleShowForm] = useState(false)
   const [newCategory, setNewCategory] = useState('')
+  const [sortedByParams, setSorted] = useState([])
+  const [searchFieldValue, setSearchValue] = useState('')
 
   const {
     user,
@@ -41,27 +47,45 @@ export const AllRecipes = props => {
 
   const handleDeleteRecipe = (event, recipeId) => {
     event.preventDefault()
-    console.log('event ', event)
     deleteRecipe(recipeId)
   }
 
   const getRecipesFromCategory = event => {
     event.preventDefault()
-    console.log('recipes by Category')
-    console.log('event.targ.value', event.target.value)
     getRecipesInCategory(user.id, event.target.value)
   }
 
-  // const getAllRecipesFunc = event => {
-  //   getAllRecipes(props.user.id)
-  // }
+  const handleSort = value => {
+    if (sortedByParams.length === 0) {
+      // if the sort parameters have not been set
+      const sorted = []
+      // console.log('recipes is currently ', recipes)
+      recipes.forEach(recipe => {
+        // split name into an array
+        const recipeName = recipe.name.split(' ')
+        recipeName.forEach(word => {
+          if (
+            !['the', 'an', 'a', 'with', 'is', 'of', 'on', 'and'].includes(
+              word.toLowerCase()
+            )
+          ) {
+            sorted.push({keyword: word.toLowerCase(), recipeId: recipe.id})
+          }
+        })
+      })
+      // console.log('sorted ', sorted)
+      setSorted(sorted)
+    }
+
+    filterRecipes(value, sortedByParams)
+  }
+
   return (
     <>
       <Container>
         <FadeIn>
-          {/* <Title>My Recipe Books</Title> */}
-          {/* {getRecipesFromCategory} */}
           <Title height="70px">My Recipes</Title>
+          <Search handleSort={handleSort} />
           <CategoriesContainer>
             <h2>Categories</h2>
             <Categories>
@@ -94,64 +118,12 @@ export const AllRecipes = props => {
                     <Button primary>View Recipe</Button>
                   </NavLink>
                   <Title>{recipe.name}</Title>
-                  {/* <Subtitle>Source: {recipe.publisher}</Subtitle> */}
-                  {/* {recipe.isDraft ? (
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          'Are you sure you wish to delete this draft?'
-                        )
-                      )
-                        handleDeleteRecipe(event, recipe.id)
-                    }}
-                  >
-                    Delete Draft
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          'Are you sure you wish to delete this recipe?'
-                        )
-                      )
-                        handleDeleteRecipe(event, recipe.id)
-                    }}
-                  >
-                    Delete Recipe
-                  </button>
-                )} */}
                 </Recipe>
               ))
             ) : (
               <div />
             )}
           </RecipesContainer>
-          {/* <CategoriesContainer>
-          <Title>Categories</Title>
-          {Array.isArray(categories) ? (
-            categories.map(category => (
-              <>
-                <button
-                  type="submit"
-                  value={category.id}
-                  onClick={() => getRecipesFromCategory(event)}
-                >
-                  {category.category}
-                </button>
-              </>
-            ))
-          ) : (
-            <div />
-          )}
-          <button type="submit" onClick={() => displayForm(event)}>
-            Add or Edit Recipe Books
-          </button>
-          {Form()}
-        </CategoriesContainer> */}
         </FadeIn>
       </Container>
     </>
@@ -168,6 +140,9 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getAllRecipes: userId => dispatch(setAllFinalRecipesThunk(userId)),
   deleteRecipe: recipeId => dispatch(deleteRecipeThunk(recipeId)),
+  filterRecipes: (filterBy, currentRecipes, sortedByParams) => {
+    dispatch(filterRecipes(filterBy, currentRecipes, sortedByParams))
+  },
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
   getRecipesInCategory: (userId, categoryId) =>
     dispatch(getRecipesInCategoryThunk(userId, categoryId)),
