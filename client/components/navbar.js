@@ -33,14 +33,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               className="navlink"
               to="/recipes"
               activeClassName="focused"
-              as="/savenew"
             >
               SAVE NEW RECIPES
             </NavLink>
-            {/* <a href="/recipes">SAVE NEW RECIPES</a> */}
-            {/* <NavLink className="navlink" to="/home" activeClassName="focused">
-              ACCOUNT
-            </NavLink> */}
             <NavLink
               className="navlink"
               to="/contact"
