@@ -5,10 +5,11 @@ import {
   getUserCategoriesThunk,
   submitCategory,
   setAllRecipesThunk,
-  updateCategory
+  updateCategory,
+  getRecipesInCategoryThunk
 } from '../store/recipes'
 import EditCategories from './EditCategories'
-import StyledButton from '../theme/Button'
+import {Link} from 'react-router-dom'
 
 import FadeIn from 'react-fade-in'
 
@@ -75,9 +76,18 @@ const MyBooks = props => {
     })
     console.log('For Update', recipesToBeAdded2)
   }
+
   const handleSubmit2 = event => {
     console.log(recipesToBeAdded)
     updateCat(user.id, categorySelected, recipesToBeAdded2)
+  }
+
+  const showRecipesInBook = categoryId => {
+    console.log('categoryId is ', categoryId)
+    getRecipesInCategoryThunk(user.id, categoryId)
+    console.log('showRecipes props ', props)
+    props.history.push('/books')
+    console.log('showRecipes 2 props ', props)
   }
 
   return (
@@ -87,17 +97,24 @@ const MyBooks = props => {
           <h1>My Books</h1>
           {categories.map(item => (
             <CategoryItem key={item.id}>
-              <Book
-                style={{
-                  background: item.colorCSS
+              <Link
+                to={{
+                  pathname: '/myrecipes',
+                  categoryId: item.id
                 }}
               >
-                <Band1 className="content" />
-                <Band2 className="content" />
-                <BookTitle className="content">{item.category}</BookTitle>
-                <Band3 className="content" />
-                <Band4 className="content" />
-              </Book>
+                <Book
+                  style={{
+                    background: item.colorCSS
+                  }}
+                >
+                  <Band1 className="content" />
+                  <Band2 className="content" />
+                  <BookTitle className="content">{item.category}</BookTitle>
+                  <Band3 className="content" />
+                  <Band4 className="content" />
+                </Book>
+              </Link>
             </CategoryItem>
           ))}
         </RecipesContainer>
@@ -157,7 +174,9 @@ const mapDispatch = dispatch => ({
   },
   updateCat: (userId, category, data) => {
     dispatch(updateCategory(userId, category, data))
-  }
+  },
+  getRecipesInCategory: (userId, categoryId) =>
+    dispatch(getRecipesInCategoryThunk(userId, categoryId))
 })
 export default connect(mapState, mapDispatch)(MyBooks)
 

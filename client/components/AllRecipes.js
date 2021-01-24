@@ -11,15 +11,11 @@ import {
   filterRecipes
 } from '../store/recipes'
 import {NavLink} from 'react-router-dom'
-// import EditCategories from './EditCategories'
 import Button from '../theme/Button'
 import {StyledButton} from '../theme/Button.js'
-import Link from 'react-router-dom'
 import Search from './Search'
 
 import FadeIn from 'react-fade-in'
-import {use} from 'chai'
-import {filter} from 'compression'
 
 export const AllRecipes = props => {
   // categories contains all the categories
@@ -41,7 +37,11 @@ export const AllRecipes = props => {
   const categories = props.categories || []
 
   useEffect(() => {
-    getAllRecipes(props.user.id)
+    if (props.history.location.categoryId) {
+      getRecipesInCategory(props.user.id, props.history.location.categoryId)
+    } else {
+      getAllRecipes(props.user.id)
+    }
     getCategories(props.user.id)
   }, [])
 
@@ -78,6 +78,8 @@ export const AllRecipes = props => {
     console.log('in handleSort')
     filterRecipes(value, sortedByParams)
   }
+
+  console.log('props ', props)
 
   return (
     <>
