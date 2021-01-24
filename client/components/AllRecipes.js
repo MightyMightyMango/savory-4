@@ -86,7 +86,7 @@ export const AllRecipes = props => {
       <Container>
         <FadeIn>
           <Title height="70px">My Recipes</Title>
-          <Search handleSort={handleSort} />
+          {/* <Search handleSort={handleSort} /> */}
           <CategoriesContainer>
             <h2>Categories</h2>
             <Categories>
