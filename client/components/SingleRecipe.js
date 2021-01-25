@@ -271,24 +271,28 @@ export class SingleRecipe extends React.Component {
       return (
         <FadeIn>
           <Confirm>
-            <Button
-              primary
-              onClick={() => {
-                this.handleSubmit(event)
-              }}
-            >
-              Confirm Changes
-            </Button>
-            <p>Make your changes below and when you're done click confirm!</p>
+            <ConfirmHeading>
+              <Button
+                primary
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </Button>
+              <p>Make your changes below and when you're done click confirm!</p>
+            </ConfirmHeading>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
-            <Button
-              primary
-              onClick={() => {
-                this.handleSubmit(event)
-              }}
-            >
-              Confirm Changes
-            </Button>
+            <ConfirmHeading>
+              <Button
+                primary
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </Button>
+            </ConfirmHeading>
           </Confirm>
         </FadeIn>
       )
@@ -325,7 +329,11 @@ const Container = styled.div`
 
 const Confirm = styled.div`
   padding-top: 20px;
+<<<<<<< HEAD
+  margin-bottom: 30px;
+=======
   text-align: center;
+>>>>>>> 4031df4f03065d5027cb8a4bfe2d062173296c29
 `
 
 const SingleRecipeHeader = styled.div`
@@ -351,6 +359,9 @@ const Title = styled.h1`
   // left: 50%;
   // transform: translate(-50%, -50%);
   z-index: 2;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: 2em;
+  }
 `
 
 const HeaderImage = styled.img`
@@ -365,6 +376,9 @@ const Description = styled.div`
   padding-bottom: 20px;
   width: 80%;
   justify-content: space-evenly;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 90%;
+  }
 `
 const Image = styled.img`
   width: 450px;
@@ -432,4 +446,10 @@ const Instructions = styled.div`
 
 const Details = styled.ul`
   list-style-type: none;
+`
+const ConfirmHeading = styled.div`
+  padding: 20px;
+  p {
+    margin-left: 8px;
+  }
 `

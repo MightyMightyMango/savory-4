@@ -257,6 +257,11 @@ const Book = styled.div`
   .content {
     display: inline-block;
   }
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 `
 const Band1 = styled.div`
   width: 10px;
