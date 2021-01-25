@@ -111,14 +111,16 @@ const Container = styled.div`
   flex-direction: ${props => (props.primary ? 'column' : 'row')};
   text-align: center;
   align-items: center;
-  // width: 100%;
-  padding-top: 100px;
-  padding-bottom: 150px;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 125px);
   background-color: darkseagreen;
   justify-content: center;
+  height: calc(100vh-125px);
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding-top: 100px;
-    padding-bottom: 150px;
+    padding-top: 50px;
+    height: calc(100vh - 100px);
+    justify-content: flex-start;
   }
 `
 

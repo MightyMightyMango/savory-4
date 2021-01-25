@@ -45,7 +45,15 @@ export class Recipe extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.props.recipe', this.props.recipe)
+    // checks to see if we're already in this component
+    // this is to reload the url entry form
+    if (prevProps.location.key !== this.props.location.key) {
+      this.setState({
+        isSubmitted: false
+      })
+    }
+
+    // parses recipe data to render in form
     if (this.props.recipe.id && this.props.recipe.id !== prevProps.recipe.id) {
       let newState = this.props.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
