@@ -16,7 +16,8 @@ import {
   MyBooks,
   Footer,
   NotFound,
-  Loader
+  Loader,
+  Contact
 } from './components'
 import ScrapeError from './components/ScrapeError'
 import NotAccepted from './components/NotAccepted'
@@ -37,6 +38,7 @@ class Routes extends Component {
         {/* <Route path="/loginsignup" component={LoginSignup} /> */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/contact" component={Contact} />
         {isLoggedIn && (
           <Switch>
             {/* only available after logging in */}

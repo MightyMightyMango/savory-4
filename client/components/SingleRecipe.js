@@ -1,9 +1,8 @@
 /* eslint-disable complexity */
-import React, {useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import history from '../history'
-// import {resetRecipeState} from '../store/singleRecipe'
 import {
   submitRecipeEdit,
   setSingleRecipeThunk,
@@ -81,7 +80,6 @@ export class SingleRecipe extends React.Component {
         ? dataToSend.instructions.split('\n')
         : dataToSend.instructions
     dataToSend.isDraft = true
-    console.log('DATA SENT TO DB', dataToSend)
     this.props.submitRecipeEdit(dataToSend)
     this.setState({canEdit: false})
     this.props.getRecipe(dataToSend.id)
@@ -101,6 +99,10 @@ export class SingleRecipe extends React.Component {
         ? recipe.instructions.split('\n')
         : recipe.instructions
     displayInstructions = displayInstructions || []
+    if (displayInstructions.length > 0)
+      displayInstructions = displayInstructions.filter(
+        instruction => instruction !== ''
+      )
     displayIngredients = displayIngredients || []
 
     // FORMAT RECIPE FOR EMAIL
@@ -167,15 +169,13 @@ export class SingleRecipe extends React.Component {
                       <a href="/books">Edit Categories</a>
                     </Button>
                     <Button primary>
-                      <a href={recipe.url} target="_blank">
+                      <a href={recipe.url} target="_blank" rel="noreferrer">
                         View Recipe Source
                       </a>
                     </Button>
                     <Button primary>
                       <a
-                        href={`mailto:?&subject=Shared from Savory: ${
-                          recipe.name
-                        }&body=${emailText}`}
+                        href={`mailto:?&subject=Shared from Savory: ${recipe.name}&body=${emailText}`}
                         title="Share by Email"
                       >
                         Share by Email
@@ -269,24 +269,28 @@ export class SingleRecipe extends React.Component {
       return (
         <FadeIn>
           <Confirm>
-            <Button
-              primary
-              onClick={() => {
-                this.handleSubmit(event)
-              }}
-            >
-              Confirm Changes
-            </Button>
-            <p>Make your changes below and when you're done click confirm!</p>
+            <ConfirmHeading>
+              <Button
+                primary
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </Button>
+              <p>Make your changes below and when you're done click confirm!</p>
+            </ConfirmHeading>
             <RecipeForm recipe={this.state} handleChange={this.handleChange} />
-            <Button
-              primary
-              onClick={() => {
-                this.handleSubmit(event)
-              }}
-            >
-              Confirm Changes
-            </Button>
+            <ConfirmHeading>
+              <Button
+                primary
+                onClick={() => {
+                  this.handleSubmit(event)
+                }}
+              >
+                Confirm Changes
+              </Button>
+            </ConfirmHeading>
           </Confirm>
         </FadeIn>
       )
@@ -323,6 +327,11 @@ const Container = styled.div`
 
 const Confirm = styled.div`
   padding-top: 20px;
+<<<<<<< HEAD
+  margin-bottom: 30px;
+=======
+  text-align: center;
+>>>>>>> 4031df4f03065d5027cb8a4bfe2d062173296c29
 `
 
 const SingleRecipeHeader = styled.div`
@@ -348,6 +357,9 @@ const Title = styled.h1`
   // left: 50%;
   // transform: translate(-50%, -50%);
   z-index: 2;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    font-size: 2em;
+  }
 `
 
 const HeaderImage = styled.img`
@@ -362,6 +374,9 @@ const Description = styled.div`
   padding-bottom: 20px;
   width: 80%;
   justify-content: space-evenly;
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    width: 90%;
+  }
 `
 const Image = styled.img`
   width: 450px;
@@ -429,4 +444,10 @@ const Instructions = styled.div`
 
 const Details = styled.ul`
   list-style-type: none;
+`
+const ConfirmHeading = styled.div`
+  padding: 20px;
+  p {
+    margin-left: 8px;
+  }
 `

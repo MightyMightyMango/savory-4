@@ -33,13 +33,15 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               className="navlink"
               to="/recipes"
               activeClassName="focused"
-              as="/savenew"
             >
               SAVE NEW RECIPES
             </NavLink>
-            {/* <a href="/recipes">SAVE NEW RECIPES</a> */}
-            <NavLink className="navlink" to="/home" activeClassName="focused">
-              ACCOUNT
+            <NavLink
+              className="navlink"
+              to="/contact"
+              activeClassName="focused"
+            >
+              CONTACT
             </NavLink>
             <a href="#" onClick={handleClick}>
               LOGOUT
@@ -51,6 +53,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* available before you log in */}
           <ul>
             {/* <Link to="/home">HOME</Link>*/}
+            <NavLink
+              className="navlink"
+              to="/contact"
+              activeClassName="focused"
+            >
+              CONTACT
+            </NavLink>
             <NavLink className="navlink" to="/login" activeClassName="focused">
               LOGIN
             </NavLink>

@@ -14,8 +14,6 @@ import SuggestionBox from './SuggestionBox'
 import Loader from './Loader'
 import FadeIn from 'react-fade-in'
 
-// import {CSSTransition, TransitionGroup} from 'react-transition-group'
-
 const defaultState = {
   url: '',
   name: '',
@@ -45,7 +43,15 @@ export class Recipe extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.props.recipe', this.props.recipe)
+    // checks to see if we're already in this component
+    // this is to reload the url entry form
+    if (prevProps.location.key !== this.props.location.key) {
+      this.setState({
+        isSubmitted: false
+      })
+    }
+
+    // parses recipe data to render in form
     if (this.props.recipe.id && this.props.recipe.id !== prevProps.recipe.id) {
       let newState = this.props.recipe
       newState.ingredients = Array.isArray(newState.ingredients)
@@ -144,61 +150,101 @@ export class Recipe extends React.Component {
                 <Supported>
                   <Title>Supported Sites:</Title>
                   <Logos>
-                    <a href="https://www.allrecipes.com/" target="_blank">
+                    <a
+                      href="https://www.allrecipes.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/all-recipes-bw.png"
                       />
                     </a>
-                    <a href="https://www.bonappetit.com/" target="_blank">
+                    <a
+                      href="https://www.bonappetit.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/bon-appetit.png"
                       />
                     </a>
-                    <a href="http://www.eatingwell.com/" target="_blank">
+                    <a
+                      href="http://www.eatingwell.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/eating-well-bw.png"
                       />
                     </a>
-                    <a href="https://www.foodnetwork.com/" target="_blank">
+                    <a
+                      href="https://www.foodnetwork.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/food-network-bw.png"
                       />
                     </a>
-                    <a href="https://cooking.nytimes.com/" target="_blank">
+                    <a
+                      href="https://cooking.nytimes.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/nyt-cooking-bw.png"
                       />
                     </a>
-                    <a href="https://www.simplyrecipes.com/" target="_blank">
+                    <a
+                      href="https://www.simplyrecipes.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/simply-recipes-bw.png"
                       />
                     </a>
-                    <a href="https://gimmedelicious.com/" target="_blank">
+                    <a
+                      href="https://gimmedelicious.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/gimme-delicious-bw.png"
                       />
                     </a>
-                    <a href="https://tasty.co/" target="_blank">
+                    <a
+                      href="https://tasty.co/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/tasty-bw.png"
                       />
                     </a>
-                    <a href="https://www.cookingclassy.com/" target="_blank">
+                    <a
+                      href="https://www.cookingclassy.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/cooking-classy-bw.png"
                       />
                     </a>
-                    <a href="https://www.spendwithpennies.com/" target="_blank">
+                    <a
+                      href="https://www.spendwithpennies.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="supported-logo"
                         src="/images/supported/spend-with-pennies-bw.jpg"

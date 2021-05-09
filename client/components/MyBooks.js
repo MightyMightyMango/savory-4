@@ -5,10 +5,11 @@ import {
   getUserCategoriesThunk,
   submitCategory,
   setAllRecipesThunk,
-  updateCategory
+  updateCategory,
+  getRecipesInCategoryThunk
 } from '../store/recipes'
 import EditCategories from './EditCategories'
-import StyledButton from '../theme/Button'
+import {Link} from 'react-router-dom'
 
 import FadeIn from 'react-fade-in'
 
@@ -36,19 +37,6 @@ const MyBooks = props => {
     setNewCategory(event.target.value)
   }
 
-  const handleSubmit = event => {
-    console.log(recipesToBeAdded)
-    const color = setBackgroundColor()
-    submitCat(user.id, newCategory, recipesToBeAdded, color)
-  }
-
-  const onChange = event => {
-    setRecipesToBeAdded({
-      ...recipesToBeAdded,
-      [event.target.id]: event.target.checked
-    })
-    console.log(event.target.name, event.target.checked, event.target.id)
-  }
   // BOOKS BACKGROUND
 
   const setBackgroundColor = () => {
@@ -63,6 +51,20 @@ const MyBooks = props => {
     return colors[Math.floor(Math.random() * Math.floor(6))]
   }
 
+  const handleSubmit = event => {
+    event.preventDefault()
+    const color = setBackgroundColor()
+    submitCat(user.id, newCategory, recipesToBeAdded, color)
+  }
+
+  const onChange = event => {
+    setRecipesToBeAdded({
+      ...recipesToBeAdded,
+      [event.target.id]: event.target.checked
+    })
+    console.log(event.target.name, event.target.checked, event.target.id)
+  }
+
   const onClickCategory = name => {
     setCategorySelected(name)
   }
@@ -74,18 +76,33 @@ const MyBooks = props => {
     })
     console.log('For Update', recipesToBeAdded2)
   }
+
   const handleSubmit2 = event => {
     console.log(recipesToBeAdded)
     updateCat(user.id, categorySelected, recipesToBeAdded2)
+  }
+
+  const showRecipesInBook = categoryId => {
+    console.log('categoryId is ', categoryId)
+    getRecipesInCategoryThunk(user.id, categoryId)
+    console.log('showRecipes props ', props)
+    props.history.push('/books')
+    console.log('showRecipes 2 props ', props)
   }
 
   return (
     <>
       <FadeIn>
         <RecipesContainer>
-            <h1>My Books</h1>
-            {categories.map(item => (
-              <CategoryItem key={item.id}>
+          <h1>My Books</h1>
+          {categories.map(item => (
+            <CategoryItem key={item.id}>
+              <Link
+                to={{
+                  pathname: '/myrecipes',
+                  categoryId: item.id
+                }}
+              >
                 <Book
                   style={{
                     background: item.colorCSS
@@ -97,8 +114,9 @@ const MyBooks = props => {
                   <Band3 className="content" />
                   <Band4 className="content" />
                 </Book>
-              </CategoryItem>
-            ))}
+              </Link>
+            </CategoryItem>
+          ))}
         </RecipesContainer>
         <ColContainer>
           <Box>
@@ -151,12 +169,14 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getAllRecipes: userId => dispatch(setAllRecipesThunk(userId)),
   getCategories: userId => dispatch(getUserCategoriesThunk(userId)),
-  submitCat: (userId, category, data) => {
-    dispatch(submitCategory(userId, category, data))
+  submitCat: (userId, category, data, colorCSS) => {
+    dispatch(submitCategory(userId, category, data, colorCSS))
   },
   updateCat: (userId, category, data) => {
     dispatch(updateCategory(userId, category, data))
-  }
+  },
+  getRecipesInCategory: (userId, categoryId) =>
+    dispatch(getRecipesInCategoryThunk(userId, categoryId))
 })
 export default connect(mapState, mapDispatch)(MyBooks)
 
@@ -236,6 +256,11 @@ const Book = styled.div`
   }
   .content {
     display: inline-block;
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 `
 const Band1 = styled.div`

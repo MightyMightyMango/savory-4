@@ -6,7 +6,6 @@ html, body {
   width:100%;
   height: 100vh;
   font-family: 'Poppins', sans-serif;
-  height: 100vh;
   font-size: 1em;
   scrollbar-width: thin;
   letter-spacing: 0.0625em;
@@ -14,6 +13,11 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  max-width: 2560px;
+}
+
+@media(max-width: 679px){
+  height: auto;
 }
 
 * {
@@ -72,7 +76,5 @@ img {
   flex: 1;
   text-align: left;
 }`
-
-//can also keep any styled components here that are the same globally,
 
 export default GlobalStyle
