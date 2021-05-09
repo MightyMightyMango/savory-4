@@ -73,21 +73,21 @@ const scraper4 = async (url, publisher, userId) => {
 
 module.exports = {scraper4}
 
-scraper4(
-  'https://www.cookingclassy.com/spinach-artichoke-dip/',
-  'CookingClassy',
-  1
-)
-scraper4(
-  'https://www.spendwithpennies.com/the-best-spinach-artichoke-dip/',
-  'Spend with Pennies',
-  1
-)
-scraper4(
-  'https://gimmedelicious.com/baked-buffalo-cauliflower-wings/',
-  'Gimme Delicious',
-  1
-)
+// scraper4(
+//   'https://www.cookingclassy.com/spinach-artichoke-dip/',
+//   'CookingClassy',
+//   1
+// )
+// scraper4(
+//   'https://www.spendwithpennies.com/the-best-spinach-artichoke-dip/',
+//   'Spend with Pennies',
+//   1
+// )
+// scraper4(
+//   'https://gimmedelicious.com/baked-buffalo-cauliflower-wings/',
+//   'Gimme Delicious',
+//   1
+// )
 
 // scraper4(
 //     'https://gimmedelicious.com/pecan-pie-cheesecake/',

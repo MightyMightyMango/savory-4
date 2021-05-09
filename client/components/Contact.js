@@ -17,7 +17,7 @@ const Contact = props => {
           <img className="profile-pics" src="/images/profile/ellen-crop.png" />
           <h3>Ellen Granoff</h3>
           <p>
-            <a href="https://www.linkedin.com/in/ellengranoff/" target="_blank">
+            <a href="https://www.linkedin.com/in/ellengranoff/" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </p>
@@ -26,7 +26,7 @@ const Contact = props => {
           <img className="profile-pics" src="/images/profile/lea-crop.png" />
           <h3>Lea Overend</h3>
           <p>
-            <a href="https://www.linkedin.com/in/lea-overend/" target="_blank">
+            <a href="https://www.linkedin.com/in/lea-overend/" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </p>
@@ -38,7 +38,7 @@ const Contact = props => {
           />
           <h3>Micheline Wu</h3>
           <p>
-            <a href="https://www.linkedin.com/in/micheline-wu/" target="_blank">
+            <a href="https://www.linkedin.com/in/micheline-wu/" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
           </p>

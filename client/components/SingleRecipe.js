@@ -169,15 +169,13 @@ export class SingleRecipe extends React.Component {
                       <a href="/books">Edit Categories</a>
                     </Button>
                     <Button primary>
-                      <a href={recipe.url} target="_blank">
+                      <a href={recipe.url} target="_blank" rel="noreferrer">
                         View Recipe Source
                       </a>
                     </Button>
                     <Button primary>
                       <a
-                        href={`mailto:?&subject=Shared from Savory: ${
-                          recipe.name
-                        }&body=${emailText}`}
+                        href={`mailto:?&subject=Shared from Savory: ${recipe.name}&body=${emailText}`}
                         title="Share by Email"
                       >
                         Share by Email
