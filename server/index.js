@@ -79,7 +79,6 @@ const createApp = () => {
 }
 
 const startListening = () => {
- 
   const server = app.listen(PORT, () =>
     console.log(`Salivating on port ${PORT}`)
   )
