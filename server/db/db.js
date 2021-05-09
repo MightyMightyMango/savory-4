@@ -20,6 +20,7 @@ if (process.env.DATABASE_URL) {
   db = new Sequelize(database, 'postgres', '', {
     dialect: 'postgres',
     logging: false,
+    ssl: true,
     dialectOptions: {
       require: true,
       rejectUnauthorized: false
